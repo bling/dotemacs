@@ -18,6 +18,5 @@
 (setq save-place-file (expand-file-name ".cache/places" user-emacs-directory))
 
 (require 'init-packages)
-(require-package 'evil)
-
 (require 'init-evil)
+(require 'init-ido)
