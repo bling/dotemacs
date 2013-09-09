@@ -21,3 +21,4 @@
 (require 'init-evil)
 (require 'init-ido)
 (require 'init-editor)
+(require 'init-auto-complete)
