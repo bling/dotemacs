@@ -1,7 +1,7 @@
 dotemacs
 ========
 
-this is a emacs configuration targeted as vim users.
+this is a emacs configuration targeted for vim users.
 
 install
 =======

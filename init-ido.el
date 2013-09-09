@@ -9,6 +9,9 @@
 (require-package 'flx-ido)
 (flx-ido-mode t)
 
+(require-package 'ido-vertical-mode)
+(ido-vertical-mode)
+
 (require-package 'smex)
 (global-set-key (kbd "M-x") 'smex)
 
