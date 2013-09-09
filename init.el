@@ -4,21 +4,8 @@
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
-; store all backup files in a directory
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                  (concat user-emacs-directory ".cache/backups")))))
-
-; make backups even for VCS files
-(setq vc-make-backup-files t)
-
-; move cursor to last position upon open
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".cache/places" user-emacs-directory))
-
 (require 'init-packages)
+(require 'init-editor)
 (require 'init-evil)
 (require 'init-ido)
-(require 'init-editor)
 (require 'init-auto-complete)
