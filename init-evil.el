@@ -10,6 +10,7 @@
 (global-evil-leader-mode)
 (global-surround-mode 1)
 
+(setq evil-magic (quote very-magic))
 (setq evil-want-C-u-scroll t)
 
 (evil-leader/set-leader ",")
