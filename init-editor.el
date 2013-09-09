@@ -12,6 +12,8 @@
 (require-package 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
+(setq-default undo-tree-history-directory-alist
+              `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 
@@ -30,4 +32,5 @@
 
 ;;; make backups even for VCS files
 (setq vc-make-backup-files t)
+
 (provide 'init-editor)
