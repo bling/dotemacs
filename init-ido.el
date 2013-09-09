@@ -6,4 +6,7 @@
   (require-package 'ido-ubiquitous)
   (ido-ubiquitous-mode t))
 
+(require-package 'flx-ido)
+(flx-ido-mode t)
+
 (provide 'init-ido)
