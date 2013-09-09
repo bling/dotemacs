@@ -5,6 +5,10 @@
  indent-tabs-mode nil
  show-trailing-whitespace t)
 
+;;; line numbers
+(global-linum-mode t)
+(setq linum-format "%4d \u2502 ")
+
 (require-package 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)

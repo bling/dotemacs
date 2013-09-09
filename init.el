@@ -1,3 +1,6 @@
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
 (add-to-list 'load-path user-emacs-directory)
 
 (setq custom-file "~/.emacs.d/custom.el")
