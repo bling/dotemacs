@@ -1,19 +1,20 @@
-(when (fboundp 'electric-pair-mode)
-  (setq-default electric-pair-mode 1))
-
 (setq-default
  indent-tabs-mode nil
  show-trailing-whitespace t)
 
-;;; line numbers
-(global-linum-mode t)
-(setq linum-format "%4d \u2502 ")
+(require-package 'smartparens)
+(require 'smartparens-config)
+(smartparens-global-mode t)
+
+(require-package 'yalinum)
+(setq-default yalinum-format "%4d ")
 
 (require-package 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
+
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 

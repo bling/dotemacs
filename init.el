@@ -22,4 +22,9 @@
 (guide-key-mode 1)
 
 (require-package 'markdown-mode)
+
 (require-package 'vimrc-mode)
+(setq auto-mode-alist
+      (cons '("\\.vim\\'" . vimrc-mode) auto-mode-alist))
+
+;;; (unload-feature 'foo)
