@@ -2,6 +2,8 @@
  indent-tabs-mode nil
  show-trailing-whitespace t)
 
+(global-hl-line-mode)
+
 (require-package 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode t)
@@ -14,9 +16,6 @@
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
-
-
-(global-set-key (kbd "RET") 'newline-and-indent)
 
 (require-package 'mic-paren)
 (paren-activate)
