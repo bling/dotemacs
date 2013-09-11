@@ -3,13 +3,12 @@
  show-trailing-whitespace t)
 
 (global-hl-line-mode)
+(global-linum-mode t)
+(setq linum-format "%4d ")
 
 (require-package 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode t)
-
-(require-package 'yalinum)
-(setq-default yalinum-format "%4d ")
 
 (require-package 'undo-tree)
 (global-undo-tree-mode)
@@ -32,5 +31,8 @@
 
 ;;; make backups even for VCS files
 (setq vc-make-backup-files t)
+
+(require-package 'moe-theme)
+(load-theme 'moe-dark t)
 
 (provide 'init-editor)
