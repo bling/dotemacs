@@ -32,7 +32,7 @@
 ;;; make backups even for VCS files
 (setq vc-make-backup-files t)
 
-(require-package 'moe-theme)
-(load-theme 'moe-dark t)
+(require-package 'monokai-theme)
+(load-theme 'monokai t)
 
 (provide 'init-editor)
