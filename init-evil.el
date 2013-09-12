@@ -25,6 +25,4 @@
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 
-(define-key evil-ex-map "e" 'ido-find-file)
-
 (provide 'init-evil)

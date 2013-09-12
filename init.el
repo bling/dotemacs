@@ -14,6 +14,7 @@
 (require 'init-projectile)
 (require 'init-helm)
 (require 'init-ido)
+(require 'init-git)
 (require 'init-bindings)
 
 (require-package 'markdown-mode)
