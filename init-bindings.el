@@ -15,7 +15,8 @@
   "e" 'eval-last-sexp
   "v" 'split-window-horizontally
   "s" 'split-window-vertically
-  "h" help-map)
+  "h" help-map
+  "h h" 'help-for-help-internal)
 
 (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
 (define-key evil-normal-state-map (kbd "] b") 'next-buffer)

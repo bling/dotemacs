@@ -10,8 +10,8 @@
 (require 'evil-leader)
 (require 'surround)
 
-(evil-mode t)
 (global-evil-leader-mode)
+(evil-mode t)
 (global-surround-mode 1)
 
 (provide 'init-evil)
