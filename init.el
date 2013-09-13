@@ -7,6 +7,8 @@
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (require 'init-packages)
 (require 'init-editor)
 (require 'init-evil)
@@ -15,12 +17,8 @@
 (require 'init-helm)
 (require 'init-ido)
 (require 'init-git)
+(require 'init-vim)
+(require 'init-markdown)
 (require 'init-bindings)
-
-(require-package 'markdown-mode)
-
-(require-package 'vimrc-mode)
-(setq auto-mode-alist
-      (cons '("\\.vim\\'" . vimrc-mode) auto-mode-alist))
 
 ;;; (unload-feature 'foo)
