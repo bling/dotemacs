@@ -4,6 +4,11 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
+(require-package 'key-chord)
+(key-chord-mode 1)
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-c h") 'helm-projectile)
 (global-set-key (kbd "M-x") 'smex)
@@ -26,9 +31,6 @@
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-
-(define-key evil-insert-state-map (kbd "j k") 'evil-normal-state)
-(define-key evil-insert-state-map (kbd "k j") 'evil-normal-state)
 
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
