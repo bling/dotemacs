@@ -1,3 +1,16 @@
+;;; move cursor to last position upon open
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".cache/places" user-emacs-directory))
+
+;;; store all backup files in a directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory ".cache/backups")))))
+
+;;; make backups even for VCS files
+(setq vc-make-backup-files t)
+
 (setq-default
  indent-tabs-mode nil
  show-trailing-whitespace t)
@@ -5,6 +18,8 @@
 (global-hl-line-mode)
 (global-linum-mode t)
 (setq linum-format "%4d ")
+
+(show-paren-mode t)
 
 (require-package 'smartparens)
 (require 'smartparens-config)
@@ -18,19 +33,6 @@
 
 (require-package 'mic-paren)
 (paren-activate)
-
-;;; move cursor to last position upon open
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".cache/places" user-emacs-directory))
-
-;;; store all backup files in a directory
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat user-emacs-directory ".cache/backups")))))
-
-;;; make backups even for VCS files
-(setq vc-make-backup-files t)
 
 (require-package 'monokai-theme)
 (load-theme 'monokai t)

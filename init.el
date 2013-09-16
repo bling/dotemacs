@@ -3,7 +3,7 @@
 
 (add-to-list 'load-path user-emacs-directory)
 
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
