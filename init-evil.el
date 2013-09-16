@@ -21,6 +21,12 @@
         (add-hook 'evil-insert-state-entry-hook
                   (lambda () (send-string-to-terminal "\e]50;CursorShape=1\x7")))
         (add-hook 'evil-insert-state-exit-hook
-                  (lambda () (send-string-to-terminal "\e]50;CursorShape=0\x7"))))))
+                  (lambda () (send-string-to-terminal "\e]50;CursorShape=0\x7")))))
+  (if (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
+      (progn
+        (add-hook 'evil-insert-state-entry-hook
+                  (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
+        (add-hook 'evil-insert-state-exit-hook
+                  (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"))))))
 
 (provide 'init-evil)
