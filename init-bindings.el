@@ -36,5 +36,6 @@
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 
 (define-key evil-normal-state-map (kbd "Q") 'kill-this-buffer)
+(define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
 (provide 'init-bindings)
