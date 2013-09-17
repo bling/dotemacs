@@ -1,3 +1,4 @@
+(provide 'init-packages)
 (require 'package)
 
 (add-to-list 'package-archives
@@ -17,4 +18,5 @@ re-downloaded in order to locate PACKAGE."
         (require-package package min-version t)))))
 
 (package-initialize)
-(provide 'init-packages)
+
+
