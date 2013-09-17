@@ -1,6 +1,8 @@
 (ido-mode t)
 (ido-everywhere t)
-(setq ido-enable-flex-matching t)
+
+(setq ido-enable-flex-matching t
+      ido-save-directory-list-file (expand-file-name ".cache/ido.last" user-emacs-directory))
 
 (when (eval-when-compile (>= emacs-major-version 24))
   (require-package 'ido-ubiquitous)

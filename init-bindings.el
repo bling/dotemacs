@@ -20,6 +20,7 @@
   "e" 'eval-last-sexp
   "v" 'split-window-horizontally
   "s" 'split-window-vertically
+  "g s" 'magit-status
   "h" help-map
   "h h" 'help-for-help-internal)
 
