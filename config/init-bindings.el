@@ -10,11 +10,10 @@
 (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-c h") 'helm-mini)
-(global-set-key (kbd "C-q") 'universal-argument)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-x C-m") 'smex)
 (global-set-key (kbd "C-c C-m") 'smex)
+(global-set-key (kbd "C-c h") 'helm-mini)
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key
@@ -28,6 +27,7 @@
 (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
 (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
 (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+(define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 
 (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
