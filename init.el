@@ -1,3 +1,5 @@
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 
@@ -20,5 +22,6 @@
 (require 'init-vim)
 (require 'init-markdown)
 (require 'init-bindings)
+(require 'init-eyecandy)
 
 ;;; (unload-feature 'foo)
