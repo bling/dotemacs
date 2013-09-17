@@ -14,7 +14,6 @@
 (xterm-mouse-mode t)
 
 (require 'init-packages)
-(require 'init-packages)
 (require 'init-editor)
 (require 'init-evil)
 (require 'init-auto-complete)

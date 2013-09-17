@@ -1,8 +1,11 @@
-(provide 'init-packages)
 (require 'package)
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
 
 ;;; from purcell/emacs.d
 (defun require-package (package &optional min-version no-refresh)
@@ -19,4 +22,4 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
-
+(provide 'init-packages)
