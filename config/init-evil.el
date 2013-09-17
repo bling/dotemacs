@@ -7,6 +7,10 @@
 (setq evil-want-C-w-in-emacs-state t)
 (setq evil-search-module 'evil-search)
 
+(setq evil-emacs-state-cursor '("red" box))
+(setq evil-normal-state-cursor '("green" box))
+(setq evil-insert-state-cursor '("orange" bar))
+
 (require 'evil)
 (require 'evil-leader)
 (require 'surround)
