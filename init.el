@@ -24,6 +24,7 @@
 (require 'init-vim)
 (require 'init-markdown)
 (require 'init-bindings)
+(require 'init-flycheck)
 (require 'init-eyecandy)
 
 ;;; (unload-feature 'foo)

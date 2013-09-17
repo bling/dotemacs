@@ -32,8 +32,7 @@
 (setq-default undo-tree-history-directory-alist
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 
-(require-package 'mic-paren)
-(paren-activate)
+(require-package 'multiple-cursors)
 
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
