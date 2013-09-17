@@ -17,7 +17,8 @@
 
 (global-hl-line-mode)
 (global-linum-mode t)
-(setq linum-format "%4d ")
+(setq linum-format "%4d "
+      linum-delay t)
 
 (show-paren-mode t)
 
