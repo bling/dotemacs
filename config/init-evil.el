@@ -1,5 +1,4 @@
-(require-package 'evil)
-(require-package 'evil-leader)
+(el-get 'sync '(evil evil-leader))
 (require-package 'surround)
 
 (setq evil-magic 'very-magic)
