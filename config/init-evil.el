@@ -1,4 +1,5 @@
 (el-get 'sync '(evil evil-leader evil-surround))
+(require-package 'evil-nerd-commenter)
 
 (setq evil-magic 'very-magic)
 (setq evil-want-C-u-scroll t)
@@ -9,8 +10,11 @@
 (setq evil-normal-state-cursor '("green" box))
 (setq evil-insert-state-cursor '("orange" bar))
 
+(setq evilnc-hotkey-comment-operator "gc")
+
 (require 'evil)
 (require 'evil-leader)
+(require 'evil-nerd-commenter)
 (require 'surround)
 
 (global-evil-leader-mode)
