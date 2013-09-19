@@ -18,8 +18,9 @@
 (evil-leader/set-leader ",")
 (evil-leader/set-key
   "e" 'eval-last-sexp
-  "v" 'split-window-horizontally
-  "s" 'split-window-vertically
+  "b d" 'kill-this-buffer
+  "v" (kbd "C-w v C-w l")
+  "s" (kbd "C-w s C-w j")
   "g s" 'magit-status
   "h" help-map
   "h h" 'help-for-help-internal)
@@ -37,7 +38,7 @@
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 
-(define-key evil-normal-state-map (kbd "Q") 'kill-this-buffer)
+(define-key evil-normal-state-map (kbd "Q") 'my-window-killer)
 (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
 (define-key evil-visual-state-map (kbd "*") 'my-visualstar-forward)

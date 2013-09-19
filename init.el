@@ -15,6 +15,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
+(require 'init-functions)
 (require 'init-packages)
 (require 'init-el-get)
 (require 'init-editor)
