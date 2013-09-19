@@ -25,6 +25,9 @@
 (require-package 'smartparens)
 (require 'smartparens-config)
 (smartparens-global-mode t)
+(smartparens-global-strict-mode t)
+(setq sp-autoescape-string-quote nil
+      sp-autoskip-closing-pair 'always)
 
 (require-package 'undo-tree)
 (global-undo-tree-mode)
