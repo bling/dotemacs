@@ -1,12 +1,14 @@
+(setq my-user-emacs-directory user-emacs-directory)
+
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 
-(add-to-list 'load-path user-emacs-directory)
-(add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
+(add-to-list 'load-path my-user-emacs-directory)
+(add-to-list 'load-path (expand-file-name "config" my-user-emacs-directory))
 
-(setq custom-file (expand-file-name "config/custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "config/custom.el" my-user-emacs-directory))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 

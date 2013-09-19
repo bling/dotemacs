@@ -1,4 +1,4 @@
-(add-to-list 'load-path (expand-file-name "el-get/el-get" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "el-get/el-get" my-user-emacs-directory))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -7,6 +7,6 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-(add-to-list 'el-get-recipe-path (expand-file-name "config/recipes" user-emacs-directory))
+(add-to-list 'el-get-recipe-path (expand-file-name "config/recipes" my-user-emacs-directory))
 
 (provide 'init-el-get)
