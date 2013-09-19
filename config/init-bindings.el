@@ -40,4 +40,7 @@
 (define-key evil-normal-state-map (kbd "Q") 'kill-this-buffer)
 (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
+(define-key evil-visual-state-map (kbd "*") 'my-visualstar-forward)
+(define-key evil-visual-state-map (kbd "#") 'my-visualstar-backward)
+
 (provide 'init-bindings)

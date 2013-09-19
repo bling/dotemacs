@@ -35,4 +35,21 @@
         (add-hook 'evil-insert-state-exit-hook
                   (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"))))))
 
+(defun my-visualstar-search (beg end direction)
+  (when (evil-visual-state-p)
+    (let ((selection (buffer-substring-no-properties beg end)))
+      (evil-exit-visual-state)
+      (setq isearch-forward direction)
+      (evil-search (regexp-quote selection) direction t))))
+
+(defun my-visualstar-forward (beg end)
+  "search for selected text in forward direction"
+  (interactive "r")
+  (my-visualstar-search beg end t))
+
+(defun my-visualstar-backward (beg end)
+  "search for selected text in backward direction"
+  (interactive "r")
+  (my-visualstar-search beg end nil))
+
 (provide 'init-evil)
