@@ -18,6 +18,7 @@
 (require 'init-functions)
 (require 'init-packages)
 (require 'init-el-get)
+(require 'init-core)
 (require 'init-editor)
 (require 'init-evil)
 (require 'init-auto-complete)
