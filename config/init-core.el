@@ -11,17 +11,20 @@
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
-;;; move cursor to last position upon open
+;; move cursor to last position upon open
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat my-user-emacs-directory ".cache/places"))
 
-;;; store all backup files in the cache
+;; store all backup files in the cache
 (setq backup-directory-alist
       `(("." . ,(concat my-user-emacs-directory ".cache/backups"))))
 
-;;; make backups even for VCS files
+;; make backups even for VCS files
 (setq vc-make-backup-files t)
+
+(setq auto-save-list-file-prefix
+      (concat my-user-emacs-directory ".cache/auto-save-list/.saves-"))
 
 (setq-default
  indent-tabs-mode nil
