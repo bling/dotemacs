@@ -12,7 +12,7 @@
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
-              `(("." . ,(concat my-user-emacs-directory ".cache/undo"))))
+              `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 
 (require-package 'monokai-theme)
 (load-theme 'monokai t)

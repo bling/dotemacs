@@ -2,7 +2,7 @@
 (ido-everywhere t)
 
 (setq ido-enable-flex-matching t
-      ido-save-directory-list-file (concat my-user-emacs-directory ".cache/ido.last"))
+      ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
 
 (require-package 'ido-ubiquitous)
 (ido-ubiquitous-mode t)
@@ -14,6 +14,6 @@
 (ido-vertical-mode)
 
 (require-package 'smex)
-(setq smex-save-file (concat my-user-emacs-directory ".cache/smex-items"))
+(setq smex-save-file (concat user-emacs-directory ".cache/smex-items"))
 
 (provide 'init-ido)
