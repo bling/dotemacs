@@ -11,10 +11,12 @@
 (require 'init-helm)
 (require 'init-ido)
 (require 'init-git)
-(require 'init-vim)
-(require 'init-markdown)
 (require 'init-bindings)
 (require 'init-flycheck)
 (require 'init-eyecandy)
+
+(require 'init-vim)
+(require 'init-lisp)
+(require 'init-markdown)
 
 ;;; (unload-feature 'foo)
