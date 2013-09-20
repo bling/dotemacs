@@ -8,5 +8,4 @@
        :features evil
        :depends undo-tree
        :build (("make" "all"))
-       :build/berkeley-unix (("gmake" "all"))
-       :info "doc")
+       :build/berkeley-unix (("gmake" "all")))
