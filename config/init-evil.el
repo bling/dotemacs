@@ -1,5 +1,7 @@
-(el-get 'sync '(evil evil-leader evil-surround))
+(require-package 'evil)
+(require-package 'evil-leader)
 (require-package 'evil-nerd-commenter)
+(require-package 'surround)
 
 (setq evil-magic 'very-magic)
 (setq evil-want-C-u-scroll t)
