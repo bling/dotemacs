@@ -3,9 +3,9 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".cache/places" my-user-emacs-directory))
 
-;;; store all backup files in a directory
+;;; store all backup files in the cache
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name "./cache/backups" my-user-emacs-directory))))
+      `(("." . ,(expand-file-name ".cache/backups" my-user-emacs-directory))))
 
 ;;; make backups even for VCS files
 (setq vc-make-backup-files t)
