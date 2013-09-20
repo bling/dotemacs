@@ -1,3 +1,5 @@
+;;; configuration for things included in the default Emacs distribution
+
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
 
@@ -30,10 +32,6 @@
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory ".cache/backups")))
       auto-save-list-file-prefix (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
 
-(setq-default
- indent-tabs-mode nil
- show-trailing-whitespace t)
-
 (global-hl-line-mode t)
 (global-linum-mode t)
 (setq linum-format "%4d "
@@ -44,5 +42,9 @@
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+(setq-default
+ indent-tabs-mode nil
+ show-trailing-whitespace t)
 
 (provide 'init-core)

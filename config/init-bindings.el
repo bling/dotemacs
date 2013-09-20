@@ -52,4 +52,9 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+;; butter fingers
+(evil-ex-define-cmd "Q" 'evil-quit)
+(evil-ex-define-cmd "Qa" 'evil-quit-all)
+(evil-ex-define-cmd "QA" 'evil-quit-all)
+
 (provide 'init-bindings)
