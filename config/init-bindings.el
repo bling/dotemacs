@@ -40,6 +40,8 @@
 (define-key evil-normal-state-map (kbd "Q") 'my-window-killer)
 (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
+(define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
+
 (define-key evil-visual-state-map (kbd "*") 'my-visualstar-forward)
 (define-key evil-visual-state-map (kbd "#") 'my-visualstar-backward)
 
