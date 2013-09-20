@@ -1,4 +1,6 @@
-(setq my-user-emacs-directory user-emacs-directory)
+(setq my-user-emacs-directory (expand-file-name user-emacs-directory))
+(add-to-list 'load-path my-user-emacs-directory)
+(add-to-list 'load-path (concat my-user-emacs-directory "config"))
 
 (require 'init-core)
 (require 'init-functions)

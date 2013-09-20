@@ -7,9 +7,6 @@
 (setq inhibit-splash-screen t
       inhibit-startup-message t)
 
-(add-to-list 'load-path my-user-emacs-directory)
-(add-to-list 'load-path (expand-file-name "config" my-user-emacs-directory))
-
 (setq custom-file (expand-file-name "config/custom.el" my-user-emacs-directory))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
