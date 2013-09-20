@@ -11,24 +11,30 @@
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
-;; move cursor to last position upon open
+;; move cursor to the last position upon open
 (require 'saveplace)
+(setq save-place-file (concat user-emacs-directory ".cache/places"))
 (setq-default save-place t)
+
+(require 'recentf)
+(setq recentf-save-file (concat user-emacs-directory ".cache/recentf"))
+(recentf-mode +1)
+
+(require 'eshell)
+(setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 
 ;; make backups even for VCS files
 (setq vc-make-backup-files t)
 
 ;; store most files in the cache
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory ".cache/backups")))
-      save-place-file (concat user-emacs-directory ".cache/places")
-      auto-save-list-file-prefix (concat user-emacs-directory ".cache/auto-save-list/.saves-")
-      eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
+      auto-save-list-file-prefix (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
 
 (setq-default
  indent-tabs-mode nil
  show-trailing-whitespace t)
 
-(global-hl-line-mode)
+(global-hl-line-mode t)
 (global-linum-mode t)
 (setq linum-format "%4d "
       linum-delay t)
