@@ -7,18 +7,18 @@
 (setq inhibit-splash-screen t
       inhibit-startup-message t)
 
-(setq custom-file (expand-file-name "config/custom.el" my-user-emacs-directory))
+(setq custom-file (concat my-user-emacs-directory "config/custom.el"))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
 ;;; move cursor to last position upon open
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (expand-file-name ".cache/places" my-user-emacs-directory))
+(setq save-place-file (concat my-user-emacs-directory ".cache/places"))
 
 ;;; store all backup files in the cache
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name ".cache/backups" my-user-emacs-directory))))
+      `(("." . ,(concat my-user-emacs-directory ".cache/backups"))))
 
 ;;; make backups even for VCS files
 (setq vc-make-backup-files t)
@@ -31,8 +31,6 @@
 (global-linum-mode t)
 (setq linum-format "%4d "
       linum-delay t)
-
-(show-paren-mode t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
