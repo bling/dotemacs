@@ -14,17 +14,15 @@
 ;; move cursor to last position upon open
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (concat user-emacs-directory ".cache/places"))
-
-;; store all backup files in the cache
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory ".cache/backups"))))
 
 ;; make backups even for VCS files
 (setq vc-make-backup-files t)
 
-(setq auto-save-list-file-prefix
-      (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
+;; store most files in the cache
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory ".cache/backups")))
+      save-place-file (concat user-emacs-directory ".cache/places")
+      auto-save-list-file-prefix (concat user-emacs-directory ".cache/auto-save-list/.saves-")
+      eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 
 (setq-default
  indent-tabs-mode nil
