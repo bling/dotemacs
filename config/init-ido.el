@@ -15,5 +15,6 @@
 (ido-vertical-mode)
 
 (require-package 'smex)
+(setq smex-save-file (expand-file-name ".cache/smex-items" my-user-emacs-directory))
 
 (provide 'init-ido)
