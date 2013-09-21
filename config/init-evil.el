@@ -54,4 +54,19 @@
   (interactive "r")
   (my-visualstar-search beg end nil))
 
+(defun my-evil-modeline-change (default-color)
+  "changes the modeline color when the evil mode changes"
+  (let ((color (cond ((minibufferp) default-color)
+                     ((evil-insert-state-p) '("#000000" . "#ffffff"))
+                     ((evil-emacs-state-p)  '("#5f0000" . "#ffffff"))
+                     ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                     (t default-color))))
+    (set-face-background 'mode-line (car color))
+    (set-face-foreground 'mode-line (cdr color))))
+
+(lexical-let ((default-color (cons (face-background 'mode-line)
+                                   (face-foreground 'mode-line))))
+  (add-hook 'post-command-hook
+            (lambda () (my-evil-modeline-change default-color))))
+
 (provide 'init-evil)
