@@ -62,4 +62,7 @@
   (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 1)))
   (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1))))
 
+;; have no use for these default bindings
+(global-unset-key (kbd "C-x m"))
+
 (provide 'init-bindings)
