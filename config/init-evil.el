@@ -23,19 +23,21 @@
 (evil-mode t)
 (global-surround-mode 1)
 
-(unless (display-graphic-p)
-  (if (string= (getenv "TERM_PROGRAM") "iTerm.app")
-      (progn
-        (add-hook 'evil-insert-state-entry-hook
-                  (lambda () (send-string-to-terminal "\e]50;CursorShape=1\x7")))
-        (add-hook 'evil-insert-state-exit-hook
-                  (lambda () (send-string-to-terminal "\e]50;CursorShape=0\x7")))))
-  (if (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
-      (progn
-        (add-hook 'evil-insert-state-entry-hook
-                  (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
-        (add-hook 'evil-insert-state-exit-hook
-                  (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"))))))
+(defun my-evil-terminal-cursor-change ()
+  (unless (display-graphic-p)
+    (if (string= (getenv "TERM_PROGRAM") "iTerm.app")
+        (progn
+          (add-hook 'evil-insert-state-entry-hook
+                    (lambda () (send-string-to-terminal "\e]50;CursorShape=1\x7")))
+          (add-hook 'evil-insert-state-exit-hook
+                    (lambda () (send-string-to-terminal "\e]50;CursorShape=0\x7")))))
+    (if (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
+        (progn
+          (add-hook 'evil-insert-state-entry-hook
+                    (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
+          (add-hook 'evil-insert-state-exit-hook
+                    (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))))
+(add-hook 'after-make-frame-functions my-evil-terminal-cursor-change)
 
 (defun my-visualstar-search (beg end direction)
   (when (evil-visual-state-p)
