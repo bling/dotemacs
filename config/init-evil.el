@@ -24,7 +24,7 @@
 (global-surround-mode 1)
 
 (defun my-evil-terminal-cursor-change ()
-  (if (display-graphic-p)
+  (unless (display-graphic-p)
     (if (string= (getenv "TERM_PROGRAM") "iTerm.app")
         (progn
           (add-hook 'evil-insert-state-entry-hook
@@ -37,7 +37,8 @@
                     (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
           (add-hook 'evil-insert-state-exit-hook
                     (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))))
-(add-hook 'after-make-frame-functions (lambda () (my-evil-terminal-cursor-change)))
+;; todo: make this work in daemon mode terminal and gui
+;; (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
 
 (defun my-visualstar-search (beg end direction)
   (when (evil-visual-state-p)
