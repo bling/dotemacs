@@ -37,6 +37,11 @@
 (setq linum-format "%4d "
       linum-delay t)
 
+;; better scrolling
+(setq scroll-margin 3
+      scroll-conservatively 9999
+      scroll-preserve-screen-position t)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
