@@ -47,10 +47,11 @@
 
 (defun my-visualstar-search (beg end direction)
   (when (evil-visual-state-p)
-    (let ((selection (buffer-substring-no-properties beg end)))
+    (let ((selection (regexp-quote (buffer-substring-no-properties beg end))))
       (evil-exit-visual-state)
-      (setq isearch-forward direction)
-      (evil-search (regexp-quote selection) direction t))))
+      (setq evil-ex-search-pattern (evil-ex-make-search-pattern selection))
+      (setq evil-ex-search-direction (if direction 'forward 'backward))
+      (evil-search selection direction t))))
 
 (defun my-visualstar-forward (beg end)
   "search for selected text in forward direction"
