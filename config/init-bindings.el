@@ -52,6 +52,10 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+;; auto-complete
+(define-key ac-completing-map (kbd "C-n") 'ac-next)
+(define-key ac-completing-map (kbd "C-p") 'ac-previous)
+
 ;; butter fingers
 (evil-ex-define-cmd "Q" 'evil-quit)
 (evil-ex-define-cmd "Qa" 'evil-quit-all)
