@@ -23,22 +23,27 @@
 (evil-mode t)
 (global-surround-mode 1)
 
+(defun my-evil-cursor-insert-iterm () (send-string-to-terminal "\e]50;CursorShape=1\x7"))
+(defun my-evil-cursor-normal-iterm () (send-string-to-terminal "\e]50;CursorShape=0\x7"))
+(defun my-evil-cursor-insert-tmux-iterm () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\"))
+(defun my-evil-cursor-normal-tmux-iterm () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"))
 (defun my-evil-terminal-cursor-change ()
+  (remove-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-iterm)
+  (remove-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-iterm)
+  (remove-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-tmux-iterm)
+  (remove-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-tmux-iterm)
   (unless (display-graphic-p)
     (if (string= (getenv "TERM_PROGRAM") "iTerm.app")
         (progn
-          (add-hook 'evil-insert-state-entry-hook
-                    (lambda () (send-string-to-terminal "\e]50;CursorShape=1\x7")))
-          (add-hook 'evil-insert-state-exit-hook
-                    (lambda () (send-string-to-terminal "\e]50;CursorShape=0\x7")))))
+          (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-iterm)
+          (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-iterm)))
     (if (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
         (progn
-          (add-hook 'evil-insert-state-entry-hook
-                    (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
-          (add-hook 'evil-insert-state-exit-hook
-                    (lambda () (send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))))
-;; todo: make this work in daemon mode terminal and gui
-;; (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
+          (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-tmux-iterm)
+          (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-tmux-iterm)))))
+
+(add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
+(my-evil-terminal-cursor-change)
 
 (defun my-visualstar-search (beg end direction)
   (when (evil-visual-state-p)
