@@ -17,6 +17,7 @@
 (evil-leader/set-leader ",")
 (evil-leader/set-key
   "e" 'eval-last-sexp
+  "E" 'eval-defun
   "b d" 'kill-this-buffer
   "v" (kbd "C-w v C-w l")
   "s" (kbd "C-w s C-w j")
@@ -33,6 +34,8 @@
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+(define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)
 
 (define-key evil-motion-state-map "j" 'evil-next-visual-line)
 (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
