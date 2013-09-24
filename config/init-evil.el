@@ -33,25 +33,25 @@
   (remove-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-tmux-iterm)
   (remove-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-tmux-iterm)
   (unless (display-graphic-p)
-    (if (string= (getenv "TERM_PROGRAM") "iTerm.app")
-        (progn
-          (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-iterm)
-          (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-iterm)))
-    (if (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
-        (progn
-          (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-tmux-iterm)
-          (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-tmux-iterm)))))
+    (when (string= (getenv "TERM_PROGRAM") "iTerm.app")
+      (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-iterm)
+      (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-iterm))
+    (when (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
+      (add-hook 'evil-insert-state-entry-hook 'my-evil-cursor-insert-tmux-iterm)
+      (add-hook 'evil-insert-state-exit-hook 'my-evil-cursor-normal-tmux-iterm))))
 
 (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
 (my-evil-terminal-cursor-change)
 
 (defun my-visualstar-search (beg end direction)
   (when (evil-visual-state-p)
-    (let ((selection (regexp-quote (buffer-substring-no-properties beg end))))
+    (let ((pattern (evil-ex-make-search-pattern (regexp-quote (buffer-substring-no-properties beg end))))
+          (direction (if direction 'forward 'backward)))
       (evil-exit-visual-state)
-      (setq evil-ex-search-pattern (evil-ex-make-search-pattern selection))
-      (setq evil-ex-search-direction (if direction 'forward 'backward))
-      (evil-search selection direction t))))
+      (setq evil-ex-search-direction direction)
+      (setq evil-ex-search-pattern pattern)
+      (evil-ex-search-activate-highlight pattern)
+      (evil-ex-search-next))))
 
 (defun my-visualstar-forward (beg end)
   "search for selected text in forward direction"
