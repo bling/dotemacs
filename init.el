@@ -5,6 +5,7 @@
 (require 'init-functions)
 (require 'init-packages)
 (require 'init-editor)
+(require 'init-yasnippet)
 (require 'init-auto-complete)
 (require 'init-projectile)
 (require 'init-helm)
