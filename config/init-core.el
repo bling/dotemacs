@@ -35,7 +35,8 @@
 (global-hl-line-mode t)
 (global-linum-mode t)
 (setq linum-format "%4d "
-      linum-delay t)
+      linum-delay t
+      linum-eager nil)
 
 ;; better scrolling
 (setq scroll-margin 3
