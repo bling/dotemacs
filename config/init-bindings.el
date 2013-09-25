@@ -47,6 +47,11 @@
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
+  (evil-add-hjkl-bindings magit-status-mode-map 'emacs
+    "K" 'magit-discard-item
+    "l" 'magit-key-mode-popup-logging
+    "h" 'magit-toggle-diff-refine-hunk)
+
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
   (evil-ex-define-cmd "Qa" 'evil-quit-all)
