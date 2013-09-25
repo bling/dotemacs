@@ -48,9 +48,6 @@
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
-  (define-key evil-visual-state-map (kbd "*") 'my-visualstar-forward)
-  (define-key evil-visual-state-map (kbd "#") 'my-visualstar-backward)
-
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
   (evil-ex-define-cmd "Qa" 'evil-quit-all)
