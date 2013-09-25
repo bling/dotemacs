@@ -6,4 +6,7 @@
 (require-package 'diminish)
 (require 'diminish)
 
+(when (display-graphic-p)
+  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+
 (provide 'init-eyecandy)
