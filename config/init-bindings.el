@@ -36,6 +36,11 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
+  (require-package 'jumpc)
+  (jumpc)
+  (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
+  (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
+
   (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)
 
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
