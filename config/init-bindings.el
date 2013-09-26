@@ -47,6 +47,9 @@
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
+  ;; emacs lisp
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") (kbd ", h f RET"))
+
   ;; proper jump lists
   (require-package 'jumpc)
   (jumpc)
