@@ -23,10 +23,12 @@
 (setq savehist-file (concat user-emacs-directory ".cache/savehist")
       savehist-additional-variables '(search ring regexp-search-ring)
       savehist-autosave-interval 60)
-(savehist-mode t)
+(savehist-mode +1)
 
 (require 'recentf)
-(setq recentf-save-file (concat user-emacs-directory ".cache/recentf"))
+(setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
+      recentf-max-saved-items 100
+      recentf-max-menu-items 50)
 (recentf-mode +1)
 
 (require 'eshell)
@@ -43,7 +45,8 @@
       auto-save-list-file-prefix
       (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
 
-(global-hl-line-mode t)
+(global-hl-line-mode +1)
+(require 'linum)
 (global-linum-mode t)
 (setq linum-format "%4d "
       linum-delay t
