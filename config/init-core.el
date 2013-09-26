@@ -29,8 +29,12 @@
 (setq vc-make-backup-files t)
 
 ;; store most files in the cache
-(setq backup-directory-alist `((".*" . ,(concat user-emacs-directory ".cache/backups")))
-      auto-save-list-file-prefix (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
+(setq backup-directory-alist
+      `((".*" . ,(concat user-emacs-directory ".cache/backups")))
+      auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory ".cache/backups") t))
+      auto-save-list-file-prefix
+      (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
 
 (global-hl-line-mode t)
 (global-linum-mode t)
