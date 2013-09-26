@@ -1,7 +1,6 @@
 (require-package 'auto-complete)
 (require 'auto-complete-config)
 
-(ac-config-default)
 (setq
  ac-auto-show-menu 0.01
  ac-auto-start 2
@@ -10,6 +9,9 @@
  ac-quick-help-delay 0.5
  ac-use-fuzzy t
  ac-show-menu-immediately-on-auto-complete t)
+
+(ac-config-default)
+(ac-linum-workaround)
 
 (add-to-list 'ac-modes 'vimrc-mode)
 
