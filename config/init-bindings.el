@@ -28,13 +28,6 @@
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
   (key-chord-define evil-normal-state-map "gh" 'redraw-display)
 
-  (when (featurep 'multiple-cursors)
-    (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
-    (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
-    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
-    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
-    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
-
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
@@ -45,13 +38,6 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-  (require-package 'jumpc)
-  (jumpc)
-  (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
-  (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
-
-  (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)
-
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 
@@ -60,6 +46,22 @@
 
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
+
+  ;; proper jump lists
+  (require-package 'jumpc)
+  (jumpc)
+  (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
+  (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
+
+  ;; projectile
+  (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)
+
+  ;; multiple cursors
+  (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
+  (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
+  (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
+  (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
+  (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this)
 
   (evil-add-hjkl-bindings magit-status-mode-map 'emacs
     "K" 'magit-discard-item
