@@ -18,6 +18,13 @@
 (setq save-place-file (concat user-emacs-directory ".cache/places"))
 (setq-default save-place t)
 
+;; minibuffer history
+(require 'savehist)
+(setq savehist-file (concat user-emacs-directory ".cache/savehist")
+      savehist-additional-variables '(search ring regexp-search-ring)
+      savehist-autosave-interval 60)
+(savehist-mode t)
+
 (require 'recentf)
 (setq recentf-save-file (concat user-emacs-directory ".cache/recentf"))
 (recentf-mode +1)
