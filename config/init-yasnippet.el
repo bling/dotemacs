@@ -1,8 +1,7 @@
 (require-package 'yasnippet)
 
-(setq yas-also-auto-indent-first-line t)
-
 (require 'yasnippet)
+(setq yas-also-auto-indent-first-line t)
 (yas-global-mode t)
 
 (provide 'init-yasnippet)

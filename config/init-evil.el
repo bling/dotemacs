@@ -1,5 +1,6 @@
 (require-package 'evil)
 (require-package 'evil-leader)
+(require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'surround)
 
@@ -16,6 +17,7 @@
 
 (require 'evil)
 (require 'evil-leader)
+(require 'evil-visualstar)
 (require 'evil-nerd-commenter)
 (require 'surround)
 

@@ -9,10 +9,10 @@
       sp-show-pair-from-inside t)
 
 (require-package 'undo-tree)
-(global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
 (setq-default undo-tree-history-directory-alist
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
+(global-undo-tree-mode)
 
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
