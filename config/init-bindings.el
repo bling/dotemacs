@@ -1,4 +1,5 @@
 (require-package 'guide-key)
+(require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c"))
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
@@ -25,6 +26,14 @@
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+  (key-chord-define evil-normal-state-map "gh" 'redraw-display)
+
+  (when (featurep 'multiple-cursors)
+    (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
+    (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
+    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
+    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
+    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
 
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
