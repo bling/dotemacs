@@ -1,5 +1,13 @@
 (defvar evil-want-C-u-scroll t)
 (defvar evil-want-C-w-in-emacs-state t)
+
+(defvar evil-search-module 'evil-search)
+(defvar evil-magic 'very-magic)
+
+(defvar evil-emacs-state-cursor '("red" box))
+(defvar evil-normal-state-cursor '("green" box))
+(defvar evil-insert-state-cursor '("orange" bar))
+
 (defvar evilnc-hotkey-comment-operator "gc")
 
 (require-package 'evil)
@@ -10,15 +18,9 @@
 
 (require 'evil)
 (require 'evil-leader)
-(require 'evil-visualstar)
 (require 'evil-nerd-commenter)
+(require 'evil-visualstar)
 (require 'surround)
-
-(setq evil-search-module 'evil-search
-      evil-magic 'very-magic
-      evil-emacs-state-cursor '("red" box)
-      evil-normal-state-cursor '("green" box)
-      evil-insert-state-cursor '("orange" bar))
 
 (global-evil-leader-mode)
 (evil-mode t)
@@ -40,12 +42,12 @@
 
 (defun my-evil-modeline-change (default-color)
   "changes the modeline color when the evil mode changes"
-  (let ((color (cond ((minibufferp) default-color)
-                     ((evil-insert-state-p) '("#000000" . "#ffffff"))
+  (let ((color (cond ((evil-insert-state-p) '("#000000" . "#ffffff"))
                      ((evil-visual-state-p) '("#010100" . "#ffffff"))
                      ((evil-emacs-state-p)  '("#5f0000" . "#ffffff"))
                      ((buffer-modified-p)   '("#001111" . "#ffffff"))
-                     (t default-color))))
+                     ;; (t default-color))))
+                     (t '("#444444" . "#ffffff")))))
     (set-face-background 'mode-line (car color))
     (set-face-foreground 'mode-line (cdr color))))
 
