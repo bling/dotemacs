@@ -1,12 +1,12 @@
+(defvar evil-want-C-u-scroll t)
+(defvar evil-want-C-w-in-emacs-state t)
+(defvar evilnc-hotkey-comment-operator "gc")
+
 (require-package 'evil)
 (require-package 'evil-leader)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'surround)
-
-(defvar evil-want-C-u-scroll t)
-(defvar evil-want-C-w-in-emacs-state t)
-(defvar evilnc-hotkey-comment-operator "gc")
 
 (require 'evil)
 (require 'evil-leader)
