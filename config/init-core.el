@@ -31,8 +31,12 @@
       recentf-max-menu-items 50)
 (recentf-mode +1)
 
+
+;; eshell
+(defvar eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
+(defvar eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 (require 'eshell)
-(setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
+
 
 ;; make backups even for VCS files
 (setq vc-make-backup-files t)
@@ -45,17 +49,12 @@
       auto-save-list-file-prefix
       (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
 
-(global-hl-line-mode +1)
-(require 'linum)
-(global-linum-mode t)
-(setq linum-format "%4d "
-      linum-delay t
-      linum-eager nil)
 
 ;; better scrolling
 (setq scroll-margin 3
       scroll-conservatively 9999
       scroll-preserve-screen-position t)
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)

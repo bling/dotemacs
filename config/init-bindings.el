@@ -14,6 +14,7 @@
   (evil-leader/set-key
     "e" 'eval-last-sexp
     "E" 'eval-defun
+    "c" 'eshell
     "b d" 'kill-this-buffer
     "v" (kbd "C-w v C-w l")
     "s" (kbd "C-w s C-w j")
