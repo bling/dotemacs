@@ -9,4 +9,7 @@
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
 
+(require-package 'monokai-theme)
+(load-theme 'monokai t)
+
 (provide 'init-eyecandy)

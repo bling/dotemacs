@@ -15,9 +15,6 @@
               `(("." . ,(concat user-emacs-directory ".cache/undo"))))
 (global-undo-tree-mode)
 
-(require-package 'monokai-theme)
-(load-theme 'monokai t)
-
 (require-package 'multiple-cursors)
 (require 'multiple-cursors)
 
