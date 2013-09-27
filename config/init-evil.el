@@ -4,8 +4,9 @@
 (require-package 'evil-nerd-commenter)
 (require-package 'surround)
 
-(setq evil-want-C-u-scroll t)
-(setq evil-want-C-w-in-emacs-state t)
+(defvar evil-want-C-u-scroll t)
+(defvar evil-want-C-w-in-emacs-state t)
+(defvar evilnc-hotkey-comment-operator "gc")
 
 (require 'evil)
 (require 'evil-leader)
@@ -13,12 +14,11 @@
 (require 'evil-nerd-commenter)
 (require 'surround)
 
-(setq evil-search-module 'evil-search)
-(setq evil-magic 'very-magic)
-(setq evil-emacs-state-cursor '("red" box))
-(setq evil-normal-state-cursor '("green" box))
-(setq evil-insert-state-cursor '("orange" bar))
-(setq evilnc-hotkey-comment-operator "gc")
+(setq evil-search-module 'evil-search
+      evil-magic 'very-magic
+      evil-emacs-state-cursor '("red" box)
+      evil-normal-state-cursor '("green" box)
+      evil-insert-state-cursor '("orange" bar))
 
 (global-evil-leader-mode)
 (evil-mode t)
