@@ -84,8 +84,9 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 ;; auto-complete
-(define-key ac-completing-map (kbd "C-n") 'ac-next)
-(define-key ac-completing-map (kbd "C-p") 'ac-previous)
+(when (featurep 'auto-complete)
+  (define-key ac-completing-map (kbd "C-n") 'ac-next)
+  (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
@@ -94,5 +95,7 @@
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
+(global-set-key (kbd "C-x C-c") (lambda () (interactive) (message "Thou shall not quit!")))
+(global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
 
 (provide 'init-bindings)
