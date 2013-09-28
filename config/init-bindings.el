@@ -85,8 +85,17 @@
 
 ;; auto-complete
 (when (featurep 'auto-complete)
+  (define-key ac-completing-map (kbd "TAB") 'my-auto-complete-tab)
+  (define-key ac-completing-map [tab] 'my-auto-complete-tab)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
+
+;; company
+(when (featurep 'company)
+  (define-key company-active-map (kbd "TAB") 'my-company-tab)
+  (define-key company-active-map [tab] 'my-company-tab)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)

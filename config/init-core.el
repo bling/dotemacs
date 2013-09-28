@@ -7,6 +7,7 @@
   (menu-bar-mode -1))
 
 (setq inhibit-splash-screen t
+      inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 
 (setq custom-file (concat user-emacs-directory "config/custom.el"))
