@@ -1,4 +1,4 @@
-alias g git
+alias g git $*
 alias la ls -la
 alias ll ls -l
 alias ff find-file $1
