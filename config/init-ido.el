@@ -2,6 +2,7 @@
 (ido-everywhere t)
 
 (setq ido-enable-flex-matching t
+      ido-use-faces nil ;; disabled so we can see flx highlights
       ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
 
 (require-package 'ido-ubiquitous)

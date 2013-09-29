@@ -5,6 +5,14 @@
 
 (require-package 'diminish)
 (require 'diminish)
+(diminish 'undo-tree-mode)
+(diminish 'auto-complete-mode)
+(diminish 'projectile-mode)
+(diminish 'yas-minor-mode)
+(diminish 'guide-key-mode)
+(diminish 'helm-mode)
+(diminish 'eldoc-mode)
+(diminish 'smartparens-mode)
 
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
