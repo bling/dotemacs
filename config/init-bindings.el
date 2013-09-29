@@ -85,8 +85,6 @@
 
 ;; auto-complete
 (when (featurep 'auto-complete)
-  (define-key ac-completing-map (kbd "TAB") 'my-auto-complete-tab)
-  (define-key ac-completing-map [tab] 'my-auto-complete-tab)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 

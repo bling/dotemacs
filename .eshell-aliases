@@ -1,7 +1,5 @@
-alias d dired $1
-alias ff find-file $1
-
-alias ll ls -l
-alias la ls -la
-
 alias g git
+alias la ls -la
+alias ll ls -l
+alias ff find-file $1
+alias d dired $1
