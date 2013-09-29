@@ -26,8 +26,9 @@
 
 (if (display-graphic-p)
     (progn
-      (require-package 'soothe-theme)
-      (load-theme 'soothe))
+      ;; (require-package 'soothe-theme)
+      (require-package 'birds-of-paradise-plus-theme)
+      (load-theme 'birds-of-paradise-plus))
   (progn
     (require-package 'monokai-theme)
     (load-theme 'monokai t)))

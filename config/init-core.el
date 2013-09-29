@@ -1,23 +1,26 @@
 ;;; configuration for things included in the default Emacs distribution
 
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(unless (display-graphic-p) (menu-bar-mode -1))
 
-(unless (display-graphic-p)
-  (menu-bar-mode -1))
+(blink-cursor-mode -1)
 
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 
+
 (setq custom-file (concat user-emacs-directory "config/custom.el"))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
+
 
 ;; move cursor to the last position upon open
 (require 'saveplace)
 (setq save-place-file (concat user-emacs-directory ".cache/places"))
 (setq-default save-place t)
+
 
 ;; minibuffer history
 (require 'savehist)
@@ -26,6 +29,8 @@
       savehist-autosave-interval 60)
 (savehist-mode +1)
 
+
+;; recent files
 (require 'recentf)
 (setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
       recentf-max-saved-items 100
@@ -57,11 +62,17 @@
       scroll-preserve-screen-position t)
 
 
+;; better buffer names for duplicates
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward
+      uniquify-separator "/"
+      uniquify-ignore-buffers-re "^\\*" ; leave special buffers alone
+      uniquify-after-kill-buffer-p t)
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
 
 (setq-default
  indent-tabs-mode nil
