@@ -16,11 +16,12 @@
 (require 'init-flycheck)
 
 (require 'init-vim)
+(require 'init-js)
 (require 'init-lisp)
 (require 'init-markdown)
 
 (require 'init-evil)
-(require 'init-eyecandy)
 (require 'init-bindings)
+(require 'init-eyecandy)
 
 ;;; (unload-feature 'foo)
