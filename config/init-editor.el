@@ -1,13 +1,3 @@
-(require-package 'smartparens)
-(require 'smartparens-config)
-(smartparens-global-mode t)
-;; (smartparens-global-strict-mode t)
-(show-smartparens-global-mode t)
-(setq sp-autoescape-string-quote nil
-      sp-autoskip-closing-pair 'always
-      sp-show-pair-delay 0
-      sp-show-pair-from-inside t)
-
 (require-package 'undo-tree)
 (require 'undo-tree)
 (setq undo-tree-auto-save-history t)

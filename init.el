@@ -6,6 +6,7 @@
 (require 'init-functions)
 (require 'init-packages)
 (require 'init-editor)
+(require 'init-smartparens)
 (require 'init-yasnippet)
 (require 'init-auto-complete)
 ;; (require 'init-company)
