@@ -16,7 +16,12 @@
       linum-delay t
       linum-eager nil)
 
-(require-package 'monokai-theme)
-(load-theme 'monokai t)
+(if (display-graphic-p)
+    (progn
+      (require-package 'soothe-theme)
+      (load-theme 'soothe))
+  (progn
+    (require-package 'monokai-theme)
+    (load-theme 'monokai t)))
 
 (provide 'init-eyecandy)
