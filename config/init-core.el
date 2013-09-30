@@ -11,7 +11,7 @@
       inhibit-startup-message t)
 
 
-(setq custom-file (concat user-emacs-directory "config/custom.el"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (unless (not (file-exists-p custom-file))
   (load custom-file))
 
