@@ -9,7 +9,7 @@
 (global-set-key (kbd "C-c C-m") 'smex)
 (global-set-key (kbd "C-c h") 'helm-mini)
 
-(when (featurep 'evil-leader)
+(after-load 'evil-leader
   (evil-leader/set-leader ",")
   (evil-leader/set-key
     "e" 'eval-last-sexp
@@ -22,7 +22,7 @@
     "h" help-map
     "h h" 'help-for-help-internal))
 
-(when (featurep 'evil)
+(after-load 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
@@ -84,12 +84,12 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 ;; auto-complete
-(when (featurep 'auto-complete)
+(after-load 'auto-complete
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 ;; company
-(when (featurep 'company)
+(after-load 'company
   (define-key company-active-map (kbd "TAB") 'my-company-tab)
   (define-key company-active-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)

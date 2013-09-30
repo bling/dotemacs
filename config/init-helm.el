@@ -1,5 +1,7 @@
 (require-package 'helm)
-(require-package 'helm-projectile)
+
+(after-load 'projectile
+  (require-package 'helm-projectile))
 
 (require 'helm-config)
 (helm-mode 1)

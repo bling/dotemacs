@@ -1,12 +1,11 @@
+(defvar ido-enable-prefix nil)
+(defvar ido-enable-flex-matching t)
+(defvar ido-create-new-buffer 'prompt)
+(defvar ido-use-faces nil) ;; disabled so we can see flx highlights
+(defvar ido-use-filename-at-point 'guess)
+(defvar ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
+
 (require 'ido)
-
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-create-new-buffer 'prompt
-      ido-use-faces nil ;; disabled so we can see flx highlights
-      ido-use-filename-at-point 'guess
-      ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
-
 (ido-mode t)
 (ido-everywhere t)
 
@@ -19,9 +18,9 @@
 (require-package 'ido-vertical-mode)
 (ido-vertical-mode)
 
+(defvar smex-save-file (concat user-emacs-directory ".cache/smex-items"))
 (require-package 'smex)
 (require 'smex)
-(setq smex-save-file (concat user-emacs-directory ".cache/smex-items"))
 (smex-initialize)
 
 (provide 'init-ido)
