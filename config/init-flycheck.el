@@ -1,8 +1,8 @@
 (require-package 'flycheck)
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(after-load 'flycheck
+  (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
 
-(eval-after-load 'flycheck
-  '(setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
+(global-flycheck-mode t)
 
 (provide 'init-flycheck)
