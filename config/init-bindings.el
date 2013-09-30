@@ -4,10 +4,13 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-x C-m") 'smex)
-(global-set-key (kbd "C-c C-m") 'smex)
-(global-set-key (kbd "C-c h") 'helm-mini)
+(after-load 'smex
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-x C-m") 'smex)
+  (global-set-key (kbd "C-c C-m") 'smex))
+
+(after-load 'helm-config
+  (global-set-key (kbd "C-c h") 'helm-mini))
 
 (after-load 'evil-leader
   (evil-leader/set-leader ",")
@@ -51,25 +54,26 @@
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") (kbd ", h f RET"))
 
   ;; proper jump lists
-  (require-package 'jumpc)
-  (jumpc)
-  (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
-  (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
+  ;; (require-package 'jumpc)
+  ;; (jumpc)
+  ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
+  ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
-  ;; projectile
-  (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)
+  (after-load 'projectile
+    (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
 
-  ;; multiple cursors
-  (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
-  (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
-  (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
-  (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
-  (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this)
+  (after-load 'multiple-cursors
+    (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
+    (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
+    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
+    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
+    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
 
-  (evil-add-hjkl-bindings magit-status-mode-map 'emacs
-    "K" 'magit-discard-item
-    "l" 'magit-key-mode-popup-logging
-    "h" 'magit-toggle-diff-refine-hunk)
+  (after-load 'magit
+    (evil-add-hjkl-bindings magit-status-mode-map 'emacs
+      "K" 'magit-discard-item
+      "l" 'magit-key-mode-popup-logging
+      "h" 'magit-toggle-diff-refine-hunk))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
@@ -83,12 +87,10 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; auto-complete
 (after-load 'auto-complete
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
-;; company
 (after-load 'company
   (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
   (define-key evil-insert-state-map [tab] 'my-company-tab)

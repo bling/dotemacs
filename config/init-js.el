@@ -1,3 +1,5 @@
+(defvar js2-highlight-level 3)
+
 (require-package 'js2-mode)
 (require 'js2-mode)
 

@@ -10,12 +10,14 @@
 (after-load 'projectile (diminish 'projectile-mode))
 (after-load 'yasnippet (diminish 'yas-minor-mode))
 (after-load 'guide-key (diminish 'guide-key-mode))
-(after-load 'helm (diminish 'helm-mode))
 (after-load 'eldoc (diminish 'eldoc-mode))
 (after-load 'smartparens (diminish 'smartparens-mode))
+(after-load 'company (diminish 'company-mode))
+(after-load 'git-gutter+ (diminish 'git-gutter+-mode))
 
 (when (display-graphic-p)
-  (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
+  (set-face-attribute 'default nil :font "Ubuntu Mono-14")
+  (fringe-mode 16))
 
 (global-hl-line-mode +1)
 (require 'linum)

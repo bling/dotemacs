@@ -4,6 +4,7 @@
 (require 'init-core)
 (require 'init-packages)
 (require 'init-util)
+(require 'init-eyecandy)
 
 (require 'init-editor)
 (require 'init-smartparens)
@@ -26,6 +27,5 @@
 
 (require 'init-evil)
 (require 'init-bindings)
-(require 'init-eyecandy)
 
 ;;; (unload-feature 'foo)
