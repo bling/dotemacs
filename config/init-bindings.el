@@ -90,8 +90,8 @@
 
 ;; company
 (after-load 'company
-  (define-key company-active-map (kbd "TAB") 'my-company-tab)
-  (define-key company-active-map [tab] 'my-company-tab)
+  (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
+  (define-key evil-insert-state-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 

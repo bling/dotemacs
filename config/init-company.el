@@ -6,6 +6,11 @@
 (defvar company-tooltip-limit 30)
 
 (require-package 'company)
+(require 'company)
+
+(after-load 'ac-js2
+  (add-to-list 'company-backends 'ac-js2-company))
+
 (global-company-mode t)
 
 (defun my-company-tab ()
