@@ -14,4 +14,4 @@
         (delete-window))
     (kill-buffer-and-window)))
 
-(provide 'init-functions)
+(provide 'init-util)

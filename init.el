@@ -3,8 +3,8 @@
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
 (require 'init-core)
-(require 'init-functions)
 (require 'init-packages)
+(require 'init-util)
 (require 'init-editor)
 (require 'init-smartparens)
 (require 'init-yasnippet)
