@@ -14,4 +14,10 @@
         (delete-window))
     (kill-buffer-and-window)))
 
+
+;; make sure $PATH is set correctly
+(require-package 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
+
+
 (provide 'init-util)
