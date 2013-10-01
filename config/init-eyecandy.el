@@ -1,7 +1,5 @@
 (require-package 'smart-mode-line)
-(require 'smart-mode-line)
-(if after-init-time (sml/setup)
-  (add-hook 'after-init-hook 'sml/setup))
+(add-hook 'after-init-hook (sml/setup))
 
 (require-package 'diminish)
 (require 'diminish)
@@ -15,13 +13,19 @@
 (after 'company (diminish 'company-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
 
+(global-hl-line-mode +1)
+
+(require 'linum)
+(setq linum-format "%4d ")
+(global-linum-mode t)
+
+(require-package 'soothe-theme)
+;; (require-package 'birds-of-paradise-plus-theme)
+;; (require-package 'sublime-themes)
+(load-theme 'soothe)
+
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Ubuntu Mono-14")
   (fringe-mode 16))
-
-(global-hl-line-mode +1)
-(require 'linum)
-(global-linum-mode t)
-(setq linum-format "%4d ")
 
 (provide 'init-eyecandy)
