@@ -10,7 +10,7 @@
   (global-set-key (kbd "C-c C-m") 'smex))
 
 (after-load 'helm-config
-  (global-set-key (kbd "C-c h") 'helm-mini))
+  (defvar helm-command-prefix-key "C-c h"))
 
 (after-load 'evil-leader
   (evil-leader/set-leader ",")
@@ -18,6 +18,7 @@
     "e" 'eval-last-sexp
     "E" 'eval-defun
     "c" 'eshell
+    "C" 'customize-group
     "b d" 'kill-this-buffer
     "v" (kbd "C-w v C-w l")
     "s" (kbd "C-w s C-w j")
