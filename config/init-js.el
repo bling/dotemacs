@@ -8,7 +8,7 @@
 (require-package 'ac-js2)
 (require 'ac-js2)
 
-(after-load 'auto-complete
+(after 'auto-complete
   (ac-js2-setup-auto-complete-mode))
 
 (provide 'init-js)

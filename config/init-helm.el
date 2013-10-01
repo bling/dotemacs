@@ -1,6 +1,6 @@
 (require-package 'helm)
 
-(after-load 'projectile
+(after 'projectile
   (require-package 'helm-projectile))
 
 (require 'helm-config)

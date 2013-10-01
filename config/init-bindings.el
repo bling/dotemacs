@@ -4,15 +4,15 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
-(after-load 'smex
+(after 'smex
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
 
-(after-load 'helm-config
+(after 'helm-config
   (defvar helm-command-prefix-key "C-c h"))
 
-(after-load 'evil-leader
+(after 'evil-leader
   (evil-leader/set-leader ",")
   (evil-leader/set-key
     "e" 'eval-last-sexp
@@ -26,7 +26,7 @@
     "h" help-map
     "h h" 'help-for-help-internal))
 
-(after-load 'evil
+(after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
@@ -60,17 +60,17 @@
   ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
-  (after-load 'projectile
+  (after 'projectile
     (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
 
-  (after-load 'multiple-cursors
+  (after 'multiple-cursors
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
     (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
     (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
 
-  (after-load 'magit
+  (after 'magit
     (evil-add-hjkl-bindings magit-status-mode-map 'emacs
       "K" 'magit-discard-item
       "l" 'magit-key-mode-popup-logging
@@ -88,11 +88,11 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-(after-load 'auto-complete
+(after 'auto-complete
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
-(after-load 'company
+(after 'company
   (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
   (define-key evil-insert-state-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
