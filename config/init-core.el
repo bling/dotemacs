@@ -44,6 +44,10 @@
 (require 'eshell)
 
 
+;; erc
+(defvar erc-log-channels-directory (concat user-emacs-directory ".cache/erc/logs"))
+
+
 ;; make backups even for VCS files
 (setq vc-make-backup-files t)
 
