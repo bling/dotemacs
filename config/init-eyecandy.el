@@ -22,17 +22,6 @@
 (global-hl-line-mode +1)
 (require 'linum)
 (global-linum-mode t)
-(setq linum-format "%4d "
-      linum-delay t
-      linum-eager nil)
-
-(if (display-graphic-p)
-    (progn
-      ;; (require-package 'soothe-theme)
-      (require-package 'birds-of-paradise-plus-theme)
-      (load-theme 'birds-of-paradise-plus))
-  (progn
-    (require-package 'monokai-theme)
-    (load-theme 'monokai t)))
+(setq linum-format "%4d ")
 
 (provide 'init-eyecandy)
