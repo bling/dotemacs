@@ -19,13 +19,8 @@
 (setq linum-format "%4d ")
 (global-linum-mode t)
 
-(require-package 'soothe-theme)
-;; (require-package 'birds-of-paradise-plus-theme)
-;; (require-package 'sublime-themes)
-(load-theme 'birds-of-paradise-plus)
-
 (when (display-graphic-p)
-  (set-face-attribute 'default nil :font "Ubuntu Mono-14")
+  (ignore-errors (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
   (fringe-mode 16))
 
 (provide 'init-eyecandy)

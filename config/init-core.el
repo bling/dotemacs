@@ -10,9 +10,8 @@
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 
-
 (setq custom-file (concat user-emacs-directory "custom.el"))
-(unless (not (file-exists-p custom-file))
+(when (file-exists-p custom-file)
   (load custom-file))
 
 

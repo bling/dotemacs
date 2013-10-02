@@ -14,10 +14,18 @@
         (delete-window))
     (kill-buffer-and-window)))
 
+(defun require-package (package)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
+
 
 ;; make sure $PATH is set correctly
 (require-package 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
+(ignore-errors ;; windows
+  (exec-path-from-shell-initialize))
 
 
 (provide 'init-util)
