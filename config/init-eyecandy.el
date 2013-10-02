@@ -22,7 +22,7 @@
 (require-package 'soothe-theme)
 ;; (require-package 'birds-of-paradise-plus-theme)
 ;; (require-package 'sublime-themes)
-(load-theme 'soothe)
+(load-theme 'birds-of-paradise-plus)
 
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "Ubuntu Mono-14")
