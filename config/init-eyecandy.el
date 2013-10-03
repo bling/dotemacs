@@ -19,8 +19,4 @@
 (setq linum-format "%4d ")
 (global-linum-mode t)
 
-(when (display-graphic-p)
-  (ignore-errors (set-face-attribute 'default nil :font "Ubuntu Mono-14"))
-  (fringe-mode 16))
-
 (provide 'init-eyecandy)

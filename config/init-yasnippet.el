@@ -5,7 +5,4 @@
 (require 'yasnippet)
 (yas-global-mode t)
 
-(define-key yas-minor-mode-map "\t" nil)
-(define-key yas-minor-mode-map [tab] nil)
-
 (provide 'init-yasnippet)

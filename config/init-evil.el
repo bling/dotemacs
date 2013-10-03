@@ -22,6 +22,8 @@
 (require 'evil-visualstar)
 (require 'surround)
 
+(add-to-list 'evil-emacs-state-modes 'profiler-report-mode)
+
 (global-evil-leader-mode)
 (evil-mode t)
 (global-surround-mode 1)
@@ -70,5 +72,11 @@
 
 (define-key evil-motion-state-map "gn" 'my-evil-next-match)
 (define-key evil-motion-state-map "gN" 'my-evil-previous-match)
+
+(defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
+
+(defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
 
 (provide 'init-evil)

@@ -48,6 +48,8 @@
   (define-key evil-normal-state-map (kbd "Q") 'my-window-killer)
   (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
+  (define-key evil-visual-state-map (kbd ", e") 'eval-region)
+
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
@@ -97,8 +99,13 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 (after 'company
+  (define-key yas-minor-mode-map "\t" nil)
+  (define-key yas-minor-mode-map [tab] nil)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
+
+(after 'vc
+  (global-set-key (kbd "C-x v =") 'vc-ediff))
 
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
