@@ -63,6 +63,10 @@
   (after 'projectile
     (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
 
+  (after 'company
+    (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
+    (define-key evil-insert-state-map [tab] 'my-company-tab))
+
   (after 'multiple-cursors
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
@@ -93,8 +97,6 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 (after 'company
-  (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
-  (define-key evil-insert-state-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 

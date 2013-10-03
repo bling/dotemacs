@@ -24,7 +24,7 @@
 (require 'init-flycheck)
 
 (require 'init-vim)
-(require 'init-js)
+(require 'init-web)
 (require 'init-lisp)
 (require 'init-markdown)
 
