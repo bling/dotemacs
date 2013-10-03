@@ -6,17 +6,14 @@
       sp-show-pair-from-inside t)
 
 (smartparens-global-mode t)
-(show-smartparens-global-mode t)
 
 (defun my-open-block-c-mode (id action context)
   (when (eq action 'insert)
-    (newline)
     (newline)
     (indent-according-to-mode)
     (previous-line)
     (indent-according-to-mode)))
 
-(sp-with-modes '(js2-mode)
-  (sp-local-pair "{" nil :post-handlers '(:add my-open-block-c-mode)))
+(sp-local-pair '(js2-mode) "{" nil :post-handlers '((my-open-block-c-mode "RET")))
 
 (provide 'init-smartparens)
