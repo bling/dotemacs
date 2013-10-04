@@ -9,9 +9,6 @@
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
 
-(after 'helm-config
-  (defvar helm-command-prefix-key "C-c h"))
-
 (after 'evil-leader
   (evil-leader/set-leader ",")
   (evil-leader/set-key
@@ -35,6 +32,7 @@
   (define-key evil-normal-state-map (kbd "SPC SPC") 'smex)
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
+  (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
 
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
@@ -66,6 +64,9 @@
   ;; (jumpc)
   ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
+
+  (after 'coffee-mode
+    (evil-define-key 'insert coffee-mode-map (kbd "RET") 'coffee-newline-and-indent))
 
   (after 'projectile
     (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
@@ -100,12 +101,14 @@
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 (after 'auto-complete
+  (define-key ac-completing-map "\t" 'ac-expand)
+  (define-key ac-completing-map [tab] 'ac-expand)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 (after 'company
-  (define-key yas-minor-mode-map "\t" nil)
-  (define-key yas-minor-mode-map [tab] nil)
+  (define-key company-active-map "\t" 'my-company-tab)
+  (define-key company-active-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 

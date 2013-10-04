@@ -1,3 +1,5 @@
+(defvar helm-command-prefix-key "C-c h")
+
 (require-package 'helm)
 
 (after 'projectile

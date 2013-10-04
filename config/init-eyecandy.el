@@ -2,6 +2,15 @@
 (add-hook 'after-init-hook (sml/setup))
 
 
+(require-package 'pretty-mode)
+(global-pretty-mode)
+
+
+(require-package 'smooth-scroll)
+(require 'smooth-scroll)
+(smooth-scroll-mode t)
+
+
 (require-package 'diminish)
 (require 'diminish)
 (after 'undo-tree (diminish 'undo-tree-mode))
