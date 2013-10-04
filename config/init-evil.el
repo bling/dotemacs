@@ -5,8 +5,8 @@
 (defvar evil-magic 'very-magic)
 
 (defvar evil-emacs-state-cursor '("red" box))
-(defvar evil-normal-state-cursor '("green" box))
-(defvar evil-insert-state-cursor '("orange" bar))
+;; (defvar evil-normal-state-cursor '("green" box))
+;; (defvar evil-insert-state-cursor '("orange" bar))
 
 (defvar evilnc-hotkey-comment-operator "gc")
 
@@ -44,19 +44,14 @@
 
 (defun my-evil-modeline-change (default-color)
   "changes the modeline color when the evil mode changes"
-  (let ((color (cond ((evil-insert-state-p) '("#333333" . "#ffffff"))
-                     ((evil-visual-state-p) '("#010100" . "#ffffff"))
-                     ((evil-emacs-state-p)  '("#5f0000" . "#ffffff"))
-                     ((buffer-modified-p)   '("#001111" . "#ffffff"))
-                     ;; (t default-color))))
-                     (t '("#000000" . "#ffffff")))))
+  (let ((color (cond ((evil-emacs-state-p)  '("#5f0000" . "#ffffff"))
+                     (t default-color))))
     (set-face-background 'mode-line (car color))
     (set-face-foreground 'mode-line (cdr color))))
 
 (lexical-let ((default-color (cons (face-background 'mode-line)
                                    (face-foreground 'mode-line))))
-  (add-hook 'post-command-hook
-            (lambda () (my-evil-modeline-change default-color))))
+  (add-hook 'post-command-hook (lambda () (my-evil-modeline-change default-color))))
 
 (evil-define-text-object my-evil-next-match (count &optional beg end type)
   "Select next match."
