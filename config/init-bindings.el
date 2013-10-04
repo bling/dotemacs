@@ -32,6 +32,11 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
+  (define-key evil-normal-state-map (kbd "SPC SPC") 'smex)
+  (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
+  (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
+  (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
+
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
