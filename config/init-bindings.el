@@ -35,6 +35,8 @@
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
 
+  (define-key evil-normal-state-map (kbd "[ SPC") (lambda () (interactive) (evil-insert-newline-above) (forward-line)))
+  (define-key evil-normal-state-map (kbd "] SPC") (lambda () (interactive) (evil-insert-newline-below) (forward-line -1)))
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
@@ -100,11 +102,13 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+
 (after 'auto-complete
   (define-key ac-completing-map "\t" 'ac-expand)
   (define-key ac-completing-map [tab] 'ac-expand)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
+
 
 (after 'company
   (define-key company-active-map "\t" 'my-company-tab)
@@ -112,13 +116,15 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-(after 'vc
-  (global-set-key (kbd "C-x v =") 'vc-ediff))
 
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 1)))
   (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1))))
+
+
+(global-set-key (kbd "C-x v =") 'vc-ediff)
+
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))

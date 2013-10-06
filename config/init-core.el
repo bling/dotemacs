@@ -29,6 +29,10 @@
 (savehist-mode +1)
 
 
+(setq mark-ring-max 64)
+(setq global-mark-ring-max 128)
+
+
 ;; recent files
 (require 'recentf)
 (setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
@@ -40,7 +44,6 @@
 ;; eshell
 (defvar eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 (defvar eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
-(require 'eshell)
 
 
 ;; erc

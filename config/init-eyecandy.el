@@ -22,6 +22,7 @@
 (after 'smartparens (diminish 'smartparens-mode))
 (after 'company (diminish 'company-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
+(after 'pretty-mode (diminish 'smooth-scroll-mode))
 
 
 (global-hl-line-mode +1)
