@@ -10,7 +10,7 @@
 
 (defvar evilnc-hotkey-comment-operator "gc")
 
-(require-package 'evil)
+(add-to-list 'load-path (concat user-emacs-directory "elisp/evil"))
 (require-package 'evil-leader)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)

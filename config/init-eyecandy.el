@@ -13,6 +13,7 @@
 
 (require-package 'diminish)
 (require 'diminish)
+(diminish 'global-visual-line-mode)
 (after 'undo-tree (diminish 'undo-tree-mode))
 (after 'auto-complete (diminish 'auto-complete-mode))
 (after 'projectile (diminish 'projectile-mode))
@@ -31,9 +32,6 @@
 (require 'linum)
 (setq linum-format "%4d ")
 (global-linum-mode t)
-
-
-(fringe-mode 16)
 
 
 (provide 'init-eyecandy)

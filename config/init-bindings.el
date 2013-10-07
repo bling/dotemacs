@@ -29,7 +29,9 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (define-key evil-normal-state-map (kbd "SPC SPC") 'smex)
+  (after 'smex
+    (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
+    (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
@@ -37,8 +39,11 @@
 
   (define-key evil-normal-state-map (kbd "[ SPC") (lambda () (interactive) (evil-insert-newline-above) (forward-line)))
   (define-key evil-normal-state-map (kbd "] SPC") (lambda () (interactive) (evil-insert-newline-below) (forward-line -1)))
+  (define-key evil-normal-state-map (kbd "[ e") (kbd "ddkP"))
+  (define-key evil-normal-state-map (kbd "] e") (kbd "ddp"))
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
+
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 
@@ -130,5 +135,6 @@
 (global-unset-key (kbd "C-x m"))
 (global-set-key (kbd "C-x C-c") (lambda () (interactive) (message "Thou shall not quit!")))
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
+
 
 (provide 'init-bindings)

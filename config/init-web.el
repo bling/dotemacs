@@ -25,6 +25,9 @@
 (require-package 'coffee-mode)
 
 
+(require-package 'jade-mode)
+
+
 (require-package 'skewer-mode)
 (skewer-setup)
 

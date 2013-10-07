@@ -6,6 +6,7 @@
       sp-show-pair-from-inside t)
 
 (smartparens-global-mode t)
+(show-smartparens-global-mode)
 
 (defun my-open-block-c-mode (id action context)
   (when (eq action 'insert)

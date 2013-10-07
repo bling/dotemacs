@@ -1,14 +1,14 @@
 ;;; configuration for things included in the default Emacs distribution
 
+(setq inhibit-splash-screen t
+      inhibit-startup-echo-area-message t
+      inhibit-startup-message t)
+
+
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (unless (display-graphic-p) (menu-bar-mode -1))
 
-(blink-cursor-mode -1)
-
-(setq inhibit-splash-screen t
-      inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
@@ -78,11 +78,15 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
+
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
 (which-function-mode t)
+(global-visual-line-mode)
+(blink-cursor-mode -1)
 
 
 (setq-default
