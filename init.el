@@ -1,5 +1,6 @@
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path (concat user-emacs-directory "config"))
+(add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)

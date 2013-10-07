@@ -1,0 +1,3 @@
+[submodule "elisp/evil"]
+	path = elisp/evil
+	url = git://gitorious.org/evil/evil.git
