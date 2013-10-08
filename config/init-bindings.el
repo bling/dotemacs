@@ -29,6 +29,9 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
+  (after 'git-gutter+
+    (evil-ex-define-cmd "Gw" 'git-gutter+-stage-hunks))
+
   (after 'smex
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
     (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
@@ -76,7 +79,7 @@
     (evil-define-key 'insert coffee-mode-map (kbd "RET") 'coffee-newline-and-indent))
 
   (after 'projectile
-    (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
+    (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
@@ -126,9 +129,6 @@
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 1)))
   (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1))))
-
-
-(global-set-key (kbd "C-x v =") 'vc-ediff)
 
 
 ;; have no use for these default bindings

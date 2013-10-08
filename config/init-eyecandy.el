@@ -12,18 +12,18 @@
 
 
 (require-package 'diminish)
-(require 'diminish)
-(diminish 'global-visual-line-mode)
-(after 'undo-tree (diminish 'undo-tree-mode))
-(after 'auto-complete (diminish 'auto-complete-mode))
-(after 'projectile (diminish 'projectile-mode))
-(after 'yasnippet (diminish 'yas-minor-mode))
-(after 'guide-key (diminish 'guide-key-mode))
-(after 'eldoc (diminish 'eldoc-mode))
-(after 'smartparens (diminish 'smartparens-mode))
-(after 'company (diminish 'company-mode))
-(after 'git-gutter+ (diminish 'git-gutter+-mode))
-(after 'pretty-mode (diminish 'smooth-scroll-mode))
+(after 'diminish-autoloads
+  (diminish 'global-visual-line-mode)
+  (after 'undo-tree (diminish 'undo-tree-mode))
+  (after 'auto-complete (diminish 'auto-complete-mode))
+  (after 'projectile (diminish 'projectile-mode))
+  (after 'yasnippet (diminish 'yas-minor-mode))
+  (after 'guide-key (diminish 'guide-key-mode))
+  (after 'eldoc (diminish 'eldoc-mode))
+  (after 'smartparens (diminish 'smartparens-mode))
+  (after 'company (diminish 'company-mode))
+  (after 'git-gutter+ (diminish 'git-gutter+-mode))
+  (after 'pretty-mode (diminish 'smooth-scroll-mode)))
 
 
 (global-hl-line-mode +1)
