@@ -34,6 +34,7 @@
 (require 'init-markdown)
 
 (require 'init-evil)
+(require 'init-misc)
 (require 'init-bindings)
 
 ;;; (unload-feature 'foo)

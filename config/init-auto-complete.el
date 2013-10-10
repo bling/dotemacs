@@ -1,15 +1,12 @@
+(defvar ac-auto-show-menu t)
+(defvar ac-auto-start 1)
+(defvar ac-comphist-file (concat user-emacs-directory ".cache/ac-comphist.dat"))
+(defvar ac-quick-help-delay 0.3)
+(defvar ac-quick-help-height 30)
+(defvar ac-show-menu-immediately-on-auto-complete t)
+
 (require-package 'auto-complete)
-
-(after 'auto-complete-autoloads
-  (setq ac-auto-show-menu t
-        ac-auto-start 1
-        ac-comphist-file (concat user-emacs-directory ".cache/ac-comphist.dat")
-        ac-quick-help-delay 0.3
-        ac-quick-help-height 30
-        ac-show-menu-immediately-on-auto-complete t))
-
 (require 'auto-complete-config)
-
 (ac-config-default)
 
 (after 'linum

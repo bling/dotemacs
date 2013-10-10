@@ -78,8 +78,8 @@
   (after 'coffee-mode
     (evil-define-key 'insert coffee-mode-map (kbd "RET") 'coffee-newline-and-indent))
 
-  (after 'projectile
-    (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag))
+  (after 'ag-autoloads
+    (define-key evil-normal-state-map (kbd "SPC /") 'ag-regexp-project-at-point))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)

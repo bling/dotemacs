@@ -47,6 +47,10 @@
 (setq vc-make-backup-files t)
 
 
+;; ediff
+(setq ediff-split-window-function 'split-window-horizontally)
+
+
 ;; store most files in the cache
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory ".cache/backups")))
