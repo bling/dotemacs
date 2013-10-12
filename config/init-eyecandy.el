@@ -8,6 +8,7 @@
 
 (require-package 'smooth-scroll)
 (require 'smooth-scroll)
+(setq smooth-scroll/vscroll-step-size 8)
 (smooth-scroll-mode t)
 
 
