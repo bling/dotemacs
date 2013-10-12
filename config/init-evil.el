@@ -14,11 +14,13 @@
 (require-package 'evil-leader)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
+(require-package 'evil-indent-textobject)
 (require-package 'surround)
 
 (require 'evil)
 (require 'evil-leader)
 (require 'evil-nerd-commenter)
+(require 'evil-indent-textobject)
 (require 'evil-visualstar)
 (require 'surround)
 
