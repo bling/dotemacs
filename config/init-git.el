@@ -1,6 +1,8 @@
 (require-package 'magit)
 (require-package 'gist)
 
+(defvar magit-diff-options '("--histogram"))
+
 (if (display-graphic-p)
     (progn
       (require-package 'git-gutter-fringe+)

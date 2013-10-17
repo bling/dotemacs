@@ -14,12 +14,16 @@
   (evil-leader/set-key
     "e" 'eval-last-sexp
     "E" 'eval-defun
-    "c" 'eshell
+    "c" (lambda ()
+          (interactive)
+          (evil-window-split)
+          (eshell))
     "C" 'customize-group
     "b d" 'kill-this-buffer
     "v" (kbd "C-w v C-w l")
     "s" (kbd "C-w s C-w j")
     "g s" 'magit-status
+    "g l" 'magit-log
     "P" 'package-list-packages
     "h" help-map
     "h h" 'help-for-help-internal))
@@ -30,8 +34,12 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after 'git-gutter+
-    (evil-ex-define-cmd "Gw" 'git-gutter+-stage-hunks))
+  (after 'git-gutter+-autoloads
+    (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
+    (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
+    (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
+    (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
+    (evil-ex-define-cmd "Gw" (lambda () (interactive) (git-gutter+-stage-whole-buffer))))
 
   (after 'smex
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
@@ -40,6 +48,8 @@
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
+  (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
+  (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (define-key evil-normal-state-map (kbd "[ SPC") (lambda () (interactive) (evil-insert-newline-above) (forward-line)))
   (define-key evil-normal-state-map (kbd "] SPC") (lambda () (interactive) (evil-insert-newline-below) (forward-line -1)))
@@ -65,6 +75,7 @@
   (define-key evil-visual-state-map (kbd ", e") 'eval-region)
 
   (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
+  (define-key evil-insert-state-map (kbd "RET") 'evil-ret)
   (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
   ;; emacs lisp
@@ -77,6 +88,7 @@
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
   (after 'coffee-mode
+    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'insert coffee-mode-map (kbd "RET") 'coffee-newline-and-indent))
 
   (after 'ag-autoloads
@@ -110,6 +122,11 @@
 (define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
+
+
+(after 'comint
+  (define-key comint-mode-map [up] 'comint-previous-input)
+  (define-key comint-mode-map [down] 'comint-next-input))
 
 
 (after 'auto-complete
