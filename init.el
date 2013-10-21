@@ -6,11 +6,9 @@
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
-(defvar package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")))
-(require 'package)
-(package-initialize)
+(require 'cl)
 
+(require 'init-packages)
 (require 'init-core)
 (require 'init-util)
 (require 'init-eyecandy)
