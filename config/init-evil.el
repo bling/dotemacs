@@ -15,6 +15,7 @@
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-indent-textobject)
+(require-package 'evil-matchit)
 (require-package 'surround)
 
 (require 'evil)
@@ -22,6 +23,7 @@
 (require 'evil-nerd-commenter)
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)
+(require 'evil-matchit)
 (require 'surround)
 
 (add-to-list 'evil-emacs-state-modes 'profiler-report-mode)

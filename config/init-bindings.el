@@ -24,6 +24,7 @@
     "s" (kbd "C-w s C-w j")
     "g s" 'magit-status
     "g l" 'magit-log
+    "g d" 'vc-diff
     "P" 'package-list-packages
     "h" help-map
     "h h" 'help-for-help-internal))

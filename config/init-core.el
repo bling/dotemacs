@@ -47,6 +47,11 @@
 (setq vc-make-backup-files t)
 
 
+;; dired
+(after 'dired
+  (require 'dired-x))
+
+
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
 
@@ -82,6 +87,9 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
+
+(setq sentence-end-double-space nil)
 
 
 (which-function-mode t)
