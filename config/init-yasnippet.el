@@ -1,7 +1,7 @@
 (defvar yas-fallback-behavior 'return-nil)
 (defvar yas-also-auto-indent-first-line t)
 
-(el-get 'sync '(yasnippet))
+(require-package 'yasnippet)
 (require 'yasnippet)
 (yas-global-mode t)
 
