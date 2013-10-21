@@ -150,6 +150,10 @@
   (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1))))
 
 
+(global-set-key [prior] 'previous-buffer)
+(global-set-key [next] 'next-buffer)
+
+
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
 (global-set-key (kbd "C-x C-c") (lambda () (interactive) (message "Thou shall not quit!")))

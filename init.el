@@ -9,8 +9,8 @@
 (require 'cl)
 
 (require 'init-packages)
-(require 'init-core)
 (require 'init-util)
+(require 'init-core)
 (require 'init-eyecandy)
 
 (require 'init-editor)
