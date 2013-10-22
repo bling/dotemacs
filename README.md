@@ -7,3 +7,8 @@ install
 =======
 
 `git clone https://github.com/bling/dotemacs.git ~/.emacs.d`
+
+disclaimer
+==========
+
+here be dragons.
