@@ -31,8 +31,9 @@
 
 
 (require 'linum)
-(setq linum-format "%4d ")
-(global-linum-mode t)
+(setq-default linum-format "%4d ")
+(add-hook 'find-file-hook (lambda ()
+                            (linum-mode)))
 
 
 (provide 'init-eyecandy)

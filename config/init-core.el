@@ -92,7 +92,6 @@
 
 
 (which-function-mode t)
-(global-visual-line-mode)
 (blink-cursor-mode -1)
 
 
@@ -100,7 +99,9 @@
  indent-tabs-mode nil)
 
 
-(add-hook 'find-file-hook (lambda () (setq show-trailing-whitespace t)))
+(add-hook 'find-file-hook (lambda ()
+                            (visual-line-mode)
+                            (setq show-trailing-whitespace t)))
 
 
 (provide 'init-core)
