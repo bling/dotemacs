@@ -26,7 +26,15 @@
 (require 'evil-matchit)
 (require 'surround)
 
-(add-to-list 'evil-emacs-state-modes 'profiler-report-mode)
+
+(evil-set-initial-state 'shell-mode 'emacs)
+(evil-set-initial-state 'term-mode 'emacs)
+(evil-set-initial-state 'comint-mode 'emacs)
+(evil-set-initial-state 'profiler-report-mode 'emacs)
+
+(after 'direx-autoloads
+  (evil-set-initial-state 'direx:direx-mode 'emacs))
+
 
 (global-evil-leader-mode)
 (evil-mode t)

@@ -4,10 +4,12 @@
 (setq guide-key/recursive-key-sequence-flag t)
 (guide-key-mode 1)
 
+
 (after 'smex
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
+
 
 (after 'evil-leader
   (evil-leader/set-leader ",")
@@ -28,6 +30,7 @@
     "P" 'package-list-packages
     "h" help-map
     "h h" 'help-for-help-internal))
+
 
 (after 'evil
   (require-package 'key-chord)
@@ -74,10 +77,6 @@
   (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
 
   (define-key evil-visual-state-map (kbd ", e") 'eval-region)
-
-  (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
-  (define-key evil-insert-state-map (kbd "RET") 'evil-ret)
-  (evil-define-key 'insert eshell-mode-map (kbd "RET") 'eshell-send-input)
 
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") (kbd ", h f RET"))
