@@ -125,6 +125,16 @@
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
 
 
+(after 'package
+  (define-key package-menu-mode-map "j" 'next-line)
+  (define-key package-menu-mode-map "k" 'previous-line))
+
+
+(after 'project-explorer-autoloads
+  (global-set-key [f2] 'project-explorer-open)
+  (global-set-key [f3] 'pe/show-file))
+
+
 (after 'comint
   (define-key comint-mode-map [up] 'comint-previous-input)
   (define-key comint-mode-map [down] 'comint-next-input))
