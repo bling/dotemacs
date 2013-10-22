@@ -48,8 +48,7 @@
 
 
 ;; dired
-(after 'dired
-  (require 'dired-x))
+(require 'dired-x)
 
 
 ;; ediff
