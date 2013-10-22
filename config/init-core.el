@@ -97,8 +97,10 @@
 
 
 (setq-default
- indent-tabs-mode nil
- show-trailing-whitespace t)
+ indent-tabs-mode nil)
+
+
+(add-hook 'find-file-hook (lambda () (setq show-trailing-whitespace t)))
 
 
 (provide 'init-core)
