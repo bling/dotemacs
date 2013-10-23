@@ -21,8 +21,8 @@
 (after 'evil-leader
   (evil-leader/set-leader ",")
   (evil-leader/set-key
-    "e" 'eval-last-sexp
-    "E" 'eval-defun
+    "e" (kbd "C-x C-e")
+    "E" (kbd "C-M-x")
     "c" (bind
           (evil-window-split)
           (eshell))
@@ -129,6 +129,8 @@
 (define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
+
+(define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
 
 (after 'package

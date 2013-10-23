@@ -6,12 +6,6 @@
 (global-pretty-mode)
 
 
-(require-package 'smooth-scroll)
-(require 'smooth-scroll)
-(setq smooth-scroll/vscroll-step-size 8)
-(smooth-scroll-mode t)
-
-
 (require-package 'diminish)
 (after 'diminish-autoloads
   (diminish 'global-visual-line-mode)
@@ -23,8 +17,7 @@
   (after 'eldoc (diminish 'eldoc-mode))
   (after 'smartparens (diminish 'smartparens-mode))
   (after 'company (diminish 'company-mode))
-  (after 'git-gutter+ (diminish 'git-gutter+-mode))
-  (after 'pretty-mode (diminish 'smooth-scroll-mode)))
+  (after 'git-gutter+ (diminish 'git-gutter+-mode)))
 
 
 (global-hl-line-mode +1)
