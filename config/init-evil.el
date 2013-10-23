@@ -27,6 +27,12 @@
 (require 'surround)
 
 
+(global-evil-leader-mode)
+(global-evil-matchit-mode)
+(evil-mode t)
+(global-surround-mode 1)
+
+
 (evil-set-initial-state 'shell-mode 'emacs)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'comint-mode 'emacs)
@@ -35,10 +41,6 @@
 (after 'direx-autoloads
   (evil-set-initial-state 'direx:direx-mode 'emacs))
 
-
-(global-evil-leader-mode)
-(evil-mode t)
-(global-surround-mode 1)
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
