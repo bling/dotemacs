@@ -1,3 +1,10 @@
+(defmacro bind (&rest commands)
+  "Convience macro which creates a lambda interactive command."
+  `(lambda ()
+     (interactive)
+     ,@commands))
+
+
 (require-package 'guide-key)
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c"))
@@ -16,8 +23,7 @@
   (evil-leader/set-key
     "e" 'eval-last-sexp
     "E" 'eval-defun
-    "c" (lambda ()
-          (interactive)
+    "c" (bind
           (evil-window-split)
           (eshell))
     "C" 'customize-group
@@ -28,6 +34,7 @@
     "g l" 'magit-log
     "g d" 'vc-diff
     "P" 'package-list-packages
+    "V" (bind (term "vim"))
     "h" help-map
     "h h" 'help-for-help-internal))
 
@@ -43,7 +50,7 @@
     (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
     (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
-    (evil-ex-define-cmd "Gw" (lambda () (interactive) (git-gutter+-stage-whole-buffer))))
+    (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
   (after 'smex
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
@@ -55,8 +62,8 @@
   (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
-  (define-key evil-normal-state-map (kbd "[ SPC") (lambda () (interactive) (evil-insert-newline-above) (forward-line)))
-  (define-key evil-normal-state-map (kbd "] SPC") (lambda () (interactive) (evil-insert-newline-below) (forward-line -1)))
+  (define-key evil-normal-state-map (kbd "[ SPC") (bind (evil-insert-newline-above) (forward-line)))
+  (define-key evil-normal-state-map (kbd "] SPC") (bind (evil-insert-newline-below) (forward-line -1)))
   (define-key evil-normal-state-map (kbd "[ e") (kbd "ddkP"))
   (define-key evil-normal-state-map (kbd "] e") (kbd "ddp"))
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
@@ -155,8 +162,8 @@
 
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
-  (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 1)))
-  (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 1))))
+  (global-set-key [mouse-4] (bind (scroll-down 1)))
+  (global-set-key [mouse-5] (bind (scroll-up 1))))
 
 
 (global-set-key [prior] 'previous-buffer)
@@ -165,7 +172,7 @@
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
-(global-set-key (kbd "C-x C-c") (lambda () (interactive) (message "Thou shall not quit!")))
+(global-set-key (kbd "C-x C-c") (bind (message "Thou shall not quit!")))
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
 
 
