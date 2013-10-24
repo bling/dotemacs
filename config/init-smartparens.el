@@ -15,6 +15,6 @@
     (previous-line)
     (indent-according-to-mode)))
 
-(sp-local-pair '(js2-mode) "{" nil :post-handlers '((my-open-block-c-mode "RET")))
+(sp-local-pair 'js2-mode "{" nil :post-handlers '(:add (my-open-block-c-mode "C-j")))
 
 (provide 'init-smartparens)
