@@ -28,7 +28,6 @@
 
 
 (global-evil-leader-mode)
-(global-evil-matchit-mode)
 (evil-mode t)
 (global-surround-mode 1)
 
@@ -37,9 +36,8 @@
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'comint-mode 'emacs)
 (evil-set-initial-state 'profiler-report-mode 'emacs)
-
-(after 'direx-autoloads
-  (evil-set-initial-state 'direx:direx-mode 'emacs))
+(evil-set-initial-state 'erc-mode 'emacs)
+(evil-set-initial-state 'direx:direx-mode 'emacs)
 
 
 (defun my-send-string-to-terminal (string)

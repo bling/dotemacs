@@ -17,33 +17,34 @@
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
 
-
-(after 'evil-leader
-  (evil-leader/set-leader ",")
-  (evil-leader/set-key
-    "e" (kbd "C-x C-e")
-    "E" (kbd "C-M-x")
-    "c" (bind
-          (evil-window-split)
-          (eshell))
-    "C" 'customize-group
-    "b d" 'kill-this-buffer
-    "v" (kbd "C-w v C-w l")
-    "s" (kbd "C-w s C-w j")
-    "g s" 'magit-status
-    "g l" 'magit-log
-    "g d" 'vc-diff
-    "P" 'package-list-packages
-    "V" (bind (term "vim"))
-    "h" help-map
-    "h h" 'help-for-help-internal))
-
-
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+
+  (after 'evil-leader
+    (evil-leader/set-leader ",")
+    (evil-leader/set-key
+      "e" (kbd "C-x C-e")
+      "E" (kbd "C-M-x")
+      "c" (bind
+           (evil-window-split)
+           (eshell))
+      "C" 'customize-group
+      "b d" 'kill-this-buffer
+      "v" (kbd "C-w v C-w l")
+      "s" (kbd "C-w s C-w j")
+      "g s" 'magit-status
+      "g l" 'magit-log
+      "g d" 'vc-diff
+      "P" 'package-list-packages
+      "V" (bind (term "vim"))
+      "h" help-map
+      "h h" 'help-for-help-internal))
+
+  (after 'evil-matchit
+    (define-key evil-normal-state-map "%" 'evilmi-jump-items))
 
   (after 'git-gutter+-autoloads
     (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
