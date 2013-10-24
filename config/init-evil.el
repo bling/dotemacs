@@ -10,7 +10,7 @@
 
 (defvar evilnc-hotkey-comment-operator "gc")
 
-(add-to-list 'load-path (concat user-emacs-directory "elisp/evil"))
+(require-package 'evil)
 (require-package 'evil-leader)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
@@ -38,6 +38,7 @@
 (evil-set-initial-state 'profiler-report-mode 'emacs)
 (evil-set-initial-state 'erc-mode 'emacs)
 (evil-set-initial-state 'direx:direx-mode 'emacs)
+(evil-set-initial-state 'project-explorer-mode 'emacs)
 
 
 (defun my-send-string-to-terminal (string)
