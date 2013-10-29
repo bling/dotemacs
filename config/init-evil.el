@@ -35,6 +35,7 @@
 (evil-set-initial-state 'shell-mode 'emacs)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'comint-mode 'emacs)
+(evil-set-initial-state 'nodejs-repl-mode 'emacs)
 (evil-set-initial-state 'profiler-report-mode 'emacs)
 (evil-set-initial-state 'erc-mode 'emacs)
 (evil-set-initial-state 'direx:direx-mode 'emacs)
