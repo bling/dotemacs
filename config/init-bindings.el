@@ -69,6 +69,8 @@
   (define-key evil-normal-state-map (kbd "] e") (kbd "ddp"))
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
+  (define-key evil-normal-state-map (kbd "[ q") 'previous-error)
+  (define-key evil-normal-state-map (kbd "] q") 'next-error)
 
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
