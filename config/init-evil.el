@@ -31,16 +31,12 @@
 (evil-mode t)
 (global-surround-mode 1)
 
-
-(evil-set-initial-state 'shell-mode 'emacs)
-(evil-set-initial-state 'term-mode 'emacs)
-(evil-set-initial-state 'comint-mode 'emacs)
-(evil-set-initial-state 'nodejs-repl-mode 'emacs)
-(evil-set-initial-state 'profiler-report-mode 'emacs)
-(evil-set-initial-state 'erc-mode 'emacs)
-(evil-set-initial-state 'direx:direx-mode 'emacs)
-(evil-set-initial-state 'project-explorer-mode 'emacs)
-
+(dolist (mode '(shell-mode term-mode comint-mode nodejs-repl-mode
+                profiler-report-mode
+                erc-mode weechat-mode
+                direx:direx-mode
+                project-explorer-mode))
+  (evil-set-initial-state mode 'emacs))
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))

@@ -59,9 +59,12 @@
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
-  (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
-  (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
+  (after 'helm-autoloads
+    (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
+    (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
+    (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
+    (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring))
 
   (define-key evil-normal-state-map (kbd "[ SPC") (bind (evil-insert-newline-above) (forward-line)))
   (define-key evil-normal-state-map (kbd "] SPC") (bind (evil-insert-newline-below) (forward-line -1)))
@@ -118,6 +121,7 @@
     (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
 
   (after 'ace-jump-mode-autoloads
+    (define-key evil-normal-state-map (kbd "SPC j") 'ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "C-SPC") 'evil-ace-jump-word-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
