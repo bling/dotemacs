@@ -3,6 +3,7 @@
 
 
 (require-package 'pretty-mode)
+(require 'pretty-mode)
 (global-pretty-mode)
 
 

@@ -153,6 +153,8 @@
 
 
 (after 'project-explorer-autoloads
+  (after 'project-explorer
+    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right))
   (global-set-key [f2] 'project-explorer-open)
   (global-set-key [f3] 'pe/show-file))
 
