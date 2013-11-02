@@ -178,6 +178,10 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 
+(after 'org
+  (global-set-key (kbd "C-c c") 'org-capture))
+
+
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (bind (scroll-down 1)))
@@ -190,8 +194,13 @@
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
+
+
+;; replace with [r]eally [q]uit
 (global-set-key (kbd "C-x C-c") (bind (message "Thou shall not quit!")))
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
+(defadvice evil-quit (around advice-for-evil-quit activate)
+  (message "Thou shall not quit!"))
 
 
 (provide 'init-bindings)

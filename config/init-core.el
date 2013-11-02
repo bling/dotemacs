@@ -47,6 +47,10 @@
 (setq vc-make-backup-files t)
 
 
+;; org
+(setq org-default-notes-file "~/.notes.org")
+
+
 ;; dired
 (require 'dired-x)
 
