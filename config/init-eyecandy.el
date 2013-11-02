@@ -9,7 +9,7 @@
 
 (require-package 'diminish)
 (after 'diminish-autoloads
-  (diminish 'global-visual-line-mode)
+  (diminish 'visual-line-mode)
   (after 'undo-tree (diminish 'undo-tree-mode))
   (after 'auto-complete (diminish 'auto-complete-mode))
   (after 'projectile (diminish 'projectile-mode))

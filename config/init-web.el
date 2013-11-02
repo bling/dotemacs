@@ -2,13 +2,10 @@
 (defvar js2-basic-offset 2)
 (defvar js2-idle-timer-delay 1)
 
-
 (require-package 'js2-mode)
-(after 'js2-mode-autoloads
-  (setq auto-mode-alist (cons '("\\.js\\'" . js2-mode) auto-mode-alist)))
-
-
 (require-package 'ac-js2)
+(after 'js2-mode-autoloads
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 
 (require-package 'tern)
