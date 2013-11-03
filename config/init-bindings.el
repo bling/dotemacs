@@ -22,6 +22,10 @@
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+  (after 'ace-jump
+    (key-chord-define evil-normal-state-map "jw" 'ace-jump-word-mode)
+    (key-chord-define evil-normal-state-map "jc" 'ace-jump-char-mode)
+    (key-chord-define evil-normal-state-map "jl" 'ace-jump-line-mode))
 
   (after 'evil-leader
     (evil-leader/set-leader ",")
@@ -194,6 +198,11 @@
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
+
+
+
+(global-set-key (kbd "C-x g") 'my-google)
+(global-set-key (kbd "C-c e") 'my-eval-and-replace)
 
 
 ;; replace with [r]eally [q]uit

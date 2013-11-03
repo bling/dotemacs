@@ -51,6 +51,10 @@
 (setq org-default-notes-file "~/.notes.org")
 
 
+;; narrowing
+(put 'narrow-to-region 'disabled nil)
+
+
 ;; dired
 (require 'dired-x)
 
