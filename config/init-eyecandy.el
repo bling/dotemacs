@@ -3,6 +3,7 @@
 
 
 (require-package 'pretty-mode)
+(setq pretty-default-groups '(:function))
 (require 'pretty-mode)
 (global-pretty-mode)
 
