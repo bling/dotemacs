@@ -16,4 +16,8 @@
 (require 'expand-region)
 
 
+(require-package 'editorconfig)
+(require 'editorconfig)
+
+
 (provide 'init-misc)
