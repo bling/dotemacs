@@ -186,6 +186,10 @@
   (global-set-key (kbd "C-c c") 'org-capture))
 
 
+(after 'expand-region-autoloads
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (bind (scroll-down 1)))

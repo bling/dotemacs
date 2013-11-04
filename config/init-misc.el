@@ -12,4 +12,8 @@
 (require 'ace-jump-mode)
 
 
+(require-package 'expand-region)
+(require 'expand-region)
+
+
 (provide 'init-misc)
