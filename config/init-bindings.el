@@ -17,11 +17,13 @@
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
 
+
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+
   (after 'ace-jump
     (key-chord-define evil-normal-state-map "jw" 'ace-jump-word-mode)
     (key-chord-define evil-normal-state-map "jc" 'ace-jump-char-mode)
@@ -60,10 +62,12 @@
   (after 'smex
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
     (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
+
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
+
   (after 'helm-autoloads
     (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
@@ -154,13 +158,13 @@
 
 
 (after 'package
-  (define-key package-menu-mode-map "j" 'next-line)
-  (define-key package-menu-mode-map "k" 'previous-line))
+  (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
 
 
 (after 'project-explorer-autoloads
   (after 'project-explorer
-    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right))
+    (after 'evil
+      (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right)))
   (global-set-key [f2] 'project-explorer-open)
   (global-set-key [f3] 'pe/show-file))
 

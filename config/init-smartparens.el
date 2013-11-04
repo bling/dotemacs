@@ -2,6 +2,7 @@
 (require 'smartparens-config)
 
 (setq sp-autoskip-closing-pair 'always
+      sp-autoescape-string-quote nil
       sp-show-pair-delay 0
       sp-show-pair-from-inside t)
 
