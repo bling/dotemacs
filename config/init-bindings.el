@@ -206,12 +206,15 @@
 (global-set-key [next] 'next-buffer)
 
 
-;; have no use for these default bindings
-(global-unset-key (kbd "C-x m"))
+(global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
 
 
 (global-set-key (kbd "C-x g") 'my-google)
 (global-set-key (kbd "C-c e") 'my-eval-and-replace)
+
+
+;; have no use for these default bindings
+(global-unset-key (kbd "C-x m"))
 
 
 ;; replace with [r]eally [q]uit

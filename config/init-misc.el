@@ -20,4 +20,11 @@
 (require 'editorconfig)
 
 
+(require-package 'windsize)
+(require 'windsize)
+(setq windsize-cols 16)
+(setq windsize-rows 8)
+(windsize-default-keybindings)
+
+
 (provide 'init-misc)
