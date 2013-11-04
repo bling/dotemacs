@@ -7,6 +7,10 @@
 (after 'js2-mode-autoloads
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
+(require-package 'js2-refactor)
+(require 'js2-refactor)
+(js2r-add-keybindings-with-prefix "C-c C-m")
+
 
 (require-package 'tern)
 (require-package 'tern-auto-complete)
