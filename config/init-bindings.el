@@ -131,6 +131,8 @@
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
   (after 'magit
+    (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
+    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
     (evil-add-hjkl-bindings magit-status-mode-map 'emacs
       "K" 'magit-discard-item
       "l" 'magit-key-mode-popup-logging
