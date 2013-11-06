@@ -25,12 +25,10 @@
   (after 'git-gutter+ (diminish 'git-gutter+-mode)))
 
 
-(global-hl-line-mode +1)
-
-
 (require 'linum)
 (setq-default linum-format "%4d ")
 (add-hook 'find-file-hook (lambda ()
+                            (hl-line-mode)
                             (linum-mode)))
 
 
