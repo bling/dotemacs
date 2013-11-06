@@ -1,5 +1,7 @@
 (require-package 'smart-mode-line)
-(add-hook 'after-init-hook (sml/setup))
+(require 'smart-mode-line)
+(setq sml/theme 'dark)
+(sml/setup)
 
 
 (require-package 'pretty-mode)

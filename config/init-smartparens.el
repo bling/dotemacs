@@ -1,7 +1,7 @@
 (require-package 'smartparens)
 (require 'smartparens-config)
 
-(setq sp-autoskip-closing-pair 'always
+(setq sp-autoskip-closing-pair t
       sp-autoescape-string-quote nil
       sp-show-pair-delay 0
       sp-show-pair-from-inside t)
