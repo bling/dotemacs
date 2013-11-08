@@ -48,6 +48,7 @@
 
 
 ;; org
+(require 'org)
 (setq org-default-notes-file "~/.notes.org")
 
 
