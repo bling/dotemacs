@@ -30,4 +30,12 @@
 (skewer-setup)
 
 
+(require-package 'rainbow-mode)
+(require 'rainbow-mode)
+(add-to-list 'rainbow-html-colors-major-mode-list 'stylus-mode)
+
+
+(require-package 'emmet-mode)
+
+
 (provide 'init-web)
