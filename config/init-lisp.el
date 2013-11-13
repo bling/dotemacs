@@ -1,7 +1,9 @@
 (require-package 'rainbow-delimiters)
+(require-package 'elisp-slime-nav)
 
 (defun my-lisp-hook ()
   (progn
+    (elisp-slime-nav-mode)
     (turn-on-eldoc-mode)
     (rainbow-delimiters-mode t)))
 

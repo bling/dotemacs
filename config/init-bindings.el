@@ -83,6 +83,8 @@
   (define-key evil-normal-state-map (kbd "[ q") 'previous-error)
   (define-key evil-normal-state-map (kbd "] q") 'next-error)
 
+  (define-key evil-normal-state-map (kbd "g p") (kbd "` [ v ` ]"))
+
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 
@@ -102,7 +104,9 @@
   (define-key evil-visual-state-map (kbd ", e") 'eval-region)
 
   ;; emacs lisp
-  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") (kbd ", h f RET"))
+  (after 'elisp-slime-nav-autoloads
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point)
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
   ;; proper jump lists
   ;; (require-package 'jumpc)
@@ -131,7 +135,6 @@
   (after 'ace-jump-mode-autoloads
     (define-key evil-normal-state-map (kbd "SPC j") 'ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "SPC") 'evil-ace-jump-char-mode)
-    (define-key evil-motion-state-map (kbd "C-SPC") 'evil-ace-jump-word-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
   (after 'magit
