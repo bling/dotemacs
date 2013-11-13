@@ -26,13 +26,13 @@
 (require-package 'stylus-mode)
 
 
-(require-package 'skewer-mode)
-(skewer-setup)
+;; (require-package 'skewer-mode)
+;; (skewer-setup)
 
 
 (require-package 'rainbow-mode)
 (require 'rainbow-mode)
-(add-to-list 'rainbow-html-colors-major-mode-list 'stylus-mode)
+(add-hook 'stylus-mode-hook (lambda () (rainbow-turn-on)))
 
 
 (require-package 'emmet-mode)

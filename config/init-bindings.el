@@ -115,8 +115,7 @@
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
   (after 'coffee-mode
-    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
-    (evil-define-key 'insert coffee-mode-map (kbd "RET") 'coffee-newline-and-indent))
+    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region))
 
   (after 'ag-autoloads
     (define-key evil-normal-state-map (kbd "SPC /") 'ag-regexp-project-at-point))
