@@ -1,6 +1,6 @@
-(defvar js2-highlight-level 3)
-(defvar js2-basic-offset 2)
-(defvar js2-idle-timer-delay 1)
+(setq js2-highlight-level 3)
+(setq js2-basic-offset 2)
+(setq js2-idle-timer-delay 1)
 
 (require-package 'js2-mode)
 (require-package 'ac-js2)

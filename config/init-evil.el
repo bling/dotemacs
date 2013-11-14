@@ -1,14 +1,14 @@
-(defvar evil-want-C-u-scroll t)
-(defvar evil-want-C-w-in-emacs-state t)
+(setq evil-want-C-u-scroll t)
+(setq evil-want-C-w-in-emacs-state t)
 
-(defvar evil-search-module 'evil-search)
-(defvar evil-magic 'very-magic)
+(setq evil-search-module 'evil-search)
+(setq evil-magic 'very-magic)
 
-(defvar evil-emacs-state-cursor '("red" box))
-;; (defvar evil-normal-state-cursor '("green" box))
-;; (defvar evil-insert-state-cursor '("orange" bar))
+(setq evil-emacs-state-cursor '("red" box))
+;; (setq evil-normal-state-cursor '("green" box))
+;; (setq evil-insert-state-cursor '("orange" bar))
 
-(defvar evilnc-hotkey-comment-operator "gc")
+(setq evilnc-hotkey-comment-operator "gc")
 
 (require-package 'evil)
 (require-package 'evil-leader)
