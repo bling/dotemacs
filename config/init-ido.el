@@ -1,3 +1,4 @@
+(require 'ido)
 (setq ido-enable-prefix nil)
 (setq ido-use-virtual-buffers t)
 (setq ido-enable-flex-matching t)
@@ -5,7 +6,6 @@
 (setq ido-use-filename-at-point 'guess)
 (setq ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
 
-(require 'ido)
 (ido-mode t)
 (ido-everywhere t)
 
@@ -18,9 +18,11 @@
 (require-package 'ido-vertical-mode)
 (ido-vertical-mode)
 
-(setq smex-save-file (concat user-emacs-directory ".cache/smex-items"))
+
 (require-package 'smex)
 (require 'smex)
+(setq smex-save-file (concat user-emacs-directory ".cache/smex-items"))
 (smex-initialize)
+
 
 (provide 'init-ido)
