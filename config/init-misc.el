@@ -1,4 +1,4 @@
-(defvar ag-highlight-search t)
+(setq ag-highlight-search t)
 (require-package 'ag)
 (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
 

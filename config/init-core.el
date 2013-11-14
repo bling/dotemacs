@@ -35,12 +35,12 @@
 
 
 ;; eshell
-(defvar eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
-(defvar eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
+(setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
+(setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 
 
 ;; erc
-(defvar erc-log-channels-directory (concat user-emacs-directory ".cache/erc/logs"))
+(setq erc-log-channels-directory (concat user-emacs-directory ".cache/erc/logs"))
 
 
 ;; vc

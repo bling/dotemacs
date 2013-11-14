@@ -1,5 +1,5 @@
-(defvar helm-command-prefix-key "C-c h")
-(defvar helm-quick-update t)
+(setq helm-command-prefix-key "C-c h")
+(setq helm-quick-update t)
 
 (require-package 'helm)
 (require-package 'helm-swoop)

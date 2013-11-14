@@ -1,7 +1,7 @@
 (require-package 'magit)
 (require-package 'gist)
 
-(defvar magit-diff-options '("--histogram"))
+(setq magit-diff-options '("--histogram"))
 
 (if (display-graphic-p)
     (progn
