@@ -5,8 +5,8 @@
 (setq evil-magic 'very-magic)
 
 (setq evil-emacs-state-cursor '("red" box))
-;; (setq evil-normal-state-cursor '("green" box))
-;; (setq evil-insert-state-cursor '("orange" bar))
+(setq evil-normal-state-cursor '("green" box))
+(setq evil-insert-state-cursor '("orange" bar))
 
 (setq evilnc-hotkey-comment-operator "gc")
 
