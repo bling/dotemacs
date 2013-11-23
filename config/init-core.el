@@ -22,10 +22,6 @@
 (savehist-mode +1)
 
 
-(setq mark-ring-max 64)
-(setq global-mark-ring-max 128)
-
-
 ;; recent files
 (require 'recentf)
 (setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
@@ -45,11 +41,6 @@
 
 ;; vc
 (setq vc-make-backup-files t)
-
-
-;; org
-(require 'org)
-(setq org-default-notes-file "~/.notes.org")
 
 
 ;; narrowing
@@ -97,7 +88,10 @@
 (prefer-coding-system 'utf-8)
 
 
-(setq sentence-end-double-space nil)
+(setq sentence-end-double-space nil
+      delete-by-moving-to-trash t
+      mark-ring-max 64
+      global-mark-ring-max 128)
 
 
 (which-function-mode t)
@@ -113,5 +107,7 @@
                             (visual-line-mode)
                             (setq show-trailing-whitespace t)))
 
+
+(random t) ;; seed
 
 (provide 'init-core)
