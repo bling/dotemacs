@@ -5,9 +5,17 @@
 (setq yas-also-auto-indent-first-line t)
 (setq yas-prompt-functions '(yas/ido-prompt yas/completing-prompt))
 
-(yas-reload-all)
+;; just use my own
+(setq yas-snippet-dirs `(,(concat user-emacs-directory "snippets")))
 
 (add-hook 'prog-mode-hook 'yas-minor-mode)
 (add-hook 'html-mode-hook 'yas-minor-mode)
+
+
+(require-package 'angular-snippets)
+(require 'angular-snippets)
+
+
+(yas-reload-all)
 
 (provide 'init-yasnippet)
