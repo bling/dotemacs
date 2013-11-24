@@ -85,6 +85,9 @@
 
   (define-key evil-normal-state-map (kbd "g p") (kbd "` [ v ` ]"))
 
+  (after 'etags-select
+    (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
+
   (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 

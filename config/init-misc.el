@@ -20,6 +20,11 @@
 (require 'editorconfig)
 
 
+(require-package 'etags-select)
+(require 'etags-select)
+(setq etags-select-go-if-unambiguous t)
+
+
 (require-package 'windsize)
 (require 'windsize)
 (setq windsize-cols 16)
