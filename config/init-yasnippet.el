@@ -14,6 +14,7 @@
 
 (require-package 'angular-snippets)
 (require 'angular-snippets)
+(angular-snippets-initialize)
 
 
 (yas-reload-all)

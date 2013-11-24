@@ -16,7 +16,7 @@
     (forward-line -1)
     (indent-according-to-mode)))
 
-(sp-pair "{" nil :post-handlers '(:add (my-open-block-c-mode "C-j")))
-(sp-pair "[" nil :post-handlers '(:add (my-open-block-c-mode "C-j")))
+(sp-pair "{" nil :post-handlers '(:add (my-open-block-c-mode "RET")))
+(sp-pair "[" nil :post-handlers '(:add (my-open-block-c-mode "RET")))
 
 (provide 'init-smartparens)

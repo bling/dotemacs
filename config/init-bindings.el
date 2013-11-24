@@ -96,7 +96,7 @@
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-  (define-key evil-insert-state-map (kbd "RET") (kbd "C-j"))
+  (define-key evil-insert-state-map (kbd "RET") 'evil-ret-and-indent)
 
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
