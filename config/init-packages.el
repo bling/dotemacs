@@ -4,6 +4,7 @@
                          ("gnu" . "http://elpa.gnu.org/packages/")))
 (require 'package)
 (package-initialize)
+(setq package-enable-at-startup nil)
 
 
 ;; (add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))

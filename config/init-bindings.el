@@ -118,7 +118,12 @@
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
   (after 'coffee-mode
-    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region))
+    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
+    (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
+
+  (after 'stylus-mode
+    (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-region)
+    (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-buffer))
 
   (after 'ag-autoloads
     (define-key evil-normal-state-map (kbd "SPC /") 'ag-regexp-project-at-point))
