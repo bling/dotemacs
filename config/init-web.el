@@ -26,8 +26,8 @@
 (require-package 'stylus-mode)
 
 
-;; (require-package 'skewer-mode)
-;; (skewer-setup)
+(require-package 'skewer-mode)
+(skewer-setup)
 
 
 (require-package 'rainbow-mode)
