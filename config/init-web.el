@@ -37,4 +37,9 @@
 (require-package 'emmet-mode)
 
 
+;; indent after deleting a tag
+(defadvice sgml-delete-tag (after reindent activate)
+  (indent-region (point-min) (point-max)))
+
+
 (provide 'init-web)
