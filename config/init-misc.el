@@ -32,4 +32,8 @@
 (windsize-default-keybindings)
 
 
+(require-package 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+
+
 (provide 'init-misc)
