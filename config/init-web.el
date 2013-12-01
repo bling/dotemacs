@@ -16,8 +16,9 @@
 (require-package 'tern-auto-complete)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (after 'tern
-  (require 'tern-auto-complete)
-  (tern-ac-setup))
+  (after 'auto-complete
+    (require 'tern-auto-complete)
+    (tern-ac-setup)))
 
 
 (require-package 'coffee-mode)
@@ -57,6 +58,13 @@
 
 
 (require-package 'emmet-mode)
+(add-hook 'css-mode-hook 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+
+
+(require-package 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 
 ;; indent after deleting a tag

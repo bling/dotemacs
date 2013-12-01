@@ -10,8 +10,7 @@
 (setq ac-show-menu-immediately-on-auto-complete t)
 
 (dolist (mode '(vimrc-mode
-                shell-mode term-mode terminal-mode eshell-mode comint-mode
-                skewer-repl-mode
+                ;; shell-mode term-mode terminal-mode eshell-mode comint-mode skewer-repl-mode
                 html-mode stylus-mode))
   (add-to-list 'ac-modes mode))
 
