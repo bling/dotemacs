@@ -6,6 +6,12 @@
 (package-initialize)
 (setq package-enable-at-startup nil)
 
+(defun require-package (package)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
 
 ;; (add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))
 ;; (unless (require 'el-get nil 'noerror)

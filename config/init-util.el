@@ -14,12 +14,6 @@
         (delete-window))
     (kill-buffer-and-window)))
 
-(defun require-package (package)
-  "Install given PACKAGE."
-  (unless (package-installed-p package)
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
 
 (defun my-minibuffer-keyboard-quit ()
   "Abort recursive edit.
