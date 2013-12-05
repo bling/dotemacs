@@ -104,8 +104,8 @@
 
 (add-hook 'find-file-hook (lambda ()
                             (visual-line-mode)
-                            (setq scroll-margin 3
-                                  show-trailing-whitespace t)))
+                            (setq-local scroll-margin 3
+                                        show-trailing-whitespace t)))
 
 
 (random t) ;; seed

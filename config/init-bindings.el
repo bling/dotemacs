@@ -172,6 +172,10 @@
   (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
 
 
+(after 'magit
+  (global-set-key (kbd "C-x g") 'magit-status))
+
+
 (after 'project-explorer-autoloads
   (after 'project-explorer
     (after 'evil
