@@ -18,6 +18,9 @@
   (global-set-key (kbd "C-c C-m") 'smex))
 
 
+(setq my-eshell-buffer-count 0)
+
+
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
@@ -37,7 +40,8 @@
       "E" (kbd "C-M-x")
       "c" (bind
            (evil-window-split)
-           (eshell))
+           (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
+           (eshell my-eshell-buffer-count))
       "C" 'customize-group
       "b d" 'kill-this-buffer
       "v" (kbd "C-w v C-w l")
