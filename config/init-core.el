@@ -33,6 +33,8 @@
 ;; eshell
 (setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
+(setq eshell-scroll-to-bottom-on-input 'all)
+(setq eshell-glob-case-insensitive t)
 
 
 ;; erc
