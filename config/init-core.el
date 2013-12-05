@@ -65,8 +65,7 @@
 
 
 ;; better scrolling
-(setq scroll-margin 3
-      scroll-conservatively 9999
+(setq scroll-conservatively 9999
       scroll-preserve-screen-position t)
 
 
@@ -105,7 +104,8 @@
 
 (add-hook 'find-file-hook (lambda ()
                             (visual-line-mode)
-                            (setq show-trailing-whitespace t)))
+                            (setq scroll-margin 3
+                                  show-trailing-whitespace t)))
 
 
 (random t) ;; seed

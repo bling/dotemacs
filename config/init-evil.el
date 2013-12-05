@@ -31,7 +31,7 @@
 (evil-mode t)
 (global-surround-mode 1)
 
-(dolist (mode '(shell-mode term-mode terminal-mode comint-mode skewer-repl-mode
+(dolist (mode '(eshell-mode shell-mode term-mode terminal-mode comint-mode skewer-repl-mode
                 profiler-report-mode
                 erc-mode weechat-mode
                 direx:direx-mode
