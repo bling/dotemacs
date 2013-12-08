@@ -101,6 +101,7 @@
 (which-function-mode t)
 (blink-cursor-mode -1)
 (global-auto-revert-mode 1)
+(electric-indent-mode t)
 
 
 (setq-default

@@ -15,8 +15,8 @@
 (require 'init-eyecandy)
 
 (require 'init-editor)
-(require 'init-smartparens)
-;; (require 'init-autopair)
+;; (require 'init-smartparens)
+(require 'init-autopair)
 
 (require 'init-yasnippet)
 (require 'init-auto-complete)

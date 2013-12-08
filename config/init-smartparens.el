@@ -6,6 +6,7 @@
 
 (sp-use-smartparens-bindings)
 (smartparens-global-mode t)
+(show-smartparens-global-mode t)
 
 (add-to-list 'sp-autoescape-string-quote-if-empty 'js2-mode)
 
