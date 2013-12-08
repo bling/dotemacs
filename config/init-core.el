@@ -94,6 +94,7 @@
 
 (setq sentence-end-double-space nil
       delete-by-moving-to-trash t
+      visible-bell t
       mark-ring-max 64
       global-mark-ring-max 128)
 
