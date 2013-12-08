@@ -35,6 +35,9 @@
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 (setq eshell-scroll-to-bottom-on-input 'all)
 (setq eshell-glob-case-insensitive t)
+(setq eshell-buffer-shorthand t)
+(setq eshell-error-if-no-glob t)
+(setq eshell-send-direct-to-subprocesses t)
 
 
 ;; erc

@@ -1,13 +1,13 @@
 (require-package 'smartparens)
 (require 'smartparens-config)
 
-(setq sp-autoskip-closing-pair 'always
-      sp-autoescape-string-quote nil
-      sp-show-pair-delay 0
-      sp-show-pair-from-inside t)
+(setq sp-show-pair-delay 0)
+(setq sp-show-pair-from-inside t)
 
+(sp-use-smartparens-bindings)
 (smartparens-global-mode t)
-(show-smartparens-global-mode)
+
+(add-to-list 'sp-autoescape-string-quote-if-empty 'js2-mode)
 
 (defun my-open-block-c-mode (id action context)
   (when (eq action 'insert)
