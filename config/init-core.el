@@ -109,7 +109,15 @@
  indent-tabs-mode nil)
 
 
+(defun my-find-file-check-large-file ()
+  (when (> (buffer-size) (* 1024 1024))
+    (setq buffer-read-only t)
+    (buffer-disable-undo)
+    (fundamental-mode)))
+
+
 (add-hook 'find-file-hook (lambda ()
+                            (my-find-file-check-large-file)
                             (visual-line-mode)
                             (setq show-trailing-whitespace t)))
 

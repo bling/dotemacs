@@ -2,6 +2,6 @@ alias gsp git stash pop
 alias gs git stash
 alias d dired $1
 alias ff find-file $1
-alias ll ls -l
-alias la ls -la
+alias ll ls -lh
+alias la ls -lah
 alias g git $*
