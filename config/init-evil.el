@@ -12,6 +12,7 @@
 
 (require-package 'evil)
 (require-package 'evil-leader)
+(require-package 'evil-numbers)
 (require-package 'evil-visualstar)
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-indent-textobject)
@@ -20,6 +21,7 @@
 
 (require 'evil)
 (require 'evil-leader)
+(require 'evil-numbers)
 (require 'evil-nerd-commenter)
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)

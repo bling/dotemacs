@@ -54,6 +54,10 @@
       "h" help-map
       "h h" 'help-for-help-internal))
 
+  (after 'evil-leader
+    (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+    (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
+
   (after 'evil-matchit
     (define-key evil-normal-state-map "%" 'evilmi-jump-items))
 
