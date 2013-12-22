@@ -4,10 +4,13 @@
 (sml/setup)
 
 
-(require-package 'pretty-mode)
-(setq pretty-default-groups '(:function))
-(require 'pretty-mode)
-(global-pretty-mode)
+(show-paren-mode)
+
+
+(require-package 'purty-mode)
+(require 'purty-mode)
+(purty-add-pair '("\\(\\bfunction\\b\\)" . "λ"))
+(purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
 
 
 (require-package 'diminish)
@@ -28,7 +31,10 @@
 
 (require 'linum)
 (setq-default linum-format "%4d ")
+
+
 (add-hook 'find-file-hook (lambda ()
+                            (purty-mode)
                             (hl-line-mode)
                             (linum-mode)))
 
