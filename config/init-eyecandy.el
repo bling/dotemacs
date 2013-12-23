@@ -9,6 +9,7 @@
 
 (require-package 'purty-mode)
 (require 'purty-mode)
+(setq purty-regexp-symbol-pairs (mapcar #'purty-enhance-pair '()))
 (purty-add-pair '("\\(\\bfunction\\b\\)" . "λ"))
 (purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
 
@@ -17,6 +18,7 @@
 (after 'diminish-autoloads
   (diminish 'visual-line-mode)
   (after 'autopair (diminish 'autopair-mode))
+  (after 'purty-mode (diminish 'purty-mode))
   (after 'undo-tree (diminish 'undo-tree-mode))
   (after 'auto-complete (diminish 'auto-complete-mode))
   (after 'projectile (diminish 'projectile-mode))
