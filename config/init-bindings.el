@@ -179,6 +179,7 @@
 
 
 (after 'magit
+  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)
   (global-set-key (kbd "C-x g") 'magit-status))
 
 

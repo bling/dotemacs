@@ -7,14 +7,12 @@
   (defadvice magit-status (around my-magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
     ad-do-it
-    (delete-other-windows))
+    (delete-other-windows)))
 
-  (defun my-magit-quit-session ()
-    (interactive)
-    (kill-buffer)
-    (jump-to-register :magit-fullscreen))
-
-  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
+(defun my-magit-quit-session ()
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
 
 
 (require-package 'gist)
