@@ -2,7 +2,6 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (unless (display-graphic-p) (menu-bar-mode -1))
 
-(add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
@@ -30,6 +29,8 @@
 (require 'init-flycheck)
 
 (require 'init-vim)
+(require 'init-stylus)
+(require 'init-js)
 (require 'init-web)
 (require 'init-lisp)
 (require 'init-markdown)
