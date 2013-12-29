@@ -234,12 +234,8 @@
 (global-set-key [next] 'next-buffer)
 
 
-(global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
-
-
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-(global-set-key (kbd "C-x g") 'my-google)
 (global-set-key (kbd "C-c e") 'my-eval-and-replace)
 
 
