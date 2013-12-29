@@ -97,7 +97,6 @@
   (after 'etags-select
     (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
 
-  (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -114,9 +113,9 @@
   (define-key evil-visual-state-map (kbd ", e") 'eval-region)
 
   ;; emacs lisp
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'my-describe-thing-in-popup)
   (after 'elisp-slime-nav-autoloads
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point)
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'elisp-slime-nav-describe-elisp-thing-at-point))
+    (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 
   ;; proper jump lists
   ;; (require-package 'jumpc)
@@ -132,8 +131,11 @@
     (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-region)
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-buffer))
 
-  (after 'ag-autoloads
-    (define-key evil-normal-state-map (kbd "SPC /") 'ag-regexp-project-at-point))
+  (after 'projectile
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (if (executable-find "ag")
+        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag)
+      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)

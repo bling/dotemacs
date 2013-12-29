@@ -86,6 +86,20 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
         (message "File '%s' successfully removed" filename)))))
 
 
+(defun my-describe-thing-in-popup ()
+  (interactive)
+  (let ((description (save-window-excursion
+                       (help-xref-interned (symbol-at-point))
+                       (switch-to-buffer "*Help*")
+                       (buffer-string))))
+    (popup-tip description
+               :point (point)
+               :around t
+               :height 30
+               :scroll-bar t
+               :margin t)))
+
+
 ;; make sure $PATH is set correctly
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
