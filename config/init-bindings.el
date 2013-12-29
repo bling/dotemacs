@@ -161,6 +161,9 @@
       "l" 'magit-key-mode-popup-logging
       "h" 'magit-toggle-diff-refine-hunk))
 
+  (after 'package
+    (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
+
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
   (evil-ex-define-cmd "Qa" 'evil-quit-all)
@@ -173,11 +176,8 @@
 (define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
 
+
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
-
-
-(after 'package
-  (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
 
 
 (after 'magit
