@@ -100,6 +100,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                :margin t)))
 
 
+(defadvice kill-buffer (around my-advice-for-kill-buffer activate)
+  (let ((buffer-to-kill (ad-get-arg 0)))
+    (if (equal buffer-to-kill "*Scratch*")
+        (bury-buffer)
+      ad-do-it)))
+
+
 ;; make sure $PATH is set correctly
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
