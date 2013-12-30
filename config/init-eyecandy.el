@@ -7,15 +7,26 @@
 (show-paren-mode)
 
 
-(require-package 'purty-mode)
-(require 'purty-mode)
-(setq purty-regexp-symbol-pairs (mapcar #'purty-enhance-pair '()))
-(purty-add-pair '("\\(\\bfunction\\b\\)" . "λ"))
-;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "Λ"))
-;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "∫"))
-;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "ƒ"))
-;; (purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
-(purty-add-pair '("\\(\\breturn\\b\\)" . "←"))
+(require-package 'pretty-symbols)
+(require 'pretty-symbols)
+(setq pretty-symbol-categories '(js))
+(setq pretty-symbol-patterns '((955 js "\\<function\\>" (js2-mode)) (8592 js "\\<return\\>" (js2-mode))))
+(add-hook 'find-file-hook (lambda () (pretty-symbols-mode)))
+
+;; (require-package 'pretty-mode)
+;; (setq pretty-default-groups nil)
+;; (require 'pretty-mode)
+;; (global-pretty-mode)
+
+;; (require-package 'purty-mode)
+;; (require 'purty-mode)
+;; (setq purty-regexp-symbol-pairs (mapcar #'purty-enhance-pair '()))
+;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "λ"))
+;; ;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "Λ"))
+;; ;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "∫"))
+;; ;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "ƒ"))
+;; ;; (purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
+;; (purty-add-pair '("\\(\\breturn\\b\\)" . "←"))
 
 
 (require-package 'diminish)
@@ -40,7 +51,6 @@
 
 
 (add-hook 'find-file-hook (lambda ()
-                            (purty-mode)
                             (hl-line-mode)
                             (linum-mode)))
 
