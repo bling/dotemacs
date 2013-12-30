@@ -37,4 +37,9 @@
 (global-rainbow-delimiters-mode)
 
 
+(require-package 'framemove)
+(require 'framemove)
+(setq framemove-hook-into-windmove t)
+
+
 (provide 'init-misc)
