@@ -8,7 +8,7 @@
 
 (require-package 'rainbow-mode)
 (require 'rainbow-mode)
-(add-hook 'find-file-hook (lambda () (rainbow-turn-on)))
+(add-to-list 'rainbow-html-colors-major-mode-list 'stylus-mode)
 
 
 (require-package 'emmet-mode)

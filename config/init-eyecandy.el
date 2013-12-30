@@ -11,7 +11,11 @@
 (require 'purty-mode)
 (setq purty-regexp-symbol-pairs (mapcar #'purty-enhance-pair '()))
 (purty-add-pair '("\\(\\bfunction\\b\\)" . "λ"))
-(purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
+;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "Λ"))
+;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "∫"))
+;; (purty-add-pair '("\\(\\bfunction\\b\\)" . "ƒ"))
+;; (purty-add-pair '("\\(\\breturn\\b\\)" . "◀◁"))
+(purty-add-pair '("\\(\\breturn\\b\\)" . "←"))
 
 
 (require-package 'diminish)
