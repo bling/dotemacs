@@ -133,9 +133,10 @@
 
   (after 'projectile
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (if (executable-find "ag")
-        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag)
-      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack)))
+    (when (and (eq system-type 'windows-nt) (executable-find "ack"))
+      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
+    (when (and (not (eq system-type 'windows-nt)) (executable-find "ag"))
+      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag)))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
