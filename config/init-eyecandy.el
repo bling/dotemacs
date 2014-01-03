@@ -19,7 +19,6 @@
 (after 'diminish-autoloads
   (diminish 'visual-line-mode)
   (after 'autopair (diminish 'autopair-mode))
-  (after 'purty-mode (diminish 'purty-mode))
   (after 'undo-tree (diminish 'undo-tree-mode))
   (after 'auto-complete (diminish 'auto-complete-mode))
   (after 'projectile (diminish 'projectile-mode))
