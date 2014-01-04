@@ -37,7 +37,6 @@
 (setq eshell-glob-case-insensitive t)
 (setq eshell-buffer-shorthand t)
 (setq eshell-error-if-no-glob t)
-(setq eshell-send-direct-to-subprocesses t)
 
 
 ;; erc
