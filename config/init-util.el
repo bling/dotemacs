@@ -46,44 +46,45 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (defun my-eval-and-replace ()
   "Replace the preceding sexp with its value."
   (interactive)
-  (backward-kill-sexp)
-  (condition-case nil
-      (prin1 (eval (read (current-kill 0)))
-             (current-buffer))
-    (error (message "Invalid expression")
-           (insert (current-kill 0)))))
+  (let ((value (eval (preceding-sexp))))
+    (backware-kill-sexp)
+    (insert (format "%s" value))))
 
 
 (defun my-rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
   (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
+  (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-        (error "Buffer '%s' is not visiting a file!" name)
+        (message "Buffer is not visiting a file!")
       (let ((new-name (read-file-name "New name: " filename)))
-        (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!" new-name)
-          (rename-file filename new-name 1)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)
-          (message "File '%s' successfully renamed to '%s'"
-                   name (file-name-nondirectory new-name)))))))
+        (cond
+         ((vc-backend filename) (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name t)
+          (set-visited-file-name new-name t t)))))))
 
 
 (defun my-delete-current-buffer-file ()
-  "Removes file connected to current buffer and kills buffer."
+  "Kill the current buffer and deletes the file it is visiting."
   (interactive)
-  (let ((filename (buffer-file-name))
-        (buffer (current-buffer))
-        (name (buffer-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (ido-kill-buffer)
-      (when (yes-or-no-p "Are you sure you want to remove this file? ")
-        (delete-file filename)
-        (kill-buffer buffer)
-        (message "File '%s' successfully removed" filename)))))
+  (let ((filename (buffer-file-name)))
+    (when filename
+      (if (vc-backend filename)
+          (vc-delete-file filename)
+        (when (y-or-n-p (format "Are you sure you want to delete %s? " filename))
+          (delete-file filename)
+          (message "Deleted file %s" filename)
+          (kill-buffer))))))
+
+
+(defun my-create-scratch-buffer ()
+  "Create a new scratch buffer."
+  (interactive)
+  (progn
+    (switch-to-buffer
+     (get-buffer-create (generate-new-buffer-name "*scratch*")))
+    (emacs-lisp-mode)))
 
 
 (defun my-describe-thing-in-popup ()
