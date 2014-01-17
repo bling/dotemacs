@@ -81,6 +81,7 @@
     (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
+    (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring))
 
   (define-key evil-normal-state-map (kbd "[ SPC") (bind (evil-insert-newline-above) (forward-line)))
@@ -145,9 +146,7 @@
   (after 'multiple-cursors
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
-    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this)
-    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
-    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this))
+    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))
 
   (after 'ace-jump-mode-autoloads
     (define-key evil-motion-state-map (kbd "z") 'evil-ace-jump-char-mode)
@@ -256,6 +255,5 @@
     (message "Thou shall not quit!"))
   (defadvice evil-quit-all (around advice-for-evil-quit-all activate)
     (message "Thou shall not quit!")))
-
 
 (provide 'init-bindings)
