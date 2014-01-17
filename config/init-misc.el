@@ -1,7 +1,13 @@
-(require-package 'ag)
-(require 'ag)
-(setq ag-highlight-search t)
-(add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
+(when (executable-find "ag")
+  (require-package 'ag)
+  (require 'ag)
+  (setq ag-highlight-search t)
+  (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t))))
+
+
+(when (executable-find "ack")
+  (require-package 'ack-and-a-half)
+  (require 'ack-and-a-half))
 
 
 (require-package 'project-explorer)
