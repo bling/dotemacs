@@ -31,15 +31,6 @@
 (recentf-mode +1)
 
 
-;; eshell
-(setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
-(setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
-(setq eshell-scroll-to-bottom-on-input 'all)
-(setq eshell-glob-case-insensitive t)
-(setq eshell-buffer-shorthand t)
-(setq eshell-error-if-no-glob t)
-
-
 ;; erc
 (setq erc-log-channels-directory (concat user-emacs-directory ".cache/erc/logs"))
 

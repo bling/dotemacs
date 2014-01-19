@@ -5,6 +5,7 @@
 
 
 (show-paren-mode)
+(setq show-paren-delay 0)
 
 
 (require-package 'pretty-symbols)
