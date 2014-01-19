@@ -31,10 +31,14 @@
 
 
 (defun my-eshell-prompt ()
-  (concat (eshell/pwd)
-          (my-current-git-branch)
-          " $ "))
+  (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
+          (propertize (my-current-git-branch) 'face 'font-lock-function-name-face)
+          (propertize " $ " 'face 'font-lock-constant-face)))
 
 
 (require 'em-prompt)
 (setq eshell-prompt-function 'my-eshell-prompt)
+(setq eshell-highlight-prompt nil)
+
+
+(provide 'init-eshell)
