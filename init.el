@@ -10,6 +10,7 @@
 (require 'init-packages)
 (require 'init-util)
 (require 'init-core)
+(require 'init-eshell)
 (require 'init-org)
 (require 'init-eyecandy)
 
