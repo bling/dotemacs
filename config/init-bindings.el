@@ -37,6 +37,7 @@
     (evil-leader/set-key
       "w" 'save-buffer
       "e" (kbd "C-x C-e")
+      ", e" (kbd "C-M-x")
       "E" (kbd "C-M-x")
       "c" (bind
            (evil-window-split)
@@ -129,8 +130,9 @@
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
   (after 'stylus-mode
-    (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-region)
-    (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-buffer))
+    (evil-define-key 'normal stylus-mode-map (kbd ", e") 'my-stylus-compile-and-eval)
+    (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-region)
+    (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after 'projectile
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
