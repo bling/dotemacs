@@ -54,4 +54,8 @@
   (my-stylus-async (point-min) (point-max) nil))
 
 
+(add-hook 'stylus-mode-hook (lambda ()
+                              (unless (process-status "httpd")
+                                (httpd-start))))
+
 (provide 'init-stylus)
