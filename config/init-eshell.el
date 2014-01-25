@@ -27,7 +27,7 @@
                             collect match))))
     (if (not (eq branch nil))
         (concat " [" (substring branch 2) "]")
-      nil)))
+      "")))
 
 
 (defun my-eshell-prompt ()
