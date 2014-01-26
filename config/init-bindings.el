@@ -12,7 +12,7 @@
 (guide-key-mode 1)
 
 
-(after 'smex
+(after 'smex-autoloads
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
@@ -27,12 +27,12 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after 'ace-jump
+  (after 'ace-jump-autoloads
     (key-chord-define evil-normal-state-map "jw" 'ace-jump-word-mode)
     (key-chord-define evil-normal-state-map "jc" 'ace-jump-char-mode)
     (key-chord-define evil-normal-state-map "jl" 'ace-jump-line-mode))
 
-  (after 'evil-leader
+  (after 'evil-leader-autoloads
     (evil-leader/set-leader ",")
     (evil-leader/set-key
       "w" 'save-buffer
@@ -55,11 +55,11 @@
       "h" help-map
       "h h" 'help-for-help-internal))
 
-  (after 'evil-leader
+  (after 'evil-numbers-autoloads
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
 
-  (after 'evil-matchit
+  (after 'evil-matchit-autoloads
     (define-key evil-normal-state-map "%" 'evilmi-jump-items))
 
   (after 'git-gutter+-autoloads
@@ -69,7 +69,7 @@
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
-  (after 'smex
+  (after 'smex-autoloads
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
     (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
 
@@ -78,12 +78,13 @@
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
-  (after 'helm-autoloads
+  (after 'helm-autoloads-autoloads
     (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
-    (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
-    (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
-    (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring))
+    (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
+    (after 'helm-swoop-autoloads
+      (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
+      (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)))
 
   (define-key evil-normal-state-map (kbd "[ SPC") (bind (evil-insert-newline-above) (forward-line)))
   (define-key evil-normal-state-map (kbd "] SPC") (bind (evil-insert-newline-below) (forward-line -1)))
@@ -96,7 +97,7 @@
 
   (define-key evil-normal-state-map (kbd "g p") (kbd "` [ v ` ]"))
 
-  (after 'etags-select
+  (after 'etags-select-autoloads
     (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
 
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
@@ -125,7 +126,7 @@
   ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
-  (after 'coffee-mode
+  (after 'coffee-mode-autoloads
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
@@ -134,7 +135,7 @@
     (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-region)
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
-  (after 'projectile
+  (after 'projectile-autoloads
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
     (when (and (eq system-type 'windows-nt) (executable-find "ack"))
       (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
@@ -145,7 +146,7 @@
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
     (define-key evil-insert-state-map [tab] 'my-company-tab))
 
-  (after 'multiple-cursors
+  (after 'multiple-cursors-autoloads
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
     (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))
@@ -187,10 +188,9 @@
   (global-set-key (kbd "C-x g") 'magit-status))
 
 
-(after 'project-explorer-autoloads
-  (after 'project-explorer
-    (after 'evil
-      (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right)))
+(after 'project-explorer
+  (after 'evil
+    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right))
   (global-set-key [f2] 'project-explorer-open)
   (global-set-key [f3] 'pe/show-file))
 
@@ -212,17 +212,12 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 
-(after 'org
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c a") 'org-agenda))
-
-
 (after 'expand-region-autoloads
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 
 (after 'web-mode
-  (after 'angular-snippets
+  (after 'angular-snippets-autoloads
     (define-key web-mode-map (kbd "C-c C-d") 'ng-snip-show-docs-at-point)))
 
 
@@ -235,6 +230,8 @@
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
