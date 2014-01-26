@@ -5,8 +5,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 
-(after 'auto-complete-autoloads
-  (require-package 'ac-js2))
+(require-package 'ac-js2)
 
 
 (require-package 'js2-refactor)
