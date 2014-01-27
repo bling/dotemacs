@@ -9,8 +9,9 @@
 
 (when (executable-find "ack")
   (require-package 's)
-  (setq projectile-generic-command
-        (concat "ack -f --print0" (s-join " --ignore-dir=" (cons "" projectile-globally-ignored-directories)))))
+  (let ((val (concat "ack -f --print0" (s-join " --ignore-dir=" (cons "" projectile-globally-ignored-directories)))))
+    (setq projectile-generic-command val)
+    (setq projectile-svn-command val)))
 
 (projectile-global-mode t)
 
