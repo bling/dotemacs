@@ -16,6 +16,12 @@
 (add-hook 'find-file-hook (lambda () (pretty-symbols-mode)))
 
 
+(require-package 'color-identifiers-mode)
+(require 'color-identifiers-mode)
+(after 'js2-mode
+  (add-hook 'js2-mode-hook (lambda () (color-identifiers-mode))))
+
+
 (require-package 'diminish)
 (diminish 'visual-line-mode)
 (after 'autopair (diminish 'autopair-mode))
