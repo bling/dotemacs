@@ -14,12 +14,13 @@
 
 
 (require-package 'tern)
-(require-package 'tern-auto-complete)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (after 'tern
   (after 'auto-complete
-    (require 'tern-auto-complete)
-    (tern-ac-setup)))
+    (require-package 'tern-auto-complete)
+    (tern-ac-setup))
+  (after 'company-mode
+    (require-package 'company-tern)))
 
 
 (provide 'init-js)

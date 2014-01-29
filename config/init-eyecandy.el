@@ -1,25 +1,5 @@
-(require-package 'smart-mode-line)
-(require 'smart-mode-line)
-(setq sml/theme 'dark)
-(sml/setup)
-
-
 (show-paren-mode)
 (setq show-paren-delay 0)
-
-
-(require-package 'pretty-symbols)
-(require 'pretty-symbols)
-(add-to-list 'pretty-symbol-categories 'js)
-(add-to-list 'pretty-symbol-patterns '(955 js "\\<function\\>" (js2-mode)))
-(add-to-list 'pretty-symbol-patterns '(8592 js "\\<return\\>" (js2-mode)))
-(add-hook 'find-file-hook (lambda () (pretty-symbols-mode)))
-
-
-(require-package 'color-identifiers-mode)
-(require 'color-identifiers-mode)
-(after 'js2-mode
-  (add-hook 'js2-mode-hook (lambda () (color-identifiers-mode))))
 
 
 (require-package 'diminish)
@@ -35,6 +15,29 @@
 (after 'company (diminish 'company-mode))
 (after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
+
+
+(require-package 'smart-mode-line)
+(require 'smart-mode-line)
+(setq sml/theme 'dark)
+(sml/setup)
+
+
+(require-package 'pretty-symbols)
+(require 'pretty-symbols)
+(diminish 'pretty-symbols-mode)
+(add-to-list 'pretty-symbol-categories 'js)
+(add-to-list 'pretty-symbol-patterns '(955 js "\\<function\\>" (js2-mode)))
+(add-to-list 'pretty-symbol-patterns '(8592 js "\\<return\\>" (js2-mode)))
+(add-hook 'find-file-hook (lambda () (pretty-symbols-mode)))
+
+
+(require-package 'color-identifiers-mode)
+(require 'color-identifiers-mode)
+(diminish 'color-identifiers-mode)
+(after 'js2-mode
+  (add-hook 'js2-mode-hook (lambda () (color-identifiers-mode))))
+
 
 
 (require 'linum)
