@@ -37,6 +37,7 @@
                 profiler-report-mode
                 erc-mode weechat-mode
                 direx:direx-mode
+                makey-key-mode
                 project-explorer-mode))
   (evil-set-initial-state mode 'emacs))
 

@@ -55,6 +55,9 @@
       "h" help-map
       "h h" 'help-for-help-internal))
 
+  (after 'discover-autoloads
+    (evil-define-key 'normal dired-mode-map (kbd "?") 'makey-key-mode-popup-dired))
+
   (after 'evil-numbers-autoloads
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
