@@ -93,6 +93,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                        (help-xref-interned (symbol-at-point))
                        (switch-to-buffer "*Help*")
                        (buffer-string))))
+    (require 'popup)
     (popup-tip description
                :point (point)
                :around t

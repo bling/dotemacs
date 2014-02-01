@@ -1,6 +1,9 @@
 (require-package 'company)
 (require 'company)
 
+(define-key company-active-map [return] nil)
+(define-key company-active-map (kbd "RET") nil)
+
 (setq company-auto-complete t)
 (setq company-global-modes t)
 (setq company-idle-delay 0.2)
