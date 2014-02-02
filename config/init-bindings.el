@@ -233,8 +233,8 @@
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c C-c") 'org-capture)
+(global-set-key (kbd "C-c C-a") 'org-agenda)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
