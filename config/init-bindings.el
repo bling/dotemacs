@@ -81,7 +81,7 @@
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
-  (after 'helm-autoloads-autoloads
+  (after 'helm-autoloads
     (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
