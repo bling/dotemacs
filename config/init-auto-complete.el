@@ -22,8 +22,11 @@
 (after 'linum
   (ac-linum-workaround))
 
-(defadvice ac-expand (before advice-for-ac-expand activate)
-  (when (yas-expand)
-    (ac-stop)))
+(after 'yasnippet
+  (add-hook 'yas-before-expand-snippet-hook (lambda () (auto-complete-mode -1)))
+  (add-hook 'yas-after-exit-snippet-hook (lambda () (auto-complete-mode t)))
+  (defadvice ac-expand (before advice-for-ac-expand activate)
+    (when (yas-expand)
+      (ac-stop))))
 
 (provide 'init-auto-complete)
