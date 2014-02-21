@@ -87,7 +87,8 @@
       delete-by-moving-to-trash t
       ring-bell-function (lambda () ())
       mark-ring-max 64
-      global-mark-ring-max 128)
+      global-mark-ring-max 128
+      save-interprogram-paste-before-kill t)
 
 
 (which-function-mode t)
