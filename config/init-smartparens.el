@@ -3,12 +3,13 @@
 
 (setq sp-show-pair-delay 0)
 (setq sp-show-pair-from-inside t)
+(setq sp-autoescape-string-quote nil)
 
 (sp-use-smartparens-bindings)
 (smartparens-global-mode t)
-(show-smartparens-global-mode t)
 
-(add-to-list 'sp-autoescape-string-quote-if-empty 'js2-mode)
+(show-smartparens-global-mode t)
+(show-paren-mode -1)
 
 (defun my-open-block-c-mode (id action context)
   (when (eq action 'insert)
