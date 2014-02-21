@@ -27,10 +27,10 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after 'ace-jump-autoloads
-    (key-chord-define evil-normal-state-map "jw" 'ace-jump-word-mode)
-    (key-chord-define evil-normal-state-map "jc" 'ace-jump-char-mode)
-    (key-chord-define evil-normal-state-map "jl" 'ace-jump-line-mode))
+  (after 'ace-jump-mode-autoloads
+    (key-chord-define evil-normal-state-map "jw" 'evil-ace-jump-word-mode)
+    (key-chord-define evil-normal-state-map "jc" 'evil-ace-jump-char-mode)
+    (key-chord-define evil-normal-state-map "jl" 'evil-ace-jump-line-mode))
 
   (after 'evil-leader-autoloads
     (evil-leader/set-leader ",")
@@ -140,10 +140,16 @@
 
   (after 'projectile-autoloads
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (when (and (eq system-type 'windows-nt) (executable-find "ack"))
-      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
-    (when (and (not (eq system-type 'windows-nt)) (executable-find "ag"))
-      (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag)))
+    (defun my-update-projectile-bindings ()
+      (when (and (eq system-type 'windows-nt) (executable-find "ack"))
+        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
+      (when (and (not (eq system-type 'windows-nt)) (executable-find "ag"))
+        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag))
+      (let ((vcs (projectile-project-vcs)))
+        (when (eq vcs 'git)
+          (define-key evil-normal-state-map (kbd "SPC /") 'projectile-grep))))
+    (add-hook 'projectile-switch-project-hook 'my-update-projectile-bindings)
+    (my-update-projectile-bindings))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
@@ -156,7 +162,7 @@
 
   (after 'ace-jump-mode-autoloads
     (define-key evil-motion-state-map (kbd "z") 'evil-ace-jump-char-mode)
-    (define-key evil-normal-state-map (kbd "SPC j") 'ace-jump-char-mode)
+    (define-key evil-normal-state-map (kbd "SPC j") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
   (after 'magit
