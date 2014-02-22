@@ -12,3 +12,8 @@ disclaimer
 ==========
 
 here be dragons.
+
+license
+==========
+
+MIT
