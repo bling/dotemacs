@@ -82,7 +82,7 @@
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (after 'helm-autoloads
-    (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
+    (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
     (after 'helm-swoop-autoloads
@@ -139,17 +139,19 @@
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after 'projectile-autoloads
-    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (defun my-update-projectile-bindings ()
-      (when (and (eq system-type 'windows-nt) (executable-find "ack"))
-        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ack))
-      (when (and (not (eq system-type 'windows-nt)) (executable-find "ag"))
-        (define-key evil-normal-state-map (kbd "SPC /") 'projectile-ag))
-      (let ((vcs (projectile-project-vcs)))
-        (when (eq vcs 'git)
-          (define-key evil-normal-state-map (kbd "SPC /") 'projectile-grep))))
-    (add-hook 'projectile-switch-project-hook 'my-update-projectile-bindings)
-    (my-update-projectile-bindings))
+    (define-key evil-normal-state-map (kbd "SPC /")
+      (bind
+       (interactive)
+       (call-interactively (cond ((ignore-errors (eq 'git (projectile-project-vcs)))
+                                  'projectile-grep)
+                                 ((and (eq system-type 'windows-nt) (executable-find "ack"))
+                                  'projectile-ack)
+                                 ((and (not (eq system-type 'windows-nt)) (executable-find "ag"))
+                                  'projectile-ag)
+                                 (t
+                                  'projectile-grep)))))
+    (define-key evil-normal-state-map (kbd "SPC e") 'projectile-recentf)
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file))
 
   (after 'company
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)

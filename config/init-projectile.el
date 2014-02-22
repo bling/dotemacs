@@ -1,10 +1,12 @@
 (require-package 'projectile)
-(require 'projectile)
 
 
 (setq projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
 (setq projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
 (setq projectile-use-git-grep t)
+
+
+(require 'projectile)
 
 
 (add-to-list 'projectile-globally-ignored-directories "elpa")
