@@ -85,6 +85,8 @@
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
+    (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
+    (define-key evil-normal-state-map (kbd "SPC r") 'helm-register)
     (after 'helm-swoop-autoloads
       (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
       (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)))
@@ -243,6 +245,7 @@
 
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c s") 'my-goto-scratch-buffer)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
@@ -252,6 +255,7 @@
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
+
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))

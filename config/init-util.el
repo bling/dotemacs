@@ -78,12 +78,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
           (kill-buffer))))))
 
 
-(defun my-create-scratch-buffer ()
+(defun my-goto-scratch-buffer ()
   "Create a new scratch buffer."
   (interactive)
   (progn
     (switch-to-buffer
-     (get-buffer-create (generate-new-buffer-name "*scratch*")))
+     (get-buffer-create "*scratch*"))
     (emacs-lisp-mode)))
 
 
