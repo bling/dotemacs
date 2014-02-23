@@ -163,7 +163,7 @@
     (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))
 
   (after 'ace-jump-mode-autoloads
-    (define-key evil-motion-state-map (kbd "z") 'evil-ace-jump-char-mode)
+    (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
     (define-key evil-normal-state-map (kbd "SPC j") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
