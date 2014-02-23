@@ -29,4 +29,9 @@
     (when (yas-expand)
       (ac-stop))))
 
+(require-package 'ac-etags)
+(setq ac-etags-requires 1)
+(after 'etags
+  (ac-etags-setup))
+
 (provide 'init-auto-complete)

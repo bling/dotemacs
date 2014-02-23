@@ -177,6 +177,9 @@
       "l" 'magit-key-mode-popup-logging
       "h" 'magit-toggle-diff-refine-hunk))
 
+  (after 'discover-autoloads
+    (evil-define-key 'normal dired-mode-map (kbd "?") 'makey-key-mode-popup-dired))
+
   (after 'package
     (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
 
