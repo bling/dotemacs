@@ -5,37 +5,46 @@
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
 
-(require 'cl)
+(defgroup dotemacs nil
+  "Custom configuration for dotemacs."
+  :group 'local)
 
+(require 'cl)
 (require 'init-packages)
 (require 'init-util)
 (require 'init-core)
-(require 'init-eshell)
-(require 'init-org)
-(require 'init-eyecandy)
 
-(require 'init-editor)
-;; (require 'init-smartparens)
-(require 'init-autopair)
+(defcustom dotemacs-modules '(init-eshell
+                              init-org
+                              init-eyecandy
 
-(require 'init-yasnippet)
-(require 'init-auto-complete)
-;; (require 'init-company)
+                              init-editor
+                              ;; init-smartparens
+                              init-autopair
 
-(require 'init-projectile)
-(require 'init-helm)
-(require 'init-ido)
+                              init-yasnippet
+                              init-auto-complete
+                              ;; init-company
 
-(require 'init-git)
-(require 'init-flycheck)
+                              init-projectile
+                              init-helm
+                              init-ido
 
-(require 'init-vim)
-(require 'init-stylus)
-(require 'init-js)
-(require 'init-web)
-(require 'init-lisp)
-(require 'init-markdown)
+                              init-git
+                              init-flycheck
 
-(require 'init-evil)
-(require 'init-misc)
-(require 'init-bindings)
+                              init-vim
+                              init-stylus
+                              init-js
+                              init-web
+                              init-lisp
+                              init-markdown
+
+                              init-evil
+                              init-misc
+                              init-bindings)
+  "Set of modules enabled in dotemacs."
+  :group 'dotemacs)
+
+(dolist (module dotemacs-modules)
+  (require module))
