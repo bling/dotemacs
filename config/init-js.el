@@ -11,17 +11,9 @@
 (require-package 'js2-refactor)
 
 
-(after 'discover-autoloads
-  (require-package 'discover-js2-refactor)
-  (require 'discover-js2-refactor))
-
-
 (require-package 'tern)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (after 'tern
-  ;; remove conflict with discover-js2
-  (define-key tern-mode-keymap (kbd "C-c C-r") nil)
-
   (after 'auto-complete
     (require-package 'tern-auto-complete)
     (tern-ac-setup))
