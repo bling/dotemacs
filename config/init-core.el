@@ -47,6 +47,14 @@
 (require 'dired-x)
 
 
+;; bookmarks
+(setq bookmark-default-file (concat user-emacs-directory ".cache/bookmarks"))
+
+
+;; fringe
+(fringe-mode 16)
+
+
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
 
