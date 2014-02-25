@@ -2,9 +2,6 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 
-(define-key ac-completing-map [return] nil)
-(define-key ac-completing-map "\r" nil)
-
 (setq ac-auto-show-menu t)
 (setq ac-auto-start t)
 (setq ac-comphist-file (concat user-emacs-directory ".cache/ac-comphist.dat"))
