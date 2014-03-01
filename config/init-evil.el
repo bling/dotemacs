@@ -89,4 +89,10 @@
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
 
+(defadvice evil-jump-forward (after advice-for-evil-jump-forward activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
+
+(defadvice evil-jump-backward (after advice-for-evil-jump-backward activate)
+  (evil-scroll-line-to-center (line-number-at-pos)))
+
 (provide 'init-evil)
