@@ -47,13 +47,17 @@
       "b d" 'kill-this-buffer
       "v" (kbd "C-w v C-w l")
       "s" (kbd "C-w s C-w j")
-      "g s" 'magit-status
-      "g l" 'magit-log
-      "g d" 'vc-diff
       "P" 'package-list-packages
       "V" (bind (term "vim"))
       "h" help-map
-      "h h" 'help-for-help-internal))
+      "h h" 'help-for-help-internal)
+
+    (after 'magit-autoloads
+      (evil-leader/set-key
+        "g s" 'magit-status
+        "g b" 'magit-blame-mode
+        "g c" 'magit-commit
+        "g l" 'magit-log)))
 
   (after 'discover-autoloads
     (evil-define-key 'normal dired-mode-map (kbd "?") 'makey-key-mode-popup-dired))
@@ -82,6 +86,7 @@
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (after 'helm-autoloads
+    (define-key evil-normal-state-map (kbd "g b") 'helm-buffers-list)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
