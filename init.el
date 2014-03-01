@@ -42,7 +42,9 @@
 
                               init-evil
                               init-misc
-                              init-bindings)
+                              init-bindings
+
+                              init-overrides)
   "Set of modules enabled in dotemacs."
   :group 'dotemacs)
 
