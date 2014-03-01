@@ -1,8 +1,11 @@
 (after 'org
+  (unless (file-exists-p org-directory)
+    (make-directory org-directory))
+
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-log-done t)
 
-
+  (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline (concat org-directory "/notes.org") "Tasks")
            "* TODO %?  %T")
