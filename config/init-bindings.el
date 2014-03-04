@@ -27,11 +27,6 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after 'ace-jump-mode-autoloads
-    (key-chord-define evil-normal-state-map "jw" 'evil-ace-jump-word-mode)
-    (key-chord-define evil-normal-state-map "jc" 'evil-ace-jump-char-mode)
-    (key-chord-define evil-normal-state-map "jl" 'evil-ace-jump-line-mode))
-
   (after 'evil-leader-autoloads
     (evil-leader/set-leader ",")
     (evil-leader/set-key
@@ -172,7 +167,7 @@
 
   (after 'ace-jump-mode-autoloads
     (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
-    (define-key evil-normal-state-map (kbd "SPC j") 'evil-ace-jump-char-mode)
+    (define-key evil-normal-state-map (kbd "s") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
   (after 'magit
