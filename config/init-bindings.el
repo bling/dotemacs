@@ -229,12 +229,6 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 
-(after 'helm-autoloads
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete))))
-
-
 (after 'expand-region-autoloads
   (global-set-key (kbd "C-=") 'er/expand-region))
 

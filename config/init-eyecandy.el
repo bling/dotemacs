@@ -2,6 +2,9 @@
 (setq show-paren-delay 0)
 
 
+(column-number-mode t)
+
+
 (require-package 'diminish)
 (diminish 'visual-line-mode)
 (after 'autopair (diminish 'autopair-mode))
@@ -19,7 +22,6 @@
 
 (require-package 'smart-mode-line)
 (require 'smart-mode-line)
-(setq sml/theme 'dark)
 (sml/setup)
 
 
@@ -37,7 +39,6 @@
 (diminish 'color-identifiers-mode)
 (after 'js2-mode
   (add-hook 'js2-mode-hook (lambda () (color-identifiers-mode))))
-
 
 
 (require 'linum)
