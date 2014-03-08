@@ -56,8 +56,4 @@
 (setq framemove-hook-into-windmove t)
 
 
-(require-package 'discover)
-(global-discover-mode)
-
-
 (provide 'init-misc)
