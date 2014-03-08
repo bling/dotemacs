@@ -5,6 +5,14 @@
      '(progn ,@body)))
 
 
+(defmacro lazy-major-mode (pattern mode)
+  "Defines a new major-mode matched by PATTERN, installs MODE if necessary, and activates it."
+  `(add-to-list 'auto-mode-alist
+                '(,pattern . (lambda ()
+                             (require-package (quote ,mode))
+                             (,mode)))))
+
+
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."
   (interactive)

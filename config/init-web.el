@@ -1,9 +1,11 @@
-(require-package 'coffee-mode)
-(require-package 'jade-mode)
+(lazy-major-mode "\\.coffee\\'" coffee-mode)
+(lazy-major-mode "\\.jade$" jade-mode)
 
 
 (require-package 'skewer-mode)
 (skewer-setup)
+(after 'stylus-mode
+  (add-hook 'stylus-mode-hook 'skewer-css-mode))
 
 
 (require-package 'rainbow-mode)
@@ -11,15 +13,16 @@
 (add-to-list 'rainbow-html-colors-major-mode-list 'stylus-mode)
 
 
-(require-package 'emmet-mode)
-(add-hook 'css-mode-hook 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook 'emmet-mode)
+(defun my-emmet-mode ()
+  (require-package 'emmet-mode)
+  (emmet-mode))
+
+(add-hook 'css-mode-hook 'my-emmet-mode)
+(add-hook 'sgml-mode-hook 'my-emmet-mode)
+(add-hook 'web-mode-hook 'my-emmet-mode)
 
 
-(require-package 'web-mode)
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(lazy-major-mode "\\.html?$" web-mode)
 
 
 ;; indent after deleting a tag

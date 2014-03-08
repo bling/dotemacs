@@ -1,5 +1,3 @@
-(require-package 'vimrc-mode)
-(setq auto-mode-alist
-      (cons '("\\.vim\\'" . vimrc-mode) auto-mode-alist))
+(lazy-major-mode "\\.vim$" vimrc-mode)
 
 (provide 'init-vim)
