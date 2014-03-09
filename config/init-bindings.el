@@ -199,11 +199,12 @@
   (global-set-key (kbd "C-x g") 'magit-status))
 
 
-(after 'project-explorer
-  (after 'evil
-    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right))
+(after "project-explorer-autoloads"
   (global-set-key [f2] 'project-explorer-open)
-  (global-set-key [f3] 'pe/show-file))
+  (autoload 'pe/show-file "project-explorer")
+  (global-set-key [f3] 'pe/show-file)
+  (after 'project-explorer
+    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right)))
 
 
 (after 'comint
