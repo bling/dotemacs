@@ -1,14 +1,14 @@
-(require 'eshell)
+;; eshell
 (setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
 (setq eshell-scroll-to-bottom-on-input 'all)
 (setq eshell-buffer-shorthand t)
 
 
-(require 'em-alias)
+;; em-alias
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 
 
-(require 'em-glob)
+;; em-glob
 (setq eshell-glob-case-insensitive t)
 (setq eshell-error-if-no-glob t)
 
@@ -34,7 +34,7 @@
           (propertize " $ " 'face 'font-lock-constant-face)))
 
 
-(require 'em-prompt)
+;; em-prompt
 (setq eshell-prompt-function 'my-eshell-prompt)
 (setq eshell-highlight-prompt nil)
 
