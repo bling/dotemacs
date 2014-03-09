@@ -2,15 +2,18 @@
 (lazy-major-mode "\\.jade$" jade-mode)
 
 
-(require-package 'skewer-mode)
-(skewer-setup)
-(after 'stylus-mode
-  (add-hook 'stylus-mode-hook 'skewer-css-mode))
+(after 'js2-mode-autoloads
+  (require-package 'skewer-mode)
+  (skewer-setup)
+  (after 'stylus-mode
+    (add-hook 'stylus-mode-hook 'skewer-css-mode)))
 
 
 (require-package 'rainbow-mode)
-(require 'rainbow-mode)
-(add-to-list 'rainbow-html-colors-major-mode-list 'stylus-mode)
+(add-hook 'html-mode-hook 'rainbow-mode)
+(add-hook 'web-mode-hook 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'stylus-mode-hook 'rainbow-mode)
 
 
 (defun my-emmet-mode ()

@@ -1,21 +1,16 @@
 (require-package 'wgrep)
-(require 'wgrep)
 
 
 (when (executable-find "ag")
   (require-package 'ag)
-  (require 'ag)
-  (require-package 'wgrep-ag)
-  (require 'wgrep-ag)
   (setq ag-highlight-search t)
-  (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t))))
+  (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
+  (require-package 'wgrep-ag))
 
 
 (when (executable-find "ack")
   (require-package 'ack-and-a-half)
-  (require 'ack-and-a-half)
-  (require-package 'wgrep-ack)
-  (require 'wgrep-ack))
+  (require-package 'wgrep-ack))
 
 
 (require-package 'project-explorer)
@@ -24,11 +19,9 @@
 
 
 (require-package 'ace-jump-mode)
-(require 'ace-jump-mode)
 
 
 (require-package 'expand-region)
-(require 'expand-region)
 
 
 (require-package 'editorconfig)
@@ -36,7 +29,6 @@
 
 
 (require-package 'etags-select)
-(require 'etags-select)
 (setq etags-select-go-if-unambiguous t)
 
 
@@ -48,7 +40,7 @@
 
 
 (require-package 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 
 (require-package 'framemove)

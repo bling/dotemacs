@@ -9,6 +9,5 @@
   (require-package 'helm-projectile))
 
 (require 'helm-config)
-(require 'helm-swoop)
 
 (provide 'init-helm)

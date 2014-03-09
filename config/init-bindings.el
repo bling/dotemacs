@@ -158,6 +158,8 @@
     (define-key evil-insert-state-map [tab] 'my-company-tab))
 
   (after "multiple-cursors-autoloads"
+    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
+    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this)
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
     (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))

@@ -43,10 +43,10 @@
 
 
 (require-package 'color-identifiers-mode)
-(require 'color-identifiers-mode)
-(diminish 'color-identifiers-mode)
+(after 'color-identifiers-mode
+  (diminish 'color-identifiers-mode))
 (after 'js2-mode
-  (add-hook 'js2-mode-hook (lambda () (color-identifiers-mode))))
+  (add-hook 'js2-mode-hook 'color-identifiers-mode))
 
 
 (require 'linum)
