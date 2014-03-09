@@ -2,9 +2,8 @@
                          ("org" . "http://orgmode.org/elpa/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))
-(require 'package)
-(package-initialize)
 (setq package-enable-at-startup nil)
+(package-initialize)
 
 (defun require-package (package)
   "Install given PACKAGE."

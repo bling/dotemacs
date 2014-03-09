@@ -12,7 +12,7 @@
 (guide-key-mode 1)
 
 
-(after 'smex-autoloads
+(after "smex-autoloads"
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "C-x C-m") 'smex)
   (global-set-key (kbd "C-c C-m") 'smex))
@@ -27,7 +27,7 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after 'evil-leader-autoloads
+  (after "evil-leader-autoloads"
     (evil-leader/set-leader ",")
     (evil-leader/set-key
       "w" 'save-buffer
@@ -47,31 +47,28 @@
       "h" help-map
       "h h" 'help-for-help-internal)
 
-    (after 'magit-autoloads
+    (after "magit-autoloads"
       (evil-leader/set-key
         "g s" 'magit-status
         "g b" 'magit-blame-mode
         "g c" 'magit-commit
         "g l" 'magit-log)))
 
-  (after 'discover-autoloads
-    (evil-define-key 'normal dired-mode-map (kbd "?") 'makey-key-mode-popup-dired))
-
-  (after 'evil-numbers-autoloads
+  (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
 
-  (after 'evil-matchit-autoloads
+  (after "evil-matchit-autoloads"
     (define-key evil-normal-state-map "%" 'evilmi-jump-items))
 
-  (after 'git-gutter+-autoloads
+  (after "git-gutter+-autoloads"
     (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
     (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
     (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
-  (after 'smex-autoloads
+  (after "smex-autoloads"
     (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
     (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
 
@@ -80,7 +77,7 @@
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
-  (after 'helm-autoloads
+  (after "helm-autoloads"
     (define-key evil-normal-state-map (kbd "g b") 'helm-buffers-list)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
@@ -88,7 +85,7 @@
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
     (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
     (define-key evil-normal-state-map (kbd "SPC r") 'helm-register)
-    (after 'helm-swoop-autoloads
+    (after "helm-swoop-autoloads"
       (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
       (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)))
 
@@ -103,7 +100,7 @@
 
   (define-key evil-normal-state-map (kbd "g p") (kbd "` [ v ` ]"))
 
-  (after 'etags-select-autoloads
+  (after "etags-select-autoloads"
     (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
 
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
@@ -123,7 +120,7 @@
 
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map (kbd "K") 'my-describe-thing-in-popup)
-  (after 'elisp-slime-nav-autoloads
+  (after "elisp-slime-nav-autoloads"
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 
   ;; proper jump lists
@@ -132,7 +129,7 @@
   ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
   ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
 
-  (after 'coffee-mode-autoloads
+  (after "coffee-mode-autoloads"
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
@@ -141,7 +138,7 @@
     (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-region)
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
-  (after 'projectile-autoloads
+  (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "SPC /")
       (bind
        (interactive)
@@ -160,12 +157,12 @@
     (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
     (define-key evil-insert-state-map [tab] 'my-company-tab))
 
-  (after 'multiple-cursors-autoloads
+  (after "multiple-cursors-autoloads"
     (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
     (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))
 
-  (after 'ace-jump-mode-autoloads
+  (after "ace-jump-mode-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
     (define-key evil-normal-state-map (kbd "s") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
@@ -177,9 +174,6 @@
       "K" 'magit-discard-item
       "l" 'magit-key-mode-popup-logging
       "h" 'magit-toggle-diff-refine-hunk))
-
-  (after 'discover-autoloads
-    (evil-define-key 'normal dired-mode-map (kbd "?") 'makey-key-mode-popup-dired))
 
   (after 'package
     (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
@@ -229,12 +223,12 @@
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 
-(after 'expand-region-autoloads
+(after "expand-region-autoloads"
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 
 (after 'web-mode
-  (after 'angular-snippets-autoloads
+  (after "angular-snippets-autoloads"
     (define-key web-mode-map (kbd "C-c C-d") 'ng-snip-show-docs-at-point)))
 
 
