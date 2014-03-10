@@ -19,8 +19,8 @@
                               init-eyecandy
 
                               init-editor
-                              ;; init-smartparens
-                              init-autopair
+                              init-smartparens
+                              ;; init-autopair
 
                               init-yasnippet
                               init-auto-complete
