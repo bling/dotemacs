@@ -39,11 +39,12 @@
     (add-to-list 'pretty-symbol-categories 'js)
     (add-to-list 'pretty-symbol-patterns '(955 js "\\<function\\>" (js2-mode)))
     (add-to-list 'pretty-symbol-patterns '(8592 js "\\<return\\>" (js2-mode)))
-    (add-hook 'find-file-hook (lambda () (pretty-symbols-mode)))))
+    (add-hook 'find-file-hook 'pretty-symbols-mode)))
 
 
 (require-package 'color-identifiers-mode)
 (global-color-identifiers-mode)
+(diminish 'color-identifiers-mode)
 
 
 (require 'linum)

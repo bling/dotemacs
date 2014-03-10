@@ -18,7 +18,6 @@
                               init-org
                               init-eyecandy
 
-                              init-editor
                               init-smartparens
                               ;; init-autopair
 
@@ -40,8 +39,8 @@
                               init-lisp
                               init-markdown
 
-                              init-evil
                               init-misc
+                              init-evil
                               init-bindings
 
                               init-overrides)
