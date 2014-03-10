@@ -15,6 +15,7 @@
 
 
 (when (executable-find "ack")
+  (setq projectile-indexing-method 'alien)
   (require-package 's)
   (let ((val (concat "ack -f --print0" (s-join " --ignore-dir=" (cons "" projectile-globally-ignored-directories)))))
     (setq projectile-generic-command val)
