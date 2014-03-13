@@ -1,13 +1,3 @@
-(setq inhibit-splash-screen t
-      inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
-
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-
 ;; move cursor to the last position upon open
 (require 'saveplace)
 (setq save-place-file (concat user-emacs-directory ".cache/places"))
@@ -91,12 +81,16 @@
 (prefer-coding-system 'utf-8)
 
 
-(setq sentence-end-double-space nil
-      delete-by-moving-to-trash t
-      ring-bell-function (lambda () ())
-      mark-ring-max 64
-      global-mark-ring-max 128
-      save-interprogram-paste-before-kill t)
+(setq sentence-end-double-space nil)
+(setq delete-by-moving-to-trash t)
+(setq ring-bell-function (lambda () ()))
+(setq mark-ring-max 64)
+(setq global-mark-ring-max 128)
+(setq save-interprogram-paste-before-kill t)
+
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-echo-area-message t)
+(setq inhibit-startup-message t)
 
 
 (which-function-mode t)

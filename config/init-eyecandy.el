@@ -3,6 +3,7 @@
 
 
 (column-number-mode t)
+(display-time-mode t)
 
 
 (require-package 'diminish)
@@ -18,10 +19,10 @@
 (after 'company (diminish 'company-mode))
 (after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
+(after 'magit (diminish 'magit-auto-revert-mode))
 
 
 (require-package 'smart-mode-line)
-(require 'smart-mode-line)
 (sml/setup)
 
 
