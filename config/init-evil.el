@@ -68,21 +68,6 @@
                                    (face-foreground 'mode-line))))
   (add-hook 'post-command-hook (lambda () (my-evil-modeline-change default-color))))
 
-(evil-define-text-object my-evil-next-match (count &optional beg end type)
-  "Select next match."
-  (evil-ex-search-previous 1)
-  (evil-ex-search-next count)
-  (list evil-ex-search-match-beg evil-ex-search-match-end))
-
-(evil-define-text-object my-evil-previous-match (count &optional beg end type)
-  "Select previous match."
-  (evil-ex-search-next 1)
-  (evil-ex-search-previous count)
-  (list evil-ex-search-match-beg evil-ex-search-match-end))
-
-(define-key evil-motion-state-map "gn" 'my-evil-next-match)
-(define-key evil-motion-state-map "gN" 'my-evil-previous-match)
-
 (defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
   (evil-scroll-line-to-center (line-number-at-pos)))
 
