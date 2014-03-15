@@ -4,6 +4,7 @@
 (setq sp-show-pair-delay 0)
 (setq sp-show-pair-from-inside t)
 (setq sp-autoescape-string-quote nil)
+(setq sp-autoinsert-if-followed-by-same 1)
 
 (sp-use-smartparens-bindings)
 (smartparens-global-mode t)
