@@ -11,13 +11,14 @@
   (setq js2-highlight-level 3)
   (setq-default js2-basic-offset 2)
 
-  (require-package 'tern)
-  (add-hook 'js2-mode-hook 'tern-mode)
-  (after 'tern
-    (after 'auto-complete
-      (require-package 'tern-auto-complete)
-      (tern-ac-setup))
-    (after 'company-mode
-      (require-package 'company-tern))))
+  (when (executable-find "tern")
+    (require-package 'tern)
+    (add-hook 'js2-mode-hook 'tern-mode)
+    (after 'tern
+      (after 'auto-complete
+        (require-package 'tern-auto-complete)
+        (tern-ac-setup))
+      (after 'company-mode
+        (require-package 'company-tern)))))
 
 (provide 'init-js)

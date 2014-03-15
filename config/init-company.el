@@ -11,8 +11,9 @@
 (after 'ac-js2-autoloads
   (add-to-list 'company-backends 'ac-js2-company))
 
-(after 'company-tern-autoloads
-  (add-to-list 'company-backends 'company-tern))
+(when (executable-find "tern")
+  (after 'company-tern-autoloads
+    (add-to-list 'company-backends 'company-tern)))
 
 (global-company-mode t)
 
