@@ -18,36 +18,37 @@
 (require 'init-util)
 (require 'init-core)
 
-(defcustom dotemacs-modules '(init-eshell
-                              init-org
-                              init-eyecandy
+(defcustom dotemacs-modules
+  '(init-eshell
+    init-org
+    init-eyecandy
 
-                              init-smartparens
-                              ;; init-autopair
+    init-smartparens
+    ;; init-autopair
 
-                              init-yasnippet
-                              init-auto-complete
-                              ;; init-company
+    init-yasnippet
+    init-auto-complete
+    ;; init-company
 
-                              init-projectile
-                              init-helm
-                              init-ido
+    init-projectile
+    init-helm
+    init-ido
 
-                              init-git
-                              init-flycheck
+    init-git
+    init-flycheck
 
-                              init-vim
-                              init-stylus
-                              init-js
-                              init-web
-                              init-lisp
-                              init-markdown
+    init-vim
+    init-stylus
+    init-js
+    init-web
+    init-lisp
+    init-markdown
 
-                              init-misc
-                              init-evil
-                              init-bindings
+    init-misc
+    init-evil
+    init-bindings
 
-                              init-overrides)
+    init-overrides)
   "Set of modules enabled in dotemacs."
   :group 'dotemacs)
 

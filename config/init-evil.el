@@ -35,6 +35,11 @@
 (evil-mode t)
 (global-surround-mode 1)
 
+(defun evilmi-customize-keybinding ()
+  (evil-define-key 'normal evil-matchit-mode-map
+    "%" 'evilmi-jump-items))
+(global-evil-matchit-mode t)
+
 (dolist (mode '(eshell-mode shell-mode term-mode terminal-mode comint-mode skewer-repl-mode
                 profiler-report-mode
                 erc-mode weechat-mode

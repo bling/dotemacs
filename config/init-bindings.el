@@ -58,9 +58,6 @@
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
 
-  (after "evil-matchit-autoloads"
-    (define-key evil-normal-state-map "%" 'evilmi-jump-items))
-
   (after "git-gutter+-autoloads"
     (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
     (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
