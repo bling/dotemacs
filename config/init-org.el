@@ -13,14 +13,14 @@
            "* %?\n%U\n")))
 
   (after 'evil
-    (add-hook 'org-capture-mode-hook (lambda () (evil-insert-state))))
+    (add-hook 'org-capture-mode-hook 'evil-insert-state))
 
-  (require 'ob)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)))
 
-  (setq org-plantuml-jar-path (expand-file-name "~/plantuml.jar")))
+  (after 'ob-core
+    (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)))
 
 
 (provide 'init-org)
