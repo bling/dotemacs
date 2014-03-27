@@ -11,12 +11,6 @@
 (add-hook 'prog-mode-hook 'yas-minor-mode)
 (add-hook 'html-mode-hook 'yas-minor-mode)
 
-
-(require-package 'angular-snippets)
-(require 'angular-snippets)
-(angular-snippets-initialize)
-
-
 (yas-reload-all)
 
 (provide 'init-yasnippet)

@@ -28,9 +28,15 @@
 (lazy-major-mode "\\.html?$" web-mode)
 
 
+(after 'web-mode
+  (after 'yasnippet
+    (require-package 'angular-snippets)
+    (require 'angular-snippets)
+    (angular-snippets-initialize)))
+
+
 ;; indent after deleting a tag
 (defadvice sgml-delete-tag (after reindent activate)
   (indent-region (point-min) (point-max)))
-
 
 (provide 'init-web)
