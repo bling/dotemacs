@@ -4,9 +4,7 @@
 
 (after 'js2-mode-autoloads
   (require-package 'skewer-mode)
-  (skewer-setup)
-  (after 'stylus-mode
-    (add-hook 'stylus-mode-hook 'skewer-css-mode)))
+  (skewer-setup))
 
 
 (require-package 'rainbow-mode)
