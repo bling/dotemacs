@@ -5,6 +5,7 @@
 (setq sp-show-pair-from-inside t)
 (setq sp-autoescape-string-quote nil)
 (setq sp-autoinsert-if-followed-by-same 1)
+(setq sp-highlight-pair-overlay nil)
 
 (sp-use-smartparens-bindings)
 (smartparens-global-mode t)

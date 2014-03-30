@@ -48,6 +48,10 @@
 (diminish 'color-identifiers-mode)
 
 
+(require-package 'fancy-narrow)
+(fancy-narrow-mode)
+
+
 (require 'linum)
 (setq-default linum-format "%4d ")
 
