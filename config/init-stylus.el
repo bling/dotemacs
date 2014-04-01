@@ -29,6 +29,7 @@
         (css-mode))))
 
   (defun my-stylus-async (begin end show)
+    (require 'skewer-css)
     (my-stylus-setup-output-buffer show)
     (setq my-stylus-last-command-mode show)
     (let ((process (apply 'start-process

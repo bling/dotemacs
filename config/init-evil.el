@@ -64,9 +64,9 @@
 
 (defun my-evil-modeline-change (default-color)
   "changes the modeline color when the evil mode changes"
-  (let ((color (cond ((evil-emacs-state-p) '("#330000" . "#ffffff"))
-                     ((evil-insert-state-p) '("#001122" . "#ffffff"))
-                     ((evil-visual-state-p) '("#220011" . "#ffffff"))
+  (let ((color (cond ((evil-emacs-state-p) '("#440000" . "#ffffff"))
+                     ((evil-insert-state-p) '("#002233" . "#ffffff"))
+                     ((evil-visual-state-p) '("#330022" . "#ffffff"))
                      (t default-color))))
     (set-face-background 'mode-line (car color))
     (set-face-foreground 'mode-line (cdr color))))
