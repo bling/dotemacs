@@ -15,6 +15,13 @@
       (kill-buffer)
       (jump-to-register :magit-fullscreen)))
 
+  (after 'evil
+    (after 'magit-blame
+      (defadvice magit-blame-file-on (after advice-for-magit-blame-file-on activate)
+        (turn-off-evil-mode))
+      (defadvice magit-blame-file-off (after advice-for-magit-blame-file-off activate)
+        (turn-on-evil-mode))))
+
   (require-package 'gist)
 
   (if (display-graphic-p)
