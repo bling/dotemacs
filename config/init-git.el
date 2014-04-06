@@ -18,9 +18,9 @@
   (after 'evil
     (after 'magit-blame
       (defadvice magit-blame-file-on (after advice-for-magit-blame-file-on activate)
-        (turn-off-evil-mode))
+        (evil-emacs-state))
       (defadvice magit-blame-file-off (after advice-for-magit-blame-file-off activate)
-        (turn-on-evil-mode))))
+        (evil-exit-emacs-state))))
 
   (require-package 'gist)
 
