@@ -2,7 +2,7 @@
 (lazy-major-mode "\\.jade$" jade-mode)
 
 
-(after 'js2-mode-autoloads
+(after "js2-mode-autoloads"
   (require-package 'skewer-mode)
   (skewer-setup))
 

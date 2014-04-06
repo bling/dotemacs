@@ -8,11 +8,11 @@
 (setq company-show-numbers t)
 (setq company-tooltip-limit 30)
 
-(after 'ac-js2-autoloads
+(after "ac-js2-autoloads"
   (add-to-list 'company-backends 'ac-js2-company))
 
 (when (executable-find "tern")
-  (after 'company-tern-autoloads
+  (after "company-tern-autoloads"
     (add-to-list 'company-backends 'company-tern)))
 
 (global-company-mode t)
