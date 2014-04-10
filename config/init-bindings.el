@@ -154,10 +154,6 @@
     (define-key evil-normal-state-map (kbd "SPC e") 'projectile-recentf)
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file))
 
-  (after 'company
-    (define-key evil-insert-state-map (kbd "TAB") 'my-company-tab)
-    (define-key evil-insert-state-map [tab] 'my-company-tab))
-
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
     (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this)
