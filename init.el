@@ -9,6 +9,10 @@
 (require 'init-packages)
 (require 'init-util)
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
