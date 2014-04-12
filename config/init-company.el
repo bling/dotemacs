@@ -9,6 +9,13 @@
 (setq company-show-numbers t)
 (setq company-tooltip-limit 30)
 
+(set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+(set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+(set-face-attribute 'company-preview nil :background "black")
+(set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+(set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+(set-face-attribute 'company-scrollbar-fg nil :background "gray40")
+
 (when (executable-find "tern")
   (after "company-tern-autoloads"
     (add-to-list 'company-backends 'company-tern)))
