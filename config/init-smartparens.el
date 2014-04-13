@@ -23,4 +23,9 @@
 (sp-pair "{" nil :post-handlers '(:add (my-open-block-c-mode "RET")))
 (sp-pair "[" nil :post-handlers '(:add (my-open-block-c-mode "RET")))
 
+;; fix conflict where smartparens clobbers yas' key bindings
+(after 'yasnippet
+  (defadvice yas-expand (before advice-for-yas-expand activate)
+    (sp-remove-active-pair-overlay)))
+
 (provide 'init-smartparens)
