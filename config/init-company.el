@@ -9,6 +9,9 @@
 (setq company-show-numbers t)
 (setq company-tooltip-limit 30)
 
+(setq company-dabbrev-downcase nil)
+(setq company-dabbrev-ignore-case nil)
+
 (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
 (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
 (set-face-attribute 'company-preview nil :background "black")
@@ -26,9 +29,8 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-(defun my-company-tab ()
-  (interactive)
+(defadvice company-complete-common (around advice-for-company-complete-common activate)
   (when (null (yas-expand))
-    (company-complete-common)))
+    ad-do-it))
 
 (provide 'init-company)

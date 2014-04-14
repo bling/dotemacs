@@ -217,8 +217,6 @@
 
 
 (after 'company
-  (define-key company-active-map "\t" 'my-company-tab)
-  (define-key company-active-map [tab] 'my-company-tab)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
