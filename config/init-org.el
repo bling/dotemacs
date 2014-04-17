@@ -15,12 +15,12 @@
   (after 'evil
     (add-hook 'org-capture-mode-hook 'evil-insert-state))
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((plantuml . t)))
+  (when (boundp 'org-plantuml-jar-path)
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((plantuml . t))))
 
   (after 'ob-core
     (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)))
-
 
 (provide 'init-org)

@@ -52,13 +52,7 @@
 (fancy-narrow-mode)
 
 
-(require 'linum)
-(setq-default linum-format "%4d ")
-
-
-(add-hook 'find-file-hook (lambda ()
-                            (hl-line-mode)
-                            (linum-mode)))
+(add-hook 'find-file-hook 'hl-line-mode)
 
 
 (provide 'init-eyecandy)

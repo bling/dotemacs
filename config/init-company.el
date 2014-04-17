@@ -1,9 +1,6 @@
 (require-package 'company)
 (require 'company)
 
-(setq company-auto-complete t)
-(setq company-auto-complete-chars '(41 46))
-
 (setq company-idle-delay t)
 (setq company-minimum-prefix-length 1)
 (setq company-show-numbers t)

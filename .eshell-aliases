@@ -5,3 +5,5 @@ alias ll ls -lh
 alias d dired $1
 alias gs git stash
 alias gsp git stash pop
+alias gsc git svn dcommit
+alias gsr git svn rebase
