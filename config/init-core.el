@@ -1,3 +1,8 @@
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+
 ;; move cursor to the last position upon open
 (require 'saveplace)
 (setq save-place-file (concat user-emacs-directory ".cache/places"))
@@ -29,12 +34,21 @@
 (setq vc-make-backup-files t)
 
 
+;; imenu
+(setq-default imenu-auto-rescan t)
+
+
 ;; narrowing
 (put 'narrow-to-region 'disabled nil)
 
 
 ;; dired
 (require 'dired-x)
+
+
+;; compile
+(setq compilation-always-kill t)
+(setq compilation-ask-about-save nil)
 
 
 ;; bookmarks
@@ -46,7 +60,8 @@
 
 
 ;; ediff
-(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-split-window-function 'split-window-horizontally) ;; side-by-side diffs
+(setq ediff-window-setup-function 'ediff-setup-windows-plain) ;; no extra frames
 
 
 ;; store most files in the cache
