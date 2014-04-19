@@ -18,6 +18,12 @@
                              (,mode)))))
 
 
+(defun my-recompile-init ()
+  "Byte-compile all your dotfiles again."
+  (interactive)
+  (byte-recompile-directory (concat user-emacs-directory "config") 0))
+
+
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."
   (interactive)
@@ -54,6 +60,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (url-hexify-string (if mark-active
                            (buffer-substring (region-beginning) (region-end))
                          (read-string "Search Google: "))))))
+
+
+(defun my-copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 
 (defun my-eval-and-replace ()
