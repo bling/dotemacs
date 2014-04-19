@@ -35,7 +35,7 @@
     init-helm
     init-ido
 
-    init-git
+    init-vcs
     init-flycheck
 
     init-vim

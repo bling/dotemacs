@@ -1,10 +1,10 @@
 (after 'vc-git
   (require-package 'magit)
 
-  (setq magit-diff-options '("--histogram"))
-  (setq magit-stage-all-confirm nil)
-
   (after 'magit
+    (setq magit-diff-options '("--histogram"))
+    (setq magit-stage-all-confirm nil)
+
     (defadvice magit-status (around my-magit-fullscreen activate)
       (window-configuration-to-register :magit-fullscreen)
       ad-do-it
@@ -22,8 +22,6 @@
       (defadvice magit-blame-file-off (after advice-for-magit-blame-file-off activate)
         (evil-exit-emacs-state))))
 
-  (require-package 'gist)
-
   (if (display-graphic-p)
       (progn
         (require-package 'git-gutter-fringe+)
@@ -32,4 +30,11 @@
 
   (global-git-gutter+-mode))
 
-(provide 'init-git)
+
+(require-package 'diff-hl)
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+(unless (display-graphic-p)
+  (diff-hl-margin-mode))
+
+
+(provide 'init-vcs)
