@@ -66,10 +66,9 @@ This function is called from `compilation-filter-hook'."
   (add-hook 'compilation-filter-hook 'pt--filter nil t))
 
 (defun pt--search (pattern directory)
-  (compilation-start (concat
-                      "cd " directory ";"
-                      "pt --nogroup " pattern)
-                     'pt-search-compilation-mode))
+  (let ((default-directory directory))
+  (compilation-start (concat "pt --nogroup " pattern)
+                     'pt-search-compilation-mode)))
 
 ;;;###autoload
 (defun pt (pattern directory)
