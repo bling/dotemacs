@@ -3,6 +3,7 @@
 
 (setq projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
 (setq projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
+(setq projectile-indexing-method 'alien)
 (setq projectile-use-git-grep t)
 
 
@@ -15,7 +16,6 @@
 
 
 (when (executable-find "ack")
-  (setq projectile-indexing-method 'alien)
   (require-package 's)
   (let ((val (concat "ack -f --print0" (s-join " --ignore-dir=" (cons "" projectile-globally-ignored-directories)))))
     (setq projectile-generic-command val)
