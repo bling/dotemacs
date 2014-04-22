@@ -4,7 +4,6 @@
 (setq projectile-cache-file (concat user-emacs-directory ".cache/projectile.cache"))
 (setq projectile-known-projects-file (concat user-emacs-directory ".cache/projectile-bookmarks.eld"))
 (setq projectile-indexing-method 'alien)
-(setq projectile-use-git-grep t)
 
 
 (require 'projectile)

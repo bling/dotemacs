@@ -67,7 +67,7 @@ This function is called from `compilation-filter-hook'."
 
 (defun pt--search (pattern directory)
   (let ((default-directory directory))
-  (compilation-start (concat "pt --nogroup " pattern)
+  (compilation-start (concat "pt --nogroup --nocolor --smart-case " (shell-quote-argument pattern))
                      'pt-search-compilation-mode)))
 
 ;;;###autoload

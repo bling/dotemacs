@@ -147,9 +147,7 @@
     (define-key evil-normal-state-map (kbd "SPC /")
       (bind
        (interactive)
-       (call-interactively (cond ((ignore-errors (eq 'git (projectile-project-vcs)))
-                                  'projectile-grep)
-                                 ((executable-find "pt")
+       (call-interactively (cond ((executable-find "pt")
                                   'projectile-pt)
                                  ((executable-find "ag")
                                   'projectile-ag)
