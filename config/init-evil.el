@@ -1,4 +1,3 @@
-(setq evil-want-C-u-scroll t)
 (setq evil-want-C-w-in-emacs-state t)
 
 (setq evil-search-module 'evil-search)
