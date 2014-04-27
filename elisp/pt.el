@@ -1,34 +1,65 @@
 ;;; pt.el --- A front-end for pt, The Platinum Searcher.
-
-;; Copyright (C) 2014 Bailey Ling <bling@live.ca>
-
-;;; Commentary:
-
-;;; License:
-
+;;
+;; Copyright (C) 2014 by Bailey Ling
+;; Author: Bailey Ling
+;; URL: https://github.com/bling/pt.el
+;; Filename: pt.el
+;; Description: A front-end for pt, the Platinum Searcher
+;; Created: 2014-04-27
+;; Version: 0.0.1
+;; Keywords: pt ack ag search
+;;
 ;; This file is not part of GNU Emacs.
-;; However, it is distributed under the same license.
-
-;; GNU Emacs is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 3, or (at your option)
-;; any later version.
-
-;; GNU Emacs is distributed in the hope that it will be useful,
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+;; General Public License for more details.
+;;
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
-
+;; along with this program; see the file COPYING. If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Install:
+;;
+;; Autoloads will be set up automatically if you use package.el.
+;;
+;; Usage:
+;;
+;; M-x pt-regexp
+;; M-x projectile-pt
+;;
 ;;; Code:
+
 (eval-when-compile (require 'cl))
 (require 'compile)
 (require 'grep)
 (require 'thingatpt)
+
+(defcustom pt-executable
+  "pt"
+  "Name of the pt executable to use."
+  :type 'string
+  :group 'pt)
+
+(defcustom pt-arguments
+  (list "--smart-case")
+  "Default arguments passed to pt."
+  :type '(repeat (string))
+  :group 'pt)
+
+(defcustom pt-highlight-search t
+  "Non-nil means to highlight the search term in the results."
+  :type 'boolean
+  :group 'pt)
 
 ;; copied from ag.el/ag-filter
 (defun pt--filter ()
@@ -54,7 +85,7 @@ This function is called from `compilation-filter-hook'."
         (while (re-search-forward "\033\\[[0-9;]*[mK]" end 1)
           (replace-match "" t t))))))
 
-(define-compilation-mode pt-search-compilation-mode "Pt"
+(define-compilation-mode pt-search-mode "Pt"
   "Platinum searcher results compilation mode"
   (set (make-local-variable 'truncate-lines) t)
   (set (make-local-variable 'compilation-disable-input) t)
@@ -67,19 +98,28 @@ This function is called from `compilation-filter-hook'."
 
 (defun pt--search (pattern directory)
   (let ((default-directory directory))
-  (compilation-start (concat "pt --nogroup --nocolor --smart-case " (shell-quote-argument pattern))
-                     'pt-search-compilation-mode)))
+    (compilation-start
+     (mapconcat 'identity
+                (append (list pt-executable)
+                        pt-arguments
+                        '("--nogroup" "--nocolor" "--")
+                        (list (shell-quote-argument pattern))) " ")
+     'pt-search-mode)))
 
 ;;;###autoload
-(defun pt (pattern directory)
-  (interactive (list (read-from-minibuffer "Search: " (thing-at-point 'symbol))
+(defun pt-regexp (regexp directory)
+  "Run a pt search with REGEXP rooted at DIRECTORY."
+  (interactive (list (read-from-minibuffer "Pt search for: " (thing-at-point 'symbol))
                      (read-directory-name "Directory: ")))
-  (pt--search pattern directory))
+  (pt--search regexp directory))
 
 ;;;###autoload
-(defun projectile-pt (pattern)
-  (interactive (list (read-from-minibuffer "Search: " (thing-at-point 'symbol))))
-  (pt--search pattern (projectile-project-root)))
+(defun projectile-pt (regexp)
+  "Run a pt search with REGEXP rooted at the current projectile project root."
+  (interactive (list (read-from-minibuffer "Pt search for: " (thing-at-point 'symbol))))
+  (if (fboundp 'projectile-project-root)
+      (pt--search regexp (projectile-project-root))
+    (error "Projectile is not available")))
 
 (provide 'pt)
 ;;; pt.el ends here
