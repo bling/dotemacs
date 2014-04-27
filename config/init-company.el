@@ -4,7 +4,7 @@
 (setq company-idle-delay t)
 (setq company-minimum-prefix-length 1)
 (setq company-show-numbers t)
-(setq company-tooltip-limit 30)
+(setq company-tooltip-limit 20)
 
 (setq company-dabbrev-downcase nil)
 (setq company-dabbrev-ignore-case nil)

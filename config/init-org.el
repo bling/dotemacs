@@ -9,13 +9,13 @@
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
         '(("t" "Todo" entry (file (concat org-directory "/notes.org"))
-           "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+           "* TODO %?\n%U\n%a\n")
           ("n" "Note" entry (file (concat org-directory "/notes.org"))
-           "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+           "* %? :NOTE:\n%U\n%a\n")
           ("m" "Metting" entry (file (concat org-directory "/notes.org"))
-           "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
+           "* MEETING %? :MEETING:\n%U")
           ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
-           "* %?\n%U\n" :clock-in t :clock-resume t)))
+           "* %?\n%U\n")))
 
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
