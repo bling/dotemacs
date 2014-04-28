@@ -14,6 +14,10 @@
 (require-package 'wgrep)
 
 
+(when (executable-find "pt")
+  (require-package 'pt))
+
+
 (when (executable-find "ag")
   (require-package 'ag)
   (setq ag-highlight-search t)
