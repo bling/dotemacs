@@ -5,14 +5,14 @@
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-log-done t)
 
-  (setq org-startup-indented t)
+  (setq org-hide-leading-stars t)
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
         '(("t" "Todo" entry (file (concat org-directory "/notes.org"))
            "* TODO %?\n%U\n%a\n")
           ("n" "Note" entry (file (concat org-directory "/notes.org"))
            "* %? :NOTE:\n%U\n%a\n")
-          ("m" "Metting" entry (file (concat org-directory "/notes.org"))
+          ("m" "Meeting" entry (file (concat org-directory "/notes.org"))
            "* MEETING %? :MEETING:\n%U")
           ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
            "* %?\n%U\n")))
@@ -40,9 +40,6 @@
   (when (boundp 'org-plantuml-jar-path)
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((plantuml . t))))
-
-  (after 'ob-core
-    (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)))
+     '((plantuml . t)))))
 
 (provide 'init-org)
