@@ -41,6 +41,7 @@
     init-vim
     init-stylus
     init-js
+    ;; init-go
     init-web
     init-lisp
     init-markdown
