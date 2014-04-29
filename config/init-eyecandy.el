@@ -25,6 +25,9 @@
 
 
 (require-package 'smart-mode-line)
+(setq sml/show-client t)
+(setq sml/show-eol t)
+(setq sml/show-frame-identification t)
 (sml/setup)
 
 
@@ -50,8 +53,8 @@
 (diminish 'color-identifiers-mode)
 
 
-(require-package 'fancy-narrow)
-(fancy-narrow-mode)
+;; (require-package 'fancy-narrow)
+;; (fancy-narrow-mode)
 
 
 (add-hook 'find-file-hook 'hl-line-mode)
