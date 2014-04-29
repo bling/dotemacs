@@ -19,16 +19,7 @@
        ;; others : digit , alpha, punc
        (setq ace-jump-query-char query-char1)
        (setq ace-jump-current-mode 'ace-jump-char-mode)
-       (ace-jump-do (regexp-quote (string query-char1 query-char2)))))
-
-   ;; enable basic fuzzy searching for helm-buffers
-   (after 'helm-buffers
-     (require 'helm-files)
-     (defun helm-buffer--match-pattern (pattern candidate)
-       (let ((ptn (helm-ff-mapconcat-candidate pattern)))
-         (if (string-match "\\`!" ptn)
-             (not (string-match (substring ptn 1) candidate))
-           (string-match ptn candidate)))))))
+       (ace-jump-do (regexp-quote (string query-char1 query-char2)))))))
 
 
 (provide 'init-overrides)
