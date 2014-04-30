@@ -22,7 +22,7 @@
 
 
 (after 'evil
-  ;; fix conflict with eletric-indent-mode
+  ;; fix conflict with electric-indent-mode in 24.4
   (define-key evil-insert-state-map [remap newline] 'newline)
   (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent)
 
@@ -109,6 +109,7 @@
 
   (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
 
+  (global-set-key (kbd "C-w") 'evil-window-map)
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
@@ -171,14 +172,7 @@
 
   (after 'magit
     (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
-    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
-    (evil-add-hjkl-bindings magit-status-mode-map 'emacs
-      "K" 'magit-discard-item
-      "l" 'magit-key-mode-popup-logging
-      "h" 'magit-toggle-diff-refine-hunk))
-
-  (after 'package
-    (evil-add-hjkl-bindings package-menu-mode-map 'emacs))
+    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)

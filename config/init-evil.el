@@ -31,21 +31,18 @@
 (require 'surround)
 
 (global-evil-leader-mode)
-(evil-mode t)
 (global-surround-mode 1)
+
+(dolist (hook '(text-mode-hook
+                prog-mode-hook
+                find-file-hook
+                compilation-mode-hook))
+  (add-hook hook 'turn-on-evil-mode))
 
 (defun evilmi-customize-keybinding ()
   (evil-define-key 'normal evil-matchit-mode-map
     "%" 'evilmi-jump-items))
 (global-evil-matchit-mode t)
-
-(dolist (mode '(eshell-mode shell-mode term-mode terminal-mode comint-mode skewer-repl-mode
-                profiler-report-mode
-                erc-mode weechat-mode
-                direx:direx-mode
-                makey-key-mode
-                project-explorer-mode))
-  (evil-set-initial-state mode 'emacs))
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
@@ -63,10 +60,10 @@
 
 (defun my-evil-modeline-change (default-color)
   "changes the modeline color when the evil mode changes"
-  (let ((color (cond ((evil-emacs-state-p) '("#440000" . "#ffffff"))
-                     ((evil-insert-state-p) '("#002233" . "#ffffff"))
+  (let ((color (cond ((evil-insert-state-p) '("#002233" . "#ffffff"))
                      ((evil-visual-state-p) '("#330022" . "#ffffff"))
-                     (t default-color))))
+                     ((evil-normal-state-p) default-color)
+                     (t '("#440000" . "#ffffff")))))
     (set-face-background 'mode-line (car color))
     (set-face-foreground 'mode-line (cdr color))))
 
