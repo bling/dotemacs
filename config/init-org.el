@@ -2,17 +2,19 @@
   (unless (file-exists-p org-directory)
     (make-directory org-directory))
 
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq my-inbox-org-file (concat org-directory "/inbox.org"))
+
+  (setq org-default-notes-file my-inbox-org-file)
   (setq org-log-done t)
 
   (setq org-hide-leading-stars t)
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file (concat org-directory "/notes.org"))
+        '(("t" "Todo" entry (file my-inbox-org-file)
            "* TODO %?\n%U\n%a\n")
-          ("n" "Note" entry (file (concat org-directory "/notes.org"))
+          ("n" "Note" entry (file my-inbox-org-file)
            "* %? :NOTE:\n%U\n%a\n")
-          ("m" "Meeting" entry (file (concat org-directory "/notes.org"))
+          ("m" "Meeting" entry (file my-inbox-org-file)
            "* MEETING %? :MEETING:\n%U")
           ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
            "* %?\n%U\n")))
@@ -21,14 +23,14 @@
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-          (sequence "BLOCKED(b@/!)" "|" "CANCELLED(c@/!)")))
+          (sequence "WAITING(w@/!)" "|" "CANCELLED(c@/!)")))
 
   (setq org-todo-state-tags-triggers
         ' (("CANCELLED" ("CANCELLED" . t))
-           ("BLOCKED" ("BLOCKED" . t))
-           ("TODO" ("BLOCKED") ("CANCELLED"))
-           ("NEXT" ("BLOCKED") ("CANCELLED"))
-           ("DONE" ("BLOCKED") ("CANCELLED"))))
+           ("WAITING" ("WAITING" . t))
+           ("TODO" ("WAITING") ("CANCELLED"))
+           ("NEXT" ("WAITING") ("CANCELLED"))
+           ("DONE" ("WAITING") ("CANCELLED"))))
 
   (setq org-refile-targets '((nil :maxlevel . 9)
                              (org-agenda-files :maxlevel . 9)))
