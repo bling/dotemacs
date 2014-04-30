@@ -16,6 +16,9 @@
       (jump-to-register :magit-fullscreen)))
 
   (after 'evil
+    (after 'git-commit-mode
+      (add-hook 'git-commit-mode-hook 'evil-emacs-state))
+
     (after 'magit-blame
       (defadvice magit-blame-file-on (after advice-for-magit-blame-file-on activate)
         (evil-emacs-state))
