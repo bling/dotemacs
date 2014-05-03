@@ -49,6 +49,7 @@
     init-misc
     init-evil
     init-bindings
+    init-macros
 
     init-overrides)
   "Set of modules enabled in dotemacs."
