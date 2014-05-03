@@ -159,11 +159,7 @@
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file))
 
   (after "multiple-cursors-autoloads"
-    (define-key evil-normal-state-map (kbd "C->") 'mc/mark-next-like-this)
-    (define-key evil-normal-state-map (kbd "C-<") 'mc/mark-previous-like-this)
-    (define-key evil-emacs-state-map (kbd "C->") 'mc/mark-next-like-this)
-    (define-key evil-emacs-state-map (kbd "C-<") 'mc/mark-previous-like-this)
-    (define-key evil-visual-state-map (kbd "C->") 'mc/mark-all-like-this))
+    (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
   (after "ace-jump-mode-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
@@ -201,6 +197,13 @@
   (global-set-key [f3] 'pe/show-file)
   (after 'project-explorer
     (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right)))
+
+
+(after "multiple-cursors-autoloads"
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-unset-key (kbd "M-<down-mouse-1>"))
+  (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click))
 
 
 (after 'comint
