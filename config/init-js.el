@@ -2,8 +2,18 @@
 
 (after 'js2-mode
 
-  (require-package 'ac-js2)
-  (add-hook 'js2-mode-hook 'ac-js2-mode)
+  (defun dotemacs-js-ctrl-c-ctrl-c ()
+    (interactive)
+    (require 'thingatpt)
+    (let ((val (thing-at-point 'list t)))
+      ;; inside parameter list?
+      (when (and (equal (substring val 0 1) "(")
+                 (equal (substring val -1) ")"))
+        (my-macro-ng-add-string-for-last-arg))))
+
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c C-c") 'dotemacs-js-ctrl-c-ctrl-c)))
 
   (require-package 'js2-refactor)
   (js2r-add-keybindings-with-prefix "C-c C-m")

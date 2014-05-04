@@ -39,6 +39,7 @@
   (add-hook hook 'turn-on-evil-mode))
 
 (dolist (map '(help-mode-map
+               occur-mode-map
                compilation-mode-map))
   (define-key (eval map) "j" 'next-line)
   (define-key (eval map) "k" 'previous-line))
