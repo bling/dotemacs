@@ -107,8 +107,6 @@
   (after "etags-select-autoloads"
     (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
 
-  (define-key evil-normal-state-map (kbd "C-q") 'universal-argument)
-
   (global-set-key (kbd "C-w") 'evil-window-map)
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)

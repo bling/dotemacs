@@ -1,5 +1,3 @@
-(setq evil-want-C-w-in-emacs-state t)
-
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
 
