@@ -9,7 +9,9 @@
       ;; inside parameter list?
       (when (and (equal (substring val 0 1) "(")
                  (equal (substring val -1) ")"))
-        (my-macro-ng-add-string-for-last-arg))))
+        (if (string-match-p "," val)
+            (my-macro-ng-add-string-for-last-arg)
+          (my-macro-ng-function-to-array-injected)))))
 
   (add-hook 'js2-mode-hook
             (lambda ()
