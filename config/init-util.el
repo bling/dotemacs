@@ -132,6 +132,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                :margin t)))
 
 
+(defun my-insert-last-kbd-macro ()
+  (interactive)
+  (name-last-kbd-macro 'my-last-macro)
+  (insert-kbd-macro 'my-last-macro))
+
+
 (defadvice kill-buffer (around my-advice-for-kill-buffer activate)
   (let ((buffer-to-kill (ad-get-arg 0)))
     (if (equal buffer-to-kill "*Scratch*")
