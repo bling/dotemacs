@@ -35,9 +35,13 @@
 
 (dolist (hook '(text-mode-hook
                 prog-mode-hook
-                find-file-hook
-                compilation-mode-hook))
+                find-file-hook))
   (add-hook hook 'turn-on-evil-mode))
+
+(dolist (map '(help-mode-map
+               compilation-mode-map))
+  (define-key (eval map) "j" 'next-line)
+  (define-key (eval map) "k" 'previous-line))
 
 (defun evilmi-customize-keybinding ()
   (evil-define-key 'normal evil-matchit-mode-map
