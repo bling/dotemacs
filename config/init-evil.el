@@ -1,8 +1,3 @@
-(defcustom dotemacs-evil-emacs-modes
-  '(eshell-mode comint-mode dired-mode git-commit-mode special-mode help-mode)
-  "Set of modes for Evil to start in Emacs state."
-  :group 'dotemacs)
-
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
 
@@ -31,20 +26,23 @@
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)
 (require 'evil-matchit)
+(require 'evil-exchange)
 (require 'surround)
 
 (global-evil-leader-mode t)
+
+(evil-mode t)
+(dolist (mode '(eshell-mode comint-mode git-commit-mode project-explorer-mode
+                special-mode help-mode))
+  (evil-set-initial-state mode 'emacs))
+
 (global-surround-mode t)
+(evil-exchange-install)
 
 (defun evilmi-customize-keybinding ()
   (evil-define-key 'normal evil-matchit-mode-map
     "%" 'evilmi-jump-items))
 (global-evil-matchit-mode t)
-
-(evil-mode t)
-
-(dolist (mode dotemacs-evil-emacs-modes)
-  (evil-set-initial-state mode 'emacs))
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
