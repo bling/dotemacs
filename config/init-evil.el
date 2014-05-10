@@ -17,17 +17,13 @@
 (require-package 'evil-nerd-commenter)
 (require-package 'evil-indent-textobject)
 (require-package 'evil-matchit)
+(require-package 'evil-exchange)
 (require-package 'surround)
 
 (require 'evil)
-(require 'evil-leader)
-(require 'evil-numbers)
 (require 'evil-nerd-commenter)
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)
-(require 'evil-matchit)
-(require 'evil-exchange)
-(require 'surround)
 
 (global-evil-leader-mode t)
 

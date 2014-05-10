@@ -1,9 +1,9 @@
 (require-package 'yasnippet)
 
-(let* ((yas-install-dir (elt (cadr (assoc 'yasnippet package-alist)) 7))
+(let* ((yas-install-dir (car (file-expand-wildcards (concat package-user-dir "\\yasnippet-*"))))
        (dir (concat yas-install-dir "/snippets/js-mode")))
   (if (file-exists-p dir)
-    (delete-directory dir t)))
+      (delete-directory dir t)))
 
 (require 'yasnippet)
 
