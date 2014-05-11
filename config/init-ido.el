@@ -4,7 +4,7 @@
 (setq ido-enable-flex-matching t)
 (setq ido-create-new-buffer 'always)
 (setq ido-use-filename-at-point 'guess)
-(setq ido-save-directory-list-file (concat user-emacs-directory ".cache/ido.last"))
+(setq ido-save-directory-list-file (concat dotemacs-cache-directory "ido.last"))
 
 (ido-mode t)
 (ido-everywhere t)
@@ -21,7 +21,7 @@
 
 (require-package 'smex)
 (require 'smex)
-(setq smex-save-file (concat user-emacs-directory ".cache/smex-items"))
+(setq smex-save-file (concat dotemacs-cache-directory "smex-items"))
 (smex-initialize)
 
 

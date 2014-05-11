@@ -5,13 +5,13 @@
 
 ;; move cursor to the last position upon open
 (require 'saveplace)
-(setq save-place-file (concat user-emacs-directory ".cache/places"))
+(setq save-place-file (concat dotemacs-cache-directory "places"))
 (setq-default save-place t)
 
 
 ;; minibuffer history
 (require 'savehist)
-(setq savehist-file (concat user-emacs-directory ".cache/savehist")
+(setq savehist-file (concat dotemacs-cache-directory "savehist")
       savehist-additional-variables '(search ring regexp-search-ring)
       savehist-autosave-interval 60)
 (setq-default history-length 1000)
@@ -20,14 +20,14 @@
 
 ;; recent files
 (require 'recentf)
-(setq recentf-save-file (concat user-emacs-directory ".cache/recentf")
+(setq recentf-save-file (concat dotemacs-cache-directory "recentf")
       recentf-max-saved-items 1000
       recentf-max-menu-items 500)
 (recentf-mode +1)
 
 
 ;; erc
-(setq erc-log-channels-directory (concat user-emacs-directory ".cache/erc/logs"))
+(setq erc-log-channels-directory (concat dotemacs-cache-directory "erc/logs"))
 
 
 ;; vc
@@ -52,7 +52,7 @@
 
 
 ;; bookmarks
-(setq bookmark-default-file (concat user-emacs-directory ".cache/bookmarks"))
+(setq bookmark-default-file (concat dotemacs-cache-directory "bookmarks"))
 
 
 ;; fringe
@@ -66,11 +66,11 @@
 
 ;; store most files in the cache
 (setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory ".cache/backups")))
+      `((".*" . ,(concat dotemacs-cache-directory "backups")))
       auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory ".cache/backups") t))
+      `((".*" ,(concat dotemacs-cache-directory "backups") t))
       auto-save-list-file-prefix
-      (concat user-emacs-directory ".cache/auto-save-list/.saves-"))
+      (concat dotemacs-cache-directory "auto-save-list/saves-"))
 
 
 ;; better scrolling

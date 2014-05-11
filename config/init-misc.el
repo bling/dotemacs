@@ -1,7 +1,7 @@
 (require-package 'undo-tree)
 (setq undo-tree-auto-save-history t)
 (setq undo-tree-history-directory-alist
-      `(("." . ,(concat user-emacs-directory ".cache/undo"))))
+      `(("." . ,(concat dotemacs-cache-directory "undo"))))
 (global-undo-tree-mode)
 
 
@@ -33,7 +33,7 @@
 
 (require-package 'project-explorer)
 (after 'project-explorer
-  (setq pe/cache-directory (concat user-emacs-directory ".cache/project-explorer"))
+  (setq pe/cache-directory (concat dotemacs-cache-directory "project-explorer"))
   (setq pe/omit-regex (concat pe/omit-regex "\\|^node_modules$")))
 
 

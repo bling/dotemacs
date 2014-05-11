@@ -1,5 +1,5 @@
 ;; eshell
-(setq eshell-directory-name (concat user-emacs-directory ".cache/eshell"))
+(setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
 (setq eshell-scroll-to-bottom-on-input 'all)
 (setq eshell-buffer-shorthand t)
 
