@@ -28,9 +28,14 @@
 (global-evil-leader-mode t)
 
 (evil-mode t)
-(dolist (mode '(eshell-mode comint-mode project-explorer-mode
-                git-commit-mode diff-mode
-                special-mode help-mode))
+
+(defcustom dotemacs-evil-emacs-state-modes
+  '(eshell-mode comint-mode project-explorer-mode git-commit-mode diff-mode special-mode help-mode)
+  "List of modes where Evil should start up in Emacs state."
+  :type '(repeat (symbol))
+  :group 'dotemacs)
+
+(dolist (mode dotemacs-evil-emacs-state-modes)
   (evil-set-initial-state mode 'emacs))
 
 (global-surround-mode t)
