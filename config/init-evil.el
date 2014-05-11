@@ -28,7 +28,8 @@
 (global-evil-leader-mode t)
 
 (evil-mode t)
-(dolist (mode '(eshell-mode comint-mode git-commit-mode project-explorer-mode
+(dolist (mode '(eshell-mode comint-mode project-explorer-mode
+                git-commit-mode diff-mode
                 special-mode help-mode))
   (evil-set-initial-state mode 'emacs))
 

@@ -161,10 +161,6 @@
     (define-key evil-normal-state-map (kbd "s") 'evil-ace-jump-char-mode)
     (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
 
-  (after 'magit
-    (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
-    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section))
-
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
   (evil-ex-define-cmd "Qa" 'evil-quit-all)
@@ -181,9 +177,12 @@
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
 
-(after 'magit
-  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)
-  (global-set-key (kbd "C-x g") 'magit-status))
+(after "magit-autoloads"
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (after 'magit
+    (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
+    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
+    (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)))
 
 
 (after "project-explorer-autoloads"
