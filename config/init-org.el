@@ -7,7 +7,7 @@
   (setq org-default-notes-file my-inbox-org-file)
   (setq org-log-done t)
 
-  (setq org-indent-mode t)
+  (setq org-startup-indented t)
   (setq org-indent-indentation-per-level 4)
 
   (setq org-agenda-files `(,org-directory))
