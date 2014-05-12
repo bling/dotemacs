@@ -130,7 +130,8 @@
 (add-hook 'find-file-hook (lambda ()
                             (my-find-file-check-large-file)
                             (visual-line-mode)
-                            (setq show-trailing-whitespace t)))
+                            (unless (eq major-mode 'org-mode)
+                              (setq show-trailing-whitespace t))))
 
 
 (random t) ;; seed

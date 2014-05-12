@@ -50,7 +50,6 @@
                              (when (or (executable-find "aspell")
                                        (executable-find "ispell")
                                        (executable-find "hunspell"))
-                               (flyspell-mode))
-                             (setq show-trailing-whitespace nil))))
+                               (flyspell-mode)))))
 
 (provide 'init-org)
