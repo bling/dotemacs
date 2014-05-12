@@ -7,7 +7,9 @@
   (setq org-default-notes-file my-inbox-org-file)
   (setq org-log-done t)
 
-  (setq org-hide-leading-stars t)
+  (setq org-indent-mode t)
+  (setq org-indent-indentation-per-level 4)
+
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
         '(("t" "Todo" entry (file my-inbox-org-file)
@@ -42,6 +44,13 @@
   (when (boundp 'org-plantuml-jar-path)
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((plantuml . t)))))
+     '((plantuml . t))))
+
+  (add-hook 'org-mode-hook (lambda ()
+                             (when (or (executable-find "aspell")
+                                       (executable-find "ispell")
+                                       (executable-find "hunspell"))
+                               (flyspell-mode))
+                             (setq show-trailing-whitespace nil))))
 
 (provide 'init-org)

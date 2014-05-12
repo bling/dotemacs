@@ -16,7 +16,8 @@
 
 
 (when (executable-find "pt")
-  (require-package 'pt))
+  (require-package 'pt)
+  (require-package 'wgrep-pt))
 
 
 (when (executable-find "ag")
@@ -65,6 +66,9 @@
 (require-package 'framemove)
 (require 'framemove)
 (setq framemove-hook-into-windmove t)
+
+
+(require-package 'discover-my-major)
 
 
 (provide 'init-misc)
