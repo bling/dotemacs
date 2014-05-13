@@ -57,6 +57,11 @@
 ;; (fancy-narrow-mode)
 
 
+(require-package 'idle-highlight)
+(setq idle-highlight-idle-time 0.3)
+(add-hook 'prog-mode-hook 'idle-highlight-mode)
+
+
 (add-hook 'find-file-hook 'hl-line-mode)
 
 
