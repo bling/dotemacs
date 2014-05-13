@@ -57,7 +57,7 @@
 ;; (fancy-narrow-mode)
 
 
-(require-package 'idle-highlight)
+(require-package 'idle-highlight-mode)
 (setq idle-highlight-idle-time 0.3)
 (add-hook 'prog-mode-hook 'idle-highlight-mode)
 
