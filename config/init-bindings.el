@@ -79,7 +79,7 @@
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (after "helm-autoloads"
-    (define-key evil-normal-state-map (kbd "g b") 'helm-buffers-list)
+    (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)

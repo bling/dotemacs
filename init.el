@@ -26,6 +26,7 @@
 
     init-eshell
     init-org
+    init-erc
     init-eyecandy
 
     init-smartparens
