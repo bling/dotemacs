@@ -30,7 +30,7 @@
 (evil-mode t)
 
 (defcustom dotemacs-evil-emacs-state-modes
-  '(eshell-mode comint-mode project-explorer-mode git-commit-mode diff-mode special-mode custom-mode help-mode)
+  '(eshell-mode comint-mode project-explorer-mode git-commit-mode diff-mode special-mode custom-mode dired-mode help-mode)
   "List of modes where Evil should start up in Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs)
