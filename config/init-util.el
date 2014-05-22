@@ -111,10 +111,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (defun my-goto-scratch-buffer ()
   "Create a new scratch buffer."
   (interactive)
-  (progn
-    (switch-to-buffer
-     (get-buffer-create "*scratch*"))
-    (emacs-lisp-mode)))
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (emacs-lisp-mode))
 
 
 (defun my-describe-thing-in-popup ()
@@ -136,13 +134,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (name-last-kbd-macro 'my-last-macro)
   (insert-kbd-macro 'my-last-macro))
-
-
-(defadvice kill-buffer (around my-advice-for-kill-buffer activate)
-  (let ((buffer-to-kill (ad-get-arg 0)))
-    (if (equal buffer-to-kill "*Scratch*")
-        (bury-buffer)
-      ad-do-it)))
 
 
 ;; make sure $PATH is set correctly

@@ -86,6 +86,15 @@
       uniquify-after-kill-buffer-p t)
 
 
+(defun my-do-not-kill-scratch-buffer ()
+  (if (member (buffer-name (current-buffer)) '("*scratch*" "*Messages*"))
+      (progn
+        (bury-buffer)
+        nil)
+    t))
+(add-hook 'kill-buffer-query-functions 'my-do-not-kill-scratch-buffer)
+
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (xterm-mouse-mode t)
 
