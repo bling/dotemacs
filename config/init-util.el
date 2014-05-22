@@ -115,21 +115,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (emacs-lisp-mode))
 
 
-(defun my-describe-thing-in-popup ()
-  (interactive)
-  (let ((description (save-window-excursion
-                       (help-xref-interned (symbol-at-point))
-                       (switch-to-buffer "*Help*")
-                       (buffer-string))))
-    (require 'popup)
-    (popup-tip description
-               :point (point)
-               :around t
-               :height 30
-               :scroll-bar t
-               :margin t)))
-
-
 (defun my-insert-last-kbd-macro ()
   (interactive)
   (name-last-kbd-macro 'my-last-macro)
