@@ -36,7 +36,6 @@
 
 ;; em-prompt
 (setq eshell-prompt-function 'my-eshell-prompt)
-(setq eshell-highlight-prompt nil)
 
 
 (provide 'init-eshell)
