@@ -36,6 +36,7 @@
     (evil-leader/set-key
       "w" 'save-buffer
       "e" (kbd "C-x C-e")
+      "f" 'make-frame-command
       ", e" (kbd "C-M-x")
       "E" (kbd "C-M-x")
       "c" (bind
