@@ -20,9 +20,10 @@
 
 ;; recent files
 (require 'recentf)
-(setq recentf-save-file (concat dotemacs-cache-directory "recentf")
-      recentf-max-saved-items 1000
-      recentf-max-menu-items 500)
+(setq recentf-save-file (concat dotemacs-cache-directory "recentf"))
+(setq recentf-max-saved-items 1000)
+(setq recentf-max-menu-items 500)
+(add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
 (recentf-mode +1)
 
 
