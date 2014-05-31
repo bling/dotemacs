@@ -49,6 +49,12 @@
 ;; compile
 (setq compilation-always-kill t)
 (setq compilation-ask-about-save nil)
+(add-hook 'compilation-filter-hook
+          (lambda ()
+            (when (eq major-mode 'compilation-mode)
+              (require 'ansi-color)
+              (let ((inhibit-read-only t))
+                (ansi-color-apply-on-region (point-min) (point-max))))))
 
 
 ;; bookmarks
