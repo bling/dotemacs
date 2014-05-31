@@ -60,6 +60,7 @@
 
 ;; bookmarks
 (setq bookmark-default-file (concat dotemacs-cache-directory "bookmarks"))
+(setq bookmark-save-flag 1) ;; save after every change
 
 
 ;; fringe
@@ -69,6 +70,14 @@
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally) ;; side-by-side diffs
 (setq ediff-window-setup-function 'ediff-setup-windows-plain) ;; no extra frames
+
+
+;; re-builder
+(setq reb-re-syntax 'string) ;; fix backslash madness
+
+
+;; clean up old buffers periodically
+(require 'midnight)
 
 
 ;; store most files in the cache
