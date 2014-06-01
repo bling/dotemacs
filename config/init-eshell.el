@@ -13,6 +13,14 @@
 (setq eshell-error-if-no-glob t)
 
 
+;; plan 9 smart shell
+(after 'esh-module
+  (add-to-list 'eshell-modules-list 'eshell-smart)
+  (setq eshell-where-to-jump 'begin)
+  (setq eshell-review-quick-commands nil)
+  (setq eshell-smart-space-goes-to-end t))
+
+
 (defun eshell/clear ()
   "Clears the buffer."
   (let ((inhibit-read-only t))
