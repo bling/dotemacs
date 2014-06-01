@@ -155,7 +155,11 @@
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file))
 
   (after "multiple-cursors-autoloads"
-    (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
+    (define-key evil-normal-state-map (kbd "g r")
+      (bind
+       (if (eq major-mode 'js2-mode)
+           (call-interactively 'js2r-rename-var)
+         (call-interactively 'mc/mark-all-like-this-dwim)))))
 
   (after "ace-jump-mode-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
