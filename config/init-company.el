@@ -22,7 +22,7 @@
 
 (setq company-global-modes
       '(not
-        eshell-mode shell-mode term-mode terminal-mode))
+        eshell-mode comint-mode org-mode))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
