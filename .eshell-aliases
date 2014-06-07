@@ -1,9 +1,10 @@
-alias mci mvn clean install
-alias g git $*
-alias la ls -lah
-alias ll ls -lh
-alias d dired $1
-alias gs git stash
-alias gsp git stash pop
-alias gsc git svn dcommit
+alias sudo *sudo $*
 alias gsr git svn rebase
+alias gsc git svn dcommit
+alias gsp git stash pop
+alias gs git stash
+alias d dired $1
+alias ll ls -lh
+alias la ls -lah
+alias g git $*
+alias mci mvn clean install
