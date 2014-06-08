@@ -25,28 +25,23 @@
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)
 
-(global-evil-leader-mode t)
-
-(evil-mode t)
-
-(defcustom dotemacs-evil-emacs-state-modes
-  '(special-mode
-    eshell-mode
-    comint-mode
-    project-explorer-mode
-    git-commit-mode
-    diff-mode
-    custom-mode
-    dired-mode
-    calendar-mode
-    help-mode)
-  "List of modes where Evil should start up in Emacs state."
+(defcustom dotemacs-evil-state-modes
+  '(fundamental-mode
+    text-mode
+    prog-mode
+    sws-mode
+    compilation-mode)
+  "List of modes that should start up in Evil state."
   :type '(repeat (symbol))
   :group 'dotemacs)
 
-(dolist (mode dotemacs-evil-emacs-state-modes)
-  (evil-set-initial-state mode 'emacs))
+(defun my-enable-evil-mode ()
+  (if (apply 'derived-mode-p dotemacs-evil-state-modes)
+      (turn-on-evil-mode)
+    (set-cursor-color "red")))
+(add-hook 'after-change-major-mode-hook 'my-enable-evil-mode)
 
+(global-evil-leader-mode t)
 (global-surround-mode t)
 (evil-exchange-install)
 

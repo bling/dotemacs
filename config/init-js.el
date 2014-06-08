@@ -5,7 +5,7 @@
   (defun dotemacs-js-ctrl-c-ctrl-c ()
     (interactive)
     (require 'thingatpt)
-    (let ((val (thing-at-point 'list t)))
+    (let ((val (thing-at-point 'list)))
       ;; inside parameter list?
       (when (and (equal (substring val 0 1) "(")
                  (equal (substring val -1) ")"))
