@@ -4,17 +4,22 @@
 
   (setq my-inbox-org-file (concat org-directory "/inbox.org"))
 
+  (setq org-mobile-directory (concat org-directory "/MobileOrg"))
+  (unless (file-exists-p org-mobile-directory)
+    (make-directory org-mobile-directory))
+  (setq org-mobile-inbox-for-pull (concat org-directory "/from-mobile.org"))
+
   (setq org-default-notes-file my-inbox-org-file)
   (setq org-log-done t)
 
   (setq org-startup-indented t)
-  (setq org-indent-indentation-per-level 4)
+  (setq org-indent-indentation-per-level 3)
 
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file my-inbox-org-file)
+        '(("t" "Todo" entry (file+headline my-inbox-org-file "TODO")
            "* TODO %?\n%U\n%a\n")
-          ("n" "Note" entry (file my-inbox-org-file)
+          ("n" "Note" entry (file+headline my-inbox-org-file "NOTES")
            "* %? :NOTE:\n%U\n%a\n")
           ("m" "Meeting" entry (file my-inbox-org-file)
            "* MEETING %? :MEETING:\n%U")
@@ -24,7 +29,7 @@
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+        '((sequence "TODO(t)" "NEXT(n@)" "|" "DONE(d)")
           (sequence "WAITING(w@/!)" "|" "CANCELLED(c@/!)")))
 
   (setq org-todo-state-tags-triggers
