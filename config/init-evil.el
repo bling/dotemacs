@@ -18,7 +18,7 @@
 (require-package 'evil-indent-textobject)
 (require-package 'evil-matchit)
 (require-package 'evil-exchange)
-(require-package 'surround)
+(require-package 'evil-surround)
 
 (require 'evil)
 (require 'evil-nerd-commenter)
@@ -42,7 +42,7 @@
 (add-hook 'after-change-major-mode-hook 'my-enable-evil-mode)
 
 (global-evil-leader-mode t)
-(global-surround-mode t)
+(global-evil-surround-mode t)
 (evil-exchange-install)
 
 (defun evilmi-customize-keybinding ()
