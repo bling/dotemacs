@@ -27,6 +27,7 @@
 (setq recentf-max-menu-items 500)
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
 (recentf-mode +1)
+(run-with-timer 1800 1800 'recentf-save-list)
 
 
 ;; erc

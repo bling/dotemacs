@@ -30,6 +30,7 @@
     text-mode
     prog-mode
     sws-mode
+    log-edit-mode
     compilation-mode)
   "List of modes that should start up in Evil state."
   :type '(repeat (symbol))
