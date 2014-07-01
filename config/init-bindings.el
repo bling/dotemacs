@@ -124,12 +124,6 @@
   (after "elisp-slime-nav-autoloads"
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 
-  ;; proper jump lists
-  ;; (require-package 'jumpc)
-  ;; (jumpc)
-  ;; (define-key evil-normal-state-map (kbd "C-o") 'jumpc-jump-backward)
-  ;; (define-key evil-normal-state-map (kbd "C-i") 'jumpc-jump-forward)
-
   (after "coffee-mode-autoloads"
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))

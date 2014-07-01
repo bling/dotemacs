@@ -10,6 +10,10 @@
 
 (setq evilnc-hotkey-comment-operator "gc")
 
+(setq evil-jumper-auto-center t)
+(setq evil-jumper-file (concat dotemacs-cache-directory "evil-jumps"))
+(setq evil-jumper-auto-save-interval 3600)
+
 (require-package 'evil)
 (require-package 'evil-leader)
 (require-package 'evil-numbers)
@@ -19,11 +23,13 @@
 (require-package 'evil-matchit)
 (require-package 'evil-exchange)
 (require-package 'evil-surround)
+(require-package 'evil-jumper)
 
 (require 'evil)
 (require 'evil-nerd-commenter)
 (require 'evil-indent-textobject)
 (require 'evil-visualstar)
+(require 'evil-jumper)
 
 (defcustom dotemacs-evil-state-modes
   '(fundamental-mode
@@ -82,12 +88,6 @@
   (recenter))
 
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
-  (recenter))
-
-(defadvice evil-jump-forward (after advice-for-evil-jump-forward activate)
-  (recenter))
-
-(defadvice evil-jump-backward (after advice-for-evil-jump-backward activate)
   (recenter))
 
 (provide 'init-evil)
