@@ -79,15 +79,15 @@
   (add-hook 'post-command-hook (lambda () (my-evil-modeline-change default-color))))
 
 (defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
+  (recenter))
 
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
+  (recenter))
 
 (defadvice evil-jump-forward (after advice-for-evil-jump-forward activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
+  (recenter))
 
 (defadvice evil-jump-backward (after advice-for-evil-jump-backward activate)
-  (evil-scroll-line-to-center (line-number-at-pos)))
+  (recenter))
 
 (provide 'init-evil)

@@ -122,6 +122,8 @@
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" (bind (help-xref-interned (symbol-at-point))))
   (after "elisp-slime-nav-autoloads"
+    (defadvice elisp-slime-nav-find-elisp-thing-at-point (after advice-for-g-d activate)
+      (recenter))
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 
   ;; proper jump lists
