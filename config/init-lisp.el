@@ -1,4 +1,7 @@
 (require-package 'elisp-slime-nav)
+(after "elisp-slime-nav-autoloads"
+  (defadvice elisp-slime-nav-find-elisp-thing-at-point (after advice-for-elisp-slime-nav-find-elisp-thing-at-point activate)
+    (recenter)))
 
 (defun my-lisp-hook ()
   (progn
