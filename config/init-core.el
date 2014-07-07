@@ -130,6 +130,7 @@
 (setq mark-ring-max 64)
 (setq global-mark-ring-max 128)
 (setq save-interprogram-paste-before-kill t)
+(setq create-lockfiles nil)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
