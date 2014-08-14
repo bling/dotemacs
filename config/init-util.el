@@ -121,6 +121,18 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (insert-kbd-macro 'my-last-macro))
 
 
+(defun my-buffer-to-unix-format ()
+  "Converts the current buffer to UNIX file format."
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-unix nil))
+
+
+(defun my-buffer-to-dos-format ()
+  "Converts the current buffer to DOS file format."
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-dos nil))
+
+
 ;; make sure $PATH is set correctly
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
