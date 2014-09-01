@@ -67,7 +67,8 @@
 
 
 ;; fringe
-(fringe-mode 16)
+(when (display-graphic-p)
+  (fringe-mode 16))
 
 
 ;; ediff
