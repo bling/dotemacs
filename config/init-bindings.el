@@ -12,6 +12,11 @@
 (guide-key-mode 1)
 
 
+(require-package 'guide-key-tip)
+(require 'guide-key-tip)
+(setq guide-key-tip/enabled t)
+
+
 (after "smex-autoloads"
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "C-x C-m") 'smex)
