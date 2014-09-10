@@ -75,6 +75,12 @@
 (add-hook 'prog-mode-hook 'idle-highlight-mode)
 
 
+(require-package 'indent-guide)
+(require 'indent-guide)
+(setq indent-guide-recursive t)
+(indent-guide-global-mode)
+
+
 (add-hook 'find-file-hook 'hl-line-mode)
 
 
