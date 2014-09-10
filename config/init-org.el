@@ -19,7 +19,7 @@
 
    (setq org-agenda-files `(,org-directory))
    (setq org-capture-templates
-         '(("t" "Todo" entry (file+headline my-inbox-org-file "TODO")
+         '(("t" "Todo" entry (file+headline my-inbox-org-file "INBOX")
             "* TODO %?\n%U\n%a\n")
            ("n" "Note" entry (file+headline my-inbox-org-file "NOTES")
             "* %? :NOTE:\n%U\n%a\n")
