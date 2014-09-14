@@ -73,4 +73,8 @@
 (require-package 'discover-my-major)
 
 
+(when (eq system-type 'darwin)
+  (require-package 'vkill))
+
+
 (provide 'init-misc)

@@ -242,10 +242,15 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c s") 'my-goto-scratch-buffer)
+(global-set-key (kbd "C-c e") 'my-eval-and-replace)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-(global-set-key (kbd "C-c e") 'my-eval-and-replace)
+
+(global-set-key (kbd "C-x p") 'proced)
+(after "vkill-autoloads"
+  (autoload 'vkill "vkill" nil t)
+  (global-set-key (kbd "C-x p") 'vkill))
 
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
