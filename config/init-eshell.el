@@ -1,3 +1,9 @@
+(defcustom dotemacs-eshell-plan9
+  nil
+  "Turns on Plan9 style prompt in eshell when non-nil."
+  :group 'dotemacs)
+
+
 ;; eshell
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
 (setq eshell-scroll-to-bottom-on-input 'all)
@@ -13,12 +19,17 @@
 (setq eshell-error-if-no-glob t)
 
 
+;; em-hist
+(setq eshell-history-size 1024)
+
+
 ;; plan 9 smart shell
-(after 'esh-module
-  (add-to-list 'eshell-modules-list 'eshell-smart)
-  (setq eshell-where-to-jump 'begin)
-  (setq eshell-review-quick-commands nil)
-  (setq eshell-smart-space-goes-to-end t))
+(when dotemacs-eshell-plan9
+  (after 'esh-module
+    (add-to-list 'eshell-modules-list 'eshell-smart)
+    (setq eshell-where-to-jump 'begin)
+    (setq eshell-review-quick-commands nil)
+    (setq eshell-smart-space-goes-to-end t)))
 
 
 (defun eshell/clear ()
