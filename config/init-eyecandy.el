@@ -70,9 +70,15 @@
 ;; (fancy-narrow-mode)
 
 
-(require-package 'idle-highlight-mode)
-(setq idle-highlight-idle-time 0.3)
-(add-hook 'prog-mode-hook 'idle-highlight-mode)
+(require-package 'highlight-symbol)
+(setq highlight-symbol-idle-delay 0.3)
+(add-hook 'prog-mode-hook 'highlight-symbol-mode)
+
+(require-package 'highlight-numbers)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+
+(require-package 'highlight-quoted)
+(add-hook 'prog-mode-hook 'highlight-quoted-mode)
 
 
 (require-package 'indent-guide)
