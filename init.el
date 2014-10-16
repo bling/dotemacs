@@ -11,7 +11,14 @@
 (unless (display-graphic-p) (menu-bar-mode -1))
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
-(add-to-list 'load-path (concat user-emacs-directory "elisp"))
+
+(let ((base (concat user-emacs-directory "elisp")))
+  (add-to-list 'load-path base)
+  (dolist (dir (directory-files base t))
+    (when (and (file-directory-p dir)
+               (not (equal (file-name-nondirectory dir) ".."))
+               (not (equal (file-name-nondirectory dir) ".")))
+      (add-to-list 'load-path dir))))
 
 (require 'cl)
 (require 'init-packages)
