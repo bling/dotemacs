@@ -1,3 +1,4 @@
+
 (defgroup dotemacs nil
   "Custom configuration for dotemacs."
   :group 'local)
@@ -12,6 +13,10 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 
+(require 'cl)
+(require 'init-packages)
+(require 'init-util)
+
 (let ((base (concat user-emacs-directory "elisp")))
   (add-to-list 'load-path base)
   (dolist (dir (directory-files base t))
@@ -19,10 +24,6 @@
                (not (equal (file-name-nondirectory dir) ".."))
                (not (equal (file-name-nondirectory dir) ".")))
       (add-to-list 'load-path dir))))
-
-(require 'cl)
-(require 'init-packages)
-(require 'init-util)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)

@@ -6,21 +6,11 @@
 (package-initialize)
 
 (defun require-package (package)
-  "Install given PACKAGE."
-  (unless (package-installed-p package)
+  "Ensures that PACKAGE is installed."
+  (unless (or (package-installed-p package)
+              (require package nil 'noerror))
     (unless (assoc package package-archive-contents)
       (package-refresh-contents))
     (package-install package)))
-
-;; (add-to-list 'load-path (concat user-emacs-directory "el-get/el-get"))
-;; (unless (require 'el-get nil 'noerror)
-;;   (with-current-buffer
-;;       (url-retrieve-synchronously
-;;        "https://github.com/dimitri/el-get/raw/master/el-get-install.el")
-;;     (let (el-get-master-branch)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp))))
-;; (el-get 'sync)
-
 
 (provide 'init-packages)
