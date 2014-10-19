@@ -6,11 +6,6 @@
 
    (setq my-inbox-org-file (concat org-directory "/inbox.org"))
 
-   (setq org-mobile-directory (concat org-directory "/MobileOrg"))
-   (unless (file-exists-p org-mobile-directory)
-     (make-directory org-mobile-directory))
-   (setq org-mobile-inbox-for-pull (concat org-directory "/from-mobile.org"))
-
    (setq org-default-notes-file my-inbox-org-file)
    (setq org-log-done t)
 
@@ -44,6 +39,12 @@
    (setq org-refile-targets '((nil :maxlevel . 9)
                               (org-agenda-files :maxlevel . 9)))
    (setq org-completion-use-ido t)
+
+   (after 'org-mobile
+     (setq org-mobile-directory (concat org-directory "/MobileOrg"))
+     (unless (file-exists-p org-mobile-directory)
+       (make-directory org-mobile-directory))
+     (setq org-mobile-inbox-for-pull (concat org-directory "/from-mobile.org")))
 
    (after 'evil
      (add-hook 'org-capture-mode-hook 'evil-insert-state))
