@@ -50,6 +50,10 @@
 (require 'editorconfig)
 
 
+(require-package 'aggressive-indent)
+(add-hook 'emacs-lisp-mode 'aggressive-indent-mode)
+
+
 (require-package 'etags-select)
 (setq etags-select-go-if-unambiguous t)
 
