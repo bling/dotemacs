@@ -68,6 +68,5 @@
   "Set of modules enabled in dotemacs."
   :group 'dotemacs)
 
-(add-hook 'after-init-hook (lambda ()
-                             (dolist (module dotemacs-modules)
-                               (require module))))
+(dolist (module dotemacs-modules)
+  (require module))
