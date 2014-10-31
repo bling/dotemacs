@@ -25,6 +25,9 @@
 (require-package 'evil)
 (require 'evil)
 
+(unless (display-graphic-p)
+  (evil-esc-mode))
+
 
 (require-package 'evil-leader)
 (global-evil-leader-mode t)
