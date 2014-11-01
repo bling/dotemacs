@@ -219,8 +219,8 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (after "helm-company-autoloads"
-    (define-key company-mode-map (kbd "C-SPC") 'helm-company)
-    (define-key company-active-map (kbd "C-SPC") 'helm-company)))
+    (define-key company-mode-map (kbd "<C-return>") 'helm-company)
+    (define-key company-active-map (kbd "<C-return>") 'helm-company)))
 
 
 (after "expand-region-autoloads"
