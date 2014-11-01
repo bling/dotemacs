@@ -5,9 +5,13 @@
 
 (require-package 'helm)
 (require-package 'helm-swoop)
+(require-package 'helm-descbinds)
 
-(after 'projectile
+(after "projectile-autoloads"
   (require-package 'helm-projectile))
+
+(after "company-autoloads"
+  (require-package 'helm-company))
 
 (require 'helm-config)
 

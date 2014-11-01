@@ -87,7 +87,7 @@
   (after "helm-autoloads"
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
-    (define-key evil-normal-state-map (kbd "SPC o") 'helm-imenu)
+    (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
     (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
@@ -215,9 +215,12 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 
-(after 'company
+(after "company-autoloads"
   (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (after "helm-company-autoloads"
+    (define-key company-mode-map (kbd "C-SPC") 'helm-company)
+    (define-key company-active-map (kbd "C-SPC") 'helm-company)))
 
 
 (after "expand-region-autoloads"
