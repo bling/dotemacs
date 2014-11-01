@@ -14,12 +14,11 @@
                  (move-end-of-line 0)
                  (current-column)))
           (count (count-lines (overlay-start ov) (overlay-end ov))))
-      (overlay-put ov 'display
-                   (format " %s [ %d lines ] ----"
-                           (make-string (- (window-width) col 32) (string-to-char "-"))
+      (overlay-put ov 'after-string
+                   (format "%s [ %d ] ... "
+                           (make-string (- (window-width) col 32) (string-to-char "."))
                            count)))))
 (setq hs-set-up-overlay 'my-fold-overlay)
-
 
 (require-package 'diminish)
 (diminish 'visual-line-mode)
