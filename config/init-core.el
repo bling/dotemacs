@@ -1,8 +1,6 @@
-(add-hook 'after-init-hook
-          (lambda ()
-            (require 'server)
-            (unless (server-running-p)
-              (server-start))))
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 
 ;; move cursor to the last position upon open

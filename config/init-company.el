@@ -24,10 +24,10 @@
       '(not
         eshell-mode comint-mode org-mode))
 
-(add-hook 'after-init-hook 'global-company-mode)
-
 (defadvice company-complete-common (around advice-for-company-complete-common activate)
   (when (null (yas-expand))
     ad-do-it))
+
+(global-company-mode)
 
 (provide 'init-company)
