@@ -51,7 +51,7 @@
 
 
 (require-package 'aggressive-indent)
-(add-hook 'emacs-lisp-mode 'aggressive-indent-mode)
+(global-aggressive-indent-mode)
 
 
 (require-package 'etags-select)
