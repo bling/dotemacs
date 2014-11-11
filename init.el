@@ -71,4 +71,5 @@
 (add-to-list 'after-init-hook
              (lambda ()
                (dolist (module dotemacs-modules)
-                 (require module))))
+                 (with-demoted-errors "######## INIT-ERROR ######## %s"
+                   (require module)))))
