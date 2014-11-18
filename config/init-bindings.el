@@ -220,6 +220,8 @@
 (after "company-autoloads"
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-active-map (kbd "<tab>") 'my-company-tab)
+  (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
   (after "helm-company-autoloads"
     (define-key company-mode-map (kbd "<C-return>") 'helm-company)
     (define-key company-active-map (kbd "<C-return>") 'helm-company)))
