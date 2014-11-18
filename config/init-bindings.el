@@ -24,6 +24,11 @@
 
 
 (setq my-eshell-buffer-count 0)
+(defun my-new-eshell-split ()
+  (interactive)
+  (split-window)
+  (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
+  (eshell my-eshell-buffer-count))
 
 
 (after 'evil
@@ -44,10 +49,7 @@
       ", e" 'eval-defun
       "E" 'eval-defun
       "f" 'ctl-x-5-prefix
-      "c" (bind
-           (evil-window-split)
-           (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
-           (eshell my-eshell-buffer-count))
+      "c" 'my-new-eshell-split
       "C" 'customize-group
       "b d" 'kill-this-buffer
       "v" (kbd "C-w v C-w l")
@@ -246,6 +248,7 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c s") 'my-goto-scratch-buffer)
 (global-set-key (kbd "C-c e") 'my-eval-and-replace)
+(global-set-key (kbd "C-c t") 'my-new-eshell-split)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
