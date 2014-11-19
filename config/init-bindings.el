@@ -32,10 +32,6 @@
 
 
 (after 'evil
-  ;; fix conflict with electric-indent-mode in 24.4
-  (define-key evil-insert-state-map [remap newline] 'newline)
-  (define-key evil-insert-state-map [remap newline-and-indent] 'newline-and-indent)
-
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
