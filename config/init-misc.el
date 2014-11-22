@@ -51,6 +51,9 @@
 
 
 (require-package 'aggressive-indent)
+(require 'aggressive-indent)
+(add-to-list 'aggressive-indent-excluded-modes 'stylus-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'org-mode)
 (global-aggressive-indent-mode)
 
 
