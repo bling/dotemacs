@@ -13,8 +13,8 @@
 (require 'savehist)
 (setq savehist-file (concat dotemacs-cache-directory "savehist")
       savehist-additional-variables '(search ring regexp-search-ring)
-      savehist-autosave-interval 60)
-(setq-default history-length 1000)
+      savehist-autosave-interval 60
+      history-length 1000)
 (savehist-mode +1)
 
 
@@ -130,6 +130,8 @@
 (setq global-mark-ring-max 128)
 (setq save-interprogram-paste-before-kill t)
 (setq create-lockfiles nil)
+(setq echo-keystrokes 0.01)
+(setq gc-cons-threshold 10000000)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
