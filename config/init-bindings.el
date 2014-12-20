@@ -17,10 +17,10 @@
 (setq guide-key-tip/enabled t)
 
 
-(after "smex-autoloads"
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "C-x C-m") 'smex)
-  (global-set-key (kbd "C-c C-m") 'smex))
+(after "helm-autoloads"
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-m") 'helm-M-x)
+  (global-set-key (kbd "C-c C-m") 'helm-M-x))
 
 
 (setq my-eshell-buffer-count 0)
@@ -73,16 +73,14 @@
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
-  (after "smex-autoloads"
-    (define-key evil-visual-state-map (kbd "SPC SPC") 'smex)
-    (define-key evil-normal-state-map (kbd "SPC SPC") 'smex))
-
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (after "helm-autoloads"
+    (define-key evil-visual-state-map (kbd "SPC SPC") 'helm-M-x)
+    (define-key evil-normal-state-map (kbd "SPC SPC") 'helm-M-x)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)

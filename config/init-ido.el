@@ -18,11 +18,4 @@
 (require-package 'ido-vertical-mode)
 (ido-vertical-mode)
 
-
-(require-package 'smex)
-(require 'smex)
-(setq smex-save-file (concat dotemacs-cache-directory "smex-items"))
-(smex-initialize)
-
-
 (provide 'init-ido)
