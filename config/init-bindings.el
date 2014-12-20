@@ -152,7 +152,11 @@
                                  (t
                                   'projectile-grep)))))
     (define-key evil-normal-state-map (kbd "SPC e") 'projectile-recentf)
-    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file))
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (after "helm-projectile-autoloads"
+      (require 'helm-projectile)
+      (define-key evil-normal-state-map (kbd "SPC e") 'helm-projectile-recentf)
+      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file-dwim)))
 
   (after "multiple-cursors-autoloads"
     (after 'js2-mode
