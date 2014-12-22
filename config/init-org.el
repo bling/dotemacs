@@ -11,6 +11,7 @@
 
    (setq org-startup-indented t)
    (setq org-indent-indentation-per-level 3)
+   (setq org-hide-leading-stars t)
 
    (setq org-agenda-files `(,org-directory))
    (setq org-capture-templates
