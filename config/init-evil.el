@@ -50,7 +50,7 @@
 (setq evil-jumper-file (concat dotemacs-cache-directory "evil-jumps"))
 (setq evil-jumper-auto-save-interval 3600)
 (require-package 'evil-jumper)
-(require 'evil-jumper)
+(global-evil-jumper-mode t)
 
 
 (require-package 'evil-matchit)
