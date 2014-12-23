@@ -65,7 +65,7 @@
 
 
 (require-package 'evil-visualstar)
-(require 'evil-visualstar)
+(global-evil-visualstar-mode t)
 
 
 (require-package 'evil-numbers)
