@@ -42,7 +42,6 @@
 (setq sml/show-client t)
 (setq sml/show-eol t)
 (setq sml/show-frame-identification t)
-(setq sml/vc-mode-show-backend t)
 (sml/setup)
 
 
