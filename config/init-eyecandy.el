@@ -34,8 +34,8 @@
 (after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
 (after 'magit (diminish 'magit-auto-revert-mode))
-(after 'highlight-symbol-mode (diminish 'highlight-symbol-mode))
-(after 'indent-guide-mode (diminish 'indent-guide-mode))
+(after 'highlight-symbol (diminish 'highlight-symbol-mode))
+(after 'indent-guide (diminish 'indent-guide-mode))
 
 
 (require-package 'smart-mode-line)
