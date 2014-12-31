@@ -17,12 +17,6 @@
 (setq guide-key-tip/enabled t)
 
 
-(after "helm-autoloads"
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-m") 'helm-M-x)
-  (global-set-key (kbd "C-c C-m") 'helm-M-x))
-
-
 (setq my-eshell-buffer-count 0)
 (defun my-new-eshell-split ()
   (interactive)
@@ -241,6 +235,19 @@
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (bind (scroll-down 1)))
   (global-set-key [mouse-5] (bind (scroll-up 1))))
+
+
+(after "helm-autoloads"
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-m") 'helm-M-x)
+  (global-set-key (kbd "C-c C-m") 'helm-M-x))
+
+
+(define-key help-mode-map (kbd "n") 'next-line)
+(define-key help-mode-map (kbd "p") 'previous-line)
+(after 'evil
+  (define-key help-mode-map (kbd "j") 'next-line)
+  (define-key help-mode-map (kbd "k") 'previous-line))
 
 
 (global-set-key [prior] 'previous-buffer)
