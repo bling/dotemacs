@@ -33,6 +33,18 @@
   (when (null (yas-expand))
     (company-select-next)))
 
+(defcustom dotemacs-ycmd-server-path nil
+  "The path to the ycmd package."
+  :group 'dotemacs)
+
+(when dotemacs-ycmd-server-path
+  (setq ycmd-server-command `("python" ,dotemacs-ycmd-server-path))
+  (require-package 'ycmd)
+  (ycmd-setup)
+
+  (require-package 'company-ycmd)
+  (company-ycmd-setup))
+
 (global-company-mode)
 
 (provide 'init-company)
