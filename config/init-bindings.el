@@ -126,7 +126,7 @@
   (after "elisp-slime-nav-autoloads"
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 
-  (after "coffee-mode-autoloads"
+  (after 'coffee-mode
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
@@ -175,16 +175,14 @@
 (define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
 
-
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
 
-(after "magit-autoloads"
+(after 'magit
   (global-set-key (kbd "C-x g") 'magit-status)
-  (after 'magit
-    (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
-    (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
-    (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)))
+  (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
+  (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
+  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
 
 
 (after "project-explorer-autoloads"
@@ -212,7 +210,7 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 
-(after "company-autoloads"
+(after 'company
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "<tab>") 'my-company-tab)
