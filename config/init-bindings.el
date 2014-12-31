@@ -55,6 +55,9 @@
       "h" help-map
       "h h" 'help-for-help-internal)
 
+    (after "paradox-autoloads"
+      (evil-leader/set-key "P" 'paradox-list-packages))
+
     (after "magit-autoloads"
       (evil-leader/set-key
         "g s" 'magit-status
