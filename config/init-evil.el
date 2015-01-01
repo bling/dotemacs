@@ -110,6 +110,12 @@
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
   (recenter))
 
+(after 'edebug
+  (add-hook 'edebug-mode-hook (lambda ()
+                                (if edebug-mode
+                                    (evil-emacs-state)
+                                  (evil-normal-state)))))
+
 (when (>= emacs-major-version 25)
   (defadvice elisp--preceding-sexp (around evil activate)
     "In normal-state or motion-state, last sexp ends at point."
