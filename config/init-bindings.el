@@ -9,12 +9,8 @@
 (require 'guide-key)
 (setq guide-key/guide-key-sequence '("C-x" "C-c" ","))
 (setq guide-key/recursive-key-sequence-flag t)
+(setq guide-key/popup-window-position 'bottom)
 (guide-key-mode 1)
-
-
-(require-package 'guide-key-tip)
-(require 'guide-key-tip)
-(setq guide-key-tip/enabled t)
 
 
 (setq my-eshell-buffer-count 0)
