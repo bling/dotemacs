@@ -76,6 +76,7 @@
     (define-key evil-normal-state-map (kbd "SPC SPC") 'helm-M-x)
     (define-key evil-normal-state-map (kbd "SPC b") 'helm-buffers-list)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
+    (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
