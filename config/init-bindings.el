@@ -136,18 +136,17 @@
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after "projectile-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC /")
-      (bind
-       (call-interactively (cond ((executable-find "pt")
-                                  'projectile-pt)
-                                 ((executable-find "ag")
-                                  'projectile-ag)
-                                 ((executable-find "ack")
-                                  'projectile-ack)
-                                 (t
-                                  'projectile-grep)))))
     (define-key evil-normal-state-map (kbd "SPC e") 'projectile-recentf)
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (let ((binding (kbd "SPC /")))
+      (cond ((executable-find "pt")
+             (define-key evil-normal-state-map binding 'projectile-pt))
+            ((executable-find "ag")
+             (define-key evil-normal-state-map binding 'projectile-ag))
+            ((executable-find "ack")
+             (define-key evil-normal-state-map binding 'projectile-ack))
+            (t
+             (define-key evil-normal-state-map binding 'projectile-grep))))
     (after "helm-projectile-autoloads"
       (require 'helm-projectile)
       (define-key evil-normal-state-map (kbd "SPC e") 'helm-projectile-recentf)
