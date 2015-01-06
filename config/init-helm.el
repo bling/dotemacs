@@ -7,6 +7,9 @@
 (setq helm-recentf-fuzzy-match t)
 (setq helm-locate-fuzzy-match t)
 (setq helm-file-cache-fuzzy-match t)
+(setq helm-semantic-fuzzy-match t)
+(setq helm-imenu-fuzzy-match t)
+(setq helm-lisp-fuzzy-completion t)
 
 (require-package 'helm)
 (require-package 'helm-swoop)
@@ -19,5 +22,6 @@
   (require-package 'helm-company))
 
 (require 'helm-config)
+(helm-autoresize-mode t)
 
 (provide 'init-helm)
