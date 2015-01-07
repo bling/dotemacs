@@ -59,7 +59,10 @@
                               (when (or (executable-find "aspell")
                                         (executable-find "ispell")
                                         (executable-find "hunspell"))
-                                (flyspell-mode))))))
+                                (flyspell-mode))))
+
+   (require-package 'org-bullets)
+   (add-hook 'org-mode-hook #'org-bullets-mode)))
 
 
 (provide 'init-org)
