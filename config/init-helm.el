@@ -22,6 +22,7 @@
   (require-package 'helm-company))
 
 (require 'helm-config)
-(helm-autoresize-mode t)
+(after 'helm
+  (helm-autoresize-mode t))
 
 (provide 'init-helm)
