@@ -38,7 +38,6 @@
     init-eyecandy
 
     init-smartparens
-    ;; init-autopair
 
     init-yasnippet
     ;; init-auto-complete

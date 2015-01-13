@@ -9,6 +9,7 @@
 
 (sp-use-smartparens-bindings)
 (smartparens-global-mode t)
+(electric-pair-mode -1)
 
 (show-smartparens-global-mode t)
 (show-paren-mode -1)
