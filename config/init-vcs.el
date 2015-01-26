@@ -4,16 +4,7 @@
   (after 'magit
     (setq magit-diff-options '("--histogram"))
     (setq magit-stage-all-confirm nil)
-
-    (defadvice magit-status (around my-magit-fullscreen activate)
-      (window-configuration-to-register :magit-fullscreen)
-      ad-do-it
-      (delete-other-windows))
-
-    (defun my-magit-quit-session ()
-      (interactive)
-      (kill-buffer)
-      (jump-to-register :magit-fullscreen)))
+    (setq magit-status-buffer-switch-function 'switch-to-buffer))
 
   (after 'evil
     (after 'git-commit-mode

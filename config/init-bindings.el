@@ -177,8 +177,7 @@
 (after 'magit
   (global-set-key (kbd "C-x g") 'magit-status)
   (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
-  (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section)
-  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
+  (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section))
 
 
 (after "project-explorer-autoloads"
