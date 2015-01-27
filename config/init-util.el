@@ -45,7 +45,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (abort-recursive-edit)))
 
 
-(defun set-transparency (alpha)
+(defun my-set-transparency (alpha)
   "Sets the transparency of the current frame."
   (interactive "nAlpha: ")
   (set-frame-parameter nil 'alpha alpha))

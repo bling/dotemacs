@@ -48,6 +48,15 @@
 (require 'dired-x)
 
 
+;; comint
+(after 'comint
+  (defun my-toggle-comint-scroll-to-bottom-on-output ()
+    (interactive)
+    (if comint-scroll-to-bottom-on-output
+        (setq comint-scroll-to-bottom-on-output nil)
+      (setq comint-scroll-to-bottom-on-output t))))
+
+
 ;; compile
 (setq compilation-always-kill t)
 (setq compilation-ask-about-save nil)
