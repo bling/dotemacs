@@ -3,10 +3,11 @@ alias gsr git svn rebase
 alias gsc git svn dcommit
 alias gsp git stash pop
 alias gs git stash
-alias gbr git branch
-alias gco git checkout
+alias gbr git branch $*
+alias gco git checkout $*
 alias gst git status
-alias grb git rebase
+alias grb git rebase $*
+alias grh git reset --hard
 alias gl git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 alias gl2 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 alias d dired $1
