@@ -37,8 +37,6 @@
     init-erc
     init-eyecandy
 
-    init-smartparens
-
     init-yasnippet
     ;; init-auto-complete
     init-company
@@ -50,14 +48,16 @@
     init-vcs
     init-flycheck
 
-    init-vim
-    init-stylus
-    init-js
-    ;; init-go
-    init-web
     init-lisp
-    init-markdown
 
+    ;; init-vim
+    ;; init-stylus
+    ;; init-js
+    ;; init-go
+    ;; init-web
+    ;; init-markdown
+
+    init-smartparens
     init-misc
     init-evil
     init-bindings
