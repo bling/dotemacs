@@ -50,12 +50,12 @@
 
     init-lisp
 
-    ;; init-vim
-    ;; init-stylus
-    ;; init-js
-    ;; init-go
-    ;; init-web
-    ;; init-markdown
+    init-vim
+    init-stylus
+    init-js
+    init-go
+    init-web
+    init-markdown
 
     init-smartparens
     init-misc
