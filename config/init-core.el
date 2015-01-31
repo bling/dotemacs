@@ -91,6 +91,12 @@
 (require 'midnight)
 
 
+;; ibuffer
+(setq ibuffer-expert t)
+(setq ibuffer-show-empty-filter-groups nil)
+(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode t)))
+
+
 ;; store most files in the cache
 (setq backup-directory-alist
       `((".*" . ,(concat dotemacs-cache-directory "backups")))
