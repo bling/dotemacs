@@ -11,6 +11,12 @@
   :type '(repeat (symbol))
   :group 'dotemacs)
 
+(defcustom dotemacs-emacs-state-modes
+  '(debugger-mode)
+  "List of modes that should start up in Evil Emacs state."
+  :type '(repeat (symbol))
+  :group 'dotemacs)
+
 
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
@@ -71,11 +77,13 @@
 (require-package 'evil-numbers)
 
 
-(defun my-enable-evil-mode ()
+(defun my-major-mode-evil-state-adjust ()
   (if (apply 'derived-mode-p dotemacs-evil-state-modes)
       (turn-on-evil-mode)
-    (set-cursor-color "red")))
-(add-hook 'after-change-major-mode-hook 'my-enable-evil-mode)
+    (set-cursor-color "red"))
+  (if (apply 'derived-mode-p dotemacs-emacs-state-modes)
+      (turn-off-evil-mode)))
+(add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
