@@ -63,4 +63,13 @@
 (setq eshell-prompt-function 'my-eshell-prompt)
 
 
+(defun my-eshell-ido-complete-history ()
+  (interactive)
+  (insert
+   (ido-completing-read "History: " (delete-dups (ring-elements eshell-history-ring)))))
+(add-hook 'eshell-mode-hook
+          (lambda ()
+              (local-set-key (kbd "C-c h") #'my-eshell-ido-complete-history)))
+
+
 (provide 'init-eshell)
