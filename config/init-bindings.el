@@ -241,12 +241,6 @@
             (local-set-key (kbd "C-c h") #'my-eshell-ido-complete-command-history)))
 
 
-(defun my-ediff-keymap-setup-hook ()
-  (define-key ediff-mode-map (kbd "c")
-    (bind (switch-to-buffer "*ediff-merge*"))))
-(add-hook 'ediff-keymap-setup-hook #'my-ediff-keymap-setup-hook)
-
-
 (define-key help-mode-map (kbd "n") 'next-line)
 (define-key help-mode-map (kbd "p") 'previous-line)
 (after 'evil
