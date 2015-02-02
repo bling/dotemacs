@@ -46,8 +46,8 @@
 
 (defun my-current-git-branch ()
   (let ((branch (car (loop for match in (split-string (shell-command-to-string "git branch") "\n")
-                            when (string-match "^\*" match)
-                            collect match))))
+                           when (string-match "^\*" match)
+                           collect match))))
     (if (not (eq branch nil))
         (concat " [" (substring branch 2) "]")
       "")))
@@ -59,17 +59,22 @@
           (propertize " $ " 'face 'font-lock-constant-face)))
 
 
-;; em-prompt
-(setq eshell-prompt-function 'my-eshell-prompt)
-
-
-(defun my-eshell-ido-complete-history ()
+(defun my-eshell-ido-complete-command-history ()
   (interactive)
+  (eshell-kill-input)
   (insert
-   (ido-completing-read "History: " (delete-dups (ring-elements eshell-history-ring)))))
-(add-hook 'eshell-mode-hook
-          (lambda ()
-              (local-set-key (kbd "C-c h") #'my-eshell-ido-complete-history)))
+   (ido-completing-read "Run command: " (delete-dups (ring-elements eshell-history-ring))))
+  (eshell-send-input))
+
+
+(defun eshell/j ()
+  "Quickly jump to previous directories."
+  (eshell/cd (ido-completing-read "Jump to directory: "
+                                  (delete-dups (ring-elements eshell-last-dir-ring)))))
+
+
+;; em-prompt
+(setq eshell-prompt-function #'my-eshell-prompt)
 
 
 (provide 'init-eshell)

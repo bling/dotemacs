@@ -236,6 +236,11 @@
   (global-set-key (kbd "C-c C-m") 'helm-M-x))
 
 
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c h") #'my-eshell-ido-complete-command-history)))
+
+
 (defun my-ediff-keymap-setup-hook ()
   (define-key ediff-mode-map (kbd "c")
     (bind (switch-to-buffer "*ediff-merge*"))))
