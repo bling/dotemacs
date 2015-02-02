@@ -1,18 +1,20 @@
 (require-package 'smartparens)
 (require 'smartparens-config)
 
-(setq sp-show-pair-delay 0)
-(setq sp-show-pair-from-inside t)
+
 (setq sp-autoescape-string-quote nil)
-(setq sp-autoinsert-if-followed-by-same 1)
-(setq sp-highlight-pair-overlay nil)
+(setq sp-autoinsert-quote-if-followed-by-closing-pair nil)
 
 (sp-use-smartparens-bindings)
-(smartparens-global-mode t)
 (electric-pair-mode -1)
+(smartparens-global-mode t)
 
-(show-smartparens-global-mode t)
+
+(setq sp-show-pair-delay 0)
+(setq sp-show-pair-from-inside t)
 (show-paren-mode -1)
+(show-smartparens-global-mode t)
+
 
 (defun my-open-block-c-mode (id action context)
   (when (eq action 'insert)
