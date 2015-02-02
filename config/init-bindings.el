@@ -10,6 +10,7 @@
 (setq guide-key/guide-key-sequence '("C-x" "C-c" ","))
 (setq guide-key/recursive-key-sequence-flag t)
 (setq guide-key/popup-window-position 'bottom)
+(setq guide-key/idle-delay 0.2)
 (guide-key-mode 1)
 
 

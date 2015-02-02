@@ -28,6 +28,10 @@
 (run-with-timer 1800 1800 'recentf-save-list)
 
 
+;; pcomplete
+(setq pcomplete-ignore-case t)
+
+
 ;; erc
 (setq erc-log-channels-directory (concat dotemacs-cache-directory "erc/logs"))
 

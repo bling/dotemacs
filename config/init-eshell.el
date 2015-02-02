@@ -23,6 +23,10 @@
 (setq eshell-history-size 1024)
 
 
+;; em-compl
+(setq eshell-cmpl-ignore-case t)
+
+
 ;; plan 9 smart shell
 (when dotemacs-eshell-plan9
   (after 'esh-module
