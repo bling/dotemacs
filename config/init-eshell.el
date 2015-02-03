@@ -81,4 +81,12 @@
 (setq eshell-prompt-function #'my-eshell-prompt)
 
 
+(setq my-eshell-buffer-count 0)
+(defun my-new-eshell-split ()
+  (interactive)
+  (split-window)
+  (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
+  (eshell my-eshell-buffer-count))
+
+
 (provide 'init-eshell)

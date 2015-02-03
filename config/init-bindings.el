@@ -14,14 +14,6 @@
 (guide-key-mode 1)
 
 
-(setq my-eshell-buffer-count 0)
-(defun my-new-eshell-split ()
-  (interactive)
-  (split-window)
-  (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
-  (eshell my-eshell-buffer-count))
-
-
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
