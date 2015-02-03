@@ -1,3 +1,4 @@
+alias vim find-file $*
 alias sudo *sudo $*
 alias gsr git svn rebase
 alias gsc git svn dcommit
