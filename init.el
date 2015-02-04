@@ -55,7 +55,7 @@
     init-js
     init-go
     init-web
-    init-markdown
+    init-markup
 
     init-smartparens
     init-misc
