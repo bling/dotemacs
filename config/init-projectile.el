@@ -4,6 +4,9 @@
 (setq projectile-cache-file (concat dotemacs-cache-directory "projectile.cache"))
 (setq projectile-known-projects-file (concat dotemacs-cache-directory "projectile-bookmarks.eld"))
 (setq projectile-indexing-method 'alien)
+(setq projectile-enable-caching t)
+(after "helm-autoloads"
+  (setq projectile-completion-system 'helm))
 
 
 (require 'projectile)
