@@ -226,7 +226,8 @@
 (after "helm-autoloads"
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-m") 'helm-M-x)
-  (global-set-key (kbd "C-c C-m") 'helm-M-x))
+  (global-set-key (kbd "C-c C-m") 'helm-M-x)
+  (global-set-key (kbd "C-x b") 'helm-buffers-list))
 
 
 (add-hook 'eshell-mode-hook
