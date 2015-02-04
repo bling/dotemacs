@@ -7,7 +7,12 @@
 (setq company-tooltip-limit 20)
 
 (setq company-dabbrev-downcase nil)
-(setq company-dabbrev-ignore-case nil)
+(setq company-dabbrev-ignore-case t)
+
+(setq company-dabbrev-code-ignore-case t)
+(setq company-dabbrev-code-everywhere t)
+
+(setq company-etags-ignore-case t)
 
 (unless (face-attribute 'company-tooltip :background)
   (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
