@@ -237,9 +237,8 @@
 
 (define-key help-mode-map (kbd "n") 'next-line)
 (define-key help-mode-map (kbd "p") 'previous-line)
-(after 'evil
-  (define-key help-mode-map (kbd "j") 'next-line)
-  (define-key help-mode-map (kbd "k") 'previous-line))
+(define-key help-mode-map (kbd "j") 'next-line)
+(define-key help-mode-map (kbd "k") 'previous-line)
 
 
 (global-set-key [prior] 'previous-buffer)
