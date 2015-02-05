@@ -1,4 +1,3 @@
-
 (defgroup dotemacs nil
   "Custom configuration for dotemacs."
   :group 'local)
@@ -38,8 +37,7 @@
     init-eyecandy
 
     init-yasnippet
-    ;; init-auto-complete
-    init-company
+    init-completion
 
     init-projectile
     init-helm
