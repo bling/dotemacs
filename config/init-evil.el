@@ -1,4 +1,9 @@
-(defcustom dotemacs-evil-state-modes
+(defgroup dotemacs-evil nil
+  "Configuration options for evil-mode."
+  :group 'dotemacs
+  :prefix 'dotemacs-evil)
+
+(defcustom dotemacs-evil/evil-state-modes
   '(fundamental-mode
     text-mode
     prog-mode
@@ -9,13 +14,13 @@
     compilation-mode)
   "List of modes that should start up in Evil state."
   :type '(repeat (symbol))
-  :group 'dotemacs)
+  :group 'dotemacs-evil)
 
-(defcustom dotemacs-emacs-state-modes
+(defcustom dotemacs-evil/emacs-state-modes
   '(debugger-mode)
   "List of modes that should start up in Evil Emacs state."
   :type '(repeat (symbol))
-  :group 'dotemacs)
+  :group 'dotemacs-evil)
 
 
 (setq evil-search-module 'evil-search)
@@ -78,10 +83,10 @@
 
 
 (defun my-major-mode-evil-state-adjust ()
-  (if (apply 'derived-mode-p dotemacs-evil-state-modes)
+  (if (apply 'derived-mode-p dotemacs-evil/evil-state-modes)
       (turn-on-evil-mode)
     (set-cursor-color "red"))
-  (if (apply 'derived-mode-p dotemacs-emacs-state-modes)
+  (if (apply 'derived-mode-p dotemacs-evil/emacs-state-modes)
       (turn-off-evil-mode)))
 (add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
 
