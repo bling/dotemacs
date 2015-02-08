@@ -1,5 +1,14 @@
 (when (eq dotemacs-completion-engine 'company)
 
+  (defgroup dotemacs-company nil
+    "Configuration options for company-mode."
+    :group 'dotemacs
+    :prefix 'dotemacs-company)
+
+  (defcustom dotemacs-company/ycmd-server-command nil
+    "The path to the ycmd package."
+    :group 'dotemacs-company)
+
   (require-package 'company)
   (require 'company)
 
@@ -41,12 +50,8 @@
     (when (null (yas-expand))
       (company-select-next)))
 
-  (defcustom dotemacs-ycmd-server-path nil
-    "The path to the ycmd package."
-    :group 'dotemacs)
-
-  (when dotemacs-ycmd-server-path
-    (setq ycmd-server-command `("python" ,dotemacs-ycmd-server-path))
+  (when dotemacs-company/ycmd-server-command
+    (setq ycmd-server-command `("python" ,dotemacs-company/ycmd-server-command))
     (require-package 'ycmd)
     (ycmd-setup)
 

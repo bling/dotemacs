@@ -1,7 +1,12 @@
-(defcustom dotemacs-eshell-plan9
+(defgroup dotemacs-eshell nil
+  "Configuration options for eshell-mode."
+  :group 'dotemacs
+  :prefix 'dotemacs-eshell)
+
+(defcustom dotemacs-eshell/plan9
   nil
   "Turns on Plan9 style prompt in eshell when non-nil."
-  :group 'dotemacs)
+  :group 'dotemacs-eshell)
 
 
 ;; eshell
@@ -28,7 +33,7 @@
 
 
 ;; plan 9 smart shell
-(when dotemacs-eshell-plan9
+(when dotemacs-eshell/plan9
   (after 'esh-module
     (add-to-list 'eshell-modules-list 'eshell-smart)
     (setq eshell-where-to-jump 'begin)
