@@ -20,7 +20,7 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (after "evil-leader-autoloads"
+  (after 'evil-leader
     (evil-leader/set-leader ",")
     (evil-leader/set-key
       "w" 'save-buffer
@@ -235,10 +235,11 @@
             (local-set-key (kbd "C-c h") #'my-eshell-ido-complete-command-history)))
 
 
-(define-key help-mode-map (kbd "n") 'next-line)
-(define-key help-mode-map (kbd "p") 'previous-line)
-(define-key help-mode-map (kbd "j") 'next-line)
-(define-key help-mode-map (kbd "k") 'previous-line)
+(after 'help-mode
+  (define-key help-mode-map (kbd "n") 'next-line)
+  (define-key help-mode-map (kbd "p") 'previous-line)
+  (define-key help-mode-map (kbd "j") 'next-line)
+  (define-key help-mode-map (kbd "k") 'previous-line))
 
 
 (global-set-key [prior] 'previous-buffer)

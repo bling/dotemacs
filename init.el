@@ -10,11 +10,9 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (unless (display-graphic-p) (menu-bar-mode -1))
 
-(add-to-list 'load-path (concat user-emacs-directory "config"))
-
 (require 'cl)
-(require 'init-packages)
-(require 'init-util)
+(require 'init-packages (concat user-emacs-directory "core/init-packages.el"))
+(require 'init-util (concat user-emacs-directory "core/init-util.el"))
 
 (let ((base (concat user-emacs-directory "elisp")))
   (add-to-list 'load-path base)
@@ -28,45 +26,11 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(defcustom dotemacs-modules
-  '(init-core
-
-    init-eshell
-    init-org
-    init-erc
-    init-eyecandy
-
-    init-yasnippet
-    init-completion
-
-    init-projectile
-    init-helm
-    init-ido
-
-    init-vcs
-    init-flycheck
-
-    init-lisp
-
-    init-vim
-    init-stylus
-    init-js
-    init-go
-    init-web
-    init-markup
-
-    init-smartparens
-    init-misc
-    init-evil
-    init-bindings
-    init-macros
-
-    init-overrides)
-  "Set of modules enabled in dotemacs."
-  :group 'dotemacs)
-
-(add-to-list 'after-init-hook
-             (lambda ()
-               (dolist (module dotemacs-modules)
-                 (with-demoted-errors "######## INIT-ERROR ######## %s"
-                   (require module)))))
+(lexical-let ((config-dir (concat user-emacs-directory "config")))
+  (add-to-list 'load-path config-dir)
+  (add-to-list 'after-init-hook
+               (lambda ()
+                 (dolist (file (directory-files config-dir t "\\.el$"))
+                   (let ((debug-on-error t)
+                         (module (file-name-base file)))
+                     (require (intern module)))))))
