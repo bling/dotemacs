@@ -1,61 +1,65 @@
-(require-package 'company)
-(require 'company)
+(when (eq dotemacs-completion-engine 'company)
 
-(setq company-idle-delay 0.2)
-(setq company-minimum-prefix-length 1)
-(setq company-show-numbers t)
-(setq company-tooltip-limit 20)
+  (require-package 'company)
+  (require 'company)
 
-(setq company-dabbrev-downcase nil)
-(setq company-dabbrev-ignore-case t)
+  (setq company-idle-delay 0.2)
+  (setq company-minimum-prefix-length 1)
+  (setq company-show-numbers t)
+  (setq company-tooltip-limit 20)
 
-(setq company-dabbrev-code-ignore-case t)
-(setq company-dabbrev-code-everywhere t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-ignore-case t)
 
-(setq company-etags-ignore-case t)
+  (setq company-dabbrev-code-ignore-case t)
+  (setq company-dabbrev-code-everywhere t)
 
-(unless (face-attribute 'company-tooltip :background)
-  (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-  (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-  (set-face-attribute 'company-preview nil :background "black")
-  (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-  (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-  (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
+  (setq company-etags-ignore-case t)
 
-(when (executable-find "tern")
-  (after "company-tern-autoloads"
-    (add-to-list 'company-backends 'company-tern)))
+  (unless (face-attribute 'company-tooltip :background)
+    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+    (set-face-attribute 'company-preview nil :background "black")
+    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+    (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+    (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
-(setq company-global-modes
-      '(not
-        eshell-mode comint-mode org-mode erc-mode))
+  (when (executable-find "tern")
+    (after "company-tern-autoloads"
+      (add-to-list 'company-backends 'company-tern)))
 
-(defadvice company-complete-common (around advice-for-company-complete-common activate)
-  (when (null (yas-expand))
-    ad-do-it))
+  (setq company-global-modes
+        '(not
+          eshell-mode comint-mode org-mode erc-mode))
 
-(defun my-company-tab ()
-  (interactive)
-  (when (null (yas-expand))
-    (company-select-next)))
+  (defadvice company-complete-common (around advice-for-company-complete-common activate)
+    (when (null (yas-expand))
+      ad-do-it))
 
-(defcustom dotemacs-ycmd-server-path nil
-  "The path to the ycmd package."
-  :group 'dotemacs)
+  (defun my-company-tab ()
+    (interactive)
+    (when (null (yas-expand))
+      (company-select-next)))
 
-(when dotemacs-ycmd-server-path
-  (setq ycmd-server-command `("python" ,dotemacs-ycmd-server-path))
-  (require-package 'ycmd)
-  (ycmd-setup)
+  (defcustom dotemacs-ycmd-server-path nil
+    "The path to the ycmd package."
+    :group 'dotemacs)
 
-  (require-package 'company-ycmd)
-  (company-ycmd-setup))
+  (when dotemacs-ycmd-server-path
+    (setq ycmd-server-command `("python" ,dotemacs-ycmd-server-path))
+    (require-package 'ycmd)
+    (ycmd-setup)
 
-(global-company-mode)
+    (require-package 'company-ycmd)
+    (company-ycmd-setup))
 
-(when (display-graphic-p)
-  (require-package 'company-quickhelp)
-  (setq company-quickhelp-delay 0.2)
-  (company-quickhelp-mode t))
+  (global-company-mode)
+
+  (when (display-graphic-p)
+    (require-package 'company-quickhelp)
+    (setq company-quickhelp-delay 0.2)
+    (company-quickhelp-mode t))
+
+  )
 
 (provide 'init-company)

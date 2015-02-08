@@ -6,6 +6,14 @@
   "The storage location for various persistent files."
   :group 'dotemacs)
 
+(defcustom dotemacs-completion-engine
+  'company
+  "The completion engine the use."
+  :type '(radio
+          (const :tag "company-mode" company)
+          (const :tag "auto-complete-mode" auto-complete))
+  :group 'dotemacs)
+
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (unless (display-graphic-p) (menu-bar-mode -1))
