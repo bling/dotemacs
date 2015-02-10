@@ -33,14 +33,6 @@
 (setq pcomplete-ignore-case t)
 
 
-;; erc
-(setq erc-log-channels-directory (concat dotemacs-cache-directory "erc/logs"))
-
-
-;; vc
-(setq vc-make-backup-files t)
-
-
 ;; imenu
 (setq-default imenu-auto-rescan t)
 
@@ -146,7 +138,7 @@
 
 (setq sentence-end-double-space nil)
 (setq delete-by-moving-to-trash t)
-(setq ring-bell-function (lambda () ()))
+(setq ring-bell-function 'ignore)
 (setq mark-ring-max 64)
 (setq global-mark-ring-max 128)
 (setq save-interprogram-paste-before-kill t)

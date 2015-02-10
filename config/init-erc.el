@@ -1,4 +1,5 @@
 (after 'erc
+  (setq erc-log-channels-directory (concat dotemacs-cache-directory "erc/logs"))
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
   (setq erc-timestamp-only-if-changed-flag nil)
