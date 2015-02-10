@@ -18,27 +18,49 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (unless (display-graphic-p) (menu-bar-mode -1))
 
+(add-to-list 'load-path (concat user-emacs-directory "/config"))
+
 (require 'cl)
-(require 'init-packages (concat user-emacs-directory "core/init-packages.el"))
-(require 'init-util (concat user-emacs-directory "core/init-util.el"))
+(require 'init-packages)
+(require 'init-util)
 
-(let ((base (concat user-emacs-directory "elisp")))
-  (add-to-list 'load-path base)
-  (dolist (dir (directory-files base t))
-    (when (and (file-directory-p dir)
-               (not (equal (file-name-nondirectory dir) ".."))
-               (not (equal (file-name-nondirectory dir) ".")))
-      (add-to-list 'load-path dir))))
+(my-add-elisp-to-load-path)
 
-(setq custom-file (concat user-emacs-directory "custom.el"))
+(setq custom-file (concat user-emacs-directory "custom"))
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(lexical-let ((config-dir (concat user-emacs-directory "config")))
-  (add-to-list 'load-path config-dir)
-  (add-to-list 'after-init-hook
-               (lambda ()
-                 (dolist (file (directory-files config-dir t "\\.el$"))
-                   (let ((debug-on-error t)
-                         (module (file-name-base file)))
-                     (require (intern module)))))))
+(let ((debug-on-error t))
+  (require 'init-core)
+
+  (require 'init-eshell)
+  (require 'init-erc)
+
+  (if (eq dotemacs-completion-engine 'company)
+      (require 'init-company)
+    (require 'init-auto-complete))
+
+  (require 'init-lisp)
+  (require 'init-org)
+  (require 'init-vim)
+  (require 'init-stylus)
+  (require 'init-js)
+  (require 'init-go)
+  (require 'init-web)
+  (require 'init-markup)
+
+  (require 'init-projectile)
+  (require 'init-helm)
+  (require 'init-ido)
+  (require 'init-vcs)
+  (require 'init-flycheck)
+  (require 'init-yasnippet)
+  (require 'init-smartparens)
+  (require 'init-misc)
+
+  (require 'init-evil)
+  (require 'init-macros)
+  (require 'init-eyecandy)
+  (require 'init-overrides)
+
+  (require 'init-bindings))
