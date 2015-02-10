@@ -14,8 +14,6 @@
 (add-hook 'prog-mode-hook 'yas-minor-mode)
 (add-hook 'html-mode-hook 'yas-minor-mode)
 
-(add-to-list 'yas-snippet-dirs (concat user-emacs-directory "snippets"))
-
-(yas-reload-all)
+(yas-load-directory (concat user-emacs-directory "/snippets"))
 
 (provide 'init-yasnippet)
