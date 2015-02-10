@@ -93,6 +93,7 @@
 
 ;; clean up old buffers periodically
 (require 'midnight)
+(midnight-delay-set 'midnight-delay 0)
 
 
 ;; ibuffer
