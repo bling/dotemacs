@@ -26,7 +26,7 @@
 
 (my-add-elisp-to-load-path)
 
-(setq custom-file (concat user-emacs-directory "custom"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
 

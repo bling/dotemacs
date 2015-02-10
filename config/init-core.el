@@ -23,8 +23,9 @@
 (setq recentf-save-file (concat dotemacs-cache-directory "recentf"))
 (setq recentf-max-saved-items 1000)
 (setq recentf-max-menu-items 500)
+(setq recentf-auto-cleanup 300)
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
-(recentf-mode +1)
+(recentf-mode t)
 (run-with-timer 1800 1800 'recentf-save-list)
 
 
