@@ -17,16 +17,23 @@
   :group 'dotemacs-evil)
 
 (defcustom dotemacs-evil/emacs-state-modes
-  '(debugger-mode)
+  '(debugger-mode
+    git-commit-mode
+    git-rebase-mode)
   "List of modes that should start up in Evil Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
+
+(defcustom dotemacs-evil/emacs-cursor
+  "red"
+  "The color of the cursor when in Emacs state."
+  :type 'color)
 
 
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
 
-(setq evil-emacs-state-cursor '("red" box))
+(setq evil-emacs-state-cursor `(,dotemacs-evil/emacs-cursor box))
 (setq evil-normal-state-cursor '("green" box))
 (setq evil-visual-state-cursor '("orange" box))
 (setq evil-insert-state-cursor '("red" bar))
@@ -85,9 +92,10 @@
 (defun my-major-mode-evil-state-adjust ()
   (if (apply 'derived-mode-p dotemacs-evil/evil-state-modes)
       (turn-on-evil-mode)
-    (set-cursor-color "red"))
-  (if (apply 'derived-mode-p dotemacs-evil/emacs-state-modes)
-      (turn-off-evil-mode)))
+    (set-cursor-color dotemacs-evil/emacs-cursor))
+  (when (apply 'derived-mode-p dotemacs-evil/emacs-state-modes)
+    (turn-off-evil-mode)
+    (set-cursor-color dotemacs-evil/emacs-cursor)))
 (add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
 
 (defun my-send-string-to-terminal (string)

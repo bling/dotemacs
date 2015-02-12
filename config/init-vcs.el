@@ -9,12 +9,6 @@
     (setq magit-status-buffer-switch-function 'switch-to-buffer))
 
   (after 'evil
-    (after 'git-commit-mode
-      (add-hook 'git-commit-mode-hook #'evil-emacs-state))
-
-    (after 'git-rebase-mode
-      (add-hook 'git-rebase-mode-hook #'evil-emacs-state))
-
     (after 'magit-blame
       (defadvice magit-blame-file-on (after advice-for-magit-blame-file-on activate)
         (evil-emacs-state))
