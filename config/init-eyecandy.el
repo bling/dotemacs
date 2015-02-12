@@ -22,7 +22,6 @@
 
 (require-package 'diminish)
 (diminish 'visual-line-mode)
-(after 'autopair (diminish 'autopair-mode))
 (after 'undo-tree (diminish 'undo-tree-mode))
 (after 'auto-complete (diminish 'auto-complete-mode))
 (after 'projectile (diminish 'projectile-mode))

@@ -15,7 +15,7 @@
       savehist-additional-variables '(search ring regexp-search-ring)
       savehist-autosave-interval 60
       history-length 1000)
-(savehist-mode +1)
+(savehist-mode t)
 
 
 ;; recent files
@@ -146,6 +146,7 @@
 (setq echo-keystrokes 0.01)
 (setq gc-cons-threshold 10000000)
 (setq initial-major-mode 'emacs-lisp-mode)
+(setq indent-tabs-mode nil)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
@@ -154,15 +155,12 @@
 
 (which-function-mode t)
 (blink-cursor-mode -1)
-(global-auto-revert-mode 1)
+(global-auto-revert-mode t)
 (electric-indent-mode t)
 (electric-pair-mode t)
-(transient-mark-mode 1)
-(delete-selection-mode 1)
-
-
-(setq-default
- indent-tabs-mode nil)
+(transient-mark-mode t)
+(delete-selection-mode t)
+(random t) ;; seed
 
 
 (defun my-find-file-check-large-file ()
@@ -177,8 +175,5 @@
                             (visual-line-mode)
                             (unless (eq major-mode 'org-mode)
                               (setq show-trailing-whitespace t))))
-
-
-(random t) ;; seed
 
 (provide 'init-core)
