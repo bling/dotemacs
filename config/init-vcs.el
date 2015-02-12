@@ -6,7 +6,9 @@
   (after 'magit
     (setq magit-diff-options '("--histogram"))
     (setq magit-stage-all-confirm nil)
-    (setq magit-status-buffer-switch-function 'switch-to-buffer))
+    (setq magit-unstage-all-confirm nil)
+    (setq magit-status-buffer-switch-function 'switch-to-buffer)
+    (setq magit-show-child-count t))
 
   (after 'evil
     (after 'magit-blame
