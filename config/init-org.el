@@ -11,6 +11,7 @@
 
    (setq org-startup-indented t)
    (setq org-indent-indentation-per-level 2)
+   (setq org-src-fontify-natively t)
 
    (setq org-agenda-files `(,org-directory))
    (setq org-capture-templates
