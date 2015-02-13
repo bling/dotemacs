@@ -132,7 +132,10 @@
       (cond ((executable-find "pt")
              (define-key evil-normal-state-map binding 'projectile-pt))
             ((executable-find "ag")
-             (define-key evil-normal-state-map binding 'projectile-ag))
+             (define-key evil-normal-state-map binding
+	       (bind
+		(setq current-prefix-arg t)
+		(call-interactively #'projectile-ag))))
             ((executable-find "ack")
              (define-key evil-normal-state-map binding 'projectile-ack))
             (t
