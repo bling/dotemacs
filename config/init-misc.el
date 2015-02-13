@@ -9,8 +9,8 @@
 
 (require-package 'multiple-cursors)
 (after 'evil
-  (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
-  (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state))
+  (add-hook 'multiple-cursors-mode-enabled-hook #'evil-emacs-state)
+  (add-hook 'multiple-cursors-mode-disabled-hook #'evil-normal-state))
 
 
 (require-package 'wgrep)
@@ -51,8 +51,8 @@
 
 (require-package 'aggressive-indent)
 (require 'aggressive-indent)
-(add-to-list 'aggressive-indent-excluded-modes 'stylus-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'org-mode)
+(add-to-list 'aggressive-indent-excluded-modes #'stylus-mode)
+(add-to-list 'aggressive-indent-excluded-modes #'org-mode)
 (global-aggressive-indent-mode)
 
 
@@ -68,7 +68,7 @@
 
 
 (require-package 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 
 (require-package 'framemove)

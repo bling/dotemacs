@@ -10,8 +10,7 @@
    (setq org-log-done t)
 
    (setq org-startup-indented t)
-   (setq org-indent-indentation-per-level 3)
-   (setq org-hide-leading-stars t)
+   (setq org-indent-indentation-per-level 2)
 
    (setq org-agenda-files `(,org-directory))
    (setq org-capture-templates
@@ -64,6 +63,7 @@
    (add-hook 'org-mode-hook #'my-org-mode-hook)
 
    (require-package 'org-bullets)
+   (setq org-bullets-bullet-list '("❀" "☢" "✸" "☯" "◆"))
    (add-hook 'org-mode-hook #'org-bullets-mode)))
 
 
