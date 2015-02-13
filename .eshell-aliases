@@ -1,5 +1,6 @@
 alias vim find-file $*
 alias sudo *sudo $*
+alias gd git diff --color $*
 alias gsr git svn rebase
 alias gsc git svn dcommit
 alias gsp git stash pop

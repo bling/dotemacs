@@ -94,4 +94,11 @@
   (eshell my-eshell-buffer-count))
 
 
+(add-hook 'eshell-mode-hook
+	  (lambda ()
+	    ;; get rid of annoying 'terminal is not fully functional' warning
+	    (when (executable-find "cat")
+	      (setenv "PAGER" "cat"))))
+
+
 (provide 'init-eshell)

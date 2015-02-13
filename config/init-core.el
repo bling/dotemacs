@@ -127,7 +127,6 @@
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-(xterm-mouse-mode t)
 
 
 (set-terminal-coding-system 'utf-8)
@@ -153,6 +152,7 @@
 (setq inhibit-startup-message t)
 
 
+(xterm-mouse-mode t)
 (which-function-mode t)
 (blink-cursor-mode -1)
 (global-auto-revert-mode t)
