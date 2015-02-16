@@ -118,14 +118,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
-(defun my-add-elisp-to-load-path ()
-  "Adds ~/.emacs.d/elisp and ~/.emacs.d/elisp/* to the `load-path'."
-  (let ((base (concat user-emacs-directory "elisp")))
-    (add-to-list 'load-path base)
-    (dolist (dir (directory-files base t))
-      (when (and (file-directory-p dir)
-                 (not (equal (file-name-nondirectory dir) ".."))
-                 (not (equal (file-name-nondirectory dir) ".")))
-        (add-to-list 'load-path dir)))))
-
 (provide 'init-util)

@@ -19,12 +19,15 @@
 (unless (display-graphic-p) (menu-bar-mode -1))
 
 (add-to-list 'load-path (concat user-emacs-directory "/config"))
+(let ((base (concat user-emacs-directory "/elisp")))
+  (add-to-list 'load-path base)
+  (dolist (dir (directory-files base t "^[^.]"))
+    (when (file-directory-p dir)
+      (add-to-list 'load-path dir))))
 
 (require 'cl)
 (require 'init-packages)
 (require 'init-util)
-
-(my-add-elisp-to-load-path)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)

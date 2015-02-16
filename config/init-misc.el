@@ -53,6 +53,7 @@
 (require 'aggressive-indent)
 (add-to-list 'aggressive-indent-excluded-modes #'stylus-mode)
 (add-to-list 'aggressive-indent-excluded-modes #'org-mode)
+(add-to-list 'aggressive-indent-excluded-modes #'vimrc-mode)
 (global-aggressive-indent-mode)
 
 
