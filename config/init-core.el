@@ -145,7 +145,7 @@
 (setq echo-keystrokes 0.01)
 (setq gc-cons-threshold 10000000)
 (setq initial-major-mode 'emacs-lisp-mode)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
