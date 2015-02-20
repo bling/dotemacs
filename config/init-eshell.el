@@ -14,6 +14,10 @@
 (setq eshell-scroll-to-bottom-on-input 'all)
 (setq eshell-buffer-shorthand t)
 
+(when (executable-find "fortune")
+  (defadvice eshell (before advice-for-eshell activate)
+    (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n"))))
+
 
 ;; em-alias
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
