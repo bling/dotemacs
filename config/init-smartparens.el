@@ -4,9 +4,9 @@
 
 (setq sp-autoescape-string-quote nil)
 (setq sp-autoinsert-quote-if-followed-by-closing-pair nil)
+(setq sp-autoinsert-pair nil)
 
 (sp-use-smartparens-bindings)
-(electric-pair-mode -1)
 (smartparens-global-mode t)
 
 
