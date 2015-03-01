@@ -48,7 +48,7 @@
      (setq org-mobile-inbox-for-pull (concat org-directory "/from-mobile.org")))
 
    (after 'evil
-     (add-hook 'org-capture-mode-hook 'evil-insert-state))
+     (add-hook 'org-capture-mode-hook #'evil-emacs-state))
 
    (when (boundp 'org-plantuml-jar-path)
      (org-babel-do-load-languages
@@ -64,7 +64,7 @@
    (add-hook 'org-mode-hook #'my-org-mode-hook)
 
    (require-package 'org-bullets)
-   (setq org-bullets-bullet-list '("❀" "☢" "✸" "☯" "◆"))
+   (setq org-bullets-bullet-list '("✿" "❀" "☢" "☯" "✸" ))
    (add-hook 'org-mode-hook #'org-bullets-mode)))
 
 
