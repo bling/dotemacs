@@ -137,6 +137,19 @@
                                     (evil-emacs-state)
                                   (evil-normal-state)))))
 
+(after 'paren
+  ;; the default behavior only highlights with the point one-after the closing paren
+  ;; this changes it such it will match with the point on the closing paren
+  (defadvice show-paren-function (around show-paren-closing-before activate)
+    (if (and (or
+              (evil-normal-state-p)
+              (evil-visual-state-p))
+             (eq (syntax-class (syntax-after (point))) 5))
+        (save-excursion
+          (forward-char)
+          ad-do-it)
+      ad-do-it)))
+
 (when (>= emacs-major-version 25)
   (defadvice elisp--preceding-sexp (around evil activate)
     "In normal-state or motion-state, last sexp ends at point."
