@@ -92,7 +92,7 @@
 ;; ibuffer
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
-(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode t)))
+(add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
 
 
 ;; store most files in the cache
