@@ -12,8 +12,12 @@
 (setq helm-lisp-fuzzy-completion t)
 
 (require-package 'helm)
-(require-package 'helm-swoop)
 (require-package 'helm-descbinds)
+
+(setq helm-swoop-pre-input-function #'ignore)
+(setq helm-swoop-use-line-number-face t)
+(setq helm-swoop-split-with-multiple-windows t)
+(require-package 'helm-swoop)
 
 (after "projectile-autoloads"
   (require-package 'helm-projectile))
