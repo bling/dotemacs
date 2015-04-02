@@ -28,11 +28,6 @@
   (require-package 'wgrep-ag))
 
 
-(when (executable-find "ack")
-  (require-package 'ack-and-a-half)
-  (require-package 'wgrep-ack))
-
-
 (require-package 'project-explorer)
 (after 'project-explorer
   (setq pe/cache-directory (concat dotemacs-cache-directory "project-explorer"))
