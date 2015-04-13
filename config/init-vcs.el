@@ -3,6 +3,8 @@
 (after 'vc-git
   (require-package 'magit)
 
+  (setq magit-last-seen-setup-instructions "1.4.0")
+
   (after 'magit
     (setq magit-diff-options '("--histogram"))
     (setq magit-stage-all-confirm nil)
