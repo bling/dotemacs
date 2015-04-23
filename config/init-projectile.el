@@ -6,7 +6,9 @@
 (setq projectile-indexing-method 'alien)
 (setq projectile-enable-caching t)
 (after "helm-autoloads"
-  (setq projectile-completion-system 'helm))
+  (setq projectile-completion-system 'helm)
+  (after 'helm-projectile
+    (add-to-list 'helm-projectile-sources-list 'helm-source-projectile-recentf-list)))
 
 
 (require 'projectile)
