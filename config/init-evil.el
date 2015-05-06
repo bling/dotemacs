@@ -64,6 +64,10 @@
 (evil-exchange-install)
 
 
+(require-package 'evil-anzu)
+(require 'evil-anzu)
+
+
 (setq evil-jumper-auto-center t)
 (setq evil-jumper-file (concat dotemacs-cache-directory "evil-jumps"))
 (setq evil-jumper-auto-save-interval 3600)
