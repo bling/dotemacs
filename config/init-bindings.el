@@ -150,10 +150,10 @@
       (evil-define-key 'normal js2-mode-map (kbd "g r") 'js2r-rename-var))
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
-  (after "ace-jump-mode-autoloads"
-    (define-key evil-operator-state-map (kbd "z") 'evil-ace-jump-char-mode)
-    (define-key evil-normal-state-map (kbd "s") 'evil-ace-jump-char-mode)
-    (define-key evil-motion-state-map (kbd "S-SPC") 'evil-ace-jump-line-mode))
+  (after "avy-autoloads"
+    (define-key evil-operator-state-map (kbd "z") 'avy-goto-char-2)
+    (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
+    (define-key evil-motion-state-map (kbd "S-SPC") 'avy-goto-line))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)

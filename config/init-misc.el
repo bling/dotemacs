@@ -34,7 +34,7 @@
   (setq pe/omit-regex (concat pe/omit-regex "\\|^node_modules$")))
 
 
-(require-package 'ace-jump-mode)
+(require-package 'avy)
 
 
 (require-package 'expand-region)
