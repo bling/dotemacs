@@ -129,6 +129,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 
+(setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
@@ -145,6 +146,7 @@
 (setq echo-keystrokes 0.01)
 (setq gc-cons-threshold 10000000)
 (setq initial-major-mode 'emacs-lisp-mode)
+(setq eval-expression-print-level nil)
 (setq-default indent-tabs-mode nil)
 
 (setq inhibit-splash-screen t)
