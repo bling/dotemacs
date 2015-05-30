@@ -64,6 +64,5 @@
   (require 'init-evil)
   (require 'init-macros)
   (require 'init-eyecandy)
-  (require 'init-overrides)
 
   (require 'init-bindings))
