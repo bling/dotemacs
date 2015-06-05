@@ -70,6 +70,7 @@
     (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
+    (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
     (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
@@ -130,7 +131,6 @@
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after "projectile-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC e") 'projectile-recentf)
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
     (let ((binding (kbd "SPC /")))
       (cond ((executable-find "pt")
@@ -146,7 +146,6 @@
              (define-key evil-normal-state-map binding 'projectile-grep))))
     (after "helm-projectile-autoloads"
       (require 'helm-projectile)
-      (define-key evil-normal-state-map (kbd "SPC e") 'helm-projectile-recentf)
       (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
 
   (after "multiple-cursors-autoloads"
@@ -238,7 +237,7 @@
 
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-r") #'helm-eshell-history))))
+              (local-set-key (kbd "C-c h") #'helm-eshell-history))))
 
 
 (after 'help-mode
