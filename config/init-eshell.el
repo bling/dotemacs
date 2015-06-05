@@ -72,14 +72,6 @@
           (propertize " $ " 'face 'font-lock-constant-face)))
 
 
-(defun my-eshell-ido-complete-command-history ()
-  (interactive)
-  (eshell-kill-input)
-  (insert
-   (ido-completing-read "Run command: " (delete-dups (ring-elements eshell-history-ring))))
-  (eshell-send-input))
-
-
 (defun eshell/j ()
   "Quickly jump to previous directories."
   (eshell/cd (ido-completing-read "Jump to directory: "
