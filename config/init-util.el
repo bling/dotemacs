@@ -16,6 +16,15 @@
                                (require-package (quote ,mode))
                                (,mode)))))
 
+
+(defmacro delayed-init (&rest body)
+  "Runs BODY after idle for a predetermined amount of time."
+  (run-with-idle-timer
+   1.5
+   nil
+   `(lambda () ,@body)))
+
+
 (defun my-recompile-init ()
   "Byte-compile all your dotfiles again."
   (interactive)

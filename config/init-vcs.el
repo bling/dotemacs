@@ -27,9 +27,11 @@
 
   (global-git-gutter+-mode))
 
+
 (require-package 'diff-hl)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (unless (display-graphic-p)
   (diff-hl-margin-mode))
+
 
 (provide 'init-vcs)
