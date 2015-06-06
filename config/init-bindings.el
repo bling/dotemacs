@@ -145,7 +145,6 @@
             (t
              (define-key evil-normal-state-map binding 'projectile-grep))))
     (after "helm-projectile-autoloads"
-      (require 'helm-projectile)
       (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
 
   (after "multiple-cursors-autoloads"
