@@ -36,35 +36,6 @@
   (load custom-file))
 
 (let ((debug-on-error t))
-  (require 'init-core)
-
-  (require 'init-eshell)
-  (require 'init-erc)
-
-  (if (eq dotemacs-completion-engine 'company)
-      (require 'init-company)
-    (require 'init-auto-complete))
-
-  (require 'init-lisp)
-  (require 'init-org)
-  (require 'init-vim)
-  (require 'init-stylus)
-  (require 'init-js)
-  (require 'init-go)
-  (require 'init-web)
-  (require 'init-markup)
-
-  (require 'init-projectile)
-  (require 'init-helm)
-  (require 'init-ido)
-  (require 'init-vcs)
-  (require 'init-flycheck)
-  (require 'init-yasnippet)
-  (require 'init-smartparens)
-  (require 'init-misc)
-
-  (require 'init-evil)
-  (require 'init-macros)
-  (require 'init-eyecandy)
-
-  (require 'init-bindings))
+  (cl-loop for file in (directory-files (concat user-emacs-directory "config/"))
+           if (not (file-directory-p file))
+           do (require (intern (file-name-base file)))))
