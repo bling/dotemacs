@@ -166,6 +166,9 @@
 (random t) ;; seed
 
 
+(setenv "EDITOR" "emacsclient")
+
+
 (defun my-find-file-check-large-file ()
   (when (> (buffer-size) (* 1024 1024))
     (setq buffer-read-only t)
