@@ -16,14 +16,12 @@
                                (require-package (quote ,mode))
                                (,mode)))))
 
-
 (defmacro delayed-init (&rest body)
   "Runs BODY after idle for a predetermined amount of time."
-  (run-with-idle-timer
-   1.5
-   nil
-   `(lambda () ,@body)))
-
+  `(run-with-idle-timer
+    1.5
+    nil
+    (lambda () ,@body)))
 
 (defun my-recompile-init ()
   "Byte-compile all your dotfiles again."
@@ -78,7 +76,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   "Replace the preceding sexp with its value."
   (interactive)
   (let ((value (eval (preceding-sexp))))
-    (backware-kill-sexp)
+    (backward-kill-sexp)
     (insert (format "%s" value))))
 
 (defun my-rename-current-buffer-file ()

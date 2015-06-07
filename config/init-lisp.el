@@ -9,8 +9,9 @@
     (eldoc-mode)))
 
 (defun my-lisp-after-save-hook ()
-  (when (string-prefix-p (file-truename user-emacs-directory)
-                         (file-truename buffer-file-name))
+  (when (and (string-prefix-p (file-truename user-emacs-directory)
+                              (file-truename buffer-file-name))
+             (equal (file-name-extension buffer-file-name) "el"))
     (emacs-lisp-byte-compile)))
 
 (add-hook 'emacs-lisp-mode-hook #'my-lisp-hook)

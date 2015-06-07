@@ -62,9 +62,9 @@
 
 
 (delayed-init
- (require-package 'color-identifiers-mode)
- (global-color-identifiers-mode)
- (diminish 'color-identifiers-mode))
+  (require-package 'color-identifiers-mode)
+  (global-color-identifiers-mode)
+  (diminish 'color-identifiers-mode))
 
 
 ;; (require-package 'fancy-narrow)

@@ -25,7 +25,9 @@
     (when (file-directory-p dir)
       (add-to-list 'load-path dir))))
 
-(require 'cl)
+(eval-when-compile
+  (require 'cl))
+
 (require 'init-packages)
 (require 'init-util)
 
