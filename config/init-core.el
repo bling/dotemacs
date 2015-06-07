@@ -119,7 +119,8 @@
 
 
 (defun my-do-not-kill-scratch-buffer ()
-  (if (member (buffer-name (current-buffer)) '("*scratch*" "*Messages*"))
+  (if (member (buffer-name (current-buffer))
+              '("*scratch*" "*Messages*" "*Require Times*"))
       (progn
         (bury-buffer)
         nil)
