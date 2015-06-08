@@ -19,6 +19,8 @@
                            (make-string (- (window-width) col 32) (string-to-char "."))
                            count)))))
 (setq hs-set-up-overlay 'my-fold-overlay)
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
 
 (require-package 'diminish)
 (diminish 'visual-line-mode)
