@@ -45,27 +45,19 @@
           (const :tag "auto-complete-mode" auto-complete))
   :group 'dotemacs)
 
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(unless (display-graphic-p) (menu-bar-mode -1))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")))
+(setq package-enable-at-startup nil)
+(package-initialize)
 
-(add-to-list 'load-path (concat user-emacs-directory "/config"))
-(let ((base (concat user-emacs-directory "/elisp")))
-  (add-to-list 'load-path base)
-  (dolist (dir (directory-files base t "^[^.]"))
-    (when (file-directory-p dir)
-      (add-to-list 'load-path dir))))
-
-(eval-when-compile
-  (require 'cl))
-
-(require 'init-packages)
 (require 'init-util)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
 
+(eval-when-compile (require 'cl))
 (let ((debug-on-error t))
   (cl-loop for file in (directory-files (concat user-emacs-directory "config/"))
            if (not (file-directory-p file))
