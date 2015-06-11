@@ -15,8 +15,8 @@
   :group 'dotemacs)
 
 (with-current-buffer (get-buffer-create "*Require Times*")
-  (insert "| feature | elapsed | timestamp |\n")
-  (insert "|---------+---------+-----------|\n"))
+  (insert "| feature | timestamp | elapsed |\n")
+  (insert "|---------+-----------+---------|\n"))
 
 (defadvice require (around require-advice activate)
   (let ((elapsed)
@@ -59,5 +59,5 @@
 (eval-when-compile (require 'cl))
 (let ((debug-on-error t))
   (cl-loop for file in (directory-files (concat user-emacs-directory "config/"))
-           if (not (file-directory-p file))
+           unless (file-directory-p file)
            do (require (intern (file-name-base file)))))
