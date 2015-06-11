@@ -26,7 +26,8 @@
 (defun my-recompile-init ()
   "Byte-compile all your dotfiles again."
   (interactive)
-  (byte-recompile-directory (concat user-emacs-directory "config") 0))
+  (byte-recompile-directory (concat user-emacs-directory "config") 0)
+  (byte-compile-file (concat user-emacs-directory "init.el")))
 
 (defun my-window-killer ()
   "closes the window, and deletes the buffer if it's the last window open."
