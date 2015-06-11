@@ -1,34 +1,3 @@
-(with-current-buffer (get-buffer-create "*Require Times*")
-  (insert "| feature | elapsed | timestamp |\n")
-  (insert "|---------+---------+-----------|\n")
-  (setq-local require-times (make-hash-table))
-  (put 'require-times 'permanent-local t))
-
-(defadvice require (around require-advice activate)
-  (let ((start (current-time))
-        (elapsed)
-        (buffer (get-buffer-create "*Require Times*")))
-    ad-do-it
-    (setq elapsed (float-time (time-subtract (current-time) start)))
-    (with-current-buffer buffer
-      (let ((match (gethash feature require-times)))
-        (unless match
-          (goto-char (point-max))
-          (insert (format "| %s | %s | %f |\n"
-                          feature (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time)) elapsed))
-          (puthash feature t require-times))))))
-
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(unless (display-graphic-p) (menu-bar-mode -1))
-
-(add-to-list 'load-path (concat user-emacs-directory "/config"))
-(let ((base (concat user-emacs-directory "/elisp")))
-  (add-to-list 'load-path base)
-  (dolist (dir (directory-files base t "^[^.]"))
-    (when (file-directory-p dir)
-      (add-to-list 'load-path dir))))
-
 (defgroup dotemacs nil
   "Custom configuration for dotemacs."
   :group 'local)
@@ -44,6 +13,36 @@
           (const :tag "company-mode" company)
           (const :tag "auto-complete-mode" auto-complete))
   :group 'dotemacs)
+
+(with-current-buffer (get-buffer-create "*Require Times*")
+  (insert "| feature | elapsed | timestamp |\n")
+  (insert "|---------+---------+-----------|\n"))
+
+(defadvice require (around require-advice activate)
+  (let ((elapsed)
+        (loaded (memq feature features))
+        (start (current-time)))
+    (prog1
+        ad-do-it
+      (unless loaded
+        (with-current-buffer (get-buffer-create "*Require Times*")
+          (goto-char (point-max))
+          (setq elapsed (float-time (time-subtract (current-time) start)))
+          (insert (format "| %s | %s | %f |\n"
+                          feature
+                          (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
+                          elapsed)))))))
+
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(unless (display-graphic-p) (menu-bar-mode -1))
+
+(add-to-list 'load-path (concat user-emacs-directory "/config"))
+(let ((base (concat user-emacs-directory "/elisp")))
+  (add-to-list 'load-path base)
+  (dolist (dir (directory-files base t "^[^.]"))
+    (when (file-directory-p dir)
+      (add-to-list 'load-path dir))))
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
