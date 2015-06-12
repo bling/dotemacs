@@ -94,7 +94,10 @@
 	  (lambda ()
 	    ;; get rid of annoying 'terminal is not fully functional' warning
 	    (when (executable-find "cat")
-	      (setenv "PAGER" "cat"))))
+	      (setenv "PAGER" "cat"))
+
+            (setenv "EDITOR" "emacsclient")
+            (setenv "NODE_NO_READLINE" "1")))
 
 
 (provide 'init-eshell)
