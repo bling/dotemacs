@@ -51,8 +51,8 @@
 (global-evil-leader-mode t)
 
 
-(require-package 'evil-nerd-commenter)
-(require 'evil-nerd-commenter)
+(require-package 'evil-commentary)
+(evil-commentary-mode t)
 
 
 (require-package 'evil-surround)

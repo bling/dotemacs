@@ -95,10 +95,6 @@
 
   (define-key evil-normal-state-map (kbd "g p") (kbd "` [ v ` ]"))
 
-  (after "evil-nerd-commenter-autoloads"
-    (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
-    (define-key evil-visual-state-map "gc" 'evilnc-comment-operator))
-
   (after "etags-select-autoloads"
     (define-key evil-normal-state-map (kbd "g ]") 'etags-select-find-tag-at-point))
 
