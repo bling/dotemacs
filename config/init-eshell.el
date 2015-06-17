@@ -11,8 +11,9 @@
 
 ;; eshell
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
-(setq eshell-scroll-to-bottom-on-input 'all)
+(setq eshell-scroll-to-bottom-on-input 'this)
 (setq eshell-buffer-shorthand t)
+
 
 (when (executable-find "fortune")
   (defadvice eshell (before advice-for-eshell activate)
@@ -58,9 +59,9 @@
 
 
 (defun my-current-git-branch ()
-  (let ((branch (car (loop for match in (split-string (shell-command-to-string "git branch") "\n")
-                           when (string-match "^\*" match)
-                           collect match))))
+  (let ((branch (car (cl-loop for match in (split-string (shell-command-to-string "git branch") "\n")
+                              when (string-match "^\*" match)
+                              collect match))))
     (if (not (eq branch nil))
         (concat " [" (substring branch 2) "]")
       "")))

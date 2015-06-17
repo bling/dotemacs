@@ -25,7 +25,6 @@
 (after "company-autoloads"
   (require-package 'helm-company))
 
-(require 'helm-config)
 (after 'helm
   (helm-autoresize-mode t))
 
