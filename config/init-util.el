@@ -1,3 +1,28 @@
+(with-current-buffer (get-buffer-create "*Require Times*")
+  (insert "| feature | timestamp | elapsed |\n")
+  (insert "|---------+-----------+---------|\n"))
+
+(defadvice require (around require-advice activate)
+  (let ((elapsed)
+        (loaded (memq feature features))
+        (start (current-time)))
+    (prog1
+        ad-do-it
+      (unless loaded
+        (with-current-buffer (get-buffer-create "*Require Times*")
+          (goto-char (point-max))
+          (setq elapsed (float-time (time-subtract (current-time) start)))
+          (insert (format "| %s | %s | %f |\n"
+                          feature
+                          (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
+                          elapsed)))))))
+
+(let ((base (concat user-emacs-directory "/elisp")))
+  (add-to-list 'load-path base)
+  (dolist (dir (directory-files base t "^[^.]"))
+    (when (file-directory-p dir)
+      (add-to-list 'load-path dir))))
+
 (if (fboundp 'with-eval-after-load)
     (defmacro after (feature &rest body)
       "After FEATURE is loaded, evaluate BODY."
