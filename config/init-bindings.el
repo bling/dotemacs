@@ -57,6 +57,8 @@
     (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
     (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
+    (define-key evil-visual-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
+    (define-key evil-visual-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
   (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
