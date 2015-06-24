@@ -18,6 +18,14 @@
           (const :tag "auto-complete-mode" auto-complete))
   :group 'dotemacs)
 
+(defcustom dotemacs-switch-engine
+  'ivy
+  "The primary engine to use for narrowing and navigation."
+  :type '(radio
+          (const :tag "ido" ido)
+          (const :tag "ivy" ivy))
+  :group 'dotemacs)
+
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))

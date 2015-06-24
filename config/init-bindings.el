@@ -59,14 +59,14 @@
     (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
+  (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
+  (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
 
   (after "helm-autoloads"
-    (define-key evil-visual-state-map (kbd "SPC SPC") 'helm-M-x)
-    (define-key evil-normal-state-map (kbd "SPC SPC") 'helm-M-x)
     (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
@@ -168,6 +168,10 @@
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
 
+(after 'ivy
+  (define-key ivy-mode-map [escape] (kbd "C-g")))
+
+
 (after 'magit
   (global-set-key (kbd "C-x g") 'magit-status)
   (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
@@ -225,11 +229,6 @@
 
 
 (after "helm-autoloads"
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-m") 'helm-M-x)
-  (global-set-key (kbd "C-c C-m") 'helm-M-x)
-  (global-set-key (kbd "C-x b") 'helm-buffers-list)
-
   (add-hook 'eshell-mode-hook
             (lambda ()
               (local-set-key (kbd "C-c h") #'helm-eshell-history))))
