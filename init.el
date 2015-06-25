@@ -22,6 +22,7 @@
   'ivy
   "The primary engine to use for narrowing and navigation."
   :type '(radio
+          (const :tag "helm" helm)
           (const :tag "ido" ido)
           (const :tag "ivy" ivy))
   :group 'dotemacs)

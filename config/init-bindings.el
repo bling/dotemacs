@@ -65,8 +65,8 @@
   (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
   (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
-  (define-key evil-normal-state-map (kbd "SPC k") 'ido-kill-buffer)
-  (define-key evil-normal-state-map (kbd "SPC f") 'ido-find-file)
+  (define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer)
+  (define-key evil-normal-state-map (kbd "SPC f") 'find-file)
 
   (after "helm-autoloads"
     (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)

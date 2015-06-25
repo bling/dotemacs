@@ -10,6 +10,7 @@
 (setq helm-semantic-fuzzy-match t)
 (setq helm-imenu-fuzzy-match t)
 (setq helm-lisp-fuzzy-completion t)
+(setq helm-completion-in-region-fuzzy-match t)
 
 (require-package 'helm)
 (require-package 'helm-descbinds)
@@ -31,5 +32,12 @@
 
 (after 'helm
   (helm-autoresize-mode t))
+
+(when (eq dotemacs-switch-engine 'helm)
+  (delayed-init
+   (helm-mode t)
+   (global-set-key [remap execute-extended-command] #'helm-M-x)
+   (global-set-key [remap find-file] #'helm-find-files)))
+
 
 (provide 'init-helm)
