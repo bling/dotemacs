@@ -37,6 +37,8 @@
 (after 'magit (diminish 'magit-auto-revert-mode))
 (after 'highlight-symbol (diminish 'highlight-symbol-mode))
 (after 'indent-guide (diminish 'indent-guide-mode))
+(after 'hideshow (diminish 'hs-minor-mode))
+(after 'ivy (diminish 'ivy-mode))
 
 
 (require-package 'smart-mode-line)
@@ -64,9 +66,9 @@
 
 
 (delayed-init
-  (require-package 'color-identifiers-mode)
-  (global-color-identifiers-mode)
-  (diminish 'color-identifiers-mode))
+ (require-package 'color-identifiers-mode)
+ (global-color-identifiers-mode)
+ (diminish 'color-identifiers-mode))
 
 
 ;; (require-package 'fancy-narrow)

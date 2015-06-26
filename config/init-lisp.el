@@ -9,11 +9,11 @@
     (eldoc-mode)))
 
 (defun my-lisp-after-save-hook ()
-  (when (or (string-prefix-p (file-truename (concat user-emacs-directory "/config"))
-                             (file-truename buffer-file-name))
-            (equal (file-truename buffer-file-name)
-                   (file-truename custom-file)))
-    (emacs-lisp-byte-compile)))
+  (let ((bufname (file-truename buffer-file-name)))
+    (when (or (string-prefix-p (file-truename (concat user-emacs-directory "/config")) bufname)
+              (equal bufname (file-truename custom-file))
+              (equal bufname (file-truename user-init-file)))
+      (emacs-lisp-byte-compile))))
 
 (add-hook 'emacs-lisp-mode-hook #'my-lisp-hook)
 (add-hook 'lisp-interaction-mode-hook #'my-lisp-hook)
