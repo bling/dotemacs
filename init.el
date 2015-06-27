@@ -33,14 +33,15 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
 (eval-when-compile (require 'cl))
 (let ((debug-on-error t)
       (config-directory (concat user-emacs-directory "config/")))
   (require 'init-util (concat config-directory "init-util.el"))
+
+  (setq custom-file (concat user-emacs-directory "custom.el"))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+
   (cl-loop for file in (directory-files config-directory t)
            unless (file-directory-p file)
            do (require (intern (file-name-base file)) file)))
