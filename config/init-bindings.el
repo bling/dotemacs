@@ -52,14 +52,14 @@
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
 
-  (after "git-gutter+-autoloads"
-    (define-key evil-normal-state-map (kbd "[ h") 'git-gutter+-previous-hunk)
-    (define-key evil-normal-state-map (kbd "] h") 'git-gutter+-next-hunk)
-    (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
-    (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
-    (define-key evil-visual-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
-    (define-key evil-visual-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
-    (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
+  (after "git-gutter-autoloads"
+    (define-key evil-normal-state-map (kbd "[ h") 'git-gutter:previous-hunk)
+    (define-key evil-normal-state-map (kbd "] h") 'git-gutter:next-hunk)
+    (define-key evil-normal-state-map (kbd ", g a") 'git-gutter:stage-hunk)
+    (define-key evil-normal-state-map (kbd ", g r") 'git-gutter:revert-hunk)
+    (evil-ex-define-cmd "Gw" (bind
+                              (start-process "stage" nil "git" "add" (buffer-file-name))
+                              (git-gutter))))
 
   (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
   (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
@@ -135,9 +135,9 @@
              (define-key evil-normal-state-map binding 'projectile-pt))
             ((executable-find "ag")
              (define-key evil-normal-state-map binding
-	       (bind
-		(setq current-prefix-arg t)
-		(call-interactively #'projectile-ag))))
+               (bind
+                (setq current-prefix-arg t)
+                (call-interactively #'projectile-ag))))
             ((executable-find "ack")
              (define-key evil-normal-state-map binding 'projectile-ack))
             (t
