@@ -16,11 +16,16 @@
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
 
-(defcustom dotemacs-evil/emacs-state-modes
+(defcustom dotemacs-evil/emacs-state-major-modes
   '(debugger-mode
-    git-commit-mode
     git-rebase-mode)
-  "List of modes that should start up in Evil Emacs state."
+  "List of major modes that should start up in Evil Emacs state."
+  :type '(repeat (symbol))
+  :group 'dotemacs-evil)
+
+(defcustom dotemacs-evil/emacs-state-minor-modes
+  '(git-commit-mode magit-blame-mode)
+  "List of minor modes that when active should switch to Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
 
@@ -96,10 +101,17 @@
   (if (apply 'derived-mode-p dotemacs-evil/evil-state-modes)
       (turn-on-evil-mode)
     (set-cursor-color dotemacs-evil/emacs-cursor))
-  (when (apply 'derived-mode-p dotemacs-evil/emacs-state-modes)
+  (when (apply 'derived-mode-p dotemacs-evil/emacs-state-major-modes)
     (turn-off-evil-mode)
     (set-cursor-color dotemacs-evil/emacs-cursor)))
 (add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
+
+(cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
+         do (let ((hook (concat (symbol-name mode) "-hook")))
+              (add-hook (intern hook) `(lambda ()
+                                         (if ,mode
+                                             (evil-emacs-state)
+                                           (evil-normal-state))))))
 
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))

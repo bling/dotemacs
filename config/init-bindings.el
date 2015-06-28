@@ -41,12 +41,12 @@
     (after "paradox-autoloads"
       (evil-leader/set-key "P" 'paradox-list-packages))
 
-    (after "magit-autoloads"
+    (after 'magit
       (evil-leader/set-key
         "g s" 'magit-status
-        "g b" 'magit-blame-mode
-        "g c" 'magit-commit
-        "g l" 'magit-log)))
+        "g b" 'magit-blame
+        "g c" 'magit-commit-popup
+        "g l" 'magit-log-popup)))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -175,9 +175,7 @@
 
 
 (after 'magit
-  (global-set-key (kbd "C-x g") 'magit-status)
-  (define-key magit-status-mode-map (kbd "C-n") 'magit-goto-next-sibling-section)
-  (define-key magit-status-mode-map (kbd "C-p") 'magit-goto-previous-sibling-section))
+  (global-set-key (kbd "C-x g") 'magit-status))
 
 
 (after "project-explorer-autoloads"
