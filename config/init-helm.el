@@ -11,6 +11,7 @@
 (setq helm-imenu-fuzzy-match t)
 (setq helm-lisp-fuzzy-completion t)
 (setq helm-completion-in-region-fuzzy-match t)
+(setq helm-mode-fuzzy-match t)
 
 (require-package 'helm)
 (require-package 'helm-descbinds)
