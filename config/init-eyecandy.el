@@ -33,11 +33,13 @@
 (after 'smartparens (diminish 'smartparens-mode))
 (after 'company (diminish 'company-mode))
 (after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
-(after 'git-gutter+ (diminish 'git-gutter+-mode))
+(after 'git-gutter (diminish 'git-gutter-mode))
 (after 'highlight-symbol (diminish 'highlight-symbol-mode))
 (after 'indent-guide (diminish 'indent-guide-mode))
 (after 'hideshow (diminish 'hs-minor-mode))
 (after 'ivy (diminish 'ivy-mode))
+(after 'helm-mode (diminish 'helm-mode))
+(after 'evil-commentary (diminish 'evil-commentary-mode))
 
 
 (require-package 'smart-mode-line)
