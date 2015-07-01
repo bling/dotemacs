@@ -1,11 +1,7 @@
 (setq vc-make-backup-files t)
 
 (after 'vc-git
-  (unless (file-exists-p (concat user-emacs-directory "elisp/magit"))
-    (let ((default-directory (concat user-emacs-directory "elisp/")))
-      (shell-command "git clone https://github.com/magit/magit")))
-  (add-to-list 'load-path (concat user-emacs-directory "elisp/magit/lisp"))
-  (require 'magit)
+  (require-package 'magit)
 
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq magit-section-show-child-count t)

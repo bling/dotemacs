@@ -41,7 +41,7 @@
     (after "paradox-autoloads"
       (evil-leader/set-key "P" 'paradox-list-packages))
 
-    (after 'magit
+    (after "magit-autoloads"
       (evil-leader/set-key
         "g s" 'magit-status
         "g b" 'magit-blame
@@ -174,7 +174,7 @@
   (define-key ivy-mode-map [escape] (kbd "C-g")))
 
 
-(after 'magit
+(after "magit-autoloads"
   (global-set-key (kbd "C-x g") 'magit-status))
 
 
