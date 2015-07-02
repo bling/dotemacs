@@ -43,10 +43,7 @@
 
     (after "magit-autoloads"
       (evil-leader/set-key
-        "g s" 'magit-status
-        "g b" 'magit-blame
-        "g c" 'magit-commit-popup
-        "g l" 'magit-log-popup)))
+        "g" 'magit-dispatch-popup)))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -175,7 +172,7 @@
 
 
 (after "magit-autoloads"
-  (global-set-key (kbd "C-x g") 'magit-status))
+  (global-set-key (kbd "C-x g") 'magit-dispatch-popup))
 
 
 (after "project-explorer-autoloads"
