@@ -156,6 +156,14 @@
     (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
     (define-key evil-motion-state-map (kbd "S-SPC") 'avy-goto-line))
 
+  (after 'eshell
+    (add-hook 'eshell-mode-hook
+              (lambda ()
+                (local-set-key (kbd "C-h") 'evil-window-left)
+                (local-set-key (kbd "C-j") 'evil-window-down)
+                (local-set-key (kbd "C-k") 'evil-window-up)
+                (local-set-key (kbd "C-l") 'evil-window-right))))
+
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
   (evil-ex-define-cmd "Qa" 'evil-quit-all)
