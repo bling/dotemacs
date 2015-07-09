@@ -43,7 +43,12 @@
 
     (after "magit-autoloads"
       (evil-leader/set-key
-        "g" 'magit-dispatch-popup)))
+        "g s" 'magit-status
+        "g b" 'magit-blame-popup
+        "g l" 'magit-log-popup
+        "g d" 'magit-diff-popup
+        "g z" 'magit-stash-popup
+        "g c" 'magit-commit-popup)))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
