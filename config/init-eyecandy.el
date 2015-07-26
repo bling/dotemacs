@@ -80,19 +80,13 @@
 (setq highlight-symbol-idle-delay 0.3)
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 
+
 (require-package 'highlight-numbers)
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
+
 (require-package 'highlight-quoted)
 (add-hook 'prog-mode-hook 'highlight-quoted-mode)
-
-
-;; this is pretty slow on big files
-(require-package 'indent-guide)
-(require 'indent-guide)
-(setq indent-guide-recursive t)
-(add-to-list 'indent-guide-inhibit-modes 'package-menu-mode)
-(indent-guide-global-mode)
 
 
 (add-hook 'find-file-hook 'hl-line-mode)
