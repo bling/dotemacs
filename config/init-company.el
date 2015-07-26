@@ -60,10 +60,10 @@
 
   (global-company-mode)
 
-  (when (display-graphic-p)
-    (require-package 'company-quickhelp)
-    (setq company-quickhelp-delay 0.2)
-    (company-quickhelp-mode t))
+  ;; (when (display-graphic-p)
+  ;;   (require-package 'company-quickhelp)
+  ;;   (setq company-quickhelp-delay 0.2)
+  ;;   (company-quickhelp-mode t))
 
   )
 
