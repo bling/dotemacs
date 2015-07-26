@@ -88,11 +88,11 @@
 
 
 ;; this is pretty slow on big files
-;; (require-package 'indent-guide)
-;; (require 'indent-guide)
-;; (setq indent-guide-recursive t)
-;; (add-to-list 'indent-guide-inhibit-modes 'package-menu-mode)
-;; (indent-guide-global-mode)
+(require-package 'indent-guide)
+(require 'indent-guide)
+(setq indent-guide-recursive t)
+(add-to-list 'indent-guide-inhibit-modes 'package-menu-mode)
+(indent-guide-global-mode)
 
 
 (add-hook 'find-file-hook 'hl-line-mode)
