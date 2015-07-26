@@ -54,14 +54,17 @@
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "C-S-a") 'evil-numbers/dec-at-pt))
 
-  (after "git-gutter-autoloads"
-    (define-key evil-normal-state-map (kbd "[ h") 'git-gutter:previous-hunk)
-    (define-key evil-normal-state-map (kbd "] h") 'git-gutter:next-hunk)
-    (define-key evil-normal-state-map (kbd ", g a") 'git-gutter:stage-hunk)
-    (define-key evil-normal-state-map (kbd ", g r") 'git-gutter:revert-hunk)
+  (after "git-gutter+-autoloads"
+    (define-key evil-normal-state-map (kbd "[ h") #'git-gutter+-next-hunk)
+    (define-key evil-normal-state-map (kbd "] h") #'git-gutter+-previous-hunk)
+
+    (define-key evil-normal-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
+    (define-key evil-normal-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
+
+    (define-key evil-visual-state-map (kbd ", g a") 'git-gutter+-stage-hunks)
+    (define-key evil-visual-state-map (kbd ", g r") 'git-gutter+-revert-hunks)
     (evil-ex-define-cmd "Gw" (bind
-                              (start-process "stage" nil "git" "add" (buffer-file-name))
-                              (git-gutter))))
+                              (git-gutter+-stage-whole-buffer))))
 
   (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
   (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
