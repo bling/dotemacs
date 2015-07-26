@@ -3,38 +3,35 @@
   :group 'dotemacs
   :prefix 'dotemacs-eshell)
 
+
 (defcustom dotemacs-eshell/plan9
   nil
   "Turns on Plan9 style prompt in eshell when non-nil."
   :group 'dotemacs-eshell)
 
 
-;; eshell
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
 (setq eshell-scroll-to-bottom-on-input 'this)
 (setq eshell-buffer-shorthand t)
+(setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
+(setq eshell-glob-case-insensitive t)
+(setq eshell-error-if-no-glob t)
+(setq eshell-history-size 1024)
+(setq eshell-cmpl-ignore-case t)
+(setq eshell-last-dir-ring 512)
+(setq eshell-prompt-function
+      (lambda ()
+        (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
+                (when (fboundp #'vc-git-branches)
+                  (let ((branch (car (vc-git-branches))))
+                    (when branch
+                      (propertize (concat " [" branch "]") 'face 'font-lock-function-name-face))))
+                (propertize " $ " 'face 'font-lock-constant-face))))
 
 
 (when (executable-find "fortune")
   (defadvice eshell (before advice-for-eshell activate)
     (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n"))))
-
-
-;; em-alias
-(setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
-
-
-;; em-glob
-(setq eshell-glob-case-insensitive t)
-(setq eshell-error-if-no-glob t)
-
-
-;; em-hist
-(setq eshell-history-size 1024)
-
-
-;; em-compl
-(setq eshell-cmpl-ignore-case t)
 
 
 ;; plan 9 smart shell
@@ -58,31 +55,12 @@
     (mapc #'find-file (mapcar #'expand-file-name (eshell-flatten-list (reverse args))))))
 
 
-(defun my-current-git-branch ()
-  (let ((branch (car (cl-loop for match in (split-string (shell-command-to-string "git branch") "\n")
-                              when (string-match "^\*" match)
-                              collect match))))
-    (if (not (eq branch nil))
-        (concat " [" (substring branch 2) "]")
-      "")))
-
-
-(defun my-eshell-prompt ()
-  (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
-          (propertize (my-current-git-branch) 'face 'font-lock-function-name-face)
-          (propertize " $ " 'face 'font-lock-constant-face)))
-
-
 (defun eshell/j ()
   "Quickly jump to previous directories."
   (let ((candidates (delete-dups (ring-elements eshell-last-dir-ring)))
         (reader (cond ((eq dotemacs-switch-engine 'ivy) #'ivy-completing-read)
                       (t #'ido-completing-read))))
     (eshell/cd (apply reader (list "Jump to directory:" candidates)))))
-
-
-;; em-prompt
-(setq eshell-prompt-function #'my-eshell-prompt)
 
 
 (setq my-eshell-buffer-count 0)
