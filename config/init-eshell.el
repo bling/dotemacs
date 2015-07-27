@@ -3,11 +3,16 @@
   :group 'dotemacs
   :prefix 'dotemacs-eshell)
 
-
 (defcustom dotemacs-eshell/plan9
   nil
   "Turns on Plan9 style prompt in eshell when non-nil."
   :group 'dotemacs-eshell)
+
+(defcustom dotemacs-eshell/prompt-git-stats
+  t
+  "Turns on additional git status statistics in the prompt."
+  :group 'dotemacs-eshell
+  :type 'boolean)
 
 
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
@@ -25,18 +30,19 @@
                 (when (fboundp #'vc-git-branches)
                   (let ((branch (car (vc-git-branches))))
                     (when branch
-                      (let* ((status (shell-command-to-string "git status --porcelain"))
-                             (parts (split-string status "\n" t " "))
-                             (states (mapcar #'string-to-char parts))
-                             (added (count-if (lambda (char) (= char ?A)) states))
-                             (modified (count-if (lambda (char) (= char ?M)) states))
-                             (deleted (count-if (lambda (char) (= char ?D)) states)))
-                        (concat
-                         (propertize " [" 'face 'font-lock-keyword-face)
-                         (propertize branch 'face 'font-lock-function-name-face)
-                         (when (> (+ added modified deleted) 0)
-                           (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face))
-                         (propertize "]" 'face 'font-lock-keyword-face))))))
+                      (concat
+                       (propertize " [" 'face 'font-lock-keyword-face)
+                       (propertize branch 'face 'font-lock-function-name-face)
+                       (when dotemacs-eshell/prompt-git-stats
+                         (let* ((status (shell-command-to-string "git status --porcelain"))
+                                (parts (split-string status "\n" t " "))
+                                (states (mapcar #'string-to-char parts))
+                                (added (count-if (lambda (char) (= char ?A)) states))
+                                (modified (count-if (lambda (char) (= char ?M)) states))
+                                (deleted (count-if (lambda (char) (= char ?D)) states)))
+                           (when (> (+ added modified deleted) 0)
+                             (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face))))
+                       (propertize "]" 'face 'font-lock-keyword-face)))))
                 (propertize " $ " 'face 'font-lock-constant-face))))
 
 
