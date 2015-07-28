@@ -167,19 +167,9 @@
 (random t) ;; seed
 
 
-(defun my-find-file-check-large-file ()
-  (when (> (buffer-size) (* 1024 1024))
-    (setq buffer-read-only t)
-    (buffer-disable-undo)
-    (when (fboundp #'undo-tree-mode)
-      (undo-tree-mode -1))
-    (fundamental-mode)))
-
-
 (add-hook 'find-file-hook (lambda ()
                             (unless (eq major-mode 'org-mode)
                               (setq show-trailing-whitespace t))))
 (add-hook 'find-file-hook #'visual-line-mode)
-(add-hook 'find-file-hook #'my-find-file-check-large-file)
 
 (provide 'init-core)
