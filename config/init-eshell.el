@@ -23,7 +23,7 @@
 (setq eshell-error-if-no-glob t)
 (setq eshell-history-size 1024)
 (setq eshell-cmpl-ignore-case t)
-(setq eshell-last-dir-ring 512)
+(setq eshell-last-dir-ring-size 512)
 (setq eshell-prompt-function
       (lambda ()
         (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
