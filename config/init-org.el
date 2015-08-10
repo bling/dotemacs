@@ -1,12 +1,26 @@
+(after 'org
+  (defgroup dotemacs-org nil
+    "Configuration options for org-mode."
+    :group 'dotemacs
+    :prefix 'dotemacs-org)
+
+  (defcustom dotemacs-org/journal-file (concat org-directory "/journal.org")
+    "The path to the file where you want to make journal entries."
+    :type 'file
+    :group 'dotemacs-org)
+
+  (defcustom dotemacs-org/inbox-file (concat org-directory "/inbox.org")
+    "The path to the file where to capture notes."
+    :type 'file
+    :group 'dotemacs-org))
+
 (add-hook
  'org-load-hook
  (lambda ()
    (unless (file-exists-p org-directory)
      (make-directory org-directory))
 
-   (setq my-inbox-org-file (concat org-directory "/inbox.org"))
-
-   (setq org-default-notes-file my-inbox-org-file)
+   (setq org-default-notes-file (expand-file-name dotemacs-org/inbox-file))
    (setq org-log-done t)
 
    (setq org-startup-indented t)
@@ -15,14 +29,14 @@
 
    (setq org-agenda-files `(,org-directory))
    (setq org-capture-templates
-         '(("t" "Todo" entry (file+headline my-inbox-org-file "INBOX")
+         '(("t" "Todo" entry (file+headline (expand-file-name dotemacs-org/inbox-file) "INBOX")
             "* TODO %?\n%U\n%a\n")
-           ("n" "Note" entry (file+headline my-inbox-org-file "NOTES")
+           ("n" "Note" entry (file+headline (expand-file-name dotemacs-org/inbox-file) "NOTES")
             "* %? :NOTE:\n%U\n%a\n")
-           ("m" "Meeting" entry (file my-inbox-org-file)
+           ("m" "Meeting" entry (file (expand-file-name dotemacs-org/inbox-file))
             "* MEETING %? :MEETING:\n%U")
-           ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
-            "* %?\n%U\n")))
+           ("j" "Journal" entry (file+datetree (expand-file-name dotemacs-org/journal-file))
+            "* %U\n** %?")))
 
    (setq org-use-fast-todo-selection t)
    (setq org-treat-S-cursor-todo-selection-as-state-change nil)
@@ -40,12 +54,6 @@
    (setq org-refile-targets '((nil :maxlevel . 9)
                               (org-agenda-files :maxlevel . 9)))
    (setq org-completion-use-ido t)
-
-   (after 'org-mobile
-     (setq org-mobile-directory (concat org-directory "/MobileOrg"))
-     (unless (file-exists-p org-mobile-directory)
-       (make-directory org-mobile-directory))
-     (setq org-mobile-inbox-for-pull (concat org-directory "/from-mobile.org")))
 
    (after 'evil
      (add-hook 'org-capture-mode-hook #'evil-emacs-state))
