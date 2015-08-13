@@ -165,13 +165,5 @@
           ad-do-it)
       ad-do-it)))
 
-(when (>= emacs-major-version 25)
-  (defadvice elisp--preceding-sexp (around evil activate)
-    "In normal-state or motion-state, last sexp ends at point."
-    (if (or (evil-normal-state-p) (evil-motion-state-p))
-        (save-excursion
-          (unless (or (eobp) (eolp)) (forward-char))
-          ad-do-it)
-      ad-do-it)))
 
 (provide 'init-evil)
