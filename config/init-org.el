@@ -1,22 +1,21 @@
-(after 'org
-  (defgroup dotemacs-org nil
-    "Configuration options for org-mode."
-    :group 'dotemacs
-    :prefix 'dotemacs-org)
-
-  (defcustom dotemacs-org/journal-file (concat org-directory "/journal.org")
-    "The path to the file where you want to make journal entries."
-    :type 'file
-    :group 'dotemacs-org)
-
-  (defcustom dotemacs-org/inbox-file (concat org-directory "/inbox.org")
-    "The path to the file where to capture notes."
-    :type 'file
-    :group 'dotemacs-org))
-
 (add-hook
  'org-load-hook
  (lambda ()
+   (defgroup dotemacs-org nil
+     "Configuration options for org-mode."
+     :group 'dotemacs
+     :prefix 'dotemacs-org)
+
+   (defcustom dotemacs-org/journal-file (concat org-directory "/journal.org")
+     "The path to the file where you want to make journal entries."
+     :type 'file
+     :group 'dotemacs-org)
+
+   (defcustom dotemacs-org/inbox-file (concat org-directory "/inbox.org")
+     "The path to the file where to capture notes."
+     :type 'file
+     :group 'dotemacs-org)
+
    (unless (file-exists-p org-directory)
      (make-directory org-directory))
 
