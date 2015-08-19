@@ -153,17 +153,8 @@
                                   (evil-normal-state)))))
 
 (after 'paren
-  ;; the default behavior only highlights with the point one-after the closing paren
-  ;; this changes it such it will match with the point on the closing paren
-  (defadvice show-paren-function (around show-paren-closing-before activate)
-    (if (and (or
-              (evil-normal-state-p)
-              (evil-visual-state-p))
-             (eq (syntax-class (syntax-after (point))) 5))
-        (save-excursion
-          (forward-char)
-          ad-do-it)
-      ad-do-it)))
+  (ad-enable-advice #'show-paren-function 'around 'evil)
+  (ad-activate #'show-paren-function))
 
 
 (provide 'init-evil)
