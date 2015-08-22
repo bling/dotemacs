@@ -21,6 +21,7 @@
 
    (setq org-default-notes-file (expand-file-name dotemacs-org/inbox-file))
    (setq org-log-done t)
+   (setq org-log-into-drawer t)
 
    (setq org-startup-indented t)
    (setq org-indent-indentation-per-level 2)
@@ -40,7 +41,7 @@
    (setq org-use-fast-todo-selection t)
    (setq org-treat-S-cursor-todo-selection-as-state-change nil)
    (setq org-todo-keywords
-         '((sequence "TODO(t)" "NEXT(n@)" "|" "DONE(d)")
+         '((sequence "TODO(t)" "NEXT(n@)" "|" "DONE(d@)")
            (sequence "WAITING(w@/!)" "|" "CANCELLED(c@/!)")))
 
    (setq org-todo-state-tags-triggers
@@ -53,9 +54,6 @@
    (setq org-refile-targets '((nil :maxlevel . 9)
                               (org-agenda-files :maxlevel . 9)))
    (setq org-completion-use-ido t)
-
-   (after 'evil
-     (add-hook 'org-capture-mode-hook #'evil-emacs-state))
 
    (when (boundp 'org-plantuml-jar-path)
      (org-babel-do-load-languages
