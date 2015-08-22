@@ -13,6 +13,9 @@
 (setq helm-completion-in-region-fuzzy-match t)
 (setq helm-mode-fuzzy-match t)
 
+(setq helm-input-idle-delay 0.02)
+(setq helm-candidate-number-limit 10)
+
 (require-package 'helm)
 (require-package 'helm-descbinds)
 
@@ -32,6 +35,9 @@
   (require-package 'helm-company))
 
 (after 'helm
+  ;; always take up 20% of real estate
+  (setq helm-autoresize-min-height 20)
+  (setq helm-autoresize-max-height 20)
   (helm-autoresize-mode t))
 
 (when (eq dotemacs-switch-engine 'helm)
