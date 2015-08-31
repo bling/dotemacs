@@ -6,6 +6,7 @@
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq magit-section-show-child-count t)
   (setq magit-diff-arguments '("--histogram"))
+  (setq magit-push-always-verify nil)
 
   (if (display-graphic-p)
       (progn
