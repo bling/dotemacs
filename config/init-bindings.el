@@ -268,6 +268,7 @@
 (global-set-key (kbd "C-c e") 'my-eval-and-replace)
 (global-set-key (kbd "C-c t") 'my-new-eshell-split)
 
+(global-set-key (kbd "C-x c") 'calculator)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 

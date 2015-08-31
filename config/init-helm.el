@@ -35,9 +35,9 @@
   (require-package 'helm-company))
 
 (after 'helm
-  ;; always take up 20% of real estate
-  (setq helm-autoresize-min-height 20)
-  (setq helm-autoresize-max-height 20)
+  ;; take between 10-30% of screen space
+  (setq helm-autoresize-min-height 10)
+  (setq helm-autoresize-max-height 30)
   (helm-autoresize-mode t))
 
 (when (eq dotemacs-switch-engine 'helm)
