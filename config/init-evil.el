@@ -9,6 +9,7 @@
     prog-mode
     sws-mode
     dired-mode
+    web-mode
     comint-mode
     log-edit-mode
     compilation-mode)
