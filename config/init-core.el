@@ -161,10 +161,16 @@
 (blink-cursor-mode -1)
 (global-auto-revert-mode t)
 (electric-indent-mode t)
-(electric-pair-mode t)
 (transient-mark-mode t)
 (delete-selection-mode t)
 (random t) ;; seed
+
+
+(unless (and (boundp 'dotemacs-smartparens/autoinsert)
+             dotemacs-smartparens/autoinsert)
+  (electric-pair-mode t)
+  (add-hook 'minibuffer-setup-hook (lambda () (electric-pair-mode -1)))
+  (add-hook 'minibuffer-exit-hook (lambda () (electric-pair-mode t))))
 
 
 (add-hook 'find-file-hook (lambda ()
