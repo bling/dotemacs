@@ -1,4 +1,22 @@
-(lazy-major-mode "\\.js$" js2-mode)
+(defgroup dotemacs-js nil
+  "Configuration options for Javascript."
+  :group 'dotemacs
+  :prefix 'dotemacs-js)
+
+(defcustom dotemacs-js/indent-offset 2
+  "The number of spaces to indent nested statements."
+  :type 'integer
+  :group 'dotemacs-js)
+
+(setq js-indent-level dotemacs-js/indent-offset)
+
+(add-to-list 'auto-mode-alist
+             '("\\.js$" . (lambda ()
+                            (if (< (buffer-size) (* 1024 20))
+                                (progn
+                                  (require-package 'js2-mode)
+                                  (js2-mode))
+                              (js-mode)))))
 
 (after 'js2-mode
 
@@ -21,7 +39,7 @@
   (js2r-add-keybindings-with-prefix "C-c C-m")
 
   (setq js2-highlight-level 3)
-  (setq-default js2-basic-offset 2)
+  (setq-default js2-basic-offset dotemacs-js/indent-offset)
 
   (when (executable-find "tern")
     (require-package 'tern)
