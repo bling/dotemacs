@@ -5,12 +5,12 @@
 
 (defcustom dotemacs-evil/evil-state-modes
   '(fundamental-mode
+    conf-mode
     text-mode
     prog-mode
     sws-mode
     dired-mode
     web-mode
-    comint-mode
     log-edit-mode
     compilation-mode)
   "List of modes that should start up in Evil state."
