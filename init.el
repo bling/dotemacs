@@ -27,6 +27,14 @@
           (const :tag "ivy" ivy))
   :group 'dotemacs)
 
+(defcustom dotemacs-pair-engine
+  'smartparens
+  "The primary engine to use auto-pairing and parens matching."
+  :type '(radio
+          (const :tag "emacs" emacs)
+          (const :tag "smartparens" smartparens))
+  :group 'dotemacs)
+
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))

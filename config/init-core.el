@@ -166,8 +166,7 @@
 (random t) ;; seed
 
 
-(unless (and (boundp 'dotemacs-smartparens/autoinsert)
-             dotemacs-smartparens/autoinsert)
+(when (eq dotemacs-pair-engine 'emacs)
   (electric-pair-mode t)
   (add-hook 'minibuffer-setup-hook (lambda () (electric-pair-mode -1)))
   (add-hook 'minibuffer-exit-hook (lambda () (electric-pair-mode t))))

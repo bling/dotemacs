@@ -1,5 +1,6 @@
-(show-paren-mode)
-(setq show-paren-delay 0)
+(when (eq dotemacs-pair-engine 'emacs)
+  (show-paren-mode)
+  (setq show-paren-delay 0))
 
 
 (line-number-mode t)
