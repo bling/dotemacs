@@ -80,12 +80,12 @@
     (eshell/cd (apply reader (list "Jump to directory:" candidates)))))
 
 
-(setq my-eshell-buffer-count 0)
-(defun my-new-eshell-split ()
-  (interactive)
-  (split-window)
-  (setq my-eshell-buffer-count (+ 1 my-eshell-buffer-count))
-  (eshell my-eshell-buffer-count))
+(eval-when-compile (require 'cl))
+(lexical-let ((count 0))
+  (defun my-new-eshell-split ()
+    (interactive)
+    (split-window)
+    (eshell (incf count))))
 
 
 (add-hook 'eshell-mode-hook
