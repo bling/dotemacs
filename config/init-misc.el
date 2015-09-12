@@ -46,10 +46,8 @@
 
 (require-package 'aggressive-indent)
 (require 'aggressive-indent)
-(add-to-list 'aggressive-indent-excluded-modes #'stylus-mode)
-(add-to-list 'aggressive-indent-excluded-modes #'org-mode)
-(add-to-list 'aggressive-indent-excluded-modes #'vimrc-mode)
-(global-aggressive-indent-mode)
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
 
 
 (require-package 'etags-select)
