@@ -5,13 +5,9 @@
      ,@commands))
 
 
-(require-package 'guide-key)
-(require 'guide-key)
-(setq guide-key/guide-key-sequence '("C-x" "C-c" ","))
-(setq guide-key/recursive-key-sequence-flag t)
-(setq guide-key/popup-window-position 'bottom)
-(setq guide-key/idle-delay 0.2)
-(guide-key-mode 1)
+(require-package 'which-key)
+(setq which-key-idle-delay 0.2)
+(which-key-mode)
 
 
 (after 'evil
