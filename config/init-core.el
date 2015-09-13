@@ -146,7 +146,6 @@
 (setq save-interprogram-paste-before-kill t)
 (setq create-lockfiles nil)
 (setq echo-keystrokes 0.01)
-(setq gc-cons-threshold 10000000)
 (setq initial-major-mode 'emacs-lisp-mode)
 (setq eval-expression-print-level nil)
 (setq-default indent-tabs-mode nil)
