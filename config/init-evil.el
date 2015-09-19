@@ -103,6 +103,7 @@
     (set-cursor-color dotemacs-evil/emacs-cursor)
     (turn-off-evil-mode)))
 (add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
+(add-hook 'find-file-hook #'turn-on-evil-mode)
 
 (cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
          do (let ((hook (concat (symbol-name mode) "-hook")))
