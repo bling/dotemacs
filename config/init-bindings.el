@@ -73,16 +73,11 @@
     (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
-    (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
-    (define-key evil-normal-state-map (kbd "SPC f") 'helm-find-files)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
     (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
-    (define-key evil-normal-state-map (kbd "SPC r") 'helm-register)
-    (after "helm-swoop-autoloads"
-      (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
-      (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)))
+    (define-key evil-normal-state-map (kbd "SPC r") 'helm-register))
 
   (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-f") 'evil-scroll-down)
@@ -134,7 +129,7 @@
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after "projectile-autoloads"
-    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file-dwim)
     (let ((binding (kbd "SPC /")))
       (cond ((executable-find "pt")
              (define-key evil-normal-state-map binding 'projectile-pt))
@@ -146,9 +141,7 @@
             ((executable-find "ack")
              (define-key evil-normal-state-map binding 'projectile-ack))
             (t
-             (define-key evil-normal-state-map binding 'projectile-grep))))
-    (after "helm-projectile-autoloads"
-      (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
+             (define-key evil-normal-state-map binding 'projectile-grep)))))
 
   (after "multiple-cursors-autoloads"
     (after 'js2-mode
@@ -167,6 +160,16 @@
                 (local-set-key (kbd "C-j") 'evil-window-down)
                 (local-set-key (kbd "C-k") 'evil-window-up)
                 (local-set-key (kbd "C-l") 'evil-window-right))))
+
+  (cond ((eq dotemacs-switch-engine 'ivy)
+         (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
+         (define-key evil-normal-state-map (kbd "SPC l") 'swiper))
+        ((eq dotemacs-switch-engine 'helm)
+         (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
+         (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
+         (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
+         (define-key evil-normal-state-map (kbd "SPC b") 'helm-projectile)
+         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file-dwim)))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)
