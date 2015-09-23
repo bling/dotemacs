@@ -41,6 +41,7 @@
 (after 'ivy (diminish 'ivy-mode))
 (after 'helm-mode (diminish 'helm-mode))
 (after 'evil-commentary (diminish 'evil-commentary-mode))
+(after 'page-break-lines (diminish 'page-break-lines-mode))
 
 
 (require-package 'smart-mode-line)
@@ -88,6 +89,10 @@
 
 (require-package 'highlight-quoted)
 (add-hook 'prog-mode-hook 'highlight-quoted-mode)
+
+
+(require-package 'page-break-lines)
+(page-break-lines-mode)
 
 
 (add-hook 'find-file-hook 'hl-line-mode)
