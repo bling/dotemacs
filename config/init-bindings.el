@@ -163,7 +163,8 @@
 
   (cond ((eq dotemacs-switch-engine 'ivy)
          (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
-         (define-key evil-normal-state-map (kbd "SPC l") 'swiper))
+         (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
+         (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-projectile-buffers))
         ((eq dotemacs-switch-engine 'helm)
          (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
