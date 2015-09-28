@@ -114,6 +114,7 @@
 (cl-loop for hook in dotemacs-evil/emacs-state-hooks
          do (add-hook hook #'evil-emacs-state))
 
+
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
 
@@ -128,18 +129,6 @@
 (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
 (my-evil-terminal-cursor-change)
 
-(defun my-evil-modeline-change (default-color)
-  "changes the modeline color when the evil mode changes"
-  (let ((color (cond ((evil-insert-state-p) '("#002233" . "#ffffff"))
-                     ((evil-visual-state-p) '("#330022" . "#ffffff"))
-                     ((evil-normal-state-p) default-color)
-                     (t '("#440000" . "#ffffff")))))
-    (set-face-background 'mode-line (car color))
-    (set-face-foreground 'mode-line (cdr color))))
-
-(lexical-let ((default-color (cons (face-background 'mode-line)
-                                   (face-foreground 'mode-line))))
-  (add-hook 'post-command-hook (lambda () (my-evil-modeline-change default-color))))
 
 (defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
   (recenter))

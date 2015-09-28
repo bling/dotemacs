@@ -44,11 +44,10 @@
 (after 'page-break-lines (diminish 'page-break-lines-mode))
 
 
-(require-package 'smart-mode-line)
-(setq sml/show-client t)
-(setq sml/show-eol t)
-(setq sml/show-frame-identification t)
-(sml/setup)
+(require-package 'spaceline)
+(require 'spaceline-config)
+(setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
+(spaceline-spacemacs-theme)
 
 
 (if (fboundp 'global-prettify-symbols-mode)
