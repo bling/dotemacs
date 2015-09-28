@@ -7,6 +7,8 @@
 
 (setq ivy-use-virtual-buffers t)
 (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+(setq ivy-height 12)
+(setq ivy-display-style 'fancy)
 
 (defun my-ivy-projectile-buffers ()
   (interactive)

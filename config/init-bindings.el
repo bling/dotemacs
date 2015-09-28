@@ -69,8 +69,10 @@
   (define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'find-file)
 
+  (when (fboundp 'fzf)
+    (define-key evil-normal-state-map (kbd "SPC f") 'fzf))
+
   (after "helm-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
