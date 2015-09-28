@@ -1,4 +1,4 @@
-(setq gc-cons-threshold 100000000) ;; 100MB
+(setq gc-cons-threshold (* 1024 1024 1024))
 
 (let ((debug-on-error t)
       (file-name-handler-alist nil)
@@ -36,7 +36,7 @@
     :group 'dotemacs)
 
   (defcustom dotemacs-pair-engine
-    'smartparens
+    'emacs
     "The primary engine to use auto-pairing and parens matching."
     :type '(radio
             (const :tag "emacs" emacs)

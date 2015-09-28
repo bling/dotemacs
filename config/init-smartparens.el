@@ -2,6 +2,8 @@
 (require 'smartparens-config)
 
 (when (eq dotemacs-pair-engine 'smartparens)
+  (electric-pair-mode -1)
+
   (setq sp-autoinsert-quote-if-followed-by-closing-pair nil)
   (setq sp-autoinsert-pair t)
 
