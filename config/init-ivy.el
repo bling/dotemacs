@@ -1,7 +1,6 @@
-(require-package 'smex)
-(setq smex-save-file (concat dotemacs-cache-directory "smex-items"))
+(require-package 'flx)
+(require 'flx)
 
-(require-package 'ivy)
 (require-package 'swiper)
 (require-package 'counsel)
 
@@ -12,19 +11,29 @@
 
 (defun my-ivy-projectile-buffers ()
   (interactive)
-  (let ((files (if (projectile-project-p)
-                   (delete-dups (append
-                                 (projectile-project-buffer-files)
-                                 (projectile-recentf-files)
-                                 (projectile-current-project-files)))
-                 recentf-list)))
+  (let* ((buffers (mapcar #'buffer-name (buffer-list)))
+         (base-files (append buffers recentf-list))
+         (files (delete-dups (if (projectile-project-p)
+                                 (append
+                                  (projectile-project-buffer-files)
+                                  (projectile-recentf-files)
+                                  (projectile-current-project-files)
+                                  base-files)
+                               base-files))))
     (ivy-read "Uber Buffers: " files
               :action
               (lambda (f)
-                (with-ivy-window (if (projectile-project-p)
-                                     (find-file (concat (projectile-project-root) f))
-                                   (find-file f)))))))
+                (with-ivy-window
+                  (cond ((member f buffers)
+                         (switch-to-buffer f))
+                        ((file-exists-p f)
+                         (find-file f))
+                        (t
+                         (find-file (concat (projectile-project-root) f)))))))))
 
+;; (require 'ivy)
+;; (setq ivy--flx-cache (flx-make-filename-cache))
+;; (setq ivy--flx-cache (flx-make-string-cache))
 
 (when (eq dotemacs-switch-engine 'ivy)
   (ivy-mode t)
