@@ -247,10 +247,10 @@
   (global-set-key [mouse-5] (bind (scroll-up 1))))
 
 
-(after "helm-autoloads"
+(after 'eshell
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c h") #'helm-eshell-history))))
+              (local-set-key (kbd "C-c h") (bind (eshell/h))))))
 
 
 (after 'help-mode

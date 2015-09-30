@@ -74,10 +74,17 @@
 
 (defun eshell/j ()
   "Quickly jump to previous directories."
-  (let ((candidates (delete-dups (ring-elements eshell-last-dir-ring)))
-        (reader (cond ((eq dotemacs-switch-engine 'ivy) #'ivy-completing-read)
-                      (t #'ido-completing-read))))
-    (eshell/cd (apply reader (list "Jump to directory:" candidates)))))
+  (my-completing-read
+   "Jump to directory: "
+   (delete-dups (ring-elements eshell-last-dir-ring))
+   #'eshell/cd))
+
+(defun eshell/h ()
+  "Quickly run a previous command."
+  (my-completing-read
+   "Run previous command: "
+   (delete-dups (ring-elements eshell-history-ring))
+   #'insert))
 
 
 (eval-when-compile (require 'cl))
