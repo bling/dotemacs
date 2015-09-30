@@ -11,8 +11,7 @@
     sws-mode
     dired-mode
     web-mode
-    log-edit-mode
-    compilation-mode)
+    log-edit-mode)
   "List of modes that should start up in Evil state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)

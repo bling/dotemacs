@@ -252,6 +252,9 @@
             (lambda ()
               (local-set-key (kbd "C-c h") (bind (eshell/h))))))
 
+(after 'compile
+  (define-key compilation-mode-map (kbd "j") 'compilation-next-error)
+  (define-key compilation-mode-map (kbd "k") 'compilation-previous-error))
 
 (after 'help-mode
   (define-key help-mode-map (kbd "n") 'next-line)
