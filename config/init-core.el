@@ -29,6 +29,10 @@
 (run-with-timer 1800 1800 'recentf-save-list)
 
 
+;; gc
+(run-with-idle-timer (* 60 3) t (lambda () (garbage-collect)))
+
+
 ;; pcomplete
 (setq pcomplete-ignore-case t)
 
