@@ -4,6 +4,7 @@
 (require-package 'swiper)
 (require-package 'counsel)
 
+(setq ivy-initial-inputs-alist '((t . "")))
 (setq ivy-use-virtual-buffers t)
 (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 (setq ivy-height 12)
