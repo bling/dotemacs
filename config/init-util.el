@@ -151,6 +151,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
+(defun my-find-file-as-root (file)
+  "Edits a file as root."
+  (interactive "f")
+  (find-file-other-window (concat "/sudo:root@localhost:" file)))
+
 (defun require-package (package)
   "Ensures that PACKAGE is installed."
   (unless (or (package-installed-p package)
