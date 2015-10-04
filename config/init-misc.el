@@ -40,8 +40,9 @@
 (require-package 'expand-region)
 
 
-(require-package 'editorconfig)
-(require 'editorconfig)
+(when (executable-find "editorconfig")
+  (require-package 'editorconfig)
+  (require 'editorconfig))
 
 
 (require-package 'aggressive-indent)
