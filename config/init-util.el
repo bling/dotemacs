@@ -1,7 +1,3 @@
-(with-current-buffer (get-buffer-create "*Require Times*")
-  (insert "| feature | timestamp | elapsed |\n")
-  (insert "|---------+-----------+---------|\n"))
-
 (defadvice require (around require-advice activate)
   (let ((elapsed)
         (loaded (memq feature features))
@@ -10,6 +6,9 @@
         ad-do-it
       (unless loaded
         (with-current-buffer (get-buffer-create "*Require Times*")
+          (when (= 0 (buffer-size))
+            (insert "| feature | timestamp | elapsed |\n")
+            (insert "|---------+-----------+---------|\n"))
           (goto-char (point-max))
           (setq elapsed (float-time (time-subtract (current-time) start)))
           (insert (format "| %s | %s | %f |\n"
@@ -23,16 +22,7 @@
     (when (file-directory-p dir)
       (add-to-list 'load-path dir))))
 
-(if (fboundp 'with-eval-after-load)
-    (defmacro after (feature &rest body)
-      "After FEATURE is loaded, evaluate BODY."
-      (declare (indent defun))
-      `(with-eval-after-load ,feature ,@body))
-  (defmacro after (feature &rest body)
-    "After FEATURE is loaded, evaluate BODY."
-    (declare (indent defun))
-    `(eval-after-load ,feature
-       '(progn ,@body))))
+(defalias 'after 'with-eval-after-load)
 
 (defmacro lazy-major-mode (pattern mode)
   "Defines a new major-mode matched by PATTERN, installs MODE if necessary, and activates it."
