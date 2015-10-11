@@ -9,6 +9,7 @@
     text-mode
     prog-mode
     sws-mode
+    yaml-mode
     dired-mode
     web-mode
     log-edit-mode)
