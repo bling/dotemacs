@@ -130,7 +130,7 @@
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
   (after "projectile-autoloads"
-    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file-dwim)
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
     (let ((binding (kbd "SPC /")))
       (cond ((executable-find "pt")
              (define-key evil-normal-state-map binding 'projectile-pt))
@@ -166,14 +166,14 @@
          (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
          (define-key evil-normal-state-map (kbd "SPC y") 'my-ivy-kill-ring)
-         (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-projectile-buffers))
+         (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-mini))
         ((eq dotemacs-switch-engine 'helm)
          (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
          (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
-         (define-key evil-normal-state-map (kbd "SPC b") 'helm-projectile)
+         (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
          (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
-         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file-dwim)))
+         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)

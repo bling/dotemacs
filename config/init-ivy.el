@@ -14,7 +14,18 @@
   (interactive)
   (ivy-read "Insert: " kill-ring :action #'insert))
 
-(defun my-ivy-projectile-buffers ()
+(defun my-ivy-mini ()
+  (interactive)
+  (let ((buffers (mapcar #'buffer-name (buffer-list))))
+    (ivy-read "Search: " (append buffers recentf-list)
+              :action (lambda (f)
+                        (with-ivy-window
+                          (cond ((member f buffers)
+                                 (switch-to-buffer f))
+                                (t
+                                 (find-file f))))))))
+
+(defun my-ivy-everything ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
          (base-files (append buffers recentf-list))
