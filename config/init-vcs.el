@@ -3,7 +3,7 @@
 (after 'vc-git
   (require-package 'magit)
 
-  (setq magit-status-buffer-switch-function 'switch-to-buffer)
+  (add-hook 'magit-post-display-buffer-hook #'delete-other-windows)
   (setq magit-section-show-child-count t)
   (setq magit-diff-arguments '("--histogram"))
   (setq magit-push-always-verify nil)

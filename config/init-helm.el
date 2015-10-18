@@ -14,7 +14,6 @@
 (setq helm-mode-fuzzy-match t)
 
 (setq helm-input-idle-delay 0.02)
-(setq helm-candidate-number-limit 10)
 
 (require-package 'helm)
 (require-package 'helm-descbinds)
