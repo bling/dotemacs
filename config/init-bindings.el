@@ -173,7 +173,7 @@
          (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
          (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
          (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
-         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)))
+         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)

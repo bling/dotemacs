@@ -18,6 +18,9 @@
 (require-package 'helm)
 (require-package 'helm-descbinds)
 
+(require-package 'helm-flx)
+(helm-flx-mode)
+
 (setq helm-swoop-pre-input-function #'ignore)
 (setq helm-swoop-use-line-number-face t)
 (setq helm-swoop-split-with-multiple-windows t)
