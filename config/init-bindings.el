@@ -131,6 +131,8 @@
 
   (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (after "helm-projectile-autoloads"
+      (and (eq dotemacs-switch-engine 'helm) (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
     (let ((binding (kbd "SPC /")))
       (cond ((executable-find "pt")
              (define-key evil-normal-state-map binding 'projectile-pt))
@@ -172,8 +174,7 @@
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
          (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
          (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
-         (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)
-         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
+         (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)))
 
   ;; butter fingers
   (evil-ex-define-cmd "Q" 'evil-quit)

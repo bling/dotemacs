@@ -10,6 +10,7 @@
     prog-mode
     sws-mode
     yaml-mode
+    vimrc-mode
     dired-mode
     web-mode
     log-edit-mode)
