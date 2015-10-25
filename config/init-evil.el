@@ -33,7 +33,14 @@
 (defcustom dotemacs-evil/emacs-cursor
   "red"
   "The color of the cursor when in Emacs state."
-  :type 'color)
+  :type 'color
+  :group 'dotemacs-evil)
+
+(defcustom dotemacs-evil/emacs-insert-mode
+  nil
+  "If non-nil, insert mode will act as Emacs state."
+  :type 'boolean
+  :group 'dotemacs-evil)
 
 
 (setq evil-search-module 'evil-search)
@@ -48,6 +55,12 @@
 
 (require-package 'evil)
 (require 'evil)
+
+
+(when dotemacs-evil/emacs-insert-mode
+  (defalias 'evil-insert-state 'evil-emacs-state)
+  (define-key evil-emacs-state-map (kbd "<escape>") 'evil-normal-state))
+
 
 (unless (display-graphic-p)
   (evil-esc-mode))
