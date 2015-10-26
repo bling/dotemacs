@@ -131,8 +131,9 @@
 
   (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (after "helm-projectile-autoloads"
-      (and (eq dotemacs-switch-engine 'helm) (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
+    (when (eq dotemacs-switch-engine 'helm)
+      (after "helm-projectile-autoloads"
+        (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
     (let ((binding (kbd "SPC /")))
       (cond ((executable-find "pt")
              (define-key evil-normal-state-map binding 'projectile-pt))
