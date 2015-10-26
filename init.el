@@ -55,5 +55,5 @@
     (load custom-file))
 
   (cl-loop for file in (directory-files config-directory t)
-           unless (file-directory-p file)
+           when (string-match "\\.el$" file)
            do (require (intern (file-name-base file)) file)))
