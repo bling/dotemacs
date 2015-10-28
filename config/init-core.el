@@ -49,6 +49,10 @@
 (require 'dired-x)
 
 
+;; tramp
+(setq tramp-persistency-file-name (concat dotemacs-cache-directory "tramp"))
+
+
 ;; comint
 (after 'comint
   (defun my-toggle-comint-scroll-to-bottom-on-output ()

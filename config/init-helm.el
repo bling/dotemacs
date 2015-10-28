@@ -11,7 +11,10 @@
 (require-package 'helm-descbinds)
 
 (require-package 'helm-flx)
-(helm-flx-mode)
+(helm-flx-mode t)
+
+(require-package 'helm-fuzzier)
+(helm-fuzzier-mode t)
 
 (setq helm-swoop-pre-input-function #'ignore)
 (setq helm-swoop-use-line-number-face t)
