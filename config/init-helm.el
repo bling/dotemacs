@@ -1,6 +1,6 @@
 (setq helm-command-prefix-key "C-c h")
-(setq helm-quick-update t)
 (setq helm-bookmark-show-location t)
+
 (setq helm-buffers-fuzzy-matching t)
 (setq helm-M-x-fuzzy-match t)
 (setq helm-apropos-fuzzy-match t)
@@ -12,8 +12,6 @@
 (setq helm-lisp-fuzzy-completion t)
 (setq helm-completion-in-region-fuzzy-match t)
 (setq helm-mode-fuzzy-match t)
-
-(setq helm-input-idle-delay 0.02)
 
 (require-package 'helm)
 (require-package 'helm-descbinds)
