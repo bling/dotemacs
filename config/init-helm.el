@@ -1,17 +1,11 @@
 (setq helm-command-prefix-key "C-c h")
 (setq helm-bookmark-show-location t)
 
-(setq helm-buffers-fuzzy-matching t)
-(setq helm-M-x-fuzzy-match t)
-(setq helm-apropos-fuzzy-match t)
-(setq helm-recentf-fuzzy-match t)
-(setq helm-locate-fuzzy-match t)
-(setq helm-file-cache-fuzzy-match t)
-(setq helm-semantic-fuzzy-match t)
-(setq helm-imenu-fuzzy-match t)
-(setq helm-lisp-fuzzy-completion t)
-(setq helm-completion-in-region-fuzzy-match t)
-(setq helm-mode-fuzzy-match t)
+(after 'helm-source
+  (defun my-helm-make-source (f &rest args)
+    (nconc args '(:fuzzy-match t))
+    (apply f args))
+  (advice-add 'helm-make-source :around 'my-helm-make-source))
 
 (require-package 'helm)
 (require-package 'helm-descbinds)
