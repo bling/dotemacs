@@ -16,6 +16,8 @@
 (setq helm-swoop-pre-input-function #'ignore)
 (setq helm-swoop-use-line-number-face t)
 (setq helm-swoop-split-with-multiple-windows t)
+(setq helm-swoop-speed-or-color t)
+(setq helm-swoop-use-fuzzy-match t)
 (require-package 'helm-swoop)
 (after 'helm-swoop
   (after 'evil
