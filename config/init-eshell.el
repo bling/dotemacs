@@ -87,6 +87,26 @@
    #'insert))
 
 
+(defun my-eshell-color-filter (string)
+  (let ((case-fold-search nil)
+        (lines (split-string string "\n")))
+    (cl-loop for line in lines
+             do (progn
+                  (cond ((string-match "\\[DEBUG\\]" line)
+                         (put-text-property 0 (length line) 'font-lock-face font-lock-comment-face line))
+                        ((string-match "\\[INFO\\]" line)
+                         (put-text-property 0 (length line) 'font-lock-face compilation-info-face line))
+                        ((string-match "\\[WARN\\]" line)
+                         (put-text-property 0 (length line) 'font-lock-face compilation-warning-face line))
+                        ((string-match "\\[ERROR\\]" line)
+                         (put-text-property 0 (length line) 'font-lock-face compilation-error-face line)))))
+    (string-join lines "\n")))
+
+(after 'esh-mode
+  (require 'compile)
+  (add-to-list 'eshell-preoutput-filter-functions #'my-eshell-color-filter))
+
+
 (eval-when-compile (require 'cl))
 (lexical-let ((count 0))
   (defun my-new-eshell-split ()
@@ -96,10 +116,10 @@
 
 
 (add-hook 'eshell-mode-hook
-	  (lambda ()
-	    ;; get rid of annoying 'terminal is not fully functional' warning
-	    (when (executable-find "cat")
-	      (setenv "PAGER" "cat"))
+          (lambda ()
+            ;; get rid of annoying 'terminal is not fully functional' warning
+            (when (executable-find "cat")
+              (setenv "PAGER" "cat"))
 
             (setenv "EDITOR" "emacsclient")
             (setenv "NODE_NO_READLINE" "1")))
