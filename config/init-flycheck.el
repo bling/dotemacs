@@ -1,10 +1,8 @@
 (require-package 'flycheck)
 
-(after 'flycheck
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers))
-  (setq flycheck-checkers (delq 'html-tidy flycheck-checkers))
-  (setq flycheck-standard-error-navigation nil))
+(setq flycheck-check-syntax-automatically '(save mode-enabled))
+(setq flycheck-standard-error-navigation nil)
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc html-tidy))
 
 (global-flycheck-mode t)
 
