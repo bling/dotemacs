@@ -156,8 +156,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 (defun my-completing-read (message candidates action)
   (let ((reader (cond ((eq dotemacs-switch-engine 'ivy) #'ivy-completing-read)
-                      ((eq dotemacs-switch-engine 'helm) #'(lambda (message candidates)
-                                                             (helm-comp-read message candidates :fuzzy t)))
+                      ((eq dotemacs-switch-engine 'helm) #'helm-comp-read)
                       (t #'ido-completing-read))))
     (funcall action (apply reader (list message candidates)))))
 
