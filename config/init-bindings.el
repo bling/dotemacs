@@ -78,7 +78,9 @@
     (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
-    (define-key evil-normal-state-map (kbd "SPC r") 'helm-register))
+    (define-key evil-normal-state-map (kbd "SPC r") 'helm-register)
+    (after "helm-dash-autoloads"
+      (define-key evil-normal-state-map (kbd "SPC d") 'helm-dash)))
 
   (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-f") 'evil-scroll-down)

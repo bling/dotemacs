@@ -16,6 +16,9 @@
 (require-package 'helm-fuzzier)
 (helm-fuzzier-mode t)
 
+(require-package 'helm-dash)
+(setq helm-dash-browser-func 'eww)
+
 (setq helm-swoop-pre-input-function #'ignore)
 (setq helm-swoop-use-line-number-face t)
 (setq helm-swoop-split-with-multiple-windows t)
