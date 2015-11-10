@@ -41,10 +41,10 @@
       (evil-leader/set-key
         "g s" 'magit-status
         "g b" 'magit-blame-popup
-        "g l" 'magit-log-popup
-        "g d" 'magit-diff-popup
-        "g z" 'magit-stash-popup
-        "g c" 'magit-commit-popup)))
+        "g l" (bind (require 'magit-log) (call-interactively #'magit-log-popup))
+        "g d" (bind (require 'magit-diff) (call-interactively #'magit-diff-popup))
+        "g c" (bind (require 'magit-commit) (call-interactively #'magit-commit-popup))
+        "g z" 'magit-stash-popup)))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
