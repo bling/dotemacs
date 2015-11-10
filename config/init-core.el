@@ -49,6 +49,10 @@
 (require 'dired-x)
 
 
+;; url
+(setq url-configuration-directory (concat dotemacs-cache-directory "url/"))
+
+
 ;; tramp
 (setq tramp-persistency-file-name (concat dotemacs-cache-directory "tramp"))
 

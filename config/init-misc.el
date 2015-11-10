@@ -1,3 +1,11 @@
+(require-package 'pcache)
+(setq pcache-directory (concat dotemacs-cache-directory "pcache/"))
+
+
+(require-package 'request)
+(setq request-storage-directory (concat dotemacs-cache-directory "request/"))
+
+
 (require-package 'undo-tree)
 (setq undo-tree-auto-save-history t)
 (setq undo-tree-history-directory-alist
