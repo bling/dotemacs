@@ -30,7 +30,7 @@
 
 
 ;; gc
-(run-with-idle-timer (* 60 3) t (lambda () (garbage-collect)))
+(run-with-idle-timer (* 60 3) t #'garbage-collect)
 
 
 ;; pcomplete
