@@ -27,12 +27,12 @@
 (diminish 'visual-line-mode)
 (after 'undo-tree (diminish 'undo-tree-mode))
 (after 'auto-complete (diminish 'auto-complete-mode))
+(after 'company (diminish 'company-mode))
 (after 'projectile (diminish 'projectile-mode))
 (after 'yasnippet (diminish 'yas-minor-mode))
 (after 'which-key (diminish 'which-key-mode))
 (after 'eldoc (diminish 'eldoc-mode))
 (after 'smartparens (diminish 'smartparens-mode))
-(after 'company (diminish 'company-mode))
 (after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
 (after 'git-gutter+ (diminish 'git-gutter+-mode))
 (after 'highlight-symbol (diminish 'highlight-symbol-mode))
@@ -42,6 +42,7 @@
 (after 'helm-mode (diminish 'helm-mode))
 (after 'evil-commentary (diminish 'evil-commentary-mode))
 (after 'page-break-lines (diminish 'page-break-lines-mode))
+(after 'flycheck (diminish 'flycheck-mode))
 
 
 (require-package 'spaceline)
