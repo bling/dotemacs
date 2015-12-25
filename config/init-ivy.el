@@ -15,14 +15,16 @@
 
 (defun my-ivy-mini ()
   (interactive)
-  (let ((buffers (mapcar #'buffer-name (buffer-list))))
-    (ivy-read "Search: " (append buffers recentf-list)
+  (let* ((buffers (mapcar #'buffer-name (buffer-list)))
+         (bufnames (mapcar '(lambda (buf) (concat "Buffer: " buf)) buffers))
+         (recents (mapcar '(lambda (file) (concat "Recent: " file)) recentf-list)))
+    (ivy-read "Search: " (append bufnames recents)
               :action (lambda (f)
                         (with-ivy-window
-                          (cond ((member f buffers)
-                                 (switch-to-buffer f))
+                          (cond ((member f bufnames)
+                                 (switch-to-buffer (substring f 8)))
                                 (t
-                                 (find-file f))))))))
+                                 (find-file (substring f 8)))))))))
 
 (defun my-ivy-everything ()
   (interactive)
