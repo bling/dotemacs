@@ -75,7 +75,6 @@
   (after "helm-autoloads"
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini)
     (define-key evil-normal-state-map (kbd "SPC a") 'helm-apropos)
-    (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
     (define-key evil-normal-state-map (kbd "SPC t") 'helm-etags-select)
     (define-key evil-normal-state-map (kbd "SPC m") 'helm-bookmarks)
     (define-key evil-normal-state-map (kbd "SPC r") 'helm-register)
@@ -169,11 +168,13 @@
 
   (cond ((eq dotemacs-switch-engine 'ivy)
          (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
+         (define-key evil-normal-state-map (kbd "SPC o") 'counsel-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
          (define-key evil-normal-state-map (kbd "SPC y") 'my-ivy-kill-ring)
          (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-mini))
         ((eq dotemacs-switch-engine 'helm)
          (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
+         (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
          (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
          (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
@@ -279,6 +280,7 @@
 (global-set-key (kbd "C-c t") 'my-new-eshell-split)
 
 (global-set-key (kbd "C-x c") 'calculator)
+(global-set-key (kbd "C-x C") 'calendar)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
