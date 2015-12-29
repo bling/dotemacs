@@ -1,5 +1,7 @@
 (lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
+(lazy-major-mode "\\.scss$" scss-mode)
+(lazy-major-mode "\\.less$" less-css-mode)
 
 
 (after "js2-mode-autoloads"

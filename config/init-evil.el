@@ -8,6 +8,7 @@
     conf-mode
     text-mode
     prog-mode
+    css-mode
     sws-mode
     yaml-mode
     vimrc-mode
