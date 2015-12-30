@@ -183,9 +183,15 @@
   (add-hook 'minibuffer-exit-hook (lambda () (electric-pair-mode t))))
 
 
-(add-hook 'find-file-hook (lambda ()
-                            (unless (eq major-mode 'org-mode)
-                              (setq show-trailing-whitespace t))))
-(add-hook 'find-file-hook #'visual-line-mode)
+(defun my-find-file-hook ()
+  (unless (eq major-mode 'org-mode)
+    (setq show-trailing-whitespace t))
+
+  (when (string-match "\\.min\\." (buffer-file-name))
+    (fundamental-mode))
+
+  (visual-line-mode))
+(add-hook 'find-file-hook #'my-find-file-hook)
+
 
 (provide 'init-core)
