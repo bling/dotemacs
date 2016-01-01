@@ -159,5 +159,11 @@
   (ad-enable-advice #'show-paren-function 'around 'evil)
   (ad-activate #'show-paren-function))
 
+(after 'wgrep
+  (defadvice wgrep-change-to-wgrep-mode (before wgrep-change-to-wgrep-mode/before activate)
+    (turn-on-evil-mode))
+  (defadvice wgrep-to-original-mode (before wgrep-change-to-wgrep-mode/before activate)
+    (turn-off-evil-mode)))
+
 
 (provide 'init-evil)
