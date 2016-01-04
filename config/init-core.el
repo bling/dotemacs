@@ -32,6 +32,13 @@
 ;; gc
 (run-with-idle-timer (* 60 3) t #'garbage-collect)
 
+(eval-when-compile (require 'cl))
+(lexical-let ((default-threshold gc-cons-threshold))
+  (defun my-minibuffer-setup-hook () (setq gc-cons-threshold most-positive-fixnum))
+  (defun my-minibuffer-exit-hook () (setq gc-cons-threshold default-threshold))
+  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook))
+
 
 ;; pcomplete
 (setq pcomplete-ignore-case t)

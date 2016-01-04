@@ -1,5 +1,3 @@
-(setq gc-cons-threshold (* 1024 1024 1024))
-
 (let ((debug-on-error t)
       (file-name-handler-alist nil)
       (config-directory (concat user-emacs-directory "config/")))
