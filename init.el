@@ -1,4 +1,5 @@
-(let ((debug-on-error t)
+(let ((gc-cons-threshold most-positive-fixnum)
+      (debug-on-error t)
       (file-name-handler-alist nil)
       (config-directory (concat user-emacs-directory "config/")))
 
