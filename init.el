@@ -5,6 +5,12 @@
 
   (eval-when-compile (require 'cl))
 
+  (lexical-let ((emacs-start-time (current-time)))
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
+                  (message "[Emacs initialized in %.3fs]" elapsed)))))
+
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   (unless (display-graphic-p) (menu-bar-mode -1))
