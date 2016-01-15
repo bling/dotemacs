@@ -2,6 +2,7 @@
 (lazy-major-mode "\\.jade$" jade-mode)
 (lazy-major-mode "\\.scss$" scss-mode)
 (lazy-major-mode "\\.less$" less-css-mode)
+(lazy-major-mode "\\.jsx$" jsx-mode)
 
 
 (after "js2-mode-autoloads"

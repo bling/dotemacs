@@ -9,6 +9,7 @@
     text-mode
     prog-mode
     css-mode
+    jsx-mode
     sws-mode
     yaml-mode
     vimrc-mode
