@@ -281,6 +281,14 @@
   (global-set-key (kbd "C-c h y") 'helm-show-kill-ring))
 
 
+(after 'counsel
+  (global-set-key (kbd "C-c i b") 'my-ivy-mini)
+  (global-set-key (kbd "C-c i e") 'ivy-recentf)
+  (global-set-key (kbd "C-c i f") 'counsel-find-file)
+  (global-set-key (kbd "C-c i x") 'counsel-M-x)
+  (global-set-key (kbd "C-c i y") 'my-ivy-kill-ring))
+
+
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 
