@@ -49,6 +49,9 @@
 (require 'spaceline-config)
 (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
 (spaceline-spacemacs-theme)
+(spaceline-info-mode)
+(after "helm-autoloads"
+  (spaceline-helm-mode))
 
 
 (global-prettify-symbols-mode)
