@@ -1,7 +1,6 @@
 (require-package 'helm)
-(require 'helm-config)
 
-(setq helm-command-prefix-key "C-c h")
+
 (setq helm-bookmark-show-location t)
 
 

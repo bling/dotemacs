@@ -265,6 +265,22 @@
   (define-key help-mode-map (kbd "k") 'previous-line))
 
 
+(after "helm-autoloads"
+  (global-set-key (kbd "C-c h a") 'helm-apropos)
+  (global-set-key (kbd "C-c h b") 'helm-mini)
+  (after "helm-dash-autoloads"
+    (global-set-key (kbd "C-c h d") 'helm-dash))
+  (global-set-key (kbd "C-c h e") 'helm-recentf)
+  (global-set-key (kbd "C-c h f") 'helm-find-files)
+  (global-set-key (kbd "C-c h m") 'helm-bookmarks)
+  (after "helm-projectile-autoloads"
+    (global-set-key (kbd "C-c h p") 'helm-projectile))
+  (global-set-key (kbd "C-c h r") 'helm-register)
+  (global-set-key (kbd "C-c h t") 'helm-etags-select)
+  (global-set-key (kbd "C-c h x") 'helm-M-x)
+  (global-set-key (kbd "C-c h y") 'helm-show-kill-ring))
+
+
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 
