@@ -38,16 +38,12 @@
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-block-face t)
-  (setq web-mode-enable-part-face t)
-
-  (after 'yasnippet
-    (require-package 'angular-snippets)
-    (require 'angular-snippets)
-    (angular-snippets-initialize)))
+  (setq web-mode-enable-part-face t))
 
 
 ;; indent after deleting a tag
 (defadvice sgml-delete-tag (after reindent activate)
   (indent-region (point-min) (point-max)))
+
 
 (provide 'init-web)

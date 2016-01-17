@@ -240,11 +240,6 @@
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 
-(after 'web-mode
-  (after "angular-snippets-autoloads"
-    (define-key web-mode-map (kbd "C-c C-d") 'ng-snip-show-docs-at-point)))
-
-
 ;; mouse scrolling in terminal
 (unless (display-graphic-p)
   (global-set-key [mouse-4] (bind (scroll-down 1)))
