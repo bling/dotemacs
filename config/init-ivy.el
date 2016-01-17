@@ -1,6 +1,3 @@
-(require-package 'flx)
-(require 'flx)
-
 (require-package 'swiper)
 (require-package 'counsel)
 
@@ -47,10 +44,6 @@
                          (find-file f))
                         (t
                          (find-file (concat (projectile-project-root) f)))))))))
-
-;; (require 'ivy)
-;; (setq ivy--flx-cache (flx-make-filename-cache))
-;; (setq ivy--flx-cache (flx-make-string-cache))
 
 (when (eq dotemacs-switch-engine 'ivy)
   (ivy-mode t)
