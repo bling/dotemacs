@@ -68,6 +68,7 @@
   (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer)
   (define-key evil-normal-state-map (kbd "SPC f") 'find-file)
+  (define-key evil-normal-state-map (kbd "SPC m") 'bookmark-jump)
 
   (when (fboundp 'fzf)
     (define-key evil-normal-state-map (kbd "SPC f") 'fzf))
