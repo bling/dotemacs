@@ -9,13 +9,12 @@
 (setq-default save-place t)
 
 
-;; minibuffer history
-(require 'savehist)
+;; savehist
 (setq savehist-file (concat dotemacs-cache-directory "savehist")
       savehist-additional-variables '(search ring regexp-search-ring)
       savehist-autosave-interval 60
       history-length 1000)
-(savehist-mode t)
+(savehist-mode)
 
 
 ;; recent files
@@ -26,7 +25,7 @@
 (setq recentf-auto-cleanup 300)
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
 (recentf-mode t)
-(run-with-timer 1800 1800 'recentf-save-list)
+(run-with-idle-timer 600 t #'recentf-save-list)
 
 
 ;; gc
@@ -49,7 +48,8 @@
 
 
 ;; dired
-(require 'dired-x)
+(after 'dired
+  (require 'dired-x))
 
 
 ;; url
