@@ -136,17 +136,14 @@
       (after "helm-projectile-autoloads"
         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
     (let ((binding (kbd "SPC /")))
-      (cond ((executable-find "pt")
-             (define-key evil-normal-state-map binding 'projectile-pt))
-            ((executable-find "ag")
-             (define-key evil-normal-state-map binding
-               (bind
-                (setq current-prefix-arg t)
-                (call-interactively #'projectile-ag))))
+      (cond ((executable-find "ag")
+             (define-key evil-normal-state-map binding #'projectile-ag))
+            ((executable-find "pt")
+             (define-key evil-normal-state-map binding #'projectile-pt))
             ((executable-find "ack")
-             (define-key evil-normal-state-map binding 'projectile-ack))
+             (define-key evil-normal-state-map binding #'projectile-ack))
             (t
-             (define-key evil-normal-state-map binding 'projectile-grep)))))
+             (define-key evil-normal-state-map binding #'projectile-grep)))))
 
   (after "multiple-cursors-autoloads"
     (after 'js2-mode
