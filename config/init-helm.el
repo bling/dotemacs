@@ -6,7 +6,10 @@
 
 (after 'helm-source
   (defun my-helm-make-source (f &rest args)
-    (nconc args '(:fuzzy-match t))
+    (let ((source-type (cadr args))
+          (props (cddr args)))
+      (unless (eq source-type 'helm-source-async)
+        (plist-put props :fuzzy-match t)))
     (apply f args))
   (advice-add 'helm-make-source :around 'my-helm-make-source))
 
@@ -25,6 +28,16 @@
 
   (require-package 'helm-dash)
   (setq helm-dash-browser-func 'eww)
+
+
+  (require-package 'helm-ag)
+  (after 'helm-ag
+    (cond ((executable-find "ag")
+           t)
+          ((executable-find "pt")
+           (setq helm-ag-base-command "pt -e --nogroup --nocolor"))
+          ((executable-find "ack")
+           (setq helm-ag-base-command "ack --nogroup --nocolor"))))
 
 
   (setq helm-swoop-pre-input-function #'ignore)
