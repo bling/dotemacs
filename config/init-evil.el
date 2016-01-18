@@ -6,6 +6,7 @@
 (defcustom dotemacs-evil/evil-state-modes
   '(fundamental-mode
     conf-mode
+    message-mode
     text-mode
     prog-mode
     css-mode
@@ -86,6 +87,10 @@
 
 (require-package 'evil-anzu)
 (require 'evil-anzu)
+
+
+(require-package 'evil-avy)
+(evil-avy-mode)
 
 
 (setq evil-jumper-auto-center t)
