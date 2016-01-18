@@ -39,8 +39,8 @@
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n@)" "|" "DONE(d@)")
-          (sequence "WAITING(w@/!)" "|" "CANCELLED(c@/!)")))
+        '((sequence "☛ TODO(t)" "NEXT(n@)" "|" "✔ DONE(d@)")
+          (sequence "⚑ WAITING(w@/!)" "|" "✘ CANCELLED(c@/!)")))
 
   (setq org-todo-state-tags-triggers
         ' (("CANCELLED" ("CANCELLED" . t))
