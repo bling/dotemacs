@@ -135,16 +135,7 @@
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
     (when (eq dotemacs-switch-engine 'helm)
       (after "helm-projectile-autoloads"
-        (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)))
-    (let ((binding (kbd "SPC /")))
-      (cond ((executable-find "ag")
-             (define-key evil-normal-state-map binding #'projectile-ag))
-            ((executable-find "pt")
-             (define-key evil-normal-state-map binding #'projectile-pt))
-            ((executable-find "ack")
-             (define-key evil-normal-state-map binding #'projectile-ack))
-            (t
-             (define-key evil-normal-state-map binding #'projectile-grep)))))
+        (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile))))
 
   (after "multiple-cursors-autoloads"
     (after 'js2-mode
@@ -165,12 +156,14 @@
                 (local-set-key (kbd "C-l") 'evil-window-right))))
 
   (cond ((eq dotemacs-switch-engine 'ivy)
+         (define-key evil-normal-state-map (kbd "SPC /") (bind (counsel-ag nil (projectile-project-root))))
          (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
          (define-key evil-normal-state-map (kbd "SPC o") 'counsel-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
          (define-key evil-normal-state-map (kbd "SPC y") 'my-ivy-kill-ring)
          (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-mini))
         ((eq dotemacs-switch-engine 'helm)
+         (define-key evil-normal-state-map (kbd "SPC /") (bind (helm-do-ag (projectile-project-root))))
          (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
          (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)

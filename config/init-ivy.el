@@ -1,5 +1,15 @@
 (require-package 'swiper)
+
+
 (require-package 'counsel)
+(after 'counsel
+  (cond ((executable-find "ag")
+         t)
+        ((executable-find "pt")
+         (setq counsel-ag-base-command "pt -e --nogroup --nocolor %S"))
+        ((executable-find "ack")
+         (setq counsel-ag-base-command "ack --nogroup --nocolor %S"))))
+
 
 (setq ivy-use-virtual-buffers t)
 (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
