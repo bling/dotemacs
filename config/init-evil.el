@@ -93,9 +93,9 @@
 (evil-avy-mode)
 
 
-(setq evil-jumper-auto-center t)
 (require-package 'evil-jumper)
 (evil-jumper-mode t)
+(add-hook 'evil-jumper-post-jump-hook #'recenter)
 
 
 (require-package 'evil-matchit)
