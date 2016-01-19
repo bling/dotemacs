@@ -1,7 +1,7 @@
 (defmacro bind (&rest commands)
   "Convenience macro which creates a lambda interactive command."
-  `(lambda ()
-     (interactive)
+  `(lambda (arg)
+     (interactive "P")
      ,@commands))
 
 
@@ -133,6 +133,23 @@
 
   (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (define-key evil-normal-state-map (kbd "SPC /")
+      (bind
+       (if current-prefix-arg
+           (cond
+            ((executable-find "ag")
+             (call-interactively #'projectile-ag))
+            ((executable-find "pt")
+             (call-interactively #'projectile-pt))
+            ((executable-find "ack")
+             (call-interactively #'projectile-ack))
+            (t
+             (call-interactively #'projectile-grep)))
+         (cond
+          ((eq dotemacs-switch-engine 'ivy)
+           (counsel-ag nil (projectile-project-root)))
+          ((eq dotemacs-switch-engine 'helm)
+           (helm-do-ag (projectile-project-root)))))))
     (when (eq dotemacs-switch-engine 'helm)
       (after "helm-projectile-autoloads"
         (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile))))
@@ -156,14 +173,12 @@
                 (local-set-key (kbd "C-l") 'evil-window-right))))
 
   (cond ((eq dotemacs-switch-engine 'ivy)
-         (define-key evil-normal-state-map (kbd "SPC /") (bind (counsel-ag nil (projectile-project-root))))
          (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
          (define-key evil-normal-state-map (kbd "SPC o") 'counsel-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
          (define-key evil-normal-state-map (kbd "SPC y") 'my-ivy-kill-ring)
          (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-mini))
         ((eq dotemacs-switch-engine 'helm)
-         (define-key evil-normal-state-map (kbd "SPC /") (bind (helm-do-ag (projectile-project-root))))
          (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
          (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
