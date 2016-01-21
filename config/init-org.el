@@ -51,6 +51,8 @@
 
   (setq org-refile-targets '((nil :maxlevel . 9)
                              (org-agenda-files :maxlevel . 9)))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-outline-path-complete-in-steps nil)
   (setq org-completion-use-ido t)
 
   (when (boundp 'org-plantuml-jar-path)
@@ -65,6 +67,7 @@
       (turn-on-flyspell))
     (toggle-truncate-lines t))
   (add-hook 'org-mode-hook #'my-org-mode-hook)
+
 
   (require-package 'org-bullets)
   (setq org-bullets-bullet-list '("✿" "❀" "☢" "☯" "✸" ))
