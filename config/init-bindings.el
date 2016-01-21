@@ -10,6 +10,25 @@
 (which-key-mode)
 
 
+(require-package 'hydra)
+
+
+(defhydra my-magit-hydra (:hint nil :exit t)
+  "
+magit:  [_s_]tatus  [_b_]lame    [_l_]og     [_f_]ile     [_a_]dd hunk
+        [_d_]iff    [_c_]ommit   [_s_]tash    ^ ^         [_r_]m hunk
+"
+  ("s" magit-status)
+  ("b" magit-blame-popup)
+  ("f" magit-file-popup)
+  ("z" magit-status-popup)
+  ("l" (lambda () (interactive) (require 'magit-log) (call-interactively #'magit-log-popup)))
+  ("d" (lambda () (interactive) (require 'magit-diff) (call-interactively #'magit-diff-popup)))
+  ("c" (lambda () (interactive) (require 'magit-commit) (call-interactively #'magit-commit-popup)))
+  ("a" git-gutter+-stage-hunks)
+  ("r" git-gutter+-revert-hunk))
+
+
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
@@ -35,16 +54,10 @@
       "h h" 'help-for-help-internal)
 
     (after "paradox-autoloads"
-      (evil-leader/set-key "P" 'paradox-list-packages))
+      (evil-leader/set-key "P" 'paradox-list-packages)))
 
-    (after "magit-autoloads"
-      (evil-leader/set-key
-        "g s" 'magit-status
-        "g b" 'magit-blame-popup
-        "g l" (bind (require 'magit-log) (call-interactively #'magit-log-popup))
-        "g d" (bind (require 'magit-diff) (call-interactively #'magit-diff-popup))
-        "g c" (bind (require 'magit-commit) (call-interactively #'magit-commit-popup))
-        "g z" 'magit-stash-popup)))
+  (after "magit-autoloads"
+    (define-key evil-normal-state-map (kbd "SPC g") #'my-magit-hydra/body))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
