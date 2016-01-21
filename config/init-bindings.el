@@ -28,6 +28,22 @@ magit:  [_s_]tatus  [_b_]lame    [_l_]og     [_f_]ile     [_a_]dd hunk
   ("a" git-gutter+-stage-hunks)
   ("r" git-gutter+-revert-hunk))
 
+(defhydra my-toggle-hydra (:hint nil :exit t)
+  "
+toggle:  _a_ggressive indent
+         _w_hitespace
+         _s_pelling
+         _t_runcate
+         _f_lx
+         debug on _e_rror
+"
+  ("a" aggressive-indent-mode)
+  ("t" toggle-truncate-lines)
+  ("e" toggle-debug-on-error)
+  ("s" flyspell-mode)
+  ("f" company-flx-mode)
+  ("w" whitespace-mode))
+
 
 (after 'evil
   (require-package 'key-chord)
@@ -56,6 +72,7 @@ magit:  [_s_]tatus  [_b_]lame    [_l_]og     [_f_]ile     [_a_]dd hunk
     (after "paradox-autoloads"
       (evil-leader/set-key "P" 'paradox-list-packages)))
 
+  (define-key evil-normal-state-map (kbd "SPC t") #'my-toggle-hydra/body)
   (after "magit-autoloads"
     (define-key evil-normal-state-map (kbd "SPC g") #'my-magit-hydra/body))
 
