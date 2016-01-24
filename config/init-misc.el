@@ -91,6 +91,11 @@
 (require 'vlf-setup)
 
 
+(require-package 'popwin)
+(require 'popwin)
+(popwin-mode)
+
+
 (when (eq system-type 'darwin)
   (require-package 'vkill))
 

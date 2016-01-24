@@ -34,7 +34,7 @@
 (defmacro delayed-init (&rest body)
   "Runs BODY after idle for a predetermined amount of time."
   `(run-with-idle-timer
-    1.5
+    0.5
     nil
     (lambda () ,@body)))
 

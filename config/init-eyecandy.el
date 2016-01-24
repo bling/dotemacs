@@ -85,7 +85,7 @@
 
 
 (require-package 'page-break-lines)
-(page-break-lines-mode)
+(global-page-break-lines-mode)
 
 
 (add-hook 'find-file-hook 'hl-line-mode)

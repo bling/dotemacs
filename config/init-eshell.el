@@ -100,7 +100,7 @@
                          (put-text-property 0 (length line) 'font-lock-face compilation-warning-face line))
                         ((string-match "\\[ERROR\\]" line)
                          (put-text-property 0 (length line) 'font-lock-face compilation-error-face line)))))
-    (string-join lines "\n")))
+    (mapconcat 'identity lines "\n")))
 
 (after 'esh-mode
   (require 'compile)
