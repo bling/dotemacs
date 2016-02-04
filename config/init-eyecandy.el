@@ -43,6 +43,7 @@
 (after 'evil-commentary (diminish 'evil-commentary-mode))
 (after 'page-break-lines (diminish 'page-break-lines-mode))
 (after 'flycheck (diminish 'flycheck-mode))
+(after 'aggressive-indent (diminish 'aggressive-indent-mode))
 
 
 (require-package 'spaceline)
