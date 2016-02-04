@@ -16,10 +16,6 @@
 (setq ivy-height 12)
 (setq ivy-display-style 'fancy)
 
-(defun my-ivy-kill-ring ()
-  (interactive)
-  (ivy-read "Insert: " kill-ring :action #'insert))
-
 (defun my-ivy-mini ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
