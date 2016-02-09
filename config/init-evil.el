@@ -16,6 +16,7 @@
     vimrc-mode
     dired-mode
     web-mode
+    magit-mode
     log-edit-mode)
   "List of modes that should start up in Evil state."
   :type '(repeat (symbol))
@@ -87,6 +88,10 @@
 
 (require-package 'evil-anzu)
 (require 'evil-anzu)
+
+
+(require-package 'evil-magit)
+(require 'evil-magit)
 
 
 (require-package 'evil-avy)
