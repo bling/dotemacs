@@ -7,73 +7,9 @@
 
 (require-package 'which-key)
 (setq which-key-idle-delay 0.2)
+(setq which-key-min-display-lines 3)
 (which-key-mode)
 
-
-
-(defvar my-toggle-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "a") #'aggressive-indent-mode)
-    (define-key map (kbd "t") #'toggle-truncate-lines)
-    (define-key map (kbd "e") #'toggle-debug-on-error)
-    (define-key map (kbd "s") #'flyspell-mode)
-    (define-key map (kbd "w") #'whitespace-mode)
-    (define-key map (kbd "W") #'toggle-word-wrap)
-    map))
-
-(defvar my-quit-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "q") #'save-buffers-kill-emacs)
-    (define-key map (kbd "r") #'restart-emacs)
-    map))
-
-
-
-(after "helm-autoloads"
-  (defvar my-helm-map (make-sparse-keymap))
-  (define-key my-helm-map (kbd "a") #'helm-apropos)
-  (define-key my-helm-map (kbd "b") #'helm-mini)
-  (define-key my-helm-map (kbd "e") #'helm-recentf)
-  (define-key my-helm-map (kbd "f") #'helm-find-files)
-  (define-key my-helm-map (kbd "m") #'helm-bookmarks)
-  (define-key my-helm-map (kbd "p") #'helm-projectile)
-  (define-key my-helm-map (kbd "r") #'helm-register)
-  (define-key my-helm-map (kbd "t") #'helm-etags-select)
-  (define-key my-helm-map (kbd "x") #'helm-M-x)
-  (define-key my-helm-map (kbd "y") #'helm-show-kill-ring)
-  (after "helm-dash-autoloads"
-    (define-key my-helm-map (kbd "d") #'helm-dash)))
-
-
-
-(after "counsel-autoloads"
-  (defvar my-ivy-map (make-sparse-keymap))
-  (define-key my-ivy-map (kbd "b") #'my-ivy-mini)
-  (define-key my-ivy-map (kbd "e") #'ivy-recentf)
-  (define-key my-ivy-map (kbd "f") #'counsel-find-file)
-  (define-key my-ivy-map (kbd "y") #'counsel-yank-pop)
-  (define-key my-ivy-map (kbd "x") #'counsel-M-x))
-
-
-
-(after "magit-autoloads"
-  (defvar my-git-map (make-sparse-keymap))
-  (define-key my-git-map (kbd "s") #'magit-status)
-  (define-key my-git-map (kbd "b") #'magit-blame-popup)
-  (define-key my-git-map (kbd "f") #'magit-file-popup)
-  (define-key my-git-map (kbd "z") #'magit-status-popup)
-  (autoload 'magit-log-popup "magit-log")
-  (define-key my-git-map (kbd "l") #'magit-log-popup)
-  (autoload 'magit-diff-popup "magit-diff")
-  (define-key my-git-map (kbd "d") #'magit-diff-popup)
-  (autoload 'magit-commit-popup "magit-commit")
-  (define-key my-git-map (kbd "c") #'magit-commit-popup)
-  (define-key my-git-map (kbd "a") #'git-gutter+-stage-hunks)
-  (define-key my-git-map (kbd "r") #'git-gutter+-revert-hunk)
-  (define-key my-git-map (kbd "A") #'git-gutter+-stage-whole-buffer)
-  (define-key my-git-map (kbd "R") #'git-gutter+-unstage-whole-buffer))
-
-
 
 (after 'evil
   (require-package 'key-chord)
@@ -102,11 +38,11 @@
     (after "paradox-autoloads"
       (evil-leader/set-key "P" 'paradox-list-packages)))
 
-  (define-key evil-normal-state-map (kbd "SPC t") my-toggle-map)
-  (define-key evil-normal-state-map (kbd "SPC q") my-quit-map)
+  (define-key evil-normal-state-map (kbd "SPC t") #'my-toggle-hydra/body)
+  (define-key evil-normal-state-map (kbd "SPC q") #'my-quit-hydra/body)
 
   (after "magit-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC g") my-git-map))
+    (define-key evil-normal-state-map (kbd "SPC g") #'my-git-hydra/body))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -126,17 +62,18 @@
 
   (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
   (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
-  (define-key evil-normal-state-map (kbd "SPC o") 'imenu)
-  (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)
+  (define-key evil-normal-state-map (kbd "SPC e") #'my-errors-hydra/body)
+  (define-key evil-normal-state-map (kbd "SPC b") #'my-buffer-hydra/body)
+  (define-key evil-normal-state-map (kbd "SPC j") #'my-jump-hydra/body)
+  (define-key evil-normal-state-map (kbd "SPC o") #'my-jump-hydra/bookmark-jump-and-exit)
+  (define-key evil-normal-state-map (kbd "SPC f") #'my-file-hydra/body)
   (define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer)
-  (define-key evil-normal-state-map (kbd "SPC f") 'find-file)
-  (define-key evil-normal-state-map (kbd "SPC m") 'bookmark-jump)
 
   (when (fboundp 'fzf)
-    (define-key evil-normal-state-map (kbd "SPC f") 'fzf))
+    (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
 
   (after "helm-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC h") my-helm-map)
+    (define-key evil-normal-state-map (kbd "SPC h") #'my-helm-hydra/body)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini))
 
   (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
@@ -230,17 +167,11 @@
                 (local-set-key (kbd "C-l") 'evil-window-right))))
 
   (cond ((eq dotemacs-switch-engine 'ivy)
-         (define-key evil-normal-state-map (kbd "SPC e") 'ivy-recentf)
-         (define-key evil-normal-state-map (kbd "SPC o") 'counsel-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
-         (define-key evil-normal-state-map (kbd "SPC y") 'counsel-yank-pop)
-         (define-key evil-normal-state-map (kbd "SPC b") 'my-ivy-mini))
+         (define-key evil-normal-state-map (kbd "SPC y") 'counsel-yank-pop))
         ((eq dotemacs-switch-engine 'helm)
-         (define-key evil-normal-state-map (kbd "SPC e") 'helm-recentf)
-         (define-key evil-normal-state-map (kbd "SPC o") 'helm-semantic-or-imenu)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
          (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
-         (define-key evil-normal-state-map (kbd "SPC b") 'helm-mini)
          (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)))
 
   ;; butter fingers
@@ -324,11 +255,11 @@
 
 
 (after "helm-autoloads"
-  (global-set-key (kbd "C-c h") my-helm-map))
+  (global-set-key (kbd "C-c h") #'my-helm-hydra/body))
 
 
 (after "counsel-autoloads"
-  (global-set-key (kbd "C-c i") my-ivy-map))
+  (global-set-key (kbd "C-c i") #'my-ivy-hydra/body))
 
 
 (global-set-key [prior] 'previous-buffer)
