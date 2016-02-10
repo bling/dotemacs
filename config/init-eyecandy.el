@@ -89,6 +89,11 @@
 (global-page-break-lines-mode)
 
 
+(require-package 'eval-sexp-fu)
+(require 'eval-sexp-fu)
+(eval-sexp-fu-flash-mode)
+
+
 (add-hook 'find-file-hook 'hl-line-mode)
 
 
