@@ -103,6 +103,9 @@
   (define-key evil-normal-state-map (kbd "C-w C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-w C-l") 'evil-window-right)
 
+  (define-key evil-normal-state-map "p" #'my-paste-hydra/evil-paste-after)
+  (define-key evil-normal-state-map "P" #'my-paste-hydra/evil-paste-before)
+
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
 
