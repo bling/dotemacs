@@ -60,8 +60,9 @@
 
   (global-company-mode)
 
-  (require-package 'company-flx)
-  (company-flx-mode)
+  ;; has big performance impact
+  ;; (require-package 'company-flx)
+  ;; (company-flx-mode)
 
   ;; (when (display-graphic-p)
   ;;   (require-package 'company-quickhelp)
