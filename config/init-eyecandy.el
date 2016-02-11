@@ -55,11 +55,12 @@
   (spaceline-helm-mode))
 
 
-(global-prettify-symbols-mode)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (push '("function" . 955) prettify-symbols-alist)
-            (push '("return" . 8592) prettify-symbols-alist)))
+(when (fboundp 'global-prettify-symbols-mode)
+  (global-prettify-symbols-mode)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (push '("function" . 955) prettify-symbols-alist)
+              (push '("return" . 8592) prettify-symbols-alist))))
 
 
 (delayed-init
