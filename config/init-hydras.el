@@ -198,7 +198,3 @@
   ("K" evil-paste-pop-next)
   ("p" evil-paste-after)
   ("P" evil-paste-before))
-
-
-
-(provide 'init-hydras)

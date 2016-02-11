@@ -50,5 +50,3 @@
         (tern-ac-setup))
       (after 'company-mode
         (require-package 'company-tern)))))
-
-(provide 'init-js)

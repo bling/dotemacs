@@ -10,6 +10,3 @@
 (when (eq system-type 'darwin)
   (require-package 'reveal-in-osx-finder)
   (require-package 'vkill))
-
-
-(provide 'init-os)

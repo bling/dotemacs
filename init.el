@@ -54,7 +54,7 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
 
-  (require 'init-util (concat config-directory "init-util.el"))
+  (load (concat config-directory "init-util.el"))
 
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (when (file-exists-p custom-file)
@@ -62,4 +62,4 @@
 
   (cl-loop for file in (directory-files config-directory t)
            when (string-match "\\.el$" file)
-           do (require (intern (file-name-base file)) file)))
+           do (load file)))

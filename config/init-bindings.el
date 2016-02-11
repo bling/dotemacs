@@ -304,5 +304,3 @@
     (message "Thou shall not quit!"))
   (defadvice evil-quit-all (around advice-for-evil-quit-all activate)
     (message "Thou shall not quit!")))
-
-(provide 'init-bindings)

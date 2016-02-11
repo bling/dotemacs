@@ -19,5 +19,3 @@
 (add-hook 'lisp-interaction-mode-hook #'my-lisp-hook)
 (add-hook 'ielm-mode-hook #'my-lisp-hook)
 (add-hook 'after-save-hook #'my-lisp-after-save-hook)
-
-(provide 'init-lisp)

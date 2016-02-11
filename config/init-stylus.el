@@ -53,5 +53,3 @@
   (add-hook 'stylus-mode-hook (lambda ()
                                 (unless (process-status "httpd")
                                   (httpd-start)))))
-
-(provide 'init-stylus)

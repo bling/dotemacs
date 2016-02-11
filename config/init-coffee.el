@@ -1,3 +1,1 @@
-(require-package 'coffee-mode)
-
-(provide 'init-coffee)
+(lazy-major-mode "\\.coffee$" coffee-mode)

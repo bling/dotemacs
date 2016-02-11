@@ -12,5 +12,3 @@ of the argument and insert a string with the value value prior to the function."
 an array and adds a string for the first argument in the parameter list."
   (save-excursion
     (evil-execute-macro 1 [?F ?\( ?l ?y ?w ?F ?f ?i ?\[ ?\' escape ?p ?l ?l ?c ?w ?, ?  escape ?f ?\{ ?% ?a ?\] escape])))
-
-(provide 'init-macros)

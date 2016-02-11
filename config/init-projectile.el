@@ -24,5 +24,3 @@
     (setq projectile-svn-command val)))
 
 (projectile-global-mode t)
-
-(provide 'init-projectile)

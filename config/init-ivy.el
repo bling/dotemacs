@@ -57,5 +57,3 @@
   (global-set-key [remap describe-function] #'counsel-describe-function)
   (global-set-key [remap describe-variable] #'counsel-describe-variable)
   (global-set-key [remap find-file] #'counsel-find-file))
-
-(provide 'init-ivy)

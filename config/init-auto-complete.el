@@ -32,5 +32,3 @@
     (ac-etags-setup))
 
   )
-
-(provide 'init-auto-complete)

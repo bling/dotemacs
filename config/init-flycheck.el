@@ -9,6 +9,3 @@
 
 (require-package 'flycheck-pos-tip)
 (flycheck-pos-tip-mode)
-
-
-(provide 'init-flycheck)

@@ -97,6 +97,3 @@
 
 
 (require-package 'restart-emacs)
-
-
-(provide 'init-misc)

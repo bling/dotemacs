@@ -18,5 +18,3 @@
 
   (require-package 'ido-ubiquitous)
   (ido-ubiquitous-mode t))
-
-(provide 'init-ido)

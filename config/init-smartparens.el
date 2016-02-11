@@ -19,5 +19,3 @@
 (after 'yasnippet
   (defadvice yas-expand (before advice-for-yas-expand activate)
     (sp-remove-active-pair-overlay)))
-
-(provide 'init-smartparens)

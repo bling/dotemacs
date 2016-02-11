@@ -162,5 +162,3 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                       ((eq dotemacs-switch-engine 'helm) #'helm-comp-read)
                       (t #'ido-completing-read))))
     (funcall action (apply reader (list message candidates)))))
-
-(provide 'init-util)
