@@ -171,6 +171,7 @@
 
   (cond ((eq dotemacs-switch-engine 'ivy)
          (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
+         (define-key evil-normal-state-map (kbd "SPC L") 'swiper-all)
          (define-key evil-normal-state-map (kbd "SPC y") 'counsel-yank-pop))
         ((eq dotemacs-switch-engine 'helm)
          (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
