@@ -3,33 +3,26 @@
   :group 'dotemacs
   :prefix 'dotemacs-evil)
 
-(defcustom dotemacs-evil/evil-state-modes
-  '(fundamental-mode
-    conf-mode
-    message-mode
-    text-mode
-    prog-mode
-    css-mode
-    jsx-mode
-    sws-mode
-    yaml-mode
-    vimrc-mode
-    dired-mode
-    web-mode
-    magit-mode
-    log-edit-mode)
-  "List of modes that should start up in Evil state."
-  :type '(repeat (symbol))
-  :group 'dotemacs-evil)
-
 (defcustom dotemacs-evil/emacs-state-hooks
   '(org-log-buffer-setup-hook org-capture-mode-hook)
   "List of hooks to automatically start up in Evil Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
 
+(defcustom dotemacs-evil/emacs-state-major-modes
+  '(eshell-mode
+    help-mode
+    term-mode
+    paradox-menu-mode
+    makey-key-mode)
+  "List of major modes that should default to Emacs state."
+  :type '(repeat (symbol))
+  :group 'dotemacs-evil)
+
 (defcustom dotemacs-evil/emacs-state-minor-modes
-  '(git-commit-mode magit-blame-mode)
+  '(edebug-mode
+    git-commit-mode
+    magit-blame-mode)
   "List of minor modes that when active should switch to Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
@@ -46,6 +39,7 @@
   :type 'boolean
   :group 'dotemacs-evil)
 
+
 
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
@@ -59,7 +53,21 @@
 
 (require-package 'evil)
 (require 'evil)
+(evil-mode)
 
+(cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
+         do (let ((hook (concat (symbol-name mode) "-hook")))
+              (add-hook (intern hook) `(lambda ()
+                                         (if ,mode
+                                             (evil-emacs-state)
+                                           (evil-normal-state))))))
+
+(cl-loop for hook in dotemacs-evil/emacs-state-hooks
+         do (add-hook hook #'evil-emacs-state))
+
+(cl-loop for mode in dotemacs-evil/emacs-state-major-modes
+         do (evil-set-initial-state mode 'emacs))
+
 
 (when dotemacs-evil/emacs-insert-mode
   (defalias 'evil-insert-state 'evil-emacs-state)
@@ -90,8 +98,9 @@
 (require 'evil-anzu)
 
 
-(require-package 'evil-magit)
-(require 'evil-magit)
+(after 'magit
+  (require-package 'evil-magit)
+  (require 'evil-magit))
 
 
 (require-package 'evil-avy)
@@ -121,24 +130,6 @@
 (require-package 'evil-numbers)
 
 
-(defun my-major-mode-evil-state-adjust ()
-  (if (apply 'derived-mode-p dotemacs-evil/evil-state-modes)
-      (turn-on-evil-mode)
-    (set-cursor-color dotemacs-evil/emacs-cursor)
-    (turn-off-evil-mode)))
-(add-hook 'after-change-major-mode-hook #'my-major-mode-evil-state-adjust)
-
-(cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
-         do (let ((hook (concat (symbol-name mode) "-hook")))
-              (add-hook (intern hook) `(lambda ()
-                                         (if ,mode
-                                             (evil-emacs-state)
-                                           (evil-normal-state))))))
-
-(cl-loop for hook in dotemacs-evil/emacs-state-hooks
-         do (add-hook hook #'evil-emacs-state))
-
-
 (defun my-send-string-to-terminal (string)
   (unless (display-graphic-p) (send-string-to-terminal string)))
 
@@ -159,22 +150,6 @@
 
 (defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
   (recenter))
-
-(after 'edebug
-  (add-hook 'edebug-mode-hook (lambda ()
-                                (if edebug-mode
-                                    (evil-emacs-state)
-                                  (evil-normal-state)))))
-
-(after 'paren
-  (ad-enable-advice #'show-paren-function 'around 'evil)
-  (ad-activate #'show-paren-function))
-
-(after 'wgrep
-  (defadvice wgrep-change-to-wgrep-mode (before wgrep-change-to-wgrep-mode/before activate)
-    (turn-on-evil-mode))
-  (defadvice wgrep-to-original-mode (before wgrep-change-to-wgrep-mode/before activate)
-    (turn-off-evil-mode)))
 
 
 (provide 'init-evil)
