@@ -36,14 +36,13 @@
 
 (defhydra my-buffer-hydra (:hint nil :exit t)
   "
-   buffers:   [_s_]: scratch buffer
-              [_k_]: kill buffer
-              [_f_]: reveal in finder
-              [_b_]: buffers
+   buffers:   [_b_]: buffers       [_s_]: scratch buffer   [_f_]: reveal in finder
+              [_k_]: kill buffer   [_m_]: messages
 "
   ("s" my-goto-scratch-buffer)
   ("k" kill-this-buffer)
   ("f" reveal-in-osx-finder)
+  ("m" (lambda () (interactive) (switch-to-buffer "*Messages*")))
   ("b" (lambda ()
          (interactive)
          (cond ((eq dotemacs-switch-engine 'ivy)
@@ -113,14 +112,21 @@
 
 (defhydra my-toggle-hydra (:hint nil :exit t)
   "
-   toggle:  [_a_]: aggressive indent    [_s_]: spelling             [_r_]: read only
-            [_w_]: whitespace           [_t_]: truncate lines       [_f_]: auto-fill
-            [_W_]: word wrap            [_e_]: debug on error
+   toggle:  [_a_]: aggressive indent   [_s_]: flycheck   [_r_]: read only    [_t_]: truncate lines   [_e_]: debug on error
+            [_f_]: auto-fill           [_S_]: flyspell   [_c_]: completion   [_W_]: word wrap        [_g_]: debug on quit
+            [_w_]: whitespace
 "
   ("a" aggressive-indent-mode)
+  ("c" (lambda ()
+         (interactive)
+         (if (eq dotemacs-completion-engine 'company)
+             (call-interactively 'company-mode)
+           (call-interactively 'auto-complete-mode))))
   ("t" toggle-truncate-lines)
   ("e" toggle-debug-on-error)
-  ("s" flyspell-mode)
+  ("g" toggle-debug-on-quit)
+  ("s" flycheck-mode)
+  ("S" flyspell-mode)
   ("w" whitespace-mode)
   ("W" toggle-word-wrap)
   ("r" read-only-mode)

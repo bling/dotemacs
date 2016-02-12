@@ -16,7 +16,7 @@
                           (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
                           elapsed)))))))
 
-(let ((base (concat user-emacs-directory "/elisp")))
+(let ((base (concat user-emacs-directory "elisp/")))
   (add-to-list 'load-path base)
   (dolist (dir (directory-files base t "^[^.]"))
     (when (file-directory-p dir)
