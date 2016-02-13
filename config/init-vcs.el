@@ -24,3 +24,8 @@
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (unless (display-graphic-p)
   (diff-hl-margin-mode))
+
+
+(after 'eshell
+  (require-package 'pcmpl-git)
+  (require 'pcmpl-git))
