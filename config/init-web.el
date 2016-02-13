@@ -1,6 +1,7 @@
 (lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
 (lazy-major-mode "\\.scss$" scss-mode)
+(lazy-major-mode "\\.sass$" sass-mode)
 (lazy-major-mode "\\.less$" less-css-mode)
 (lazy-major-mode "\\.jsx$" jsx-mode)
 
