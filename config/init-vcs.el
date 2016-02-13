@@ -29,3 +29,7 @@
 (after 'eshell
   (require-package 'pcmpl-git)
   (require 'pcmpl-git))
+
+
+(lazy-major-mode "^\\.gitignore$" gitignore-mode)
+(lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
