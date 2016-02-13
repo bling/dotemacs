@@ -5,8 +5,8 @@
 (setq my-errors-hydra/flycheck nil)
 (defhydra my-errors-hydra (:hint nil)
   "
-   errors:  [_n_]: next error       [_t_]: toggle flycheck (%`my-errors-hydra/flycheck)
-            [_p_]: previous error
+   errors:  _n_ → next error       _t_ → toggle flycheck (%`my-errors-hydra/flycheck)
+            _p_ → previous error
 "
   ("n" (lambda ()
          (interactive)
@@ -26,8 +26,8 @@
 
 (defhydra my-quit-hydra (:hint nil :exit t)
   "
-   quit:  [_q_]: quit
-          [_r_]: restart
+   quit:  _q_ → quit
+          _r_ → restart
 "
   ("q" save-buffers-kill-emacs)
   ("r" restart-emacs))
@@ -36,8 +36,8 @@
 
 (defhydra my-buffer-hydra (:hint nil :exit t)
   "
-   buffers:   [_b_]: buffers       [_s_]: scratch buffer   [_f_]: reveal in finder
-              [_k_]: kill buffer   [_m_]: messages
+   buffers:   _b_ → buffers       _s_ → scratch buffer   _f_ → reveal in finder
+              _k_ → kill buffer   _m_ → messages
 "
   ("s" my-goto-scratch-buffer)
   ("k" kill-this-buffer)
@@ -56,8 +56,8 @@
 
 (defhydra my-jump-hydra (:hint nil :exit t)
   "
-   jump   [_i_]: in buffer
-          [_b_]: bookmark
+   jump   _i_ → outline in current buffer   _l_ → lines in current buffer
+          _b_ → bookmarks                   _L_ → lines in all buffers
 "
   ("i" (lambda ()
          (interactive)
@@ -67,22 +67,34 @@
                 (call-interactively #'helm-semantic-or-imenu))
                (t
                 (call-interactively #'imenu)))))
+  ("l" (lambda ()
+         (interactive)
+         (cond ((eq dotemacs-switch-engine 'ivy)
+                (call-interactively #'swiper))
+               ((eq dotemacs-switch-engine 'helm)
+                (call-interactively #'helm-swoop)))))
+  ("L" (lambda ()
+         (interactive)
+         (cond ((eq dotemacs-switch-engine 'ivy)
+                (call-interactively #'swiper-all))
+               ((eq dotemacs-switch-engine 'helm)
+                (call-interactively #'helm-multi-swoop)))))
   ("b" bookmark-jump))
 
 
 
 (defhydra my-file-convert-hydra (:hint nil :exit t)
   "
-   convert to [_d_]: dos
-              [_u_]: unix
+   convert to _d_ → dos
+              _u_ → unix
 "
   ("d" my-buffer-to-dos-format)
   ("u" my-buffer-to-unix-format))
 
 (defhydra my-file-hydra (:hint nil :exit t)
   "
-   files:   [_f_]: find files     [_D_]: delete   [_y_]: copy filename  [_E_]: edit as root  [_z_]: fzf
-            [_r_]: recent files   [_R_]: rename   [_c_]: copy file      [_C_]: convert
+   files:    _f_ → find files      _D_ → delete    _y_ → copy filename   _E_ → edit as root   _z_ → fzf
+             _r_ → recent files    _R_ → rename    _c_ → copy file       _C_ → convert
 "
   ("D" my-delete-current-buffer-file)
   ("R" my-rename-current-buffer-file)
@@ -112,9 +124,9 @@
 
 (defhydra my-toggle-hydra (:hint nil :exit t)
   "
-   toggle:  [_a_]: aggressive indent   [_s_]: flycheck   [_r_]: read only    [_t_]: truncate lines   [_e_]: debug on error
-            [_f_]: auto-fill           [_S_]: flyspell   [_c_]: completion   [_W_]: word wrap        [_g_]: debug on quit
-            [_w_]: whitespace
+   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only    _t_ → truncate lines   _e_ → debug on error
+            _f_ → auto-fill           _S_ → flyspell   _c_ → completion   _W_ → word wrap        _g_ → debug on quit
+            _w_ → whitespace          ^ ^              ^ ^                _b_ → page break
 "
   ("a" aggressive-indent-mode)
   ("c" (lambda ()
@@ -125,6 +137,7 @@
   ("t" toggle-truncate-lines)
   ("e" toggle-debug-on-error)
   ("g" toggle-debug-on-quit)
+  ("b" page-break-lines-mode)
   ("s" flycheck-mode)
   ("S" flyspell-mode)
   ("w" whitespace-mode)
@@ -136,10 +149,10 @@
 
 (defhydra my-helm-hydra (:hint nil :exit t)
   "
-   helm:   [_a_]: apropos   [_m_]: bookmarks   [_y_]: kill-ring
-           [_b_]: mini      [_p_]: projectile  [_d_]: dash
-           [_e_]: recentf   [_r_]: register    [_x_]: M-x
-           [_f_]: files     [_t_]: tags
+   helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring
+           _b_ → mini      _p_ → projectile  _d_ → dash
+           _e_ → recentf   _r_ → register    _x_ → M-x
+           _f_ → files     _t_ → tags
 "
   ("a" helm-apropos)
   ("b" helm-mini)
@@ -157,9 +170,9 @@
 
 (defhydra my-ivy-hydra (:hint nil :exit t)
   "
-   ivy:   [_b_]: mini       [_y_]: kill-ring
-          [_e_]: recentf    [_x_]: M-x
-          [_f_]: files
+   ivy:   _b_ → mini       _y_ → kill-ring
+          _e_ → recentf    _x_ → M-x
+          _f_ → files
 "
   ("b" my-ivy-mini)
   ("e" ivy-recentf)
@@ -175,10 +188,10 @@
 
 (defhydra my-git-hydra (:hint nil :exit t)
   "
-   magit           ^ ^            ^ ^           ^ ^         ^^^^s^tage/unstage
-   -^-^------------^-^------------^-^-----------^-^-------    --^-^--------------^-^----------------
-   [_s_]: status  [_b_]: blame   [_l_]: log    [_f_]: file    [_a_]: +hunk  [_A_]: +buffer
-   [_d_]: diff    [_c_]: commit  [_z_]: stash   ^ ^           [_r_]: -hunk  [_R_]: -buffer
+   magit         ^ ^           ^ ^          ^ ^         ^^stage/unstage
+   ^-^-----------^-^-----------^-^----------^-^-------    ^-^----------^-^----------------
+   _s_ → status  _b_ → blame   _l_ → log    _f_ → file    _a_ → +hunk  _A_ → +buffer
+   _d_ → diff    _c_ → commit  _z_ → stash  ^ ^           _r_ → -hunk  _R_ → -buffer
 "
   ("s" magit-status)
   ("b" magit-blame-popup)
@@ -197,8 +210,8 @@
 (defhydra my-paste-hydra (:hint nil)
   "
    Paste transient state: [%s(length kill-ring-yank-pointer)/%s(length kill-ring)]
-         [_J_]: cycle next          [_p_] paste above
-         [_K_]: cycle previous      [_P_] paste below
+         _J_ → cycle next          _p_ → paste before
+         _K_ → cycle previous      _P_ → paste after
 "
   ("J" evil-paste-pop)
   ("K" evil-paste-pop-next)

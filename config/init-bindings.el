@@ -11,6 +11,12 @@
 (which-key-mode)
 
 
+(defun bind-prefix (keymap sequence description body)
+  (declare (indent defun))
+  (define-key keymap (kbd sequence) body)
+  (which-key-add-key-based-replacements sequence description))
+
+
 (after 'evil
   (require-package 'key-chord)
   (key-chord-mode 1)
@@ -38,11 +44,11 @@
     (after "paradox-autoloads"
       (evil-leader/set-key "P" 'paradox-list-packages)))
 
-  (define-key evil-normal-state-map (kbd "SPC t") #'my-toggle-hydra/body)
-  (define-key evil-normal-state-map (kbd "SPC q") #'my-quit-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC t" "toggle..." #'my-toggle-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC q" "quit..." #'my-quit-hydra/body)
 
   (after "magit-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC g") #'my-git-hydra/body))
+    (bind-prefix evil-normal-state-map "SPC g" "git..." #'my-git-hydra/body))
 
   (after "evil-numbers-autoloads"
     (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -60,20 +66,18 @@
     (evil-ex-define-cmd "Gw" (bind
                               (git-gutter+-stage-whole-buffer))))
 
-  (define-key evil-visual-state-map (kbd "SPC SPC") 'execute-extended-command)
-  (define-key evil-normal-state-map (kbd "SPC SPC") 'execute-extended-command)
-  (define-key evil-normal-state-map (kbd "SPC e") #'my-errors-hydra/body)
-  (define-key evil-normal-state-map (kbd "SPC b") #'my-buffer-hydra/body)
-  (define-key evil-normal-state-map (kbd "SPC j") #'my-jump-hydra/body)
-  (define-key evil-normal-state-map (kbd "SPC o") #'my-jump-hydra/bookmark-jump-and-exit)
-  (define-key evil-normal-state-map (kbd "SPC f") #'my-file-hydra/body)
-  (define-key evil-normal-state-map (kbd "SPC k") 'kill-buffer)
+  (bind-prefix evil-normal-state-map "SPC SPC" "M-x" #'execute-extended-command)
+  (bind-prefix evil-visual-state-map "SPC SPC" "M-x" #'execute-extended-command)
+  (bind-prefix evil-normal-state-map "SPC e" "errors..." #'my-errors-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC b" "buffers..." #'my-buffer-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC j" "jump..." #'my-jump-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC f" "files..." #'my-file-hydra/body)
 
   (when (fboundp 'fzf)
     (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
 
   (after "helm-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC h") #'my-helm-hydra/body)
+    (bind-prefix evil-normal-state-map "SPC h" "helm..." #'my-helm-hydra/body)
     (define-key evil-normal-state-map (kbd "g b") 'helm-mini))
 
   (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
@@ -130,7 +134,7 @@
 
   (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (define-key evil-normal-state-map (kbd "SPC /")
+    (bind-prefix evil-normal-state-map "SPC /" "search"
       (bind
        (if current-prefix-arg
            (cond
@@ -259,11 +263,11 @@
 
 
 (after "helm-autoloads"
-  (global-set-key (kbd "C-c h") #'my-helm-hydra/body))
+  (bind-prefix (current-global-map) "C-c h" "helm..." #'my-helm-hydra/body))
 
 
 (after "counsel-autoloads"
-  (global-set-key (kbd "C-c i") #'my-ivy-hydra/body))
+  (bind-prefix (current-global-map) "C-c i" "ivy..." #'my-ivy-hydra/body))
 
 
 (global-set-key [prior] 'previous-buffer)
