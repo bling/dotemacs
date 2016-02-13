@@ -8,5 +8,8 @@
     (exec-path-from-shell-initialize)))
 
 (when (eq system-type 'darwin)
+  (require-package 'osx-trash)
+  (osx-trash-setup)
+
   (require-package 'reveal-in-osx-finder)
   (require-package 'vkill))
