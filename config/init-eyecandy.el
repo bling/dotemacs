@@ -1,3 +1,18 @@
+(defgroup dotemacs-eyecandy nil
+  "Configuration options for eye candy."
+  :group 'dotemacs
+  :prefix 'dotemacs-eyecandy)
+
+(defcustom dotemacs-eyecandy/mode-line
+  'sml
+  "List of hooks to automatically start up in Evil Emacs state."
+  :type '(radio
+          (const :tag "smart mode line" sml)
+          (const :tag "spaceline" spaceline))
+  :group 'dotemacs-eyecandy)
+
+
+
 (when (eq dotemacs-pair-engine 'emacs)
   (show-paren-mode)
   (setq show-paren-delay 0))
@@ -46,13 +61,28 @@
 (after 'aggressive-indent (diminish 'aggressive-indent-mode))
 
 
-(require-package 'spaceline)
-(require 'spaceline-config)
-(setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
-(spaceline-spacemacs-theme)
-(spaceline-info-mode)
-(after "helm-autoloads"
-  (spaceline-helm-mode))
+(if (eq dotemacs-eyecandy/mode-line 'sml)
+    (progn
+      (require-package 'smart-mode-line)
+      (sml/setup)
+      (after 'evil
+        (defun my-evil-modeline-color-change ()
+          (cond ((evil-emacs-state-p)
+                 (set-face-background 'mode-line "#440000"))
+                ((evil-insert-state-p)
+                 (set-face-background 'mode-line "#002244"))
+                ((evil-visual-state-p)
+                 (set-face-background 'mode-line "#440044"))
+                (t
+                 (set-face-background 'mode-line "black"))))
+        (add-hook 'post-command-hook #'my-evil-modeline-color-change)))
+  (require-package 'spaceline)
+  (require 'spaceline-config)
+  (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
+  (spaceline-spacemacs-theme)
+  (spaceline-info-mode)
+  (after "helm-autoloads"
+    (spaceline-helm-mode)))
 
 
 (when (fboundp 'global-prettify-symbols-mode)
