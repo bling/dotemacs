@@ -80,7 +80,7 @@
   ("D" my-delete-current-buffer-file)
   ("R" my-rename-current-buffer-file)
   ("f" (my-switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
-  ("r" (my-switch-action #'recentf   :ivy #'ivy-recenf        :helm #'helm-recentf))
+  ("r" (my-switch-action #'recentf   :ivy #'ivy-recentf        :helm #'helm-recentf))
   ("y" my-copy-file-name-to-clipboard)
   ("E" my-find-file-as-root)
   ("c" copy-file)
@@ -91,7 +91,7 @@
 
 (defhydra my-toggle-hydra (:hint nil :exit t)
   "
-   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only    _t_ → truncate lines   _e_ → debug on error
+   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only    _t_ → truncate lines   _e_ → debug on error   _'_ → switch (%`dotemacs-switch-engine)
             _f_ → auto-fill           _S_ → flyspell   _c_ → completion   _W_ → word wrap        _g_ → debug on quit
             _w_ → whitespace          ^ ^              ^ ^                _b_ → page break
 "
@@ -108,7 +108,15 @@
   ("w" whitespace-mode)
   ("W" toggle-word-wrap)
   ("r" read-only-mode)
-  ("f" auto-fill-mode))
+  ("f" auto-fill-mode)
+  ("'" (cond
+        ((eq dotemacs-switch-engine 'ivy)
+         (setq dotemacs-switch-engine 'helm))
+        ((eq dotemacs-switch-engine 'helm)
+         (setq dotemacs-switch-engine 'ido))
+        ((eq dotemacs-switch-engine 'ido)
+         (setq dotemacs-switch-engine 'ivy)))
+   :exit nil))
 
 
 
