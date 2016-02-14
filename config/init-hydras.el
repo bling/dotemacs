@@ -149,8 +149,8 @@
 
 (defhydra my-helm-hydra (:hint nil :exit t)
   "
-   helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring
-           _b_ → mini      _p_ → projectile  _d_ → dash
+   helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring  _l_ → swoop
+           _b_ → mini      _p_ → projectile  _d_ → dash       _L_ → swoop (multi)
            _e_ → recentf   _r_ → register    _x_ → M-x
            _f_ → files     _t_ → tags
 "
@@ -164,21 +164,25 @@
   ("r" helm-register)
   ("t" helm-etags-select)
   ("x" helm-M-x)
+  ("l" helm-swoop)
+  ("L" helm-multi-swoop)
   ("y" helm-show-kill-ring))
 
 
 
 (defhydra my-ivy-hydra (:hint nil :exit t)
   "
-   ivy:   _b_ → mini       _y_ → kill-ring
-          _e_ → recentf    _x_ → M-x
+   ivy:   _b_ → mini       _y_ → kill-ring   _l_ → swiper
+          _e_ → recentf    _x_ → M-x         _L_ → swiper (multi)
           _f_ → files
 "
   ("b" my-ivy-mini)
   ("e" ivy-recentf)
   ("f" counsel-find-file)
   ("y" counsel-yank-pop)
-  ("x" counsel-M-x))
+  ("x" counsel-M-x)
+  ("l" swiper)
+  ("L" swiper-all))
 
 
 
