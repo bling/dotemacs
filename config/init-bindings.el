@@ -77,9 +77,9 @@
     (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
 
   (after "helm-autoloads"
-    (bind-prefix evil-normal-state-map "SPC h" "helm..." #'my-helm-hydra/body)
-    (define-key evil-normal-state-map (kbd "g b") 'helm-mini))
+    (bind-prefix evil-normal-state-map "SPC h" "helm..." #'my-helm-hydra/body))
 
+  (define-key evil-normal-state-map (kbd "g b") #'my-buffer-hydra/lambda-b-and-exit)
   (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-f") 'evil-scroll-down)
 
@@ -134,6 +134,7 @@
 
   (after "projectile-autoloads"
     (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (bind-prefix evil-normal-state-map "SPC p" "projectile..." 'projectile-command-map)
     (bind-prefix evil-normal-state-map "SPC /" "search"
       (bind
        (if current-prefix-arg

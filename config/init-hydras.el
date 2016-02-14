@@ -8,18 +8,15 @@
    errors:  _n_ → next error       _t_ → toggle flycheck (%`my-errors-hydra/flycheck)
             _p_ → previous error
 "
-  ("n" (lambda ()
-         (interactive)
+  ("n" (progn
          (if my-errors-hydra/flycheck
              (call-interactively #'flycheck-next-error)
            (call-interactively #'next-error))))
-  ("p" (lambda ()
-         (interactive)
+  ("p" (progn
          (if my-errors-hydra/flycheck
              (call-interactively #'flycheck-previous-error)
            (call-interactively #'previous-error))))
-  ("t" (lambda ()
-         (interactive)
+  ("t" (progn
          (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck)))))
 
 
@@ -42,9 +39,8 @@
   ("s" my-goto-scratch-buffer)
   ("k" kill-this-buffer)
   ("f" reveal-in-osx-finder)
-  ("m" (lambda () (interactive) (switch-to-buffer "*Messages*")))
-  ("b" (lambda ()
-         (interactive)
+  ("m" (switch-to-buffer "*Messages*"))
+  ("b" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'my-ivy-mini))
                ((eq dotemacs-switch-engine 'helm)
@@ -59,22 +55,19 @@
    jump   _i_ → outline in current buffer   _l_ → lines in current buffer
           _b_ → bookmarks                   _L_ → lines in all buffers
 "
-  ("i" (lambda ()
-         (interactive)
+  ("i" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'counsel-imenu))
                ((eq dotemacs-switch-engine 'helm)
                 (call-interactively #'helm-semantic-or-imenu))
                (t
                 (call-interactively #'imenu)))))
-  ("l" (lambda ()
-         (interactive)
+  ("l" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'swiper))
                ((eq dotemacs-switch-engine 'helm)
                 (call-interactively #'helm-swoop)))))
-  ("L" (lambda ()
-         (interactive)
+  ("L" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'swiper-all))
                ((eq dotemacs-switch-engine 'helm)
@@ -98,16 +91,14 @@
 "
   ("D" my-delete-current-buffer-file)
   ("R" my-rename-current-buffer-file)
-  ("f" (lambda ()
-         (interactive)
+  ("f" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'counsel-find-file))
                ((eq dotemacs-switch-engine 'helm)
                 (call-interactively #'helm-find-files))
                (t
                 (call-interactively #'find-file)))))
-  ("r" (lambda ()
-         (interactive)
+  ("r" (progn
          (cond ((eq dotemacs-switch-engine 'ivy)
                 (call-interactively #'ivy-recentf))
                ((eq dotemacs-switch-engine 'helm)
@@ -129,8 +120,7 @@
             _w_ → whitespace          ^ ^              ^ ^                _b_ → page break
 "
   ("a" aggressive-indent-mode)
-  ("c" (lambda ()
-         (interactive)
+  ("c" (progn
          (if (eq dotemacs-completion-engine 'company)
              (call-interactively 'company-mode)
            (call-interactively 'auto-complete-mode))))
