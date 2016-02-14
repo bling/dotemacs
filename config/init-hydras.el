@@ -1,5 +1,17 @@
 (require-package 'hydra)
 
+(defun my-switch-action (fallback &rest props)
+  "Performs an action based on the value of `dotemacs-switch-engine'."
+  (cond
+   ((and (eq dotemacs-switch-engine 'ivy) (plist-get props :ivy))
+    (call-interactively (plist-get props :ivy)))
+   ((and (eq dotemacs-switch-engine 'helm) (plist-get props :helm))
+    (call-interactively (plist-get props :helm)))
+   (t
+    (if fallback
+        (call-interactively fallback)
+      (message "unsupported action")))))
+
 
 
 (setq my-errors-hydra/flycheck nil)
@@ -8,23 +20,19 @@
    errors:  _n_ → next error       _t_ → toggle flycheck (%`my-errors-hydra/flycheck)
             _p_ → previous error
 "
-  ("n" (progn
-         (if my-errors-hydra/flycheck
-             (call-interactively #'flycheck-next-error)
-           (call-interactively #'next-error))))
-  ("p" (progn
-         (if my-errors-hydra/flycheck
-             (call-interactively #'flycheck-previous-error)
-           (call-interactively #'previous-error))))
-  ("t" (progn
-         (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck)))))
+  ("n" (if my-errors-hydra/flycheck
+           (call-interactively #'flycheck-next-error)
+         (call-interactively #'next-error)))
+  ("p" (if my-errors-hydra/flycheck
+           (call-interactively #'flycheck-previous-error)
+         (call-interactively #'previous-error)))
+  ("t" (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck))))
 
 
 
 (defhydra my-quit-hydra (:hint nil :exit t)
   "
-   quit:  _q_ → quit
-          _r_ → restart
+   quit:  _q_ → quit    _r_ → restart
 "
   ("q" save-buffers-kill-emacs)
   ("r" restart-emacs))
@@ -40,13 +48,7 @@
   ("k" kill-this-buffer)
   ("f" reveal-in-osx-finder)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'my-ivy-mini))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-mini))
-               (t
-                (call-interactively #'switch-to-buffer))))))
+  ("b" (my-switch-action #'switch-to-buffer :ivy #'my-ivy-mini :helm #'helm-mini)))
 
 
 
@@ -55,23 +57,9 @@
    jump   _i_ → outline in current buffer   _l_ → lines in current buffer
           _b_ → bookmarks                   _L_ → lines in all buffers
 "
-  ("i" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'counsel-imenu))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-semantic-or-imenu))
-               (t
-                (call-interactively #'imenu)))))
-  ("l" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'swiper))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-swoop)))))
-  ("L" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'swiper-all))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-multi-swoop)))))
+  ("i" (my-switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu))
+  ("l" (my-switch-action nil     :ivy #'swiper        :helm #'helm-swoop))
+  ("L" (my-switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop))
   ("b" bookmark-jump))
 
 
@@ -91,20 +79,8 @@
 "
   ("D" my-delete-current-buffer-file)
   ("R" my-rename-current-buffer-file)
-  ("f" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'counsel-find-file))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-find-files))
-               (t
-                (call-interactively #'find-file)))))
-  ("r" (progn
-         (cond ((eq dotemacs-switch-engine 'ivy)
-                (call-interactively #'ivy-recentf))
-               ((eq dotemacs-switch-engine 'helm)
-                (call-interactively #'helm-recentf))
-               (t
-                (call-interactively #'recentf)))))
+  ("f" (my-switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
+  ("r" (my-switch-action #'recentf   :ivy #'ivy-recenf        :helm #'helm-recentf))
   ("y" my-copy-file-name-to-clipboard)
   ("E" my-find-file-as-root)
   ("c" copy-file)
@@ -120,10 +96,9 @@
             _w_ → whitespace          ^ ^              ^ ^                _b_ → page break
 "
   ("a" aggressive-indent-mode)
-  ("c" (progn
-         (if (eq dotemacs-completion-engine 'company)
-             (call-interactively 'company-mode)
-           (call-interactively 'auto-complete-mode))))
+  ("c" (if (eq dotemacs-completion-engine 'company)
+           (call-interactively 'company-mode)
+         (call-interactively 'auto-complete-mode)))
   ("t" toggle-truncate-lines)
   ("e" toggle-debug-on-error)
   ("g" toggle-debug-on-quit)
