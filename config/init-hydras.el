@@ -41,14 +41,17 @@
 
 (defhydra my-buffer-hydra (:hint nil :exit t)
   "
-   buffers:   _b_ → buffers       _s_ → scratch buffer   _f_ → reveal in finder
-              _k_ → kill buffer   _m_ → messages
+   buffers:   _b_ → buffers          _k_ → kill buffer             _f_ → reveal in finder
+              _m_ → goto messages    _e_ → erase buffer            ^ ^
+              _s_ → goto scratch     _E_ → erase buffer (force)    ^ ^
 "
   ("s" my-goto-scratch-buffer)
   ("k" kill-this-buffer)
   ("f" reveal-in-osx-finder)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (my-switch-action #'switch-to-buffer :ivy #'my-ivy-mini :helm #'helm-mini)))
+  ("b" (my-switch-action #'switch-to-buffer :ivy #'my-ivy-mini :helm #'helm-mini))
+  ("e" erase-buffer)
+  ("E" (let ((inhibit-read-only t)) (erase-buffer))))
 
 
 
