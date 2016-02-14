@@ -1,4 +1,9 @@
 (require-package 'swiper)
+(after 'swiper
+  (defadvice swiper (before dotemacs activate)
+    (setq gc-cons-threshold most-positive-fixnum))
+  (defadvice swiper-all (before dotemacs activate)
+    (setq gc-cons-threshold most-positive-fixnum)))
 
 
 (require-package 'counsel)

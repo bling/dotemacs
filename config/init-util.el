@@ -1,4 +1,4 @@
-(defadvice require (around require-advice activate)
+(defadvice require (around dotemacs activate)
   (let ((elapsed)
         (loaded (memq feature features))
         (start (current-time)))

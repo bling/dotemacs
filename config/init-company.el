@@ -41,7 +41,7 @@
         '(not
           eshell-mode comint-mode org-mode erc-mode))
 
-  (defadvice company-complete-common (around advice-for-company-complete-common activate)
+  (defadvice company-complete-common (around dotemacs activate)
     (when (null (yas-expand))
       ad-do-it))
 

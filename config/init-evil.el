@@ -145,8 +145,8 @@
 (my-evil-terminal-cursor-change)
 
 
-(defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
+(defadvice evil-ex-search-next (after dotemacs activate)
   (recenter))
 
-(defadvice evil-ex-search-previous (after advice-for-evil-ex-search-previous activate)
+(defadvice evil-ex-search-previous (after dotemacs activate)
   (recenter))

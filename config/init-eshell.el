@@ -47,7 +47,7 @@
 
 
 (when (executable-find "fortune")
-  (defadvice eshell (before advice-for-eshell activate)
+  (defadvice eshell (before dotemacs activate)
     (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n"))))
 
 

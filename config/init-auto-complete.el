@@ -22,7 +22,7 @@
   (after 'yasnippet
     (add-hook 'yas-before-expand-snippet-hook (lambda () (auto-complete-mode -1)))
     (add-hook 'yas-after-exit-snippet-hook (lambda () (auto-complete-mode t)))
-    (defadvice ac-expand (before advice-for-ac-expand activate)
+    (defadvice ac-expand (before dotemacs activate)
       (when (yas-expand)
         (ac-stop))))
 

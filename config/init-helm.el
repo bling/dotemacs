@@ -48,7 +48,7 @@
   (require-package 'helm-swoop)
   (after 'helm-swoop
     (after 'evil
-      (defadvice helm-swoop--edit (after helm-swoop--edit-advice activate)
+      (defadvice helm-swoop--edit (after dotemacs activate)
         (turn-on-evil-mode))))
 
 

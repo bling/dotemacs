@@ -17,5 +17,5 @@
 
 ;; fix conflict where smartparens clobbers yas' key bindings
 (after 'yasnippet
-  (defadvice yas-expand (before advice-for-yas-expand activate)
+  (defadvice yas-expand (before dotemacs activate)
     (sp-remove-active-pair-overlay)))

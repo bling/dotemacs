@@ -43,5 +43,5 @@
 
 
 ;; indent after deleting a tag
-(defadvice sgml-delete-tag (after reindent activate)
+(defadvice sgml-delete-tag (after dotemacs activate)
   (indent-region (point-min) (point-max)))

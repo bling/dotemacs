@@ -304,7 +304,7 @@
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "C-x C-c") (bind (message "Thou shall not quit!")))
 (after 'evil
-  (defadvice evil-quit (around advice-for-evil-quit activate)
+  (defadvice evil-quit (around dotemacs activate)
     (message "Thou shall not quit!"))
-  (defadvice evil-quit-all (around advice-for-evil-quit-all activate)
+  (defadvice evil-quit-all (around dotemacs activate)
     (message "Thou shall not quit!")))
