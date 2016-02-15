@@ -51,6 +51,8 @@
 (setq evil-replace-state-cursor '("red" bar))
 (setq evil-operator-state-cursor '("red" hollow))
 
+(add-hook 'evil-jumps-post-jump-hook #'recenter)
+
 (require-package 'evil)
 (require 'evil)
 (evil-mode)
@@ -67,6 +69,7 @@
 
 (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
          do (evil-set-initial-state mode 'emacs))
+
 
 
 (when dotemacs-evil/emacs-insert-mode
@@ -105,11 +108,6 @@
 
 (require-package 'evil-avy)
 (evil-avy-mode)
-
-
-(require-package 'evil-jumper)
-(evil-jumper-mode t)
-(add-hook 'evil-jumper-post-jump-hook #'recenter)
 
 
 (require-package 'evil-matchit)
