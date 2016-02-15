@@ -72,6 +72,7 @@
   (bind-prefix evil-normal-state-map "SPC b" "buffers..." #'my-buffer-hydra/body)
   (bind-prefix evil-normal-state-map "SPC j" "jump..." #'my-jump-hydra/body)
   (bind-prefix evil-normal-state-map "SPC f" "files..." #'my-file-hydra/body)
+  (bind-prefix evil-normal-state-map "SPC s" "search..." #'my-search-hydra/body)
 
   (when (fboundp 'fzf)
     (define-key evil-normal-state-map (kbd "SPC F") 'fzf))

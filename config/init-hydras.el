@@ -67,6 +67,23 @@
 
 
 
+(defhydra my-search-hydra (:hint nil :exit t)
+  "
+    search     project      ^^directory    ^^buffer       ^^buffers      ^^web
+               -------      ^^---------    ^^------       ^^-------      ^^---
+               _a_ → ag       _A_ → ag       _l_ → lines    _L_ → lines    _g_ → google
+               _p_ → pt       _P_ → pt
+"
+  ("a" projectile-ag)
+  ("p" projectile-pt)
+  ("A" ag)
+  ("P" pt-regexp)
+  ("l" my-jump-hydra/lambda-l-and-exit)
+  ("L" my-jump-hydra/lambda-L-and-exit)
+  ("g" my-google))
+
+
+
 (defhydra my-file-convert-hydra (:hint nil :exit t)
   "
    convert to _d_ → dos
@@ -83,7 +100,7 @@
   ("D" my-delete-current-buffer-file)
   ("R" my-rename-current-buffer-file)
   ("f" (my-switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
-  ("r" (my-switch-action #'recentf   :ivy #'ivy-recentf        :helm #'helm-recentf))
+  ("r" (my-switch-action #'recentf   :ivy #'ivy-recentf       :helm #'helm-recentf))
   ("y" my-copy-file-name-to-clipboard)
   ("E" my-find-file-as-root)
   ("c" copy-file)
