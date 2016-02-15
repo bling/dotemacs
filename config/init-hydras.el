@@ -62,7 +62,7 @@
 "
   ("i" (my-switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu))
   ("l" (my-switch-action nil     :ivy #'swiper        :helm #'helm-swoop))
-  ("L" (my-switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop))
+  ("L" (my-switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all))
   ("b" bookmark-jump))
 
 
@@ -163,7 +163,7 @@
   ("t" helm-etags-select)
   ("x" helm-M-x)
   ("l" helm-swoop)
-  ("L" helm-multi-swoop)
+  ("L" helm-multi-swoop-all)
   ("y" helm-show-kill-ring))
 
 

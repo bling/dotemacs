@@ -73,6 +73,8 @@
   (bind-prefix evil-normal-state-map "SPC j" "jump..." #'my-jump-hydra/body)
   (bind-prefix evil-normal-state-map "SPC f" "files..." #'my-file-hydra/body)
   (bind-prefix evil-normal-state-map "SPC s" "search..." #'my-search-hydra/body)
+  (define-key evil-normal-state-map (kbd "SPC l") #'my-jump-hydra/lambda-l-and-exit)
+  (define-key evil-normal-state-map (kbd "SPC L") #'my-jump-hydra/lambda-L-and-exit)
 
   (when (fboundp 'fzf)
     (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
@@ -176,12 +178,8 @@
                 (local-set-key (kbd "C-l") 'evil-window-right))))
 
   (cond ((eq dotemacs-switch-engine 'ivy)
-         (define-key evil-normal-state-map (kbd "SPC l") 'swiper)
-         (define-key evil-normal-state-map (kbd "SPC L") 'swiper-all)
          (define-key evil-normal-state-map (kbd "SPC y") 'counsel-yank-pop))
         ((eq dotemacs-switch-engine 'helm)
-         (define-key evil-normal-state-map (kbd "SPC l") 'helm-swoop)
-         (define-key evil-normal-state-map (kbd "SPC L") 'helm-multi-swoop)
          (define-key evil-normal-state-map (kbd "SPC y") 'helm-show-kill-ring)))
 
   ;; butter fingers
