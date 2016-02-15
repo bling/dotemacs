@@ -94,9 +94,9 @@
 
 (defhydra my-toggle-hydra (:hint nil :exit t)
   "
-   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only    _t_ → truncate lines   _e_ → debug on error   _'_ → switch (%`dotemacs-switch-engine)
-            _f_ → auto-fill           _S_ → flyspell   _c_ → completion   _W_ → word wrap        _g_ → debug on quit
-            _w_ → whitespace          ^ ^              ^ ^                _b_ → page break
+   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch (%`dotemacs-switch-engine)
+            _f_ → auto-fill           _S_ → flyspell   _c_ → completion     _W_ → word wrap        _g_ → debug on quit
+            _w_ → whitespace          ^ ^              _p_ → auto-pairing   _b_ → page break
 "
   ("a" aggressive-indent-mode)
   ("c" (if (eq dotemacs-completion-engine 'company)
@@ -112,6 +112,11 @@
   ("W" toggle-word-wrap)
   ("r" read-only-mode)
   ("f" auto-fill-mode)
+  ("p" (cond
+        ((eq dotemacs-pair-engine 'emacs)
+         (call-interactively #'electric-pair-mode))
+        ((eq dotemacs-pair-engine 'smartparens)
+         (call-interactively #'smartparens-global-mode))))
   ("'" (cond
         ((eq dotemacs-switch-engine 'ivy)
          (setq dotemacs-switch-engine 'helm))
