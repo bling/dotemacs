@@ -47,10 +47,6 @@
   (setq helm-swoop-speed-or-color t)
   (setq helm-swoop-use-fuzzy-match t)
   (require-package 'helm-swoop)
-  (after 'helm-swoop
-    (after 'evil
-      (defadvice helm-swoop--edit (after dotemacs activate)
-        (turn-on-evil-mode))))
 
 
   (after "projectile-autoloads"
