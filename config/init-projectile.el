@@ -3,7 +3,7 @@
 (setq projectile-cache-file (concat dotemacs-cache-directory "projectile.cache"))
 (setq projectile-known-projects-file (concat dotemacs-cache-directory "projectile-bookmarks.eld"))
 (setq projectile-indexing-method 'alien)
-(setq projectile-enable-caching t)
+(setq projectile-enable-caching nil)
 (setq projectile-completion-system dotemacs-switch-engine)
 
 (after "helm-autoloads"
