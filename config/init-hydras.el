@@ -15,18 +15,27 @@
 
 
 (setq my-errors-hydra/flycheck nil)
-(defhydra my-errors-hydra (:hint nil)
+(defun my-errors-hydra/target-list ()
+  (if my-errors-hydra/flycheck
+      'flycheck
+    'emacs))
+(defhydra my-errors-hydra (:hint nil :post (quit-windows-on "*Flycheck errors*"))
   "
-   errors:  _n_ → next error       _t_ → toggle flycheck (%`my-errors-hydra/flycheck)
-            _p_ → previous error
+   errors:  navigation                 flycheck
+            -----------------------    ---------------
+            _j_ → next error             _l_ → list errors
+            _k_ → previous error         _?_ → describe checker
+            _t_ → toggle list (%(my-errors-hydra/target-list))
 "
-  ("n" (if my-errors-hydra/flycheck
+  ("j" (if my-errors-hydra/flycheck
            (call-interactively #'flycheck-next-error)
          (call-interactively #'next-error)))
-  ("p" (if my-errors-hydra/flycheck
+  ("k" (if my-errors-hydra/flycheck
            (call-interactively #'flycheck-previous-error)
          (call-interactively #'previous-error)))
-  ("t" (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck))))
+  ("t" (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck)))
+  ("?" flycheck-describe-checker)
+  ("l" flycheck-list-errors))
 
 
 
