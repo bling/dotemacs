@@ -54,7 +54,7 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
 
-  (load (concat config-directory "init-util.el"))
+  (load (concat config-directory "init-boot.el"))
 
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (when (file-exists-p custom-file)
