@@ -16,6 +16,7 @@
 
 
 (require-package 'multiple-cursors)
+(setq mc/list-file (concat dotemacs-cache-directory "mc-lists.el"))
 (after 'evil
   (add-hook 'multiple-cursors-mode-enabled-hook #'evil-emacs-state)
   (add-hook 'multiple-cursors-mode-disabled-hook #'evil-normal-state))
