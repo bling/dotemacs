@@ -114,6 +114,9 @@
     (split-window)
     (eshell (incf count))))
 
+(after "magit-autoloads"
+  (defalias 'eshell/s #'magit-status))
+
 
 (add-hook 'eshell-mode-hook
           (lambda ()
