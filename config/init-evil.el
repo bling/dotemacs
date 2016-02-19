@@ -14,6 +14,7 @@
     help-mode
     term-mode
     paradox-menu-mode
+    calculator-mode
     makey-key-mode)
   "List of major modes that should default to Emacs state."
   :type '(repeat (symbol))
@@ -27,12 +28,6 @@
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
 
-(defcustom dotemacs-evil/emacs-cursor
-  "red"
-  "The color of the cursor when in Emacs state."
-  :type 'color
-  :group 'dotemacs-evil)
-
 (defcustom dotemacs-evil/emacs-insert-mode
   nil
   "If non-nil, insert mode will act as Emacs state."
@@ -44,7 +39,8 @@
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
 
-(setq evil-emacs-state-cursor `(,dotemacs-evil/emacs-cursor box))
+(setq evil-emacs-state-cursor `("red" box))
+(setq evil-motion-state-cursor `("orange" box))
 (setq evil-normal-state-cursor '("green" box))
 (setq evil-visual-state-cursor '("orange" box))
 (setq evil-insert-state-cursor '("red" bar))
