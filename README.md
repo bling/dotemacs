@@ -1,6 +1,6 @@
 # dotemacs
 
-This is a KISS Emacs config.
+This is my personal KISS Emacs config.
 
 # intro
 
