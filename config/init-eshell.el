@@ -74,17 +74,18 @@
 
 (defun eshell/j ()
   "Quickly jump to previous directories."
-  (my-completing-read
-   "Jump to directory: "
-   (delete-dups (ring-elements eshell-last-dir-ring))
-   #'eshell/cd))
+  (eshell/cd (completing-read
+              "Jump to directory: "
+              (cl-remove-if-not
+               (lambda (dir)
+                 (file-exists-p dir))
+               (delete-dups (ring-elements eshell-last-dir-ring))))))
 
 (defun eshell/h ()
   "Quickly run a previous command."
-  (my-completing-read
-   "Run previous command: "
-   (delete-dups (ring-elements eshell-history-ring))
-   #'insert))
+  (insert (completing-read
+           "Run previous command: "
+           (delete-dups (ring-elements eshell-history-ring)))))
 
 
 (defun my-eshell-color-filter (string)
