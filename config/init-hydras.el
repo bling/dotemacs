@@ -207,9 +207,9 @@
 
 
 
-(autoload 'magit-log-popup "magit-log")
-(autoload 'magit-diff-popup "magit-diff")
-(autoload 'magit-commit-popup "magit-commit")
+(autoload 'magit-log-popup "magit-log" nil t)
+(autoload 'magit-diff-popup "magit-diff" nil t)
+(autoload 'magit-commit-popup "magit-commit" nil t)
 
 (defhydra my-git-hydra (:hint nil :exit t)
   "
