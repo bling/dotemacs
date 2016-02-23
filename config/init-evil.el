@@ -144,3 +144,17 @@
 
 (defadvice evil-ex-search-previous (after dotemacs activate)
   (recenter))
+
+(require 'evil-evilified-state)
+
+(with-current-buffer "*Messages*"
+  (evil-evilified-state))
+
+(evilified-state-evilify ibuffer-mode ibuffer-mode-map)
+(evilified-state-evilify paradox-menu-mode paradox-menu-mode-map)
+(evilified-state-evilify diff-mode diff-mode-map
+  "j" #'diff-hunk-next
+  "k" #'diff-hunk-prev)
+(evilified-state-evilify vc-annotate-mode vc-annotate-mode-map
+  "l" #'vc-annotate-show-log-revision-at-line
+  "J" #'vc-annotate-revision-at-line)
