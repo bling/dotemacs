@@ -83,8 +83,10 @@
 (require-package 'discover-my-major)
 
 
-(require-package 'paradox)
-(setq paradox-execute-asynchronously nil)
+(when (and (>= emacs-major-version 24)
+           (>= emacs-minor-version 4))
+  (require-package 'paradox)
+  (setq paradox-execute-asynchronously nil))
 
 
 (require-package 'vlf)

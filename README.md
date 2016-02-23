@@ -65,6 +65,10 @@ Another decision is to keep all keybindings in one place: `init-bindings.el`.  B
 
 Keybindings are the single most differentiating factor between configs.  By defining them in one place, if you want to use/fork this config, you can simply change the bindings to your liking and still use all the other preconfigured packages as is.  If you're not an Evil user, delete `init-evil.el` and you will get a pure Emacs experience.
 
+#### lazy installation of major mode packages
+
+By combining `after`, `require-package`, and `auto-mode-alist`, packages are installed only when necessary.  If you never open a Javascript file, none of those packages will be installed.
+
 # install
 
 `git clone https://github.com/bling/dotemacs.git ~/.emacs.d`

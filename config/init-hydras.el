@@ -235,10 +235,10 @@
 (defhydra my-paste-hydra (:hint nil)
   "
    Paste transient state: [%s(length kill-ring-yank-pointer)/%s(length kill-ring)]
-         _J_ → cycle next          _p_ → paste before
-         _K_ → cycle previous      _P_ → paste after
+         _C-j_ → cycle next          _p_ → paste before
+         _C-k_ → cycle previous      _P_ → paste after
 "
-  ("J" evil-paste-pop)
-  ("K" evil-paste-pop-next)
+  ("C-j" evil-paste-pop-next)
+  ("C-k" evil-paste-pop)
   ("p" evil-paste-after)
   ("P" evil-paste-before))

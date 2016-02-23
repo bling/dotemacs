@@ -30,7 +30,11 @@
       (package-refresh-contents))
     (package-install package)))
 
-(defalias 'after 'with-eval-after-load)
+(if (fboundp 'with-eval-after-load)
+    (defalias 'after 'with-eval-after-load)
+  (defmacro after (feature &rest body)
+    (declare (indent defun))
+    `(eval-after-load ,feature '(progn ,@body))))
 
 (defmacro lazy-major-mode (pattern mode)
   "Defines a new major-mode matched by PATTERN, installs MODE if necessary, and activates it."

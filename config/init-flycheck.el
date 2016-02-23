@@ -7,5 +7,6 @@
 (global-flycheck-mode)
 
 
-(require-package 'flycheck-pos-tip)
-(flycheck-pos-tip-mode)
+(when (display-graphic-p)
+  (require-package 'flycheck-pos-tip)
+  (flycheck-pos-tip-mode))
