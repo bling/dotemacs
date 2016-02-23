@@ -39,8 +39,8 @@
 (setq evil-search-module 'evil-search)
 (setq evil-magic 'very-magic)
 
-(setq evil-emacs-state-cursor `("red" box))
-(setq evil-motion-state-cursor `("orange" box))
+(setq evil-emacs-state-cursor '("red" box))
+(setq evil-motion-state-cursor '("orange" box))
 (setq evil-normal-state-cursor '("green" box))
 (setq evil-visual-state-cursor '("orange" box))
 (setq evil-insert-state-cursor '("red" bar))
@@ -65,6 +65,14 @@
 
 (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
          do (evil-set-initial-state mode 'emacs))
+
+(evil-put-property 'evil-state-properties 'normal   :tag " NORMAL ")
+(evil-put-property 'evil-state-properties 'insert   :tag " INSERT ")
+(evil-put-property 'evil-state-properties 'visual   :tag " VISUAL ")
+(evil-put-property 'evil-state-properties 'motion   :tag " MOTION ")
+(evil-put-property 'evil-state-properties 'emacs    :tag " EMACS ")
+(evil-put-property 'evil-state-properties 'replace  :tag " REPLACE ")
+(evil-put-property 'evil-state-properties 'operator :tag " OPERTR ")
 
 
 
@@ -152,6 +160,7 @@
 
 (evilified-state-evilify ibuffer-mode ibuffer-mode-map)
 (evilified-state-evilify paradox-menu-mode paradox-menu-mode-map)
+(evilified-state-evilify package-menu-mode package-menu-mode-map)
 (evilified-state-evilify diff-mode diff-mode-map
   "j" #'diff-hunk-next
   "k" #'diff-hunk-prev)
