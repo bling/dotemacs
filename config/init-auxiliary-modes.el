@@ -4,3 +4,4 @@
 (lazy-major-mode "\\.json$" json-mode)
 (lazy-major-mode "\\.vim$" vimrc-mode)
 (lazy-major-mode "\\.lua$" lua-mode)
+(lazy-major-mode "\\.csv$" csv-mode)

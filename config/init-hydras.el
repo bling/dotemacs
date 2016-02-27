@@ -44,7 +44,7 @@
    quit:  _q_ → quit    _r_ → restart
 "
   ("q" save-buffers-kill-emacs)
-  ("r" restart-emacs))
+  ("r" (restart-emacs '("--debug-init"))))
 
 
 

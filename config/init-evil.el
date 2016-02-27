@@ -11,7 +11,6 @@
 
 (defcustom dotemacs-evil/emacs-state-major-modes
   '(eshell-mode
-    help-mode
     term-mode
     paradox-menu-mode
     calculator-mode
@@ -158,6 +157,8 @@
 (with-current-buffer "*Messages*"
   (evil-evilified-state))
 
+(evilified-state-evilify Custom-mode Custom-mode-map)
+(evilified-state-evilify help-mode help-mode-map)
 (evilified-state-evilify ibuffer-mode ibuffer-mode-map)
 (evilified-state-evilify paradox-menu-mode paradox-menu-mode-map)
 (evilified-state-evilify package-menu-mode package-menu-mode-map)
