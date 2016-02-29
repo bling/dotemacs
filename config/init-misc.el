@@ -85,8 +85,7 @@
 
 (when (and (>= emacs-major-version 24)
            (>= emacs-minor-version 4))
-  (require-package 'paradox)
-  (setq paradox-execute-asynchronously nil))
+  (require-package 'paradox))
 
 
 (require-package 'vlf)
