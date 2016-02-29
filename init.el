@@ -1,9 +1,8 @@
+(eval-when-compile (require 'cl))
+
 (let ((gc-cons-threshold most-positive-fixnum)
-      (debug-on-error t)
       (file-name-handler-alist nil)
       (config-directory (concat user-emacs-directory "config/")))
-
-  (eval-when-compile (require 'cl))
 
   (lexical-let ((emacs-start-time (current-time)))
     (add-hook 'emacs-startup-hook
@@ -54,12 +53,10 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
 
-  (load (concat config-directory "init-boot.el"))
+  (require 'init-boot (concat config-directory "init-boot.el"))
 
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (when (file-exists-p custom-file)
     (load custom-file))
 
-  (cl-loop for file in (directory-files config-directory t)
-           when (string-match "\\.el$" file)
-           do (load file)))
+  (my-load-config config-directory))

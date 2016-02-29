@@ -1,3 +1,5 @@
+(eval-when-compile (require 'cl))
+
 (let ((base (concat user-emacs-directory "elisp/")))
   (add-to-list 'load-path base)
   (dolist (dir (directory-files base t "^[^.]"))
@@ -49,3 +51,13 @@
     0.5
     nil
     (lambda () ,@body)))
+
+(defun my-load-config (directory)
+  (cl-loop for file in (directory-files directory t)
+           when (string-match "\\.el$" file)
+           do (condition-case ex
+                  (load file)
+                ('error (with-current-buffer "*scratch*"
+                          (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))
+
+(provide 'init-boot)
