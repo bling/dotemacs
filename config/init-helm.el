@@ -62,9 +62,18 @@
   (setq helm-autoresize-max-height 30)
   (helm-autoresize-mode t))
 
+(defun my-switch-engine-as-helm (on)
+  (if on
+      (progn
+        (global-set-key [remap execute-extended-command] #'helm-M-x)
+        (global-set-key [remap find-file] #'helm-find-files)
+        (helm-mode t))
+    (global-set-key [remap execute-extended-command] nil)
+    (global-set-key [remap find-file] nil)
+    (helm-mode -1)))
 
 (when (eq dotemacs-switch-engine 'helm)
   (delayed-init
-   (helm-mode t)
-   (global-set-key [remap execute-extended-command] #'helm-M-x)
-   (global-set-key [remap find-file] #'helm-find-files)))
+   (my-switch-engine-as-helm t)))
+
+(provide 'init-helm)

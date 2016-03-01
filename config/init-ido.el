@@ -6,15 +6,25 @@
 (setq ido-save-directory-list-file (concat dotemacs-cache-directory "ido.last"))
 
 (after 'ido
+  (require-package 'ido-ubiquitous)
+
   (require-package 'flx-ido)
   (flx-ido-mode t)
 
   (require-package 'ido-vertical-mode)
   (ido-vertical-mode))
 
-(when (eq dotemacs-switch-engine 'ido)
-  (ido-mode t)
-  (ido-everywhere t)
+(defun my-switch-engine-as-ido (on)
+  (if on
+      (progn
+        (ido-mode t)
+        (ido-everywhere t)
+        (ido-ubiquitous-mode t))
+    (ido-mode -1)
+    (ido-everywhere -1)
+    (ido-ubiquitous-mode -1)))
 
-  (require-package 'ido-ubiquitous)
-  (ido-ubiquitous-mode t))
+(when (eq dotemacs-switch-engine 'ido)
+  (my-switch-engine-as-ido t))
+
+(provide 'init-ido)

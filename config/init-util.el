@@ -98,3 +98,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   "Edits a file as root."
   (interactive "f")
   (find-file-other-window (concat "/sudo:root@localhost:" file)))
+
+(defun my-activate-switch-engine (engine)
+  (let ((func (intern (concat "my-switch-engine-as-" (symbol-name dotemacs-switch-engine)))))
+    (apply func '(nil)))
+  (let ((func (intern (concat "my-switch-engine-as-" (symbol-name engine)))))
+    (apply func '(t)))
+  (setq dotemacs-switch-engine engine)
+  (setq projectile-completion-system dotemacs-switch-engine))
+
+(provide 'init-util)

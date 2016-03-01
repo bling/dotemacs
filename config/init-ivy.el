@@ -56,9 +56,21 @@
                         (t
                          (find-file (concat (projectile-project-root) f)))))))))
 
+(defun my-switch-engine-as-ivy (on)
+  (if on
+      (progn
+        (global-set-key [remap execute-extended-command] #'counsel-M-x)
+        (global-set-key [remap find-file] #'counsel-find-file)
+        (global-set-key [remap describe-function] #'counsel-describe-function)
+        (global-set-key [remap describe-variable] #'counsel-describe-variable)
+        (ivy-mode t))
+    (global-set-key [remap execute-extended-command] nil)
+    (global-set-key [remap find-file] nil)
+    (global-set-key [remap describe-function] nil)
+    (global-set-key [remap describe-variable] nil)
+    (ivy-mode -1)))
+
 (when (eq dotemacs-switch-engine 'ivy)
-  (ivy-mode t)
-  (global-set-key [remap execute-extended-command] #'counsel-M-x)
-  (global-set-key [remap describe-function] #'counsel-describe-function)
-  (global-set-key [remap describe-variable] #'counsel-describe-variable)
-  (global-set-key [remap find-file] #'counsel-find-file))
+  (my-switch-engine-as-ivy t))
+
+(provide 'init-ivy)

@@ -143,27 +143,10 @@
          (call-interactively #'electric-pair-mode))
         ((eq dotemacs-pair-engine 'smartparens)
          (call-interactively #'smartparens-global-mode))))
-  ("'" (progn
-         (ido-mode -1)
-         (helm-mode -1)
-         (ivy-mode -1)
-         (cond
-          ((eq dotemacs-switch-engine 'ivy)
-           (setq dotemacs-switch-engine 'helm)
-           (global-set-key [remap execute-extended-command] #'helm-M-x)
-           (global-set-key [remap find-file] #'helm-find-files)
-           (helm-mode t))
-          ((eq dotemacs-switch-engine 'helm)
-           (setq dotemacs-switch-engine 'ido)
-           (global-set-key [remap execute-extended-command] #'smex)
-           (global-set-key [remap find-file] #'ido-find-file)
-           (ido-mode t))
-          ((eq dotemacs-switch-engine 'ido)
-           (setq dotemacs-switch-engine 'ivy)
-           (global-set-key [remap execute-extended-command] #'counsel-M-x)
-           (global-set-key [remap find-file] #'counsel-find-file)
-           (ivy-mode t)))
-         (setq projectile-completion-system dotemacs-switch-engine))
+  ("'" (cond
+        ((eq dotemacs-switch-engine 'ivy)  (my-activate-switch-engine 'helm))
+        ((eq dotemacs-switch-engine 'helm) (my-activate-switch-engine 'ido))
+        ((eq dotemacs-switch-engine 'ido) (my-activate-switch-engine 'ivy)))
    :exit nil))
 
 
