@@ -61,14 +61,11 @@
      '((plantuml . t))))
 
   (defun my-org-mode-hook ()
-    (when (or (executable-find "aspell")
-              (executable-find "ispell")
-              (executable-find "hunspell"))
-      (turn-on-flyspell))
     (toggle-truncate-lines t))
   (add-hook 'org-mode-hook #'my-org-mode-hook)
-
 
   (require-package 'org-bullets)
   (setq org-bullets-bullet-list '("✿" "❀" "☢" "☯" "✸" ))
   (add-hook 'org-mode-hook #'org-bullets-mode))
+
+(provide 'init-org)
