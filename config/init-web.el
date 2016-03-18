@@ -35,9 +35,10 @@
             (lambda ()
               (electric-pair-mode -1)))
 
-  (setq web-mode-auto-close-style 2) ;; auto-add closing tag
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-element-content-fontification t)
+  (setq web-mode-enable-element-tag-fontification t)
   (setq web-mode-enable-block-face t)
   (setq web-mode-enable-part-face t))
 
