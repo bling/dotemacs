@@ -84,10 +84,6 @@
   (evil-esc-mode))
 
 
-(require-package 'evil-leader)
-(global-evil-leader-mode t)
-
-
 (require-package 'evil-commentary)
 (evil-commentary-mode t)
 
@@ -165,6 +161,16 @@
 (evilified-state-evilify diff-mode diff-mode-map
   "j" #'diff-hunk-next
   "k" #'diff-hunk-prev)
+(evilified-state-evilify calendar-mode calendar-mode-map
+  "j" #'calendar-forward-week
+  "k" #'calendar-backward-week
+  "l" #'calendar-forward-day
+  "h" #'calendar-backward-day)
 (evilified-state-evilify vc-annotate-mode vc-annotate-mode-map
+  (kbd "M-p") #'vc-annotate-prev-revision
+  (kbd "M-n") #'vc-annotate-next-revision
   "l" #'vc-annotate-show-log-revision-at-line
   "J" #'vc-annotate-revision-at-line)
+
+
+(provide 'init-evil)
