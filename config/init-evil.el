@@ -13,6 +13,7 @@
   '(eshell-mode
     term-mode
     paradox-menu-mode
+    project-explorer-mode
     calculator-mode
     makey-key-mode)
   "List of major modes that should default to Emacs state."

@@ -1,3 +1,4 @@
+(setq lv-use-separator t)
 (require-package 'hydra)
 
 (defun my-switch-action (fallback &rest props)

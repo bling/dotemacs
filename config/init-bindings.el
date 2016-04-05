@@ -180,9 +180,11 @@
                           (call-interactively #'projectile-find-file)))))))
 
   (after "multiple-cursors-autoloads"
-    (after 'js2-mode
-      (evil-define-key 'normal js2-mode-map (kbd "g r") 'js2r-rename-var))
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
+
+  (after 'js2-mode
+    (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var)
+    (evil-define-key 'normal js2-mode-map (kbd "g d") #'js2-jump-to-definition))
 
   (after "avy-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'avy-goto-char-2)
@@ -270,13 +272,6 @@
   (define-key compilation-mode-map (kbd "k") 'compilation-previous-error))
 
 
-(after 'help-mode
-  (define-key help-mode-map (kbd "n") 'next-line)
-  (define-key help-mode-map (kbd "p") 'previous-line)
-  (define-key help-mode-map (kbd "j") 'next-line)
-  (define-key help-mode-map (kbd "k") 'previous-line))
-
-
 (after "helm-autoloads"
   (-define-key (current-global-map) "C-c h" #'my-helm-hydra/body "helm..."))
 
@@ -307,10 +302,11 @@
   (autoload 'vkill "vkill" nil t)
   (global-set-key (kbd "C-x p") 'vkill))
 
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
+(-define-keys (current-global-map)
+  ("C-s"   #'isearch-forward-regexp)
+  ("C-M-s" #'isearch-forward)
+  ("C-r"   #'isearch-backward-regexp)
+  ("C-M-r" #'isearch-backward))
 
 
 ;; have no use for these default bindings
