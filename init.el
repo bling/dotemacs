@@ -40,7 +40,7 @@
     :group 'dotemacs)
 
   (defcustom dotemacs-pair-engine
-    'emacs
+    'smartparens
     "The primary engine to use auto-pairing and parens matching."
     :type '(radio
             (const :tag "emacs" emacs)
