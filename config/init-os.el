@@ -1,3 +1,6 @@
+(setenv "PATH" (concat (getenv "PATH")
+                       (if (eq system-type 'windows-nt) ";" ":")
+                       (expand-file-name (concat user-emacs-directory "bin"))))
 
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
