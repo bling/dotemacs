@@ -1,3 +1,13 @@
+(defgroup dotemacs-web nil
+  "Configuration options for web."
+  :group 'dotemacs
+  :prefix 'dotemacs-web)
+
+(defcustom dotemacs-web/indent-offset 2
+  "The number of spaces to indent nested statements."
+  :type 'integer
+  :group 'dotemacs-web)
+
 (lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
 (lazy-major-mode "\\.scss$" scss-mode)
@@ -38,6 +48,11 @@
             (lambda ()
               (electric-pair-mode -1)
               (and (fboundp #'smartparens-mode) (smartparens-mode -1))))
+
+  (setq web-mode-code-indent-offset dotemacs-web/indent-offset)
+  (setq web-mode-markup-indent-offset dotemacs-web/indent-offset)
+  (setq web-mode-css-indent-offset dotemacs-web/indent-offset)
+  (setq web-mode-sql-indent-offset dotemacs-web/indent-offset)
 
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-current-element-highlight t)
