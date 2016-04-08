@@ -197,10 +197,9 @@
 
 (defhydra my-git-hydra (:hint nil :exit t)
   "
-   magit         ^ ^           ^ ^          ^ ^         ^^stage/unstage
-   ^-^-----------^-^-----------^-^----------^-^-------    ^-^----------^-^----------------
-   _s_ → status  _b_ → blame   _l_ → log    _f_ → file    _a_ → +hunk  _A_ → +buffer
-   _d_ → diff    _c_ → commit  _z_ → stash  ^ ^           _r_ → -hunk  _R_ → -buffer
+   magit:  _s_ → status  _l_ → log    _f_ → file      staging:  _a_ → +hunk  _A_ → +buffer
+           _c_ → commit  _d_ → diff   _z_ → stash               _r_ → -hunk  _R_ → -buffer
+           _p_ → push    _b_ → blame  _m_ → merge
 "
   ("s" magit-status)
   ("b" magit-blame-popup)
@@ -209,6 +208,8 @@
   ("l" magit-log-popup)
   ("d" magit-diff-popup)
   ("c" magit-commit-popup)
+  ("m" magit-merge-popup)
+  ("p" magit-push-popup)
   ("a" git-gutter+-stage-hunks)
   ("r" git-gutter+-revert-hunk)
   ("A" git-gutter+-stage-whole-buffer)
@@ -226,3 +227,23 @@
   ("C-k" evil-paste-pop)
   ("p" evil-paste-after)
   ("P" evil-paste-before))
+
+
+
+(when (> (length narrow-map) 8)
+  (error "`narrow-map' has more than 7 bindings!"))
+(defhydra my-narrow-hydra (:hint nil :exit t)
+  "
+   narrow  _d_ → defun   _b_ → org-block    _w_ → widen
+           _n_ → region  _e_ → org-element
+           _p_ → page    _s_ → org-subtree
+"
+  ("b" org-narrow-to-block)
+  ("e" org-narrow-to-element)
+  ("s" org-narrow-to-subtree)
+  ("d" narrow-to-defun)
+  ("n" narrow-to-region)
+  ("p" narrow-to-page)
+  ("w" widen))
+
+(provide 'init-hydras)

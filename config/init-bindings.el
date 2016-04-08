@@ -91,12 +91,10 @@
   (after "git-gutter+-autoloads"
     (-define-keys evil-normal-state-map
       ("[ h" #'git-gutter+-next-hunk)
-      ("] h" #'git-gutter+-previous-hunk)
-      (", g a" #'git-gutter+-stage-hunks)
-      (", g r" #'git-gutter+-revert-hunks))
+      ("] h" #'git-gutter+-previous-hunk))
     (-define-keys evil-visual-state-map
-      (", g a" #'git-gutter+-stage-hunks)
-      (", g r" #'git-gutter+-revert-hunks))
+      ("SPC g a" #'git-gutter+-stage-hunks)
+      ("SPC g r" #'git-gutter+-revert-hunks))
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
   (-define-keys evil-normal-state-map
@@ -296,6 +294,7 @@
   ("C-x C" #'calendar)
   ("C-x C-b" #'ibuffer)
   ("C-x C-k" #'kill-this-buffer)
+  ("C-x n" #'my-narrow-hydra/body)
   ("C-x p" #'proced))
 
 (after "vkill-autoloads"
