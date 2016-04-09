@@ -38,6 +38,7 @@
 
 
 (require-package 'project-explorer)
+(evilify project-explorer-mode project-explorer-mode-map)
 (after 'project-explorer
   (setq pe/cache-directory (concat dotemacs-cache-directory "project-explorer"))
   (setq pe/omit-regex (concat pe/omit-regex "\\|^node_modules$")))
@@ -86,7 +87,8 @@
 (when (and (>= emacs-major-version 24)
            (>= emacs-minor-version 4))
   (setq paradox-execute-asynchronously t)
-  (require-package 'paradox))
+  (require-package 'paradox)
+  (evilify paradox-menu-mode paradox-menu-mode-map))
 
 
 (require-package 'vlf)
@@ -100,3 +102,6 @@
 
 
 (require-package 'restart-emacs)
+
+
+(provide 'init-misc)

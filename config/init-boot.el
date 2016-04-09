@@ -52,6 +52,10 @@
     nil
     (lambda () ,@body)))
 
+(autoload 'evil-evilified-state "evil-evilified-state")
+(autoload 'evilified-state-evilify "evil-evilified-state")
+(defalias 'evilify 'evilified-state-evilify)
+
 (defun my-load-config (directory)
   (cl-loop for file in (directory-files directory t)
            when (string-match "\\.el$" file)

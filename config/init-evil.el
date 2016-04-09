@@ -12,8 +12,6 @@
 (defcustom dotemacs-evil/emacs-state-major-modes
   '(eshell-mode
     term-mode
-    paradox-menu-mode
-    project-explorer-mode
     calculator-mode
     makey-key-mode)
   "List of major modes that should default to Emacs state."
@@ -149,29 +147,9 @@
 (defadvice evil-ex-search-previous (after dotemacs activate)
   (recenter))
 
-(require 'evil-evilified-state)
+
 
 (with-current-buffer "*Messages*"
   (evil-evilified-state))
-
-(evilified-state-evilify Custom-mode Custom-mode-map)
-(evilified-state-evilify help-mode help-mode-map)
-(evilified-state-evilify ibuffer-mode ibuffer-mode-map)
-(evilified-state-evilify paradox-menu-mode paradox-menu-mode-map)
-(evilified-state-evilify package-menu-mode package-menu-mode-map)
-(evilified-state-evilify diff-mode diff-mode-map
-  "j" #'diff-hunk-next
-  "k" #'diff-hunk-prev)
-(evilified-state-evilify calendar-mode calendar-mode-map
-  "j" #'calendar-forward-week
-  "k" #'calendar-backward-week
-  "l" #'calendar-forward-day
-  "h" #'calendar-backward-day)
-(evilified-state-evilify vc-annotate-mode vc-annotate-mode-map
-  (kbd "M-p") #'vc-annotate-prev-revision
-  (kbd "M-n") #'vc-annotate-next-revision
-  "l" #'vc-annotate-show-log-revision-at-line
-  "J" #'vc-annotate-revision-at-line)
-
 
 (provide 'init-evil)

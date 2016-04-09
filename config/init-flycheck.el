@@ -13,4 +13,6 @@
   (require-package 'flycheck-pos-tip)
   (flycheck-pos-tip-mode))
 
+(evilify flycheck-error-list-mode flycheck-error-list-mode-map)
+
 (provide 'init-flycheck)

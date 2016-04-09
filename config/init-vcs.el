@@ -33,3 +33,16 @@
 
 (lazy-major-mode "^\\.gitignore$" gitignore-mode)
 (lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
+
+
+(evilify diff-mode diff-mode-map
+  "j" #'diff-hunk-next
+  "k" #'diff-hunk-prev)
+(evilify vc-annotate-mode vc-annotate-mode-map
+  (kbd "M-p") #'vc-annotate-prev-revision
+  (kbd "M-n") #'vc-annotate-next-revision
+  "l" #'vc-annotate-show-log-revision-at-line
+  "J" #'vc-annotate-revision-at-line)
+
+
+(provide 'init-vcs)
