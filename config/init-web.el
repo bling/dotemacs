@@ -18,6 +18,11 @@
   :type 'boolean
   :group 'dotemacs-web)
 
+(defcustom dotemacs-web/treat-js-as-jsx nil
+  "Treats .js files as JSX files."
+  :type 'boolean
+  :group 'dotemacs-web)
+
 
 (lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
@@ -59,7 +64,11 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (electric-pair-mode -1)
-              (and (fboundp #'smartparens-mode) (smartparens-mode -1))))
+              (and (fboundp #'smartparens-mode) (smartparens-mode -1))
+
+              (when (and dotemacs-web/treat-js-as-jsx
+                         (string-match-p "\\.js$" (buffer-file-name)))
+                (web-mode-set-content-type "jsx"))))
 
   (setq web-mode-code-indent-offset dotemacs-web/indent-offset)
   (setq web-mode-markup-indent-offset dotemacs-web/indent-offset)
