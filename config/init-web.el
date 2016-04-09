@@ -80,6 +80,8 @@
       (and (fboundp #'js2-minor-mode) (js2-minor-mode))))
   (add-hook 'web-mode-hook #'init-web/web-mode-hook)
 
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+
   (setq web-mode-code-indent-offset dotemacs-web/indent-offset)
   (setq web-mode-markup-indent-offset dotemacs-web/indent-offset)
   (setq web-mode-css-indent-offset dotemacs-web/indent-offset)
