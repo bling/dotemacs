@@ -17,7 +17,10 @@
 
 (defun init-js/js2-refactor ()
   (require-package 'js2-refactor)
-  (js2r-add-keybindings-with-prefix "C-c C-m"))
+  (js2r-add-keybindings-with-prefix "C-c C-m")
+
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (add-hook 'js2-minor-mode-hook #'js2-refactor-mode))
 
 (defun init-js/tern ()
   (when (executable-find "tern")
@@ -27,14 +30,12 @@
         (require-package 'tern-auto-complete)
         (tern-ac-setup))
       (after 'company-mode
-        (require-package 'company-tern)))))
+        (require-package 'company-tern)))
 
-(if dotemacs-js/use-web-mode
-    (progn
-      (after 'web-mode
-        (init-js/js2-refactor)
-        (when (init-js/tern)
-          (add-hook 'web-mode-hook #'tern-mode))))
+    (add-hook 'js2-mode-hook #'tern-mode)
+    (add-hook 'js2-minor-mode-hook #'tern-mode)))
+
+(unless dotemacs-js/use-web-mode
   (add-to-list 'auto-mode-alist
                '("\\.jsx?$" . (lambda ()
                                 (if (< (buffer-size) (* 1024 20))
@@ -60,12 +61,9 @@
               (local-set-key (kbd "C-c C-c") #'my-dotemacs-js-ctrl-c-ctrl-c)))
 
   (init-js/js2-refactor)
-  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (init-js/tern)
 
   (setq js2-highlight-level 3)
-  (setq-default js2-basic-offset dotemacs-js/indent-offset)
-
-  (when (init-js/tern)
-    (add-hook 'js2-mode-hook #'tern-mode)))
+  (setq-default js2-basic-offset dotemacs-js/indent-offset))
 
 (provide 'init-js)

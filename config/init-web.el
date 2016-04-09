@@ -23,6 +23,11 @@
   :type 'boolean
   :group 'dotemacs-web)
 
+(defcustom dotemacs-web/js2-integration nil
+  "When non-nil, integrates `js2-mode' into `web-mode' buffers."
+  :type 'boolean
+  :group 'dotemacs-web)
+
 
 (lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
@@ -61,14 +66,19 @@
 
 
 (after 'web-mode
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (electric-pair-mode -1)
-              (and (fboundp #'smartparens-mode) (smartparens-mode -1))
+  (defun init-web/web-mode-hook ()
+    (electric-pair-mode -1)
+    (and (fboundp #'smartparens-mode) (smartparens-mode -1))
 
-              (when (and dotemacs-web/treat-js-as-jsx
-                         (string-match-p "\\.js$" (buffer-file-name)))
-                (web-mode-set-content-type "jsx"))))
+    (when (and dotemacs-web/treat-js-as-jsx
+               (string-match-p "\\.js$" (buffer-file-name)))
+      (web-mode-set-content-type "jsx"))
+
+    (when (and dotemacs-web/js2-integration
+               (or (equal web-mode-content-type "javascript")
+                   (equal web-mode-content-type "jsx")))
+      (and (fboundp #'js2-minor-mode) (js2-minor-mode))))
+  (add-hook 'web-mode-hook #'init-web/web-mode-hook)
 
   (setq web-mode-code-indent-offset dotemacs-web/indent-offset)
   (setq web-mode-markup-indent-offset dotemacs-web/indent-offset)
