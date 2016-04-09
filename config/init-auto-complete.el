@@ -1,5 +1,4 @@
 (when (eq dotemacs-completion-engine 'auto-complete)
-
   (require-package 'auto-complete)
 
   (setq ac-auto-show-menu t)
@@ -27,6 +26,6 @@
   (require-package 'ac-etags)
   (setq ac-etags-requires 1)
   (after 'etags
-    (ac-etags-setup))
+    (ac-etags-setup)))
 
-  )
+(provide 'init-auto-complete)

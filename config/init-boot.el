@@ -32,11 +32,11 @@
       (package-refresh-contents))
     (package-install package)))
 
-(if (fboundp 'with-eval-after-load)
-    (defalias 'after 'with-eval-after-load)
-  (defmacro after (feature &rest body)
-    (declare (indent defun))
-    `(eval-after-load ,feature '(progn ,@body))))
+(unless (fboundp 'with-eval-after-load)
+  (defmacro with-eval-after-load (file &rest body)
+    (declare (indent 1))
+    `(eval-after-load ,file (lambda () ,@body))))
+(defalias 'after 'with-eval-after-load)
 
 (defmacro lazy-major-mode (pattern mode)
   "Defines a new major-mode matched by PATTERN, installs MODE if necessary, and activates it."
@@ -60,7 +60,7 @@
   (cl-loop for file in (directory-files directory t)
            when (string-match "\\.el$" file)
            do (condition-case ex
-                  (load file)
+                  (require (intern (file-name-base file)) file)
                 ('error (with-current-buffer "*scratch*"
                           (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))
 

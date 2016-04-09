@@ -1,5 +1,5 @@
 (require-package 'elisp-slime-nav)
-(after "elisp-slime-nav-autoloads"
+(after 'elisp-slime-nav
   (defadvice elisp-slime-nav-find-elisp-thing-at-point (after dotemacs activate)
     (recenter)))
 
@@ -11,3 +11,5 @@
 (add-hook 'emacs-lisp-mode-hook #'my-lisp-hook)
 (add-hook 'lisp-interaction-mode-hook #'my-lisp-hook)
 (add-hook 'ielm-mode-hook #'my-lisp-hook)
+
+(provide 'init-lisp)

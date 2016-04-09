@@ -126,3 +126,6 @@
 
 
 (add-hook 'find-file-hook 'hl-line-mode)
+
+
+(provide 'init-eyecandy)

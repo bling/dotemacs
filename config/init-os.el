@@ -20,3 +20,5 @@
     (interactive)
     (start-process "*explorer*" "*explorer*" "explorer.exe"
                    (replace-regexp-in-string "/" "\\\\" (file-name-directory (buffer-file-name))))))
+
+(provide 'init-os)

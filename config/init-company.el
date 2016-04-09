@@ -70,3 +70,5 @@
   ;;   (company-quickhelp-mode t))
 
   )
+
+(provide 'init-company)

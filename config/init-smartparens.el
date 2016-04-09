@@ -19,3 +19,5 @@
   (after 'yasnippet
     (defadvice yas-expand (before dotemacs activate)
       (sp-remove-active-pair-overlay))))
+
+(provide 'init-smartparens)

@@ -67,3 +67,5 @@
 
   (when (init-js/tern)
     (add-hook 'js2-mode-hook #'tern-mode)))
+
+(provide 'init-js)

@@ -5,3 +5,5 @@
 (lazy-major-mode "\\.vim$" vimrc-mode)
 (lazy-major-mode "\\.lua$" lua-mode)
 (lazy-major-mode "\\.csv$" csv-mode)
+
+(provide 'init-auxiliary-modes)
