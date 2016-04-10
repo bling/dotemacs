@@ -32,6 +32,7 @@
 
 
   (require-package 'helm-ag)
+  (setq helm-ag-fuzzy-match t)
   (after 'helm-ag
     (cond ((executable-find "ag")
            t)
