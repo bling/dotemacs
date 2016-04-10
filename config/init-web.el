@@ -77,7 +77,8 @@
     (when (and dotemacs-web/js2-integration
                (or (equal web-mode-content-type "javascript")
                    (equal web-mode-content-type "jsx")))
-      (and (fboundp #'js2-minor-mode) (js2-minor-mode))))
+      (require-package 'js2-mode)
+      (js2-minor-mode)))
   (add-hook 'web-mode-hook #'init-web/web-mode-hook)
 
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
