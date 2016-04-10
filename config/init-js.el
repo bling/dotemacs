@@ -46,7 +46,8 @@
 
 (after "js2-mode-autoloads"
   (require-package 'js2-refactor)
-  (js2r-add-keybindings-with-prefix "C-c C-m")
+  (after 'js2-refactor
+    (js2r-add-keybindings-with-prefix "C-c C-m"))
 
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
   (add-hook 'js2-minor-mode-hook #'js2-refactor-mode)
