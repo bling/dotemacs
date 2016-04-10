@@ -98,7 +98,7 @@
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
   (-define-keys evil-normal-state-map
-    ("g p" "` [ v ` ]")
+    ("g p" "`[v`]")
     ("g b" #'my-buffer-hydra/lambda-b-and-exit))
 
   (-define-keys evil-normal-state-map
@@ -116,6 +116,12 @@
     ("] q" 'next-error))
 
   (global-set-key (kbd "C-w") 'evil-window-map)
+  (after 'evil-evilified-state
+    (-define-keys evil-evilified-state-map
+      ("C-h" #'evil-window-left)
+      ("C-j" #'evil-window-down)
+      ("C-k" #'evil-window-up)
+      ("C-l" #'evil-window-right)))
   (-define-keys evil-normal-state-map
     ("C-h" #'evil-window-left)
     ("C-j" #'evil-window-down)
