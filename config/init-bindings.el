@@ -132,14 +132,15 @@
     ("C-w C-k" #'evil-window-up)
     ("C-w C-l" #'evil-window-right))
 
-  (define-key evil-normal-state-map "p" #'my-paste-hydra/evil-paste-after)
-  (define-key evil-normal-state-map "P" #'my-paste-hydra/evil-paste-before)
+  (-define-keys evil-motion-state-map
+    ("j" #'evil-next-visual-line)
+    ("k" #'evil-previous-visual-line))
 
-  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
-  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
-
-  (define-key evil-normal-state-map (kbd "Q") 'my-window-killer)
-  (define-key evil-normal-state-map (kbd "Y") (kbd "y$"))
+  (-define-keys evil-normal-state-map
+    ("p" #'my-paste-hydra/evil-paste-after)
+    ("P" #'my-paste-hydra/evil-paste-before)
+    ("Q" #'my-window-killer)
+    ("Y" "y$"))
 
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" (bind (help-xref-interned (symbol-at-point))))
@@ -195,18 +196,12 @@
     (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
     (define-key evil-motion-state-map (kbd "S-SPC") 'avy-goto-line))
 
-  (after 'eshell
-    (add-hook 'eshell-mode-hook
-              (lambda ()
-                (local-set-key (kbd "C-h") 'evil-window-left)
-                (local-set-key (kbd "C-j") 'evil-window-down)
-                (local-set-key (kbd "C-k") 'evil-window-up)
-                (local-set-key (kbd "C-l") 'evil-window-right))))
-
-  ;; butter fingers
-  (evil-ex-define-cmd "Q" 'evil-quit)
-  (evil-ex-define-cmd "Qa" 'evil-quit-all)
-  (evil-ex-define-cmd "QA" 'evil-quit-all))
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-h") #'evil-window-left)
+              (local-set-key (kbd "C-j") #'evil-window-down)
+              (local-set-key (kbd "C-k") #'evil-window-up)
+              (local-set-key (kbd "C-l") #'evil-window-right))))
 
 ;; escape minibuffer
 (define-key minibuffer-local-map [escape] 'my-minibuffer-keyboard-quit)

@@ -147,7 +147,7 @@
   ("'" (cond
         ((eq dotemacs-switch-engine 'ivy)  (my-activate-switch-engine 'helm))
         ((eq dotemacs-switch-engine 'helm) (my-activate-switch-engine 'ido))
-        ((eq dotemacs-switch-engine 'ido) (my-activate-switch-engine 'ivy)))
+        ((eq dotemacs-switch-engine 'ido)  (my-activate-switch-engine 'ivy)))
    :exit nil))
 
 

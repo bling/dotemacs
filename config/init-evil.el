@@ -99,6 +99,10 @@
 (require 'evil-anzu)
 
 
+(require-package 'evil-ediff)
+(evil-ediff-init)
+
+
 (after 'magit
   (require-package 'evil-magit)
   (require 'evil-magit))
