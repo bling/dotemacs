@@ -1,0 +1,16 @@
+{
+  "name": "plantuml-server",
+  "description": "plantuml-server",
+  "repository": "https://github.com/bling/dotemacs",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "node-plantuml": "^0.4.4",
+    "body-parser": "^1.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "GPL-3.0"
+}
