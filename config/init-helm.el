@@ -54,10 +54,6 @@
     (require-package 'helm-projectile))
 
 
-  (after "company-autoloads"
-    (require-package 'helm-company))
-
-
   ;; take between 10-30% of screen space
   (setq helm-autoresize-min-height 10)
   (setq helm-autoresize-max-height 30)
