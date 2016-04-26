@@ -13,7 +13,8 @@
   (osx-trash-setup)
 
   (require-package 'reveal-in-osx-finder)
-  (require-package 'vkill))
+  (require-package 'vkill)
+  (evilify vkill-mode vkill-mode-map))
 
 (when (eq system-type 'windows-nt)
   (defun reveal-in-osx-finder ()
