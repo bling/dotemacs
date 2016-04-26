@@ -33,9 +33,12 @@
 
 (require-package 'with-editor)
 (autoload 'with-editor-export-editor "with-editor")
-(add-hook 'shell-mode-hook #'with-editor-export-editor)
-(add-hook 'term-mode-hook #'with-editor-export-editor)
-(add-hook 'eshell-mode-hook #'with-editor-export-editor)
+(defun init-vcs/export-with-editor ()
+  (with-editor-export-editor)
+  (message ""))
+(add-hook 'shell-mode-hook #'init-vcs/export-with-editor)
+(add-hook 'term-mode-hook #'init-vcs/export-with-editor)
+(add-hook 'eshell-mode-hook #'init-vcs/export-with-editor)
 
 
 (lazy-major-mode "^\\.gitignore$" gitignore-mode)
