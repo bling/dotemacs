@@ -125,7 +125,6 @@
             (when (executable-find "cat")
               (setenv "PAGER" "cat"))
 
-            (setenv "EDITOR" "emacsclient")
             (setenv "NODE_NO_READLINE" "1")))
 
 (provide 'init-eshell)
