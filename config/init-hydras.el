@@ -20,7 +20,7 @@
   (if my-errors-hydra/flycheck
       'flycheck
     'emacs))
-(defhydra my-errors-hydra (:hint nil :post (quit-windows-on "*Flycheck errors*"))
+(defhydra my-errors-hydra (:hint nil)
   "
    errors:  navigation                 flycheck
             -----------------------    ---------------
@@ -36,7 +36,7 @@
          (call-interactively #'previous-error)))
   ("t" (setq my-errors-hydra/flycheck (not my-errors-hydra/flycheck)))
   ("?" flycheck-describe-checker)
-  ("l" flycheck-list-errors))
+  ("l" flycheck-list-errors :exit t))
 
 
 
