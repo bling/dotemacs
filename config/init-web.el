@@ -61,10 +61,6 @@
 (lazy-major-mode "\\.html?$" web-mode)
 
 
-(when dotemacs-js/use-web-mode
-  (lazy-major-mode "\\.jsx?$" web-mode))
-
-
 (after 'web-mode
   (defun init-web/web-mode-hook ()
     (electric-pair-mode -1)

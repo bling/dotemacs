@@ -13,16 +13,24 @@
   :type 'boolean
   :group 'dotemacs-js)
 
+(defcustom dotemacs-js/maximum-file-size (* 1024 20)
+  "The threshold for when `fundamental-mode' is used instead."
+  :type 'integer
+  :group 'dotemacs-js)
+
 (setq js-indent-level dotemacs-js/indent-offset)
 
-(unless dotemacs-js/use-web-mode
-  (add-to-list 'auto-mode-alist
-               '("\\.jsx?$" . (lambda ()
-                                (if (< (buffer-size) (* 1024 20))
-                                    (progn
-                                      (require-package 'js2-mode)
-                                      (js2-mode))
-                                  (js-mode))))))
+(defun init-js/auto-mode ()
+  (cond ((> (buffer-size) dotemacs-js/maximum-file-size)
+         (fundamental-mode))
+        (dotemacs-js/use-web-mode
+         (require-package 'web-mode)
+         (web-mode))
+        (t
+         (require-package 'js2-mode)
+         (js2-mode))))
+
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . #'init-js/auto-mode))
 
 (after 'js2-mode
   (defun my-dotemacs-js-ctrl-c-ctrl-c ()
