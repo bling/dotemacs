@@ -163,17 +163,15 @@
        (bind
         (if current-prefix-arg
             (cond
-             ((executable-find "ag")
-              (call-interactively #'projectile-ag))
-             ((executable-find "pt")
-              (call-interactively #'projectile-pt))
-             ((executable-find "ack")
-              (call-interactively #'projectile-ack))
-             (t
-              (call-interactively #'projectile-grep)))
+             ((executable-find "ag")  (call-interactively #'projectile-ag))
+             ((executable-find "pt")  (call-interactively #'projectile-pt))
+             ((executable-find "ack") (call-interactively #'projectile-ack))
+             (t                       (call-interactively #'projectile-grep)))
           (cond
            ((eq dotemacs-switch-engine 'ivy)
-            (counsel-ag nil (projectile-project-root)))
+            (cond
+             ((executable-find "ag") (counsel-ag nil (projectile-project-root)))
+             ((executable-find "pt") (counsel-pt nil (projectile-project-root)))))
            ((eq dotemacs-switch-engine 'helm)
             (helm-do-ag (projectile-project-root))))))
        "search..."))

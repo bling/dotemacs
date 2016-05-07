@@ -16,13 +16,6 @@
 
 
 (require-package 'counsel)
-(after 'counsel
-  (cond ((executable-find "ag")
-         t)
-        ((executable-find "pt")
-         (setq counsel-ag-base-command "pt -e --nogroup --nocolor %S"))
-        ((executable-find "ack")
-         (setq counsel-ag-base-command "ack --nogroup --nocolor %S"))))
 
 
 (defun my-ivy-mini ()
@@ -33,10 +26,10 @@
     (ivy-read "Search: " (append bufnames recents)
               :action (lambda (f)
                         (with-ivy-window
-                          (cond ((member f bufnames)
-                                 (switch-to-buffer (substring f 8)))
-                                (t
-                                 (find-file (substring f 8)))))))))
+                         (cond ((member f bufnames)
+                                (switch-to-buffer (substring f 8)))
+                               (t
+                                (find-file (substring f 8)))))))))
 
 (defun my-ivy-everything ()
   (interactive)
@@ -53,12 +46,12 @@
               :action
               (lambda (f)
                 (with-ivy-window
-                  (cond ((member f buffers)
-                         (switch-to-buffer f))
-                        ((file-exists-p f)
-                         (find-file f))
-                        (t
-                         (find-file (concat (projectile-project-root) f)))))))))
+                 (cond ((member f buffers)
+                        (switch-to-buffer f))
+                       ((file-exists-p f)
+                        (find-file f))
+                       (t
+                        (find-file (concat (projectile-project-root) f)))))))))
 
 (defun my-switch-engine-as-ivy (on)
   (if on
