@@ -1,12 +1,20 @@
-(setenv "PATH" (concat (getenv "PATH")
-                       (if (eq system-type 'windows-nt) ";" ":")
-                       (expand-file-name (concat user-emacs-directory "bin"))))
+(defcustom dotemacs-os/additional-exec-paths
+  nil
+  "Additional paths to be added to `exec-path'."
+  :type '(repeat (string))
+  :group 'dotemacs)
 
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
       (add-to-list 'exec-path (replace-regexp-in-string "\\\\" "/" path)))
   (require-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
+
+(add-to-list 'exec-path (expand-file-name (concat user-emacs-directory "bin")))
+(dolist (path dotemacs-os/additional-exec-paths)
+  (add-to-list 'exec-path path))
+
+(setq eshell-path-env (mapconcat #'identity exec-path path-separator))
 
 (when (eq system-type 'darwin)
   (require-package 'osx-trash)
