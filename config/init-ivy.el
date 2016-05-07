@@ -1,3 +1,12 @@
+(require-package 'ivy)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-virtual-abbreviate 'full)
+(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+(setq ivy-height 12)
+(setq ivy-display-style 'fancy)
+(setq ivy-initial-inputs-alist nil)
+
+
 (require-package 'swiper)
 (after 'swiper
   (defadvice swiper (before dotemacs activate)
@@ -15,11 +24,6 @@
         ((executable-find "ack")
          (setq counsel-ag-base-command "ack --nogroup --nocolor %S"))))
 
-
-(setq ivy-use-virtual-buffers t)
-(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-(setq ivy-height 12)
-(setq ivy-display-style 'fancy)
 
 (defun my-ivy-mini ()
   (interactive)
@@ -59,15 +63,9 @@
 (defun my-switch-engine-as-ivy (on)
   (if on
       (progn
-        (global-set-key [remap execute-extended-command] #'counsel-M-x)
-        (global-set-key [remap find-file] #'counsel-find-file)
-        (global-set-key [remap describe-function] #'counsel-describe-function)
-        (global-set-key [remap describe-variable] #'counsel-describe-variable)
+        (counsel-mode t)
         (ivy-mode t))
-    (global-set-key [remap execute-extended-command] nil)
-    (global-set-key [remap find-file] nil)
-    (global-set-key [remap describe-function] nil)
-    (global-set-key [remap describe-variable] nil)
+    (counsel-mode -1)
     (ivy-mode -1)))
 
 (when (eq dotemacs-switch-engine 'ivy)
