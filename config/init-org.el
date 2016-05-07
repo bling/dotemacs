@@ -67,7 +67,7 @@
   (add-hook 'org-mode-hook #'my-org-mode-hook)
 
   (require-package 'org-bullets)
-  (setq org-bullets-bullet-list '("✿" "❀" "☢" "☯" "✸" ))
+  (setq org-bullets-bullet-list '("●" "○" "◆" "◇" "▸"))
   (add-hook 'org-mode-hook #'org-bullets-mode))
 
 (after 'ob-plantuml
