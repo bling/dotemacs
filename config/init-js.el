@@ -30,7 +30,7 @@
          (require-package 'js2-mode)
          (js2-mode))))
 
-(add-to-list 'auto-mode-alist '("\\.jsx?$" . #'init-js/auto-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . init-js/auto-mode))
 
 (after 'js2-mode
   (defun my-dotemacs-js-ctrl-c-ctrl-c ()
