@@ -10,11 +10,17 @@
   (require-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
-(add-to-list 'exec-path (expand-file-name (concat user-emacs-directory "bin")))
-(dolist (path dotemacs-os/additional-exec-paths)
-  (add-to-list 'exec-path path))
+(defun init-os/addpath (path)
+  (let* ((directory (expand-file-name path))
+         (env-value (concat directory path-separator (getenv "PATH"))))
+    (when directory
+      (setenv "PATH" env-value)
+      (setq eshell-path-env env-value)
+      (add-to-list 'exec-path directory))))
 
-(setq eshell-path-env (mapconcat #'identity exec-path path-separator))
+(init-os/addpath (concat user-emacs-directory "bin"))
+(dolist (path dotemacs-os/additional-exec-paths)
+  (init-os/addpath path))
 
 (when (eq system-type 'darwin)
   (require-package 'osx-trash)
