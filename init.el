@@ -1,6 +1,6 @@
 (eval-when-compile (require 'cl))
 
-(let ((gc-cons-threshold most-positive-fixnum)
+(let ((gc-cons-threshold (* 256 1024 1024))
       (file-name-handler-alist nil)
       (config-directory (concat user-emacs-directory "config/")))
 
