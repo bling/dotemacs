@@ -16,12 +16,14 @@
 
 
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
+(setq eshell-buffer-maximum-lines 20000)
 (setq eshell-scroll-to-bottom-on-input 'this)
 (setq eshell-buffer-shorthand t)
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 (setq eshell-glob-case-insensitive t)
 (setq eshell-error-if-no-glob t)
-(setq eshell-history-size 1024)
+(setq eshell-history-size (* 10 1024))
+(setq eshell-hist-ignoredups t)
 (setq eshell-cmpl-ignore-case t)
 (setq eshell-last-dir-ring-size 512)
 (setq eshell-prompt-function
@@ -88,6 +90,11 @@
            (delete-dups (ring-elements eshell-history-ring)))))
 
 
+(defun eshell/ssh-tramp (&rest args)
+  (insert (apply #'format "cd /ssh:%s:\\~" args))
+  (eshell-send-input))
+
+
 (defun my-eshell-color-filter (string)
   (let ((case-fold-search nil)
         (lines (split-string string "\n")))
@@ -103,10 +110,6 @@
                          (put-text-property 0 (length line) 'font-lock-face compilation-error-face line)))))
     (mapconcat 'identity lines "\n")))
 
-(after 'esh-mode
-  (require 'compile)
-  (add-to-list 'eshell-preoutput-filter-functions #'my-eshell-color-filter))
-
 
 (eval-when-compile (require 'cl))
 (lexical-let ((count 0))
@@ -119,12 +122,17 @@
   (defalias 'eshell/s #'magit-status))
 
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            ;; get rid of annoying 'terminal is not fully functional' warning
-            (when (executable-find "cat")
-              (setenv "PAGER" "cat"))
+(defun init-eshell/eshell-mode-hook ()
+  (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
+  (add-to-list 'eshell-preoutput-filter-functions #'my-eshell-color-filter)
 
-            (setenv "NODE_NO_READLINE" "1")))
+  ;; get rid of annoying 'terminal is not fully functional' warning
+  (when (executable-find "cat")
+    (setenv "PAGER" "cat"))
+
+  (setenv "NODE_NO_READLINE" "1"))
+
+(add-hook 'eshell-mode-hook #'init-eshell/eshell-mode-hook)
+
 
 (provide 'init-eshell)
