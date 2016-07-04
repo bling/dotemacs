@@ -27,14 +27,16 @@
 
 (when (executable-find "pt")
   (require-package 'pt)
-  (require-package 'wgrep-pt))
+  (require-package 'wgrep-pt)
+  (evilify pt-search-mode pt-search-mode-map))
 
 
 (when (executable-find "ag")
   (require-package 'ag)
   (setq ag-highlight-search t)
   (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
-  (require-package 'wgrep-ag))
+  (require-package 'wgrep-ag)
+  (evilify ag-mode ag-mode-hook))
 
 
 (require-package 'project-explorer)

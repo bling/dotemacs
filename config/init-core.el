@@ -78,6 +78,7 @@
               (require 'ansi-color)
               (let ((inhibit-read-only t))
                 (ansi-color-apply-on-region (point-min) (point-max))))))
+(evilify compilation-mode compilation-mode-map)
 
 
 ;; bookmarks
