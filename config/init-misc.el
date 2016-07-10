@@ -28,15 +28,16 @@
 (when (executable-find "pt")
   (require-package 'pt)
   (require-package 'wgrep-pt)
-  (evilify pt-search-mode pt-search-mode-map))
+  (after 'evil
+    (add-to-list 'evil-motion-state-modes 'pt-search-mode)
+    (evil-add-hjkl-bindings pt-search-mode-hook 'motion)))
 
 
 (when (executable-find "ag")
   (require-package 'ag)
   (setq ag-highlight-search t)
   (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
-  (require-package 'wgrep-ag)
-  (evilify ag-mode ag-mode-hook))
+  (require-package 'wgrep-ag))
 
 
 (require-package 'project-explorer)
