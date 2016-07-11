@@ -29,11 +29,14 @@
   :group 'dotemacs-web)
 
 
-(lazy-major-mode "\\.coffee\\'" coffee-mode)
 (lazy-major-mode "\\.jade$" jade-mode)
 (lazy-major-mode "\\.scss$" scss-mode)
 (lazy-major-mode "\\.sass$" sass-mode)
 (lazy-major-mode "\\.less$" less-css-mode)
+
+
+(lazy-major-mode "\\.coffee\\'" coffee-mode)
+(setq coffee-indent-like-python-mode t)
 
 
 (when dotemacs-web/use-skewer-mode
