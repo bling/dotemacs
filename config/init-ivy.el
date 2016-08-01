@@ -4,6 +4,7 @@
 (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 (setq ivy-height 12)
 (setq ivy-display-style 'fancy)
+(setq ivy-count-format "[%d/%d] ")
 (setq ivy-initial-inputs-alist nil)
 
 
@@ -21,15 +22,15 @@
 (defun my-ivy-mini ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
-         (bufnames (mapcar #'(lambda (buf) (concat (propertize "Buffer: " 'face 'error) buf)) buffers))
-         (recents (mapcar #'(lambda (file) (concat (propertize "Recent: " 'face 'error) file)) recentf-list)))
+         (bufnames (mapcar #'(lambda (buf) (propertize buf 'line-prefix "[Buffer] ")) buffers))
+         (recents (mapcar #'(lambda (file) (propertize file 'line-prefix "[Recent] ")) recentf-list)))
     (ivy-read "Search: " (append bufnames recents)
               :action (lambda (f)
                         (with-ivy-window
                          (cond ((member f bufnames)
-                                (switch-to-buffer (substring f 8)))
+                                (switch-to-buffer f))
                                (t
-                                (find-file (substring f 8)))))))))
+                                (find-file f))))))))
 
 (defun my-ivy-everything ()
   (interactive)
