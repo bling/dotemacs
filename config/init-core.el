@@ -110,13 +110,19 @@
 (add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
 
 
-;; store most files in the cache
-(setq backup-directory-alist
-      `((".*" . ,(concat dotemacs-cache-directory "backups")))
-      auto-save-file-name-transforms
-      `((".*" ,(concat dotemacs-cache-directory "backups") t))
-      auto-save-list-file-prefix
-      (concat dotemacs-cache-directory "auto-save-list/saves-"))
+;; move auto-save to the cache
+(let ((dir (expand-file-name (concat dotemacs-cache-directory "auto-save/"))))
+  (setq auto-save-list-file-prefix (concat dir "saves-"))
+  (setq auto-save-file-name-transforms `((".*" ,(concat dir "save-") t))))
+
+
+;; multiple-backups
+(setq backup-directory-alist `((".*" . ,(expand-file-name (concat dotemacs-cache-directory "backups/")))))
+(setq backup-by-copying t)
+(setq version-control t)
+(setq kept-old-versions 0)
+(setq kept-new-versions 20)
+(setq delete-old-versions t)
 
 
 ;; better scrolling
