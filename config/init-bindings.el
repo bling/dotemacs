@@ -176,11 +176,15 @@
             (helm-do-ag (projectile-project-root))))))
        "search..."))
     (-define-keys evil-normal-state-map
-      ("C-p" (bind (cond ((and (fboundp #'helm-projectile)
-                               (eq dotemacs-switch-engine 'helm))
-                          (call-interactively #'helm-projectile))
-                         (t
-                          (call-interactively #'projectile-find-file)))))))
+      ("C-p" (bind
+              (cond ((eq dotemacs-switch-engine 'helm)
+                     (call-interactively #'helm-projectile))
+                    ((eq dotemacs-switch-engine 'ivy)
+                     (if (projectile-project-p)
+                         (call-interactively #'counsel-projectile-find-file)
+                       (call-interactively #'counsel-projectile)))
+                    (t
+                     (call-interactively #'projectile-find-file-dwim)))))))
 
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))

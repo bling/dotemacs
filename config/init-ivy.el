@@ -19,6 +19,10 @@
 (require-package 'counsel)
 
 
+(after "projectile-autoloads"
+  (require-package 'counsel-projectile))
+
+
 (defun my-ivy-mini ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
