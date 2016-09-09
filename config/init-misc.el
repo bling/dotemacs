@@ -22,6 +22,13 @@
   (add-hook 'multiple-cursors-mode-disabled-hook #'evil-normal-state))
 
 
+(require-package 'dumb-jump)
+(after 'evil
+  (after 'dumb-jump
+    (defadvice dumb-jump-go (before dotemacs activate)
+      (evil--jumps-push))))
+
+
 (require-package 'wgrep)
 
 

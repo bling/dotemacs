@@ -145,6 +145,9 @@
     ("Q" #'my-window-killer)
     ("Y" "y$"))
 
+  (-define-keys evil-normal-state-map
+    ("g d" #'dumb-jump-go))
+
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" (bind (help-xref-interned (symbol-at-point))))
   (after "elisp-slime-nav-autoloads"
@@ -193,8 +196,7 @@
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
   (after 'js2-mode
-    (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var)
-    (evil-define-key 'normal js2-mode-map (kbd "g d") #'js2-jump-to-definition))
+    (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var))
 
   (after "avy-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'avy-goto-char-2)
