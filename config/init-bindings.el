@@ -90,8 +90,8 @@
 
   (after "git-gutter+-autoloads"
     (-define-keys evil-normal-state-map
-      ("[ h" #'git-gutter+-next-hunk)
-      ("] h" #'git-gutter+-previous-hunk))
+      ("[ h" #'git-gutter+-previous-hunk)
+      ("] h" #'git-gutter+-next-hunk))
     (-define-keys evil-visual-state-map
       ("SPC g a" #'git-gutter+-stage-hunks)
       ("SPC g r" #'git-gutter+-revert-hunks))
