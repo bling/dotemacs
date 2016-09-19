@@ -81,6 +81,9 @@
   (after "helm-autoloads"
     (-define-key evil-normal-state-map "SPC h" #'my-helm-hydra/body "helm..."))
 
+  (after "helm-dash-autoloads"
+    (-define-key evil-normal-state-map "SPC d" #'helm-dash "dash"))
+
   (after "fzf-autoloads"
     (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
 
