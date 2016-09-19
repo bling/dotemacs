@@ -62,12 +62,6 @@
     (setq eshell-smart-space-goes-to-end t)))
 
 
-(defun eshell/clear ()
-  "Clears the buffer."
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
-
-
 (defun eshell/ff (&rest args)
   "Opens a file in emacs."
   (when (not (null args))

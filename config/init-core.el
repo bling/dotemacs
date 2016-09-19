@@ -100,7 +100,7 @@
 
 
 ;; clean up old buffers periodically
-(require 'midnight)
+(midnight-mode)
 (midnight-delay-set 'midnight-delay 0)
 
 
