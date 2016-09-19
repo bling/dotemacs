@@ -62,7 +62,7 @@
 
 (when (executable-find "editorconfig")
   (require-package 'editorconfig)
-  (require 'editorconfig))
+  (editorconfig-mode))
 
 
 (require-package 'aggressive-indent)
