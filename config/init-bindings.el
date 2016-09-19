@@ -228,12 +228,15 @@
   (global-set-key (kbd "C-x g") #'my-git-hydra/body))
 
 
-(after "project-explorer-autoloads"
-  (global-set-key [f2] 'project-explorer-open)
-  (autoload 'pe/show-file "project-explorer")
-  (global-set-key [f3] 'pe/show-file)
-  (after 'project-explorer
-    (define-key project-explorer-mode-map (kbd "C-l") 'evil-window-right)))
+(after "neotree-autoloads"
+  (global-set-key [f2] #'neotree)
+  (global-set-key [f3] #'neotree-find)
+  (after 'neotree
+    (-define-keys neotree-mode-map
+      ("^" (kbd "ggU"))
+      ("c" #'neotree-create-node)
+      ("d" #'neotree-delete-node)
+      ("r" #'neotree-rename-node))))
 
 
 (after "multiple-cursors-autoloads"

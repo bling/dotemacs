@@ -47,11 +47,9 @@
   (require-package 'wgrep-ag))
 
 
-(require-package 'project-explorer)
-(evilify project-explorer-mode project-explorer-mode-map)
-(after 'project-explorer
-  (setq pe/cache-directory (concat dotemacs-cache-directory "project-explorer"))
-  (setq pe/omit-regex (concat pe/omit-regex "\\|^node_modules$")))
+(require-package 'neotree)
+(after 'neotree
+  (evilify neotree-mode neotree-mode-map))
 
 
 (require-package 'avy)
