@@ -60,7 +60,7 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   (with-editor-export-editor)
   (message ""))
 (add-hook 'shell-mode-hook #'init-vcs/export-with-editor)
-(add-hook 'term-mode-hook #'init-vcs/export-with-editor)
+(add-hook 'term-exec-hook #'init-vcs/export-with-editor)
 (add-hook 'eshell-mode-hook #'init-vcs/export-with-editor)
 
 
