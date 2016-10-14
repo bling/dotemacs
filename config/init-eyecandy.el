@@ -59,6 +59,7 @@
 (after 'page-break-lines (diminish 'page-break-lines-mode))
 (after 'flycheck (diminish 'flycheck-mode))
 (after 'aggressive-indent (diminish 'aggressive-indent-mode))
+(after 'counsel (diminish #'counsel-mode))
 
 
 (if (eq dotemacs-eyecandy/mode-line 'sml)

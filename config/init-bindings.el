@@ -162,6 +162,11 @@
     (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-region)
     (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
 
+  (after 'cider
+    (evil-define-key 'normal clojure-mode-map (kbd ", e") #'cider-eval-last-sexp)
+    (evil-define-key 'visual clojure-mode-map (kbd ", e") #'cider-eval-region)
+    (evil-define-key 'normal clojure-mode-map (kbd ", E") #'cider-eval-defun-at-point))
+
   (after "projectile-autoloads"
     (-define-keys evil-normal-state-map
       ("SPC p" #'projectile-command-map "projectile...")
