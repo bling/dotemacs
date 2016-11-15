@@ -75,13 +75,17 @@
               (cl-remove-if-not
                (lambda (dir)
                  (file-exists-p dir))
-               (delete-dups (ring-elements eshell-last-dir-ring))))))
+               (delete-dups (ring-elements eshell-last-dir-ring)))
+              nil
+              t)))
 
 (defun eshell/h ()
   "Quickly run a previous command."
   (insert (completing-read
            "Run previous command: "
-           (delete-dups (ring-elements eshell-history-ring)))))
+           (delete-dups (ring-elements eshell-history-ring))
+           nil
+           t)))
 
 
 (defun eshell/ssh-tramp (&rest args)
