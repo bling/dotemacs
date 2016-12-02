@@ -112,4 +112,8 @@
 (require-package 'restart-emacs)
 
 
+(require-package 'origami)
+(global-origami-mode)
+
+
 (provide 'init-misc)
