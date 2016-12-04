@@ -76,6 +76,10 @@ FEATURE may be any one of:
 
 (autoload 'evil-evilified-state "evil-evilified-state")
 (autoload 'evilified-state-evilify "evil-evilified-state")
-(defalias 'evilify 'evilified-state-evilify)
+(defmacro evilify (mode map &rest body)
+  (declare (indent defun))
+  (if body
+      `(after 'evil (evilified-state-evilify ,mode ,map ,@body))
+    `(after 'evil (evilified-state-evilify ,mode ,map))))
 
 (provide 'init-boot)
