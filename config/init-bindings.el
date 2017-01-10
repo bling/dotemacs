@@ -181,8 +181,8 @@
           (cond
            ((eq dotemacs-switch-engine 'ivy)
             (cond
-             ((executable-find "ag") (counsel-ag nil (projectile-project-root)))
-             ((executable-find "pt") (counsel-pt nil (projectile-project-root)))))
+             ((executable-find "ag") (counsel-ag))
+             ((executable-find "pt") (counsel-pt))))
            ((eq dotemacs-switch-engine 'helm)
             (helm-do-ag (projectile-project-root))))))
        "search..."))
