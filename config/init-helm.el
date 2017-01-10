@@ -9,9 +9,9 @@
   (defun my-helm-make-source (f &rest args)
     (let ((source-type (cadr args))
           (props (cddr args)))
-      (unless (eq source-type 'helm-source-async)
-        (plist-put props :fuzzy-match t)))
-    (apply f args))
+      (unless (child-of-class-p source-type 'helm-source-async)
+        (plist-put props :fuzzy-match t))
+      (apply f args)))
   (advice-add 'helm-make-source :around 'my-helm-make-source))
 
 
