@@ -64,13 +64,15 @@
 (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
          do (evil-set-initial-state mode 'emacs))
 
-(evil-put-property 'evil-state-properties 'normal   :tag " NORMAL ")
-(evil-put-property 'evil-state-properties 'insert   :tag " INSERT ")
-(evil-put-property 'evil-state-properties 'visual   :tag " VISUAL ")
-(evil-put-property 'evil-state-properties 'motion   :tag " MOTION ")
-(evil-put-property 'evil-state-properties 'emacs    :tag " EMACS ")
-(evil-put-property 'evil-state-properties 'replace  :tag " REPLACE ")
-(evil-put-property 'evil-state-properties 'operator :tag " OPERTR ")
+(add-hook 'after-init-hook
+          (lambda ()
+            (evil-put-property 'evil-state-properties 'normal   :tag " NORMAL ")
+            (evil-put-property 'evil-state-properties 'insert   :tag " INSERT ")
+            (evil-put-property 'evil-state-properties 'visual   :tag " VISUAL ")
+            (evil-put-property 'evil-state-properties 'motion   :tag " MOTION ")
+            (evil-put-property 'evil-state-properties 'emacs    :tag " EMACS ")
+            (evil-put-property 'evil-state-properties 'replace  :tag " REPLACE ")
+            (evil-put-property 'evil-state-properties 'operator :tag " OPERATOR ")))
 
 
 
