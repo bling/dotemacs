@@ -25,7 +25,6 @@
 (setq eshell-history-size (* 10 1024))
 (setq eshell-hist-ignoredups t)
 (setq eshell-cmpl-ignore-case t)
-(setq eshell-last-dir-ring-size 512)
 (setq eshell-prompt-function
       (lambda ()
         (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
@@ -45,7 +44,7 @@
                          (when (> (+ added modified deleted) 0)
                            (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face)))
                        (propertize "]" 'face 'font-lock-keyword-face)))))
-                (propertize " $ " 'face 'font-lock-constant-face))))
+                (propertize " λ " 'face 'font-lock-constant-face))))
 
 
 (when (executable-find "fortune")
@@ -67,17 +66,6 @@
   (when (not (null args))
     (mapc #'find-file (mapcar #'expand-file-name (eshell-flatten-list (reverse args))))))
 
-
-(defun eshell/j ()
-  "Quickly jump to previous directories."
-  (eshell/cd (completing-read
-              "Jump to directory: "
-              (cl-remove-if-not
-               (lambda (dir)
-                 (file-exists-p dir))
-               (delete-dups (ring-elements eshell-last-dir-ring)))
-              nil
-              t)))
 
 (defun eshell/h ()
   "Quickly run a previous command."
@@ -109,6 +97,10 @@
     (mapconcat 'identity lines "\n")))
 
 
+(after 'em-term
+  (add-to-list 'eshell-visual-commands "ssh"))
+
+
 (eval-when-compile (require 'cl))
 (lexical-let ((count 0))
   (defun my-new-eshell-split ()
@@ -116,8 +108,15 @@
     (split-window)
     (eshell (incf count))))
 
+
 (after "magit-autoloads"
   (defalias 'eshell/s #'magit-status))
+
+
+(require-package 'eshell-z)
+(setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
+(add-hook 'eshell-mode-hook #'eshell-z)
+(defalias 'eshell/j #'eshell/z)
 
 
 (defun init-eshell/eshell-mode-hook ()
