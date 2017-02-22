@@ -66,6 +66,9 @@
     (toggle-truncate-lines t))
   (add-hook 'org-mode-hook #'my-org-mode-hook)
 
+  (require-package 'ob-async)
+  (add-to-list 'org-ctrl-c-ctrl-c-hook #'ob-async-org-babel-execute-src-block)
+
   (require-package 'org-bullets)
   (setq org-bullets-bullet-list '("●" "○" "◆" "◇" "▸"))
   (add-hook 'org-mode-hook #'org-bullets-mode))
