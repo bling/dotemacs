@@ -44,7 +44,7 @@
                          (when (> (+ added modified deleted) 0)
                            (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face)))
                        (propertize "]" 'face 'font-lock-keyword-face)))))
-                (propertize " λ " 'face 'font-lock-constant-face))))
+                (propertize " $ " 'face 'font-lock-constant-face))))
 
 
 (when (executable-find "fortune")
@@ -115,7 +115,9 @@
 
 (require-package 'eshell-z)
 (setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
-(add-hook 'eshell-mode-hook #'eshell-z)
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (require 'eshell-z)))
 (defalias 'eshell/j #'eshell/z)
 
 
