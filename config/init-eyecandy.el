@@ -126,6 +126,16 @@
 (eval-sexp-fu-flash-mode)
 
 
+(when (font-info "all-the-icons")
+  (after 'dired
+    (require-package 'all-the-icons-dired)
+    (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
+
+  (after 'ivy
+    (require-package 'all-the-icons-ivy)
+    (all-the-icons-ivy-setup)))
+
+
 (add-hook 'find-file-hook 'hl-line-mode)
 
 
