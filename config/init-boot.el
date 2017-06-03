@@ -15,11 +15,11 @@
       (unless loaded
         (with-current-buffer (get-buffer-create "*Require Times*")
           (when (= 0 (buffer-size))
-            (insert "| feature | timestamp | elapsed |\n")
-            (insert "|---------+-----------+---------|\n"))
+            (insert (format "| %-40s | %-23s | elapsed  |\n" "feature" "timestamp"))
+            (insert "|------------------------------------------+-------------------------+----------|\n"))
           (goto-char (point-max))
           (setq elapsed (float-time (time-subtract (current-time) start)))
-          (insert (format "| %s | %s | %f |\n"
+          (insert (format "| %-40s | %s | %f |\n"
                           feature
                           (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
                           elapsed)))))))
