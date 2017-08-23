@@ -136,7 +136,11 @@
     (all-the-icons-ivy-setup)))
 
 
-(add-hook 'find-file-hook 'hl-line-mode)
+(add-hook 'find-file-hook #'hl-line-mode)
+
+(if (fboundp #'display-line-numbers-mode)
+    (add-hook 'find-file-hook #'display-line-numbers-mode)
+  (add-hook 'find-file-hook 'linum-mode))
 
 
 (provide 'init-eyecandy)
