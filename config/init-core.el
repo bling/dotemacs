@@ -25,6 +25,7 @@
 (setq recentf-max-menu-items 500)
 (setq recentf-auto-cleanup 300)
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
+(add-to-list 'recentf-exclude ".*elpa.*autoloads\.el$")
 (recentf-mode t)
 (run-with-idle-timer 600 t #'recentf-save-list)
 
