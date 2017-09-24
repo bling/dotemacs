@@ -20,7 +20,7 @@
 
 (setq js-indent-level dotemacs-js/indent-offset)
 
-(defun init-js/auto-mode ()
+(defun /js/auto-mode-alist-hook ()
   (cond ((> (buffer-size) dotemacs-js/maximum-file-size)
          (fundamental-mode))
         (dotemacs-js/use-web-mode
@@ -30,10 +30,10 @@
          (require-package 'js2-mode)
          (js2-mode))))
 
-(add-to-list 'auto-mode-alist '("\\.jsx?$" . init-js/auto-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . /js/auto-mode-alist-hook))
 
 (after 'js2-mode
-  (defun my-dotemacs-js-ctrl-c-ctrl-c ()
+  (defun /js/ctrl-c-ctrl-c ()
     (interactive)
     (require 'thingatpt)
     (let ((val (thing-at-point 'list)))
@@ -41,12 +41,12 @@
       (when (and (equal (substring val 0 1) "(")
                  (equal (substring val -1) ")"))
         (if (string-match-p "," val)
-            (my-macro-ng-add-string-for-last-arg)
-          (my-macro-ng-function-to-array-injected)))))
+            (/macros/ng-add-string-for-last-arg)
+          (/macros/ng-function-to-array-injected)))))
 
   (add-hook 'js2-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-c C-c") #'my-dotemacs-js-ctrl-c-ctrl-c)))
+              (local-set-key (kbd "C-c C-c") #'/js/ctrl-c-ctrl-c)))
 
   (setq js2-highlight-level 3)
   (setq-default js2-basic-offset dotemacs-js/indent-offset))

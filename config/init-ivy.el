@@ -23,7 +23,7 @@
   (require-package 'counsel-projectile))
 
 
-(defun my-ivy-mini ()
+(defun /ivy/mini ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
          (bufnames (mapcar #'(lambda (buf) (propertize buf 'line-prefix "[Buffer] ")) buffers))
@@ -36,7 +36,7 @@
                                (t
                                 (find-file f))))))))
 
-(defun my-ivy-everything ()
+(defun /ivy/everything ()
   (interactive)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
          (base-files (append buffers recentf-list))
@@ -58,7 +58,7 @@
                        (t
                         (find-file (concat (projectile-project-root) f)))))))))
 
-(defun my-switch-engine-as-ivy (on)
+(defun /ivy/activate-as-switch-engine (on)
   (if on
       (progn
         (counsel-mode t)
@@ -67,6 +67,6 @@
     (ivy-mode -1)))
 
 (when (eq dotemacs-switch-engine 'ivy)
-  (my-switch-engine-as-ivy t))
+  (/ivy/activate-as-switch-engine t))
 
 (provide 'init-ivy)

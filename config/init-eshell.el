@@ -81,7 +81,7 @@
   (eshell-send-input))
 
 
-(defun my-eshell-color-filter (string)
+(defun /eshell/color-filter (string)
   (let ((case-fold-search nil)
         (lines (split-string string "\n")))
     (cl-loop for line in lines
@@ -103,7 +103,7 @@
 
 (eval-when-compile (require 'cl))
 (lexical-let ((count 0))
-  (defun my-new-eshell-split ()
+  (defun /eshell/new-split ()
     (interactive)
     (split-window)
     (eshell (incf count))))
@@ -121,9 +121,9 @@
 (defalias 'eshell/j #'eshell/z)
 
 
-(defun init-eshell/eshell-mode-hook ()
+(defun /eshell/eshell-mode-hook ()
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
-  (add-to-list 'eshell-preoutput-filter-functions #'my-eshell-color-filter)
+  (add-to-list 'eshell-preoutput-filter-functions #'/eshell/color-filter)
 
   ;; get rid of annoying 'terminal is not fully functional' warning
   (when (executable-find "cat")
@@ -131,7 +131,7 @@
 
   (setenv "NODE_NO_READLINE" "1"))
 
-(add-hook 'eshell-mode-hook #'init-eshell/eshell-mode-hook)
+(add-hook 'eshell-mode-hook #'/eshell/eshell-mode-hook)
 
 
 (provide 'init-eshell)

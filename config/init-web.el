@@ -45,13 +45,13 @@
 
 
 (when dotemacs-web/use-emmet-mode
-  (defun my-emmet-mode ()
+  (defun /web/turn-on-emmet-mode ()
     (require-package 'emmet-mode)
     (emmet-mode))
 
-  (add-hook 'css-mode-hook #'my-emmet-mode)
-  (add-hook 'sgml-mode-hook #'my-emmet-mode)
-  (add-hook 'web-mode-hook #'my-emmet-mode))
+  (add-hook 'css-mode-hook #'/web/turn-on-emmet-mode)
+  (add-hook 'sgml-mode-hook #'/web/turn-on-emmet-mode)
+  (add-hook 'web-mode-hook #'/web/turn-on-emmet-mode))
 
 
 (require-package 'rainbow-mode)
@@ -65,7 +65,7 @@
 
 
 (after 'web-mode
-  (defun init-web/web-mode-hook ()
+  (defun /web/web-mode-hook ()
     (electric-pair-mode -1)
     (and (fboundp #'smartparens-mode) (smartparens-mode -1))
 
@@ -78,7 +78,7 @@
                    (equal web-mode-content-type "jsx")))
       (require-package 'js2-mode)
       (js2-minor-mode)))
-  (add-hook 'web-mode-hook #'init-web/web-mode-hook)
+  (add-hook 'web-mode-hook #'/web/web-mode-hook)
 
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
 

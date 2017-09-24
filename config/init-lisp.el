@@ -3,13 +3,13 @@
   (defadvice elisp-slime-nav-find-elisp-thing-at-point (after dotemacs activate)
     (recenter)))
 
-(defun my-lisp-hook ()
+(defun /lisp/major-mode-hook ()
   (progn
     (elisp-slime-nav-mode)
     (eldoc-mode)))
 
-(add-hook 'emacs-lisp-mode-hook #'my-lisp-hook)
-(add-hook 'lisp-interaction-mode-hook #'my-lisp-hook)
-(add-hook 'ielm-mode-hook #'my-lisp-hook)
+(add-hook 'emacs-lisp-mode-hook #'/lisp/major-mode-hook)
+(add-hook 'lisp-interaction-mode-hook #'/lisp/major-mode-hook)
+(add-hook 'ielm-mode-hook #'/lisp/major-mode-hook)
 
 (provide 'init-lisp)

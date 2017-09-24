@@ -45,7 +45,7 @@
     (when (null (yas-expand))
       ad-do-it))
 
-  (defun my-company-tab ()
+  (defun /company/tab ()
     (interactive)
     (when (null (yas-expand))
       (company-select-next)))

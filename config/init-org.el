@@ -62,9 +62,10 @@
 
   (add-hook 'org-babel-after-execute-hook #'org-redisplay-inline-images)
 
-  (defun my-org-mode-hook ()
-    (toggle-truncate-lines t))
-  (add-hook 'org-mode-hook #'my-org-mode-hook)
+  (defun /org/org-mode-hook ()
+    (toggle-truncate-lines t)
+    (setq show-trailing-whitespace t))
+  (add-hook 'org-mode-hook #'/org/org-mode-hook)
 
   (require-package 'ob-async)
   (require 'ob-async)

@@ -39,7 +39,7 @@
     (", , e" #'eval-defun)
     (", E" #'eval-defun)
     (", f" ctl-x-5-map "frames")
-    (", c" #'my-new-eshell-split "eshell")
+    (", c" #'/eshell/new-split "eshell")
     (", C" #'customize-group)
     (", v" (kbd "C-w v C-w l") "vsplit")
     (", s" (kbd "C-w s C-w j") "split")
@@ -55,17 +55,17 @@
   (-define-key evil-visual-state-map "SPC SPC" #'execute-extended-command "M-x")
   (-define-keys evil-normal-state-map
     ("SPC SPC" #'execute-extended-command "M-x")
-    ("SPC t" #'my-toggle-hydra/body "toggle...")
-    ("SPC q" #'my-quit-hydra/body "quit...")
-    ("SPC e" #'my-errors-hydra/body "errors...")
-    ("SPC b" #'my-buffer-hydra/body "buffers...")
-    ("SPC j" #'my-jump-hydra/body "jump...")
-    ("SPC f" #'my-file-hydra/body "files...")
-    ("SPC s" #'my-search-hydra/body "search...")
-    ("SPC l" #'my-jump-hydra/lambda-l-and-exit "lines(current)")
-    ("SPC L" #'my-jump-hydra/lambda-L-and-exit "lines(all)")
-    ("SPC o" #'my-jump-hydra/lambda-i-and-exit "outline")
-    ("SPC '" #'my-new-eshell-split "shell")
+    ("SPC t" #'/hydras/toggles/body "toggle...")
+    ("SPC q" #'/hydras/quit/body "quit...")
+    ("SPC e" #'/hydras/errors/body "errors...")
+    ("SPC b" #'/hydras/buffers/body "buffers...")
+    ("SPC j" #'/hydras/jumps/body "jump...")
+    ("SPC f" #'/hydras/files/body "files...")
+    ("SPC s" #'/hydras/search/body "search...")
+    ("SPC l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
+    ("SPC L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
+    ("SPC o" #'/hydras/jumps/lambda-i-and-exit "outline")
+    ("SPC '" #'/eshell/new-split "shell")
     ("SPC y" (bind
               (cond ((eq dotemacs-switch-engine 'ivy)
                      (call-interactively #'counsel-yank-pop))
@@ -73,13 +73,13 @@
                      (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
 
   (after "magit-autoloads"
-    (-define-key evil-normal-state-map "SPC g" #'my-git-hydra/body "git..."))
+    (-define-key evil-normal-state-map "SPC g" #'/hydras/git/body "git..."))
 
   (after "counsel-autoloads"
-    (-define-key evil-normal-state-map "SPC i" #'my-ivy-hydra/body "ivy..."))
+    (-define-key evil-normal-state-map "SPC i" #'/hydras/ivy/body "ivy..."))
 
   (after "helm-autoloads"
-    (-define-key evil-normal-state-map "SPC h" #'my-helm-hydra/body "helm..."))
+    (-define-key evil-normal-state-map "SPC h" #'/hydras/helm/body "helm..."))
 
   (after "helm-dash-autoloads"
     (-define-key evil-normal-state-map "SPC d" #'helm-dash "dash"))
@@ -102,7 +102,7 @@
 
   (-define-keys evil-normal-state-map
     ("g p" "`[v`]")
-    ("g b" #'my-buffer-hydra/lambda-b-and-exit))
+    ("g b" #'/hydras/buffers/lambda-b-and-exit))
 
   (-define-keys evil-normal-state-map
     ("C-b" #'evil-scroll-up)
@@ -140,9 +140,9 @@
     ("k" #'evil-previous-visual-line))
 
   (-define-keys evil-normal-state-map
-    ("p" #'my-paste-hydra/evil-paste-after)
-    ("P" #'my-paste-hydra/evil-paste-before)
-    ("Q" #'my-window-killer)
+    ("p" #'/hydras/paste/evil-paste-after)
+    ("P" #'/hydras/paste/evil-paste-before)
+    ("Q" #'/utils/window-killer)
     ("Y" "y$"))
 
   (-define-keys evil-normal-state-map
@@ -158,9 +158,9 @@
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
   (after 'stylus-mode
-    (define-key stylus-mode-map [remap eval-last-sexp] 'my-stylus-compile-and-eval-buffer)
-    (evil-define-key 'visual stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-region)
-    (evil-define-key 'normal stylus-mode-map (kbd ", p") 'my-stylus-compile-and-show-buffer))
+    (define-key stylus-mode-map [remap eval-last-sexp] '/stylus/compile-and-eval-buffer)
+    (evil-define-key 'visual stylus-mode-map (kbd ", p") '/stylus/compile-and-show-region)
+    (evil-define-key 'normal stylus-mode-map (kbd ", p") '/stylus/compile-and-show-buffer))
 
   (after 'cider
     (evil-define-key 'normal clojure-mode-map (kbd ", e") #'cider-eval-last-sexp)
@@ -253,11 +253,11 @@
               (local-set-key (kbd "C-l") #'evil-window-right))))
 
 ;; escape minibuffer
-(define-key minibuffer-local-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'my-minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'my-minibuffer-keyboard-quit)
+(define-key minibuffer-local-map [escape] '/utils/minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] '/utils/minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] '/utils/minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] '/utils/minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] '/utils/minibuffer-keyboard-quit)
 
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
@@ -267,7 +267,7 @@
 
 
 (after "magit-autoloads"
-  (global-set-key (kbd "C-x g") #'my-git-hydra/body))
+  (global-set-key (kbd "C-x g") #'/hydras/git/body))
 
 
 (after "treemacs-autoloads"
@@ -297,7 +297,7 @@
 (after 'company
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "<tab>") 'my-company-tab)
+  (define-key company-active-map (kbd "<tab>") '/company/tab)
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
 
 
@@ -317,11 +317,11 @@
 
 
 (after "helm-autoloads"
-  (-define-key (current-global-map) "C-c h" #'my-helm-hydra/body "helm..."))
+  (-define-key (current-global-map) "C-c h" #'/hydras/helm/body "helm..."))
 
 
 (after "counsel-autoloads"
-  (-define-key (current-global-map) "C-c i" #'my-ivy-hydra/body "ivy..."))
+  (-define-key (current-global-map) "C-c i" #'/hydras/ivy/body "ivy..."))
 
 
 (global-set-key [prior] 'previous-buffer)
@@ -331,16 +331,16 @@
   ("C-c c" #'org-capture)
   ("C-c a" #'org-agenda)
   ("C-c l" #'org-store-link)
-  ("C-c s" #'my-goto-scratch-buffer)
-  ("C-c e" #'my-eval-and-replace)
-  ("C-c t" #'my-new-eshell-split))
+  ("C-c s" #'/utils/goto-scratch-buffer)
+  ("C-c e" #'/utils/eval-and-replace)
+  ("C-c t" #'/eshell/new-split))
 
 (-define-keys (current-global-map)
   ("C-x c" #'calculator)
   ("C-x C" #'calendar)
   ("C-x C-b" #'ibuffer)
   ("C-x C-k" #'kill-this-buffer)
-  ("C-x n" #'my-narrow-hydra/body)
+  ("C-x n" #'/hydras/narrow/body)
   ("C-x p" #'proced))
 
 (after "vkill-autoloads"

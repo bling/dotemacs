@@ -14,7 +14,7 @@
   (require-package 'ido-vertical-mode)
   (ido-vertical-mode))
 
-(defun my-switch-engine-as-ido (on)
+(defun /ido/activate-as-switch-engine (on)
   (if on
       (progn
         (ido-mode t)
@@ -25,6 +25,6 @@
     (ido-ubiquitous-mode -1)))
 
 (when (eq dotemacs-switch-engine 'ido)
-  (my-switch-engine-as-ido t))
+  (/ido/activate-as-switch-engine t))
 
 (provide 'init-ido)

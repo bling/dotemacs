@@ -24,7 +24,7 @@
 (size-indication-mode t)
 
 
-(defun my-fold-overlay (ov)
+(defun /eyecandy/fold-overlay (ov)
   (when (eq 'code (overlay-get ov 'hs))
     (let ((col (save-excursion
                  (move-end-of-line 0)
@@ -34,7 +34,7 @@
                    (format "%s [ %d ] ... "
                            (make-string (- (window-width) col 32) (string-to-char "."))
                            count)))))
-(setq hs-set-up-overlay 'my-fold-overlay)
+(setq hs-set-up-overlay '/eyecandy/fold-overlay)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 

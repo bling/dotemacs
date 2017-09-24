@@ -6,13 +6,13 @@
 
 
 (after 'helm-source
-  (defun my-helm-make-source (f &rest args)
+  (defun /helm/make-source (f &rest args)
     (let ((source-type (cadr args))
           (props (cddr args)))
       (unless (child-of-class-p source-type 'helm-source-async)
         (plist-put props :fuzzy-match t))
       (apply f args)))
-  (advice-add 'helm-make-source :around 'my-helm-make-source))
+  (advice-add 'helm-make-source :around '/helm/make-source))
 
 
 (after 'helm
@@ -55,7 +55,7 @@
   (setq helm-autoresize-max-height 30)
   (helm-autoresize-mode t))
 
-(defun my-switch-engine-as-helm (on)
+(defun /helm/activate-as-switch-engine (on)
   (if on
       (progn
         (global-set-key [remap execute-extended-command] #'helm-M-x)
@@ -67,6 +67,6 @@
 
 (when (eq dotemacs-switch-engine 'helm)
   (delayed-init
-   (my-switch-engine-as-helm t)))
+   (/helm/activate-as-switch-engine t)))
 
 (provide 'init-helm)

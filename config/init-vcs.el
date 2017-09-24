@@ -21,10 +21,10 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 (require-package 'magit)
 
-(defun my-magit-post-display-buffer ()
+(defun /vcs/magit-post-display-buffer-hook()
   (if (string-match "*magit:" (buffer-name))
       (delete-other-windows)))
-(add-hook 'magit-post-display-buffer-hook #'my-magit-post-display-buffer)
+(add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
 
 (setq magit-section-show-child-count t)
 (setq magit-diff-arguments '("--histogram"))
@@ -56,13 +56,13 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 (require-package 'with-editor)
 (autoload 'with-editor-export-editor "with-editor")
-(defun init-vcs/export-with-editor ()
+(defun /vcs/with-editor-export ()
   (unless (equal (buffer-name) "*fzf*")
     (with-editor-export-editor)
     (message "")))
-(add-hook 'shell-mode-hook #'init-vcs/export-with-editor)
-(add-hook 'term-exec-hook #'init-vcs/export-with-editor)
-(add-hook 'eshell-mode-hook #'init-vcs/export-with-editor)
+(add-hook 'shell-mode-hook #'/vcs/with-editor-export)
+(add-hook 'term-exec-hook #'/vcs/with-editor-export)
+(add-hook 'eshell-mode-hook #'/vcs/with-editor-export)
 
 
 

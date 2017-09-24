@@ -31,10 +31,10 @@
 
 
 ;; gc
-(defun my-minibuffer-setup-hook () (setq gc-cons-threshold most-positive-fixnum))
-(defun my-minibuffer-exit-hook () (setq gc-cons-threshold (* 64 1024 1024)))
-(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+(defun /core/minibuffer-setup-hook () (setq gc-cons-threshold most-positive-fixnum))
+(defun /core/minibuffer-exit-hook () (setq gc-cons-threshold (* 64 1024 1024)))
+(add-hook 'minibuffer-setup-hook #'/core/minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'/core/minibuffer-exit-hook)
 
 
 ;; pcomplete
@@ -64,7 +64,7 @@
 
 ;; comint
 (after 'comint
-  (defun my-toggle-comint-scroll-to-bottom-on-output ()
+  (defun /core/toggle-comint-scroll-to-bottom-on-output ()
     (interactive)
     (if comint-scroll-to-bottom-on-output
         (setq comint-scroll-to-bottom-on-output nil)
@@ -141,14 +141,14 @@
       uniquify-after-kill-buffer-p t)
 
 
-(defun my-do-not-kill-scratch-buffer ()
+(defun /core/do-not-kill-scratch-buffer ()
   (if (member (buffer-name (current-buffer))
               '("*scratch*" "*Messages*" "*Require Times*"))
       (progn
         (bury-buffer)
         nil)
     t))
-(add-hook 'kill-buffer-query-functions 'my-do-not-kill-scratch-buffer)
+(add-hook 'kill-buffer-query-functions '/core/do-not-kill-scratch-buffer)
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -172,6 +172,7 @@
 (setq initial-major-mode 'emacs-lisp-mode)
 (setq eval-expression-print-level nil)
 (setq-default indent-tabs-mode nil)
+(setq-default visual-line-mode t)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
@@ -194,15 +195,10 @@
   (add-hook 'minibuffer-exit-hook (lambda () (electric-pair-mode t))))
 
 
-(defun my-find-file-hook ()
-  (unless (eq major-mode 'org-mode)
-    (setq show-trailing-whitespace t))
-
+(defun /core/find-file-hook ()
   (when (string-match "\\.min\\." (buffer-file-name))
-    (fundamental-mode))
-
-  (visual-line-mode))
-(add-hook 'find-file-hook #'my-find-file-hook)
+    (fundamental-mode)))
+(add-hook 'find-file-hook #'/core/find-file-hook)
 
 
 (evilify Custom-mode Custom-mode-map)
