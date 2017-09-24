@@ -23,10 +23,6 @@
   (helm-flx-mode t)
 
 
-  (require-package 'helm-fuzzier)
-  (helm-fuzzier-mode t)
-
-
   (require-package 'helm-dash)
   (setq helm-dash-browser-func 'eww)
 
