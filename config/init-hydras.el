@@ -51,13 +51,13 @@
 
 (defhydra /hydras/buffers (:hint nil :exit t)
   "
-   buffers:   _b_ → buffers          _k_ → kill buffer             _f_ → reveal in finder
+   buffers:   _b_ → buffers          _k_ → kill buffer             _f_ → reveal in os
               _m_ → goto messages    _e_ → erase buffer            ^ ^
               _s_ → goto scratch     _E_ → erase buffer (force)    ^ ^
 "
   ("s" /utils/goto-scratch-buffer)
   ("k" kill-this-buffer)
-  ("f" reveal-in-osx-finder)
+  ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
   ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/mini :helm #'helm-mini))
   ("e" erase-buffer)

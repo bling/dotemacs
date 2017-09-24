@@ -30,10 +30,11 @@
   (require-package 'vkill)
   (evilify vkill-mode vkill-mode-map))
 
-(when (eq system-type 'windows-nt)
-  (defun reveal-in-osx-finder ()
-    (interactive)
-    (start-process "*explorer*" "*explorer*" "explorer.exe"
-                   (replace-regexp-in-string "/" "\\\\" (file-name-directory (buffer-file-name))))))
+(defun /os/reveal-in-os ()
+  (interactive)
+  (if (eq system-type 'windows-nt)
+      (start-process "*explorer*" "*explorer*" "explorer.exe"
+                     (replace-regexp-in-string "/" "\\\\" (file-name-directory (buffer-file-name))))
+    (call-interactively #'reveal-in-osx-finder)))
 
 (provide 'init-os)
