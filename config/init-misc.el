@@ -47,9 +47,14 @@
   (require-package 'wgrep-ag))
 
 
-(require-package 'neotree)
-(after 'neotree
-  (evilify neotree-mode neotree-mode-map))
+(require-package 'treemacs)
+(after 'projectile
+  (require-package 'treemacs-projectile)
+  (after 'treemacs-projectile
+    (setq treemacs-header-function #'treemacs-projectile-create-header)))
+(after 'evil
+  (require-package 'treemacs-evil)
+  (require 'treemacs-evil))
 
 
 (require-package 'avy)

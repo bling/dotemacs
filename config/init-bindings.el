@@ -270,15 +270,11 @@
   (global-set-key (kbd "C-x g") #'my-git-hydra/body))
 
 
-(after "neotree-autoloads"
-  (global-set-key [f2] #'neotree)
-  (global-set-key [f3] #'neotree-find)
-  (after 'neotree
-    (-define-keys neotree-mode-map
-      ("^" (kbd "ggU"))
-      ("c" #'neotree-create-node)
-      ("d" #'neotree-delete-node)
-      ("r" #'neotree-rename-node))))
+(after "treemacs-autoloads"
+  (global-set-key [f3] #'treemacs-find-file)
+  (global-set-key [f2] #'treemacs-toggle)
+  (after "projectile-autoloads"
+    (global-set-key [f2] #'treemacs-projectile-toggle)))
 
 
 (after "multiple-cursors-autoloads"
