@@ -77,7 +77,10 @@
                (or (equal web-mode-content-type "javascript")
                    (equal web-mode-content-type "jsx")))
       (require-package 'js2-mode)
-      (js2-minor-mode)))
+      (js2-minor-mode))
+
+    (setq web-mode-enable-auto-quoting (not (eq web-mode-content-type "jsx"))))
+
   (add-hook 'web-mode-hook #'/web/web-mode-hook)
 
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
