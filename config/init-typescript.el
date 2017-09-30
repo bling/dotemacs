@@ -18,6 +18,10 @@
 (lazy-major-mode "\\.tsx$" web-mode)
 (add-hook 'web-mode-hook #'/typescript/web-mode-hook)
 
+(after [tide evil]
+  (defadvice tide-jump-to-definition (before dotemacs activate)
+    (evil--jumps-push)))
+
 (defun /typescript/generate-typings-for-css ()
   "Generates a Typescript type definition file for the current CSS file."
   (interactive)
