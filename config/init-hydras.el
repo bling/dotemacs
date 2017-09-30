@@ -127,9 +127,19 @@
   (setq dotemacs-switch-engine engine)
   (setq projectile-completion-system dotemacs-switch-engine))
 
+(defhydra /hydras/toggles/switch-engine (:hint nil :exit t)
+  "
+   engine:  _h_ → helm
+            _i_ → ivy
+            _o_ → ido
+"
+  ("h" (/hydras/toggles/activate-switch-engine 'helm))
+  ("i" (/hydras/toggles/activate-switch-engine 'ivy))
+  ("o" (/hydras/toggles/activate-switch-engine 'ido)))
+
 (defhydra /hydras/toggles (:hint nil :exit t)
   "
-   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch (%`dotemacs-switch-engine)
+   toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch-engine
             _f_ → auto-fill           _S_ → flyspell   _c_ → completion     _W_ → word wrap        _g_ → debug on quit
             _w_ → whitespace          ^ ^              _p_ → auto-pairing   _b_ → page break
 "
@@ -152,11 +162,7 @@
          (call-interactively #'electric-pair-mode))
         ((eq dotemacs-pair-engine 'smartparens)
          (call-interactively #'smartparens-global-mode))))
-  ("'" (cond
-        ((eq dotemacs-switch-engine 'ivy)  (/hydras/toggles/activate-switch-engine 'helm))
-        ((eq dotemacs-switch-engine 'helm) (/hydras/toggles/activate-switch-engine 'ido))
-        ((eq dotemacs-switch-engine 'ido)  (/hydras/toggles/activate-switch-engine 'ivy)))
-   :exit nil))
+  ("'" /hydras/toggles/switch-engine/body))
 
 
 
