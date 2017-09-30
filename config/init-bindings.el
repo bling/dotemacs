@@ -25,13 +25,30 @@
                                (desc ,(caddr binding)))
                            (-define-key ,keymap seq func desc)))))
 
+(defun /bindings/custom-major-mode-hydra ()
+  (interactive)
+  (let ((func (intern (concat "/hydras/modes/" (symbol-name major-mode) "/body"))))
+    (message "detecting %s" func)
+    (if (fboundp func)
+        (call-interactively func)
+      (message "No custom major-mode bindings defined."))))
+
 
 
 (after 'evil
+  (after "multiple-cursors-autoloads"
+    (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
+
+  (-define-keys evil-normal-state-map
+    ("g d" #'dumb-jump-go))
+
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
+
+  (-define-key evil-normal-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
+  (-define-key evil-visual-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
 
   (-define-keys evil-normal-state-map
     (", w" #'save-buffer)
@@ -145,9 +162,6 @@
     ("Q" #'/utils/window-killer)
     ("Y" "y$"))
 
-  (-define-keys evil-normal-state-map
-    ("g d" #'dumb-jump-go))
-
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" (bind (help-xref-interned (symbol-at-point))))
   (after "elisp-slime-nav-autoloads"
@@ -161,6 +175,10 @@
     (define-key stylus-mode-map [remap eval-last-sexp] '/stylus/compile-and-eval-buffer)
     (evil-define-key 'visual stylus-mode-map (kbd ", p") '/stylus/compile-and-show-region)
     (evil-define-key 'normal stylus-mode-map (kbd ", p") '/stylus/compile-and-show-buffer))
+
+  (after 'tide
+    (evil-define-key 'normal tide-mode-map (kbd "g d") #'tide-jump-to-definition)
+    (evil-define-key 'normal tide-mode-map (kbd "g r") #'tide-rename-symbol))
 
   (after 'cider
     (evil-define-key 'normal clojure-mode-map (kbd ", e") #'cider-eval-last-sexp)
@@ -233,9 +251,6 @@
                        (call-interactively #'counsel-projectile)))
                     (t
                      (call-interactively #'projectile-find-file-dwim)))))))
-
-  (after "multiple-cursors-autoloads"
-    (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
   (after 'js2-mode
     (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var))
