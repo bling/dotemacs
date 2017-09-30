@@ -18,17 +18,19 @@
 (lazy-major-mode "\\.tsx$" web-mode)
 (add-hook 'web-mode-hook #'/typescript/web-mode-hook)
 
-(after 'hydra
-  (defhydra /hydras/modes/typescript-mode (:hint nil)
-    "
- _d_ jump to definition   _f_ find references
- _r_ rename               _h_ documentation
- _S_ restart server
-"
-    ("d" tide-jump-to-definition)
-    ("r" tide-rename-symbol)
-    ("S" tide-restart-server)
-    ("f" tide-references)
-    ("h" tide-documentation-at-point)))
+(defun /typescript/generate-typings-for-css ()
+  "Generates a Typescript type definition file for the current CSS file."
+  (interactive)
+  (unless (s-ends-with-p "\.css" (buffer-file-name))
+    (error "The current buffer is not a CSS file"))
+  (let ((pos 0)
+        (string (substring-no-properties (buffer-string)))
+        matches)
+    (while (string-match "^\.\\(\\w\\|-\\)+" string pos)
+      (push (s-lower-camel-case (substring (match-string 0 string) 1)) matches)
+      (setq pos (match-end 0)))
+    (with-temp-file (concat (buffer-file-name) ".d.ts")
+      (dolist (m (reverse matches))
+        (insert (format "export const %s: string;\n" m))))))
 
 (provide 'init-typescript)

@@ -28,7 +28,6 @@
 (defun /bindings/custom-major-mode-hydra ()
   (interactive)
   (let ((func (intern (concat "/hydras/modes/" (symbol-name major-mode) "/body"))))
-    (message "detecting %s" func)
     (if (fboundp func)
         (call-interactively func)
       (message "No custom major-mode bindings defined."))))

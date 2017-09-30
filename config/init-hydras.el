@@ -234,9 +234,8 @@
 
 (defhydra /hydras/paste (:hint nil)
   "
-   Paste transient state: [%s(length kill-ring-yank-pointer)/%s(length kill-ring)]
-         _C-j_ → cycle next          _p_ → paste before
-         _C-k_ → cycle previous      _P_ → paste after
+   paste:  _C-j_ → cycle next          _p_ → paste before       pos: %(length kill-ring-yank-pointer)
+           _C-k_ → cycle previous      _P_ → paste after        len: %(length kill-ring)
 "
   ("C-j" evil-paste-pop-next)
   ("C-k" evil-paste-pop)
@@ -249,9 +248,9 @@
   (error "`narrow-map' has more than 7 bindings!"))
 (defhydra /hydras/narrow (:hint nil :exit t)
   "
-   narrow  _d_ → defun   _b_ → org-block    _w_ → widen
-           _n_ → region  _e_ → org-element
-           _p_ → page    _s_ → org-subtree
+   narrow:  _d_ → defun   _b_ → org-block    _w_ → widen
+            _n_ → region  _e_ → org-element
+            _p_ → page    _s_ → org-subtree
 "
   ("b" org-narrow-to-block)
   ("e" org-narrow-to-element)
@@ -260,5 +259,28 @@
   ("n" narrow-to-region)
   ("p" narrow-to-page)
   ("w" widen))
+
+
+
+(defhydra /hydras/modes/typescript-mode (:hint nil :exit t)
+  "
+   typescript:  _d_ jump to definition   _h_ documentation
+                _f_ find references      _e_ project errors
+                _r_ rename               _S_ restart server
+"
+  ("e" tide-project-errors)
+  ("d" tide-jump-to-definition)
+  ("r" tide-rename-symbol)
+  ("S" tide-restart-server)
+  ("f" tide-references)
+  ("h" tide-documentation-at-point))
+
+
+
+(defhydra /hydras/modes/css-mode (:hint nil :exit t)
+  "
+   css:  _t_ generate type definition for CSS
+"
+  ("t" /typescript/generate-typings-for-css))
 
 (provide 'init-hydras)
