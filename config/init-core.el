@@ -172,13 +172,13 @@
 (setq initial-major-mode 'emacs-lisp-mode)
 (setq eval-expression-print-level nil)
 (setq-default indent-tabs-mode nil)
-(setq-default visual-line-mode t)
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
 (setq inhibit-startup-message t)
 
 
+(global-visual-line-mode)
 (xterm-mouse-mode t)
 (which-function-mode t)
 (blink-cursor-mode -1)
