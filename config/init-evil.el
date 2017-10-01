@@ -154,6 +154,7 @@
 
 
 
+(require 'evil-evilified-state)
 (with-current-buffer "*Messages*"
   (evil-evilified-state))
 

@@ -20,6 +20,7 @@
 
   (defcustom dotemacs-cache-directory (concat user-emacs-directory ".cache/")
     "The storage location for various persistent files."
+    :type 'directory
     :group 'dotemacs)
 
   (defcustom dotemacs-completion-engine
@@ -53,7 +54,7 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
 
-  (require 'init-boot (concat config-directory "init-boot.el"))
+  (load (concat config-directory "init-boot"))
 
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (when (file-exists-p custom-file)
@@ -62,6 +63,6 @@
   (cl-loop for file in (directory-files config-directory t)
            when (string-match "\\.el$" file)
            do (condition-case ex
-                  (load file)
+                  (load (file-name-sans-extension file))
                 ('error (with-current-buffer "*scratch*"
                           (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))

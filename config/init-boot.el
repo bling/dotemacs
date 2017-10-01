@@ -74,12 +74,10 @@ FEATURE may be any one of:
     nil
     (lambda () ,@body)))
 
-(autoload 'evil-evilified-state "evil-evilified-state")
-(autoload 'evilified-state-evilify "evil-evilified-state")
 (defmacro evilify (mode map &rest body)
   (declare (indent defun))
   (if body
-      `(after 'evil (evilified-state-evilify ,mode ,map ,@body))
-    `(after 'evil (evilified-state-evilify ,mode ,map))))
+      `(after 'init-evil (evilified-state-evilify ,mode ,map ,@body))
+    `(after 'init-evil (evilified-state-evilify ,mode ,map))))
 
 (provide 'init-boot)
