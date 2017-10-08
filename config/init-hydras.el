@@ -262,15 +262,16 @@
 
 (defhydra /hydras/modes/typescript-mode (:hint nil :exit t)
   "
-   typescript:  _d_ jump to definition   _h_ documentation
-                _f_ find references      _e_ project errors
-                _r_ rename               _S_ restart server
+   typescript:  _d_ jump to definition   _h_ documentation        _e_ project errors
+                _r_ find references      _f_ fix error at point   _S_ restart server
+                _R_ rename
 "
   ("e" tide-project-errors)
   ("d" tide-jump-to-definition)
-  ("r" tide-rename-symbol)
+  ("R" tide-rename-symbol)
+  ("r" tide-references)
   ("S" tide-restart-server)
-  ("f" tide-references)
+  ("f" tide-fix)
   ("h" tide-documentation-at-point))
 
 
