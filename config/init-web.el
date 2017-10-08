@@ -79,7 +79,7 @@
       (require-package 'js2-mode)
       (js2-minor-mode))
 
-    (setq web-mode-enable-auto-quoting (not (eq web-mode-content-type "jsx"))))
+    (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 
   (add-hook 'web-mode-hook #'/web/web-mode-hook)
 
