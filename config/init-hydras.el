@@ -110,7 +110,7 @@
   ("D" /utils/delete-current-buffer-file)
   ("R" /utils/rename-current-buffer-file)
   ("f" (/hydras/switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
-  ("r" (/hydras/switch-action #'recentf   :ivy #'ivy-recentf       :helm #'helm-recentf))
+  ("r" (/hydras/switch-action #'recentf   :ivy #'counsel-recentf   :helm #'helm-recentf))
   ("y" /utils/copy-file-name-to-clipboard)
   ("E" /utils/find-file-as-root)
   ("c" copy-file)
@@ -196,7 +196,7 @@
           _f_ → files
 "
   ("b" /ivy/mini)
-  ("e" ivy-recentf)
+  ("e" counsel-recentf)
   ("f" counsel-find-file)
   ("y" counsel-yank-pop)
   ("x" counsel-M-x)
@@ -206,9 +206,7 @@
 
 
 (autoload 'magit-log-popup "magit-log" nil t)
-(autoload 'magit-diff-popup "magit-diff" nil t)
 (autoload 'magit-commit-popup "magit-commit" nil t)
-(autoload 'magit-file-popup "magit" nil t)
 
 (defhydra /hydras/git (:hint nil :exit t)
   "
@@ -219,7 +217,7 @@
   ("s" magit-status)
   ("b" magit-blame-popup)
   ("f" magit-file-popup)
-  ("z" magit-status-popup)
+  ("z" magit-stash-popup)
   ("l" magit-log-popup)
   ("d" magit-diff-popup)
   ("c" magit-commit-popup)
