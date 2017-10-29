@@ -22,6 +22,9 @@
   (defadvice tide-jump-to-definition (before dotemacs activate)
     (evil--jumps-push)))
 
+(after [tide flycheck]
+  (flycheck-add-mode 'typescript-tslint 'web-mode))
+
 (defun /typescript/generate-typings-for-css ()
   "Generates a Typescript type definition file for the current CSS file."
   (interactive)

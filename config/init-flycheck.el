@@ -10,6 +10,7 @@
 
 (when (display-graphic-p)
   (require-package 'flycheck-pos-tip)
+  (setq flycheck-pos-tip-timeout -1)
   (flycheck-pos-tip-mode))
 
 (evilify flycheck-error-list-mode flycheck-error-list-mode-map)
