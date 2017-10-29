@@ -368,6 +368,10 @@
   ("C-M-r" #'isearch-backward))
 
 
+(global-set-key (kbd "<f5>") (bind (profiler-start 'cpu+mem)))
+(global-set-key (kbd "<f6>") (bind (profiler-report) (profiler-stop)))
+
+
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
 

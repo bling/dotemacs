@@ -201,6 +201,7 @@
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
 
+(evilify profiler-report-mode profiler-report-mode-map)
 (evilify Custom-mode Custom-mode-map)
 (evilify help-mode help-mode-map)
 (evilify ibuffer-mode ibuffer-mode-map)
