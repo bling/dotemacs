@@ -74,4 +74,34 @@
   (setq org-bullets-bullet-list '("●" "○" "◆" "◇" "▸"))
   (add-hook 'org-mode-hook #'org-bullets-mode))
 
+(after 'ob-plantuml
+  (when (executable-find "npm")
+    (let ((default-directory (concat user-emacs-directory "/extra/plantuml-server/")))
+      (unless (file-exists-p "node_modules/")
+        (shell-command "npm install"))
+
+      (ignore-errors
+        (let ((kill-buffer-query-functions nil))
+          (kill-buffer "*plantuml-server*")))
+      (start-process "*plantuml-server*" "*plantuml-server*" "npm" "start"))
+
+    (defun init-org/generate-diagram (uml)
+      (let ((url-request-method "POST")
+            (url-request-extra-headers '(("Content-Type" . "text/plain")))
+            (url-request-data uml))
+        (let* ((buffer (url-retrieve-synchronously "http://localhost:8182/png")))
+          (with-current-buffer buffer
+            (goto-char (point-min))
+            (search-forward "\n\n")
+            (buffer-substring (point) (point-max))))))
+
+    (defun org-babel-execute:plantuml (body params)
+      (let* ((out-file (or (cdr (assoc :file params))
+                           (error "PlantUML requires a \":file\" header argument"))))
+        (let ((png (init-org/generate-diagram (concat "@startuml\n" body "\n@enduml"))))
+          (with-temp-buffer
+            (insert png)
+            (write-file out-file)))))))
+
 (provide 'init-org)
+
