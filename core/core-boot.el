@@ -77,7 +77,7 @@ FEATURE may be any one of:
 (defmacro evilify (mode map &rest body)
   (declare (indent defun))
   (if body
-      `(after 'init-evil (evilified-state-evilify ,mode ,map ,@body))
-    `(after 'init-evil (evilified-state-evilify ,mode ,map))))
+      `(after 'evil-evilifid-state (evilified-state-evilify ,mode ,map ,@body))
+    `(after 'evil-evilified-state (evilified-state-evilify ,mode ,map))))
 
 (provide 'core-boot)
