@@ -80,4 +80,4 @@ FEATURE may be any one of:
       `(after 'init-evil (evilified-state-evilify ,mode ,map ,@body))
     `(after 'init-evil (evilified-state-evilify ,mode ,map))))
 
-(provide 'init-boot)
+(provide 'core-boot)

@@ -50,12 +50,11 @@ This was taken from [milkypostman][2].
 At the bottom of the `init.el` is the following gem:
 
 ``` cl
-(cl-loop for file in (directory-files config-directory t)
-  when (string-match "\\.el$" file)
+(cl-loop for file in (directory-files-recursively config-directory "\\.el$")
   do (load file)))
 ```
 
-Basically, it finds anything in `config/` and loads it.  If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be loaded.  One exception is `init-boot.el`, which is always loaded first.
+Basically, it recursively finds anything in `config/` and loads it.  If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be loaded.
 
 ### other building blocks
 
