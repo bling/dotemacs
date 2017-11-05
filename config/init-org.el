@@ -89,7 +89,7 @@
       (let ((url-request-method "POST")
             (url-request-extra-headers '(("Content-Type" . "text/plain")))
             (url-request-data uml))
-        (let* ((buffer (url-retrieve-synchronously "http://localhost:8182/png")))
+        (let* ((buffer (url-retrieve-synchronously "http://localhost:8182/svg")))
           (with-current-buffer buffer
             (goto-char (point-min))
             (search-forward "\n\n")

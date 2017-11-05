@@ -9,19 +9,6 @@ app.use(bodyParser.text());
 
 plantuml.useNailgun();
 
-app.post('/png', function(req, res) {
-  res.set('Content-Type', 'image/png');
-
-  const uml = new Readable();
-  uml.push(req.body);
-  uml.push(null);
-
-  const gen = plantuml.generate({format: 'png'});
-
-  uml.pipe(gen.in);
-  gen.out.pipe(res);
-});
-
 app.post('/svg', function(req, res) {
   res.set('Content-Type', 'image/svg+xml');
 
