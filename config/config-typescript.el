@@ -20,7 +20,7 @@
 
 (after [tide evil]
   (defadvice tide-jump-to-definition (before dotemacs activate)
-    (evil--jumps-push)))
+    (evil-set-jump)))
 
 (after [tide flycheck]
   (flycheck-add-mode 'typescript-tslint 'web-mode))

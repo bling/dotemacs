@@ -23,10 +23,9 @@
 
 
 (require-package 'dumb-jump)
-(after 'evil
-  (after 'dumb-jump
-    (defadvice dumb-jump-go (before dotemacs activate)
-      (evil--jumps-push))))
+(after [evil dumb-jump]
+  (defadvice dumb-jump-go (before dotemacs activate)
+    (evil-set-jump)))
 
 
 (require-package 'wgrep)
