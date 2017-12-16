@@ -284,11 +284,8 @@
   (global-set-key (kbd "C-x g") #'/hydras/git/body))
 
 
-(after "treemacs-autoloads"
-  (global-set-key [f3] #'treemacs-find-file)
-  (global-set-key [f2] #'treemacs-toggle)
-  (after "projectile-autoloads"
-    (global-set-key [f2] #'treemacs-projectile-toggle)))
+(after "dired-sidebar-autoloads"
+  (global-set-key [f2] #'dired-sidebar-toggle-sidebar))
 
 
 (after "multiple-cursors-autoloads"

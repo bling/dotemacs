@@ -1,5 +1,6 @@
 (setq lv-use-separator t)
 (require-package 'hydra)
+(autoload 'hydra-default-pre "hydra")
 
 (defun /hydras/switch-action (fallback &rest props)
   "Performs an action based on the value of `dotemacs-switch-engine'."
