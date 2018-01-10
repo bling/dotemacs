@@ -131,20 +131,10 @@
 (require-package 'evil-numbers)
 
 
-(defun /evil/send-string-to-terminal (string)
-  (unless (display-graphic-p) (send-string-to-terminal string)))
+(require-package 'evil-terminal-cursor-changer)
+(evil-terminal-cursor-changer-activate)
 
-(defun /evil/terminal-cursor-change ()
-  (when (string= (getenv "TERM_PROGRAM") "iTerm.app")
-    (add-hook 'evil-insert-state-entry-hook (lambda () (/evil/send-string-to-terminal "\e]50;CursorShape=1\x7")))
-    (add-hook 'evil-insert-state-exit-hook  (lambda () (/evil/send-string-to-terminal "\e]50;CursorShape=0\x7"))))
-  (when (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
-    (add-hook 'evil-insert-state-entry-hook (lambda () (/evil/send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
-    (add-hook 'evil-insert-state-exit-hook  (lambda () (/evil/send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))
-
-(add-hook 'after-make-frame-functions (lambda (frame) (/evil/terminal-cursor-change)))
-(/evil/terminal-cursor-change)
-
+
 
 (defadvice evil-ex-search-next (after dotemacs activate)
   (recenter))
