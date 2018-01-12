@@ -50,19 +50,19 @@ This was taken from [milkypostman][2].
 At the bottom of the `init.el` is the following gem:
 
 ``` cl
-(cl-loop for file in (directory-files-recursively config-directory "\\.el$")
+(cl-loop for file in (reverse (directory-files-recursively config-directory "\\.el$"))
   do (load file)))
 ```
 
-Basically, it recursively finds anything in `config/` and loads it.  If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be loaded.
+Basically, it recursively finds anything in `config/` and loads it.  If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be loaded.  Files are loaded in reverse order so that any functions defined will be available in child nodes.
 
 ### other building blocks
 
 #### bindings in one place
 
-Another decision is to keep all keybindings in one place: `init-bindings.el`.  Because of this, things like [use-package][3] aren't particularly useful here because it doesn't add much value over `(require-package)` and `after`.
+Another decision is to keep all keybindings in one place: `config-bindings.el`.  Because of this, things like [use-package][3] aren't particularly useful here because it doesn't add much value over `(require-package)` and `after`.
 
-Keybindings are the single most differentiating factor between configs.  By defining them in one place, if you want to use/fork this config, you can simply change the bindings to your liking and still use all the other preconfigured packages as is.  If you're not an Evil user, delete `init-evil.el` and you will get a pure Emacs experience.
+Keybindings are the single most differentiating factor between configs.  By defining them in one place, if you want to use/fork this config, you can simply change the bindings to your liking and still use all the other preconfigured packages as is.  If you're not an Evil user, delete `config-evil.el` and you will get a pure Emacs experience.
 
 #### lazy installation of major mode packages
 
