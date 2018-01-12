@@ -229,13 +229,6 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 
-(after 'company
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "<tab>") '/company/tab)
-  (define-key company-active-map (kbd "<backtab>") 'company-select-previous))
-
-
 (after "expand-region-autoloads"
   (global-set-key (kbd "C-=") 'er/expand-region))
 

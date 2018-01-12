@@ -7,10 +7,10 @@
 
   (defcustom dotemacs-company/ycmd-server-command nil
     "The path to the ycmd package."
-    :group 'dotemacs-company)
+    :group 'dotemacs-company
+    :type 'boolean)
 
   (require-package 'company)
-  (require 'company)
 
   (setq company-idle-delay 0.2)
   (setq company-minimum-prefix-length 1)
@@ -25,30 +25,13 @@
 
   (setq company-etags-ignore-case t)
 
-  (unless (face-attribute 'company-tooltip :background)
-    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-    (set-face-attribute 'company-preview nil :background "black")
-    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-    (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-    (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
-
   (when (executable-find "tern")
     (after "company-tern-autoloads"
       (add-to-list 'company-backends 'company-tern)))
 
   (setq company-global-modes
         '(not
-          eshell-mode comint-mode org-mode erc-mode))
-
-  (defadvice company-complete-common (around dotemacs activate)
-    (when (null (yas-expand))
-      ad-do-it))
-
-  (defun /company/tab ()
-    (interactive)
-    (when (null (yas-expand))
-      (company-select-next)))
+          eshell-mode comint-mode text-mode erc-mode))
 
   (when dotemacs-company/ycmd-server-command
     (setq ycmd-server-command `("python" ,dotemacs-company/ycmd-server-command))
@@ -69,6 +52,23 @@
   ;;   (setq company-quickhelp-delay 0.2)
   ;;   (company-quickhelp-mode t))
 
+  (after 'yasnippet
+    (setq company-backends
+          (mapcar
+           (lambda (backend)
+             (if (and (listp backend) (member 'company-yasnippet backend))
+                 backend
+               (append (if (consp backend) backend (list backend))
+                       '(:with company-yasnippet))))
+           company-backends)))
+
+  (unless (face-attribute 'company-tooltip :background)
+    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+    (set-face-attribute 'company-preview nil :background "black")
+    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+    (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+    (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
   )
 
 (provide 'config-company)
