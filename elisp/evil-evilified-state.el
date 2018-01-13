@@ -126,8 +126,7 @@ BODY is a list of additional key bindings to apply for the given MAP in
     `(progn (unless ,(null mode)
               (unless (memq ',mode evilified-state--modes)
                 (push ',mode evilified-state--modes))
-              (unless (or (bound-and-true-p holy-mode)
-                          (eq 'evilified (evil-initial-state ',mode)))
+              (unless (eq 'evilified (evil-initial-state ',mode))
                 (evil-set-initial-state ',mode 'evilified)))
             (unless ,(null defkey) (,@defkey)))))
 (put 'evilified-state-evilify 'lisp-indent-function 'defun)
@@ -165,8 +164,7 @@ BODY is a list of additional key bindings to apply for the given MAP in
                          processed pending-funcs)))
     (when pending-funcs
       (message
-       (concat (format (concat "Auto-evilication could not remap these "
-                               "functions in map `%s':\n")
+       (concat (format (concat "Auto-evilification could not remap these functions in map `%s':\n")
                        map-symbol)
                (mapconcat (lambda (x)
                             (format "   - `%s' originally mapped on `%s'"

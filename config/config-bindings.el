@@ -9,21 +9,30 @@
 (setq which-key-min-display-lines 3)
 (which-key-mode)
 
-(defmacro -define-key (keymap sequence binding &optional description)
-  (declare (indent defun))
-  `(progn
-     (define-key ,keymap (kbd ,sequence) ,binding)
-     (when ,description
-       (which-key-add-key-based-replacements ,sequence ,description))))
-
-(defmacro -define-keys (keymap &rest body)
+(defmacro -define-prefix-keys (keymap prefix &rest body)
   (declare (indent defun))
   `(progn
      ,@(cl-loop for binding in body
-                collect `(let ((seq ,(car binding))
-                               (func ,(cadr binding))
-                               (desc ,(caddr binding)))
-                           (-define-key ,keymap seq func desc)))))
+                collect
+                `(let ((seq ,(car binding))
+                       (func ,(cadr binding))
+                       (desc ,(caddr binding)))
+                   (define-key ,keymap (kbd seq) func)
+                   (when desc
+                     (which-key-add-key-based-replacements
+                       (if ,prefix
+                           (concat ,prefix " " seq)
+                         seq)
+                       desc))))))
+
+(defmacro -define-keys (keymap &rest body)
+  (declare (indent defun))
+  `(-define-prefix-keys ,keymap nil ,@body))
+
+(defmacro -define-key (keymap sequence binding &optional description)
+  (declare (indent defun))
+  `(-define-prefix-keys ,keymap nil
+     (,sequence ,binding ,description)))
 
 (defun /bindings/custom-major-mode-hydra ()
   (interactive)
@@ -34,12 +43,74 @@
 
 
 
+(setq /bindings/normal-space-leader-map (make-sparse-keymap))
+(-define-prefix-keys /bindings/normal-space-leader-map "SPC"
+  ("SPC" #'execute-extended-command "M-x")
+  ("t" #'/hydras/toggles/body "toggle...")
+  ("q" #'/hydras/quit/body "quit...")
+  ("e" #'/hydras/errors/body "errors...")
+  ("b" #'/hydras/buffers/body "buffers...")
+  ("j" #'/hydras/jumps/body "jump...")
+  ("f" #'/hydras/files/body "files...")
+  ("s" #'/hydras/search/body "search...")
+  ("l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
+  ("L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
+  ("o" #'/hydras/jumps/lambda-i-and-exit "outline")
+  ("'" #'/eshell/new-split "shell")
+  ("y" (bind
+        (cond ((eq dotemacs-switch-engine 'ivy)
+               (call-interactively #'counsel-yank-pop))
+              ((eq dotemacs-switch-engine 'helm)
+               (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
+
+(after "magit-autoloads"
+  (-define-key /bindings/normal-space-leader-map "g" #'/hydras/git/body "git..."))
+
+(after "counsel-autoloads"
+  (-define-key /bindings/normal-space-leader-map "i" #'/hydras/ivy/body "ivy..."))
+
+(after "helm-autoloads"
+  (-define-key /bindings/normal-space-leader-map "h" #'/hydras/helm/body "helm..."))
+
+(after "helm-dash-autoloads"
+  (-define-key /bindings/normal-space-leader-map "d" #'helm-dash "dash"))
+
+(after "fzf-autoloads"
+  (-define-key /bindings/normal-space-leader-map "F" #'fzf))
+
+
+(setq /bindings/normal-comma-leader-map (make-sparse-keymap))
+(-define-prefix-keys /bindings/normal-comma-leader-map ","
+  ("w" #'save-buffer)
+  ("e" #'eval-last-sexp)
+  (", e" #'eval-defun)
+  ("E" #'eval-defun)
+  ("f" ctl-x-5-map "frames")
+  ("c" #'/eshell/new-split "eshell")
+  ("C" #'customize-group)
+  ("v" (kbd "C-w v C-w l") "vsplit")
+  ("s" (kbd "C-w s C-w j") "split")
+  ("P" #'package-list-packages "packages")
+  ("h" help-map "help"))
+
+(after "paradox-autoloads"
+  (-define-key /bindings/normal-comma-leader-map "P" #'paradox-list-packages))
+
+
+
+(after 'evil-evilified-state
+  (-define-keys evil-evilified-state-map
+    ("g b" #'/hydras/buffers/lambda-b-and-exit)
+    ("," /bindings/normal-comma-leader-map)
+    ("SPC" /bindings/normal-space-leader-map)))
+
+
+
 (after 'evil
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
-  (-define-keys evil-normal-state-map
-    ("g d" #'dumb-jump-go))
+  (-define-keys evil-normal-state-map ("g d" #'dumb-jump-go))
 
   (require-package 'key-chord)
   (key-chord-mode 1)
@@ -49,59 +120,13 @@
   (-define-key evil-normal-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
   (-define-key evil-visual-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
 
-  (-define-keys evil-normal-state-map
-    (", w" #'save-buffer)
-    (", e" #'eval-last-sexp)
-    (", , e" #'eval-defun)
-    (", E" #'eval-defun)
-    (", f" ctl-x-5-map "frames")
-    (", c" #'/eshell/new-split "eshell")
-    (", C" #'customize-group)
-    (", v" (kbd "C-w v C-w l") "vsplit")
-    (", s" (kbd "C-w s C-w j") "split")
-    (", P" #'package-list-packages "packages")
-    (", h" help-map "help"))
+  (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
+  (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
 
   (-define-keys evil-visual-state-map
     (", e" #'eval-region))
 
-  (after "paradox-autoloads"
-    (-define-key evil-normal-state-map ", P" #'paradox-list-packages))
-
   (-define-key evil-visual-state-map "SPC SPC" #'execute-extended-command "M-x")
-  (-define-keys evil-normal-state-map
-    ("SPC SPC" #'execute-extended-command "M-x")
-    ("SPC t" #'/hydras/toggles/body "toggle...")
-    ("SPC q" #'/hydras/quit/body "quit...")
-    ("SPC e" #'/hydras/errors/body "errors...")
-    ("SPC b" #'/hydras/buffers/body "buffers...")
-    ("SPC j" #'/hydras/jumps/body "jump...")
-    ("SPC f" #'/hydras/files/body "files...")
-    ("SPC s" #'/hydras/search/body "search...")
-    ("SPC l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
-    ("SPC L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
-    ("SPC o" #'/hydras/jumps/lambda-i-and-exit "outline")
-    ("SPC '" #'/eshell/new-split "shell")
-    ("SPC y" (bind
-              (cond ((eq dotemacs-switch-engine 'ivy)
-                     (call-interactively #'counsel-yank-pop))
-                    ((eq dotemacs-switch-engine 'helm)
-                     (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
-
-  (after "magit-autoloads"
-    (-define-key evil-normal-state-map "SPC g" #'/hydras/git/body "git..."))
-
-  (after "counsel-autoloads"
-    (-define-key evil-normal-state-map "SPC i" #'/hydras/ivy/body "ivy..."))
-
-  (after "helm-autoloads"
-    (-define-key evil-normal-state-map "SPC h" #'/hydras/helm/body "helm..."))
-
-  (after "helm-dash-autoloads"
-    (-define-key evil-normal-state-map "SPC d" #'helm-dash "dash"))
-
-  (after "fzf-autoloads"
-    (define-key evil-normal-state-map (kbd "SPC F") 'fzf))
 
   (after "evil-numbers-autoloads"
     (-define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
