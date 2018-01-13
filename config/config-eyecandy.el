@@ -60,6 +60,7 @@
 (after 'flycheck (diminish 'flycheck-mode))
 (after 'aggressive-indent (diminish 'aggressive-indent-mode))
 (after 'counsel (diminish #'counsel-mode))
+(after 'autorevert (diminish #'auto-revert-mode))
 
 
 (if (eq dotemacs-eyecandy/mode-line 'sml)
@@ -80,6 +81,7 @@
   (require-package 'spaceline)
   (require 'spaceline-config)
   (setq spaceline-highlight-face-func #'spaceline-highlight-face-evil-state)
+  (set-face-attribute 'spaceline-evil-emacs nil :background "red" :foreground "white")
   (spaceline-spacemacs-theme)
   (spaceline-info-mode)
   (after "helm-autoloads"
