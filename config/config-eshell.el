@@ -115,13 +115,20 @@
 
 (require-package 'eshell-z)
 (setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (require 'eshell-z)))
 (defalias 'eshell/j #'eshell/z)
+
+(defun eshell/z-clean ()
+  (let* ((directories (hash-table-keys eshell-z-freq-dir-hash-table))
+         (non-existent (cl-remove-if #'file-exists-p directories)))
+    (cl-loop for dir in non-existent
+             do (remhash (eshell-z--expand-directory-name dir)
+                         eshell-z-freq-dir-hash-table))
+    (eshell-z--write-freq-dir-hash-table)))
 
 
 (defun /eshell/eshell-mode-hook ()
+  (require 'eshell-z)
+
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
   (add-to-list 'eshell-preoutput-filter-functions #'/eshell/color-filter)
 
