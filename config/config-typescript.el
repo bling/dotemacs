@@ -1,8 +1,24 @@
+(defgroup dotemacs-typescript nil
+  "Configuration options for TypeScript."
+  :group 'dotemacs
+  :prefix 'dotemacs-typescript)
+
+(defcustom dotemacs-typescript/tide-format-before-save t
+  "If non-nil, will auto format the buffer with tide prior to saving."
+  :group 'dotemacs-typescript
+  :type 'boolean)
+
+(setq tide-completion-detailed t)
+(setq tide-completion-ignore-case t)
+(setq tide-always-show-documentation t)
+
 (defun /typescript/setup ()
+  (when dotemacs-typescript/tide-format-before-save
+    (add-hook 'before-save-hook #'tide-format-before-save))
+
   (tide-setup)
   (tide-hl-identifier-mode t)
-  (eldoc-mode t)
-  (add-hook 'before-save-hook #'tide-format-before-save))
+  (eldoc-mode t))
 
 (defun /typescript/typescript-mode-hook ()
   (require-package 'tide)
