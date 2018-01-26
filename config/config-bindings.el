@@ -44,57 +44,66 @@
 
 
 (setq /bindings/normal-space-leader-map (make-sparse-keymap))
-(-define-prefix-keys /bindings/normal-space-leader-map "SPC"
-  ("SPC" #'execute-extended-command "M-x")
-  ("t" #'/hydras/toggles/body "toggle...")
-  ("q" #'/hydras/quit/body "quit...")
-  ("e" #'/hydras/errors/body "errors...")
-  ("b" #'/hydras/buffers/body "buffers...")
-  ("j" #'/hydras/jumps/body "jump...")
-  ("f" #'/hydras/files/body "files...")
-  ("s" #'/hydras/search/body "search...")
-  ("l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
-  ("L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
-  ("o" #'/hydras/jumps/lambda-i-and-exit "outline")
-  ("'" #'/eshell/new-split "shell")
-  ("y" (bind
-        (cond ((eq dotemacs-switch-engine 'ivy)
-               (call-interactively #'counsel-yank-pop))
-              ((eq dotemacs-switch-engine 'helm)
-               (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
+(let ((prefix "SPC"))
+  (-define-prefix-keys /bindings/normal-space-leader-map prefix
+    ("SPC" #'execute-extended-command "M-x")
+    ("t" #'/hydras/toggles/body "toggle...")
+    ("q" #'/hydras/quit/body "quit...")
+    ("e" #'/hydras/errors/body "errors...")
+    ("b" #'/hydras/buffers/body "buffers...")
+    ("j" #'/hydras/jumps/body "jump...")
+    ("f" #'/hydras/files/body "files...")
+    ("s" #'/hydras/search/body "search...")
+    ("l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
+    ("L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
+    ("o" #'/hydras/jumps/lambda-i-and-exit "outline")
+    ("'" #'/eshell/new-split "shell")
+    ("y" (bind
+          (cond ((eq dotemacs-switch-engine 'ivy)
+                 (call-interactively #'counsel-yank-pop))
+                ((eq dotemacs-switch-engine 'helm)
+                 (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
 
-(after "magit-autoloads"
-  (-define-key /bindings/normal-space-leader-map "g" #'/hydras/git/body "git..."))
+  (after "magit-autoloads"
+    (-define-prefix-keys /bindings/normal-space-leader-map prefix
+      ("g" #'/hydras/git/body "git...")))
 
-(after "counsel-autoloads"
-  (-define-key /bindings/normal-space-leader-map "i" #'/hydras/ivy/body "ivy..."))
+  (after "counsel-autoloads"
+    (-define-prefix-keys /bindings/normal-space-leader-map prefix
+      ("i" #'/hydras/ivy/body "ivy...")))
 
-(after "helm-autoloads"
-  (-define-key /bindings/normal-space-leader-map "h" #'/hydras/helm/body "helm..."))
+  (after "helm-autoloads"
+    (-define-prefix-keys /bindings/normal-space-leader-map prefix
+      ("h" #'/hydras/helm/body "helm...")))
 
-(after "helm-dash-autoloads"
-  (-define-key /bindings/normal-space-leader-map "d" #'helm-dash "dash"))
+  (after "helm-dash-autoloads"
+    (-define-prefix-keys /bindings/normal-space-leader-map prefix
+      ("d" #'helm-dash "dash")))
 
-(after "fzf-autoloads"
-  (-define-key /bindings/normal-space-leader-map "F" #'fzf))
+  (after "fzf-autoloads"
+    (-define-prefix-keys /bindings/normal-space-leader-map prefix
+      ("F" #'fzf))))
 
+
 
 (setq /bindings/normal-comma-leader-map (make-sparse-keymap))
-(-define-prefix-keys /bindings/normal-comma-leader-map ","
-  ("w" #'save-buffer)
-  ("e" #'eval-last-sexp)
-  (", e" #'eval-defun)
-  ("E" #'eval-defun)
-  ("f" ctl-x-5-map "frames")
-  ("c" #'/eshell/new-split "eshell")
-  ("C" #'customize-group)
-  ("v" (kbd "C-w v C-w l") "vsplit")
-  ("s" (kbd "C-w s C-w j") "split")
-  ("P" #'package-list-packages "packages")
-  ("h" help-map "help"))
+(let ((prefix ","))
+  (-define-prefix-keys /bindings/normal-comma-leader-map prefix
+    ("w" #'save-buffer)
+    ("e" #'eval-last-sexp)
+    (", e" #'eval-defun)
+    ("E" #'eval-defun)
+    ("f" ctl-x-5-map "frames")
+    ("c" #'/eshell/new-split "eshell")
+    ("C" #'customize-group)
+    ("v" (kbd "C-w v C-w l") "vsplit")
+    ("s" (kbd "C-w s C-w j") "split")
+    ("P" #'package-list-packages "packages")
+    ("h" help-map "help"))
 
-(after "paradox-autoloads"
-  (-define-key /bindings/normal-comma-leader-map "P" #'paradox-list-packages))
+  (after "paradox-autoloads"
+    (-define-prefix-keys /bindings/normal-comma-leader-map prefix
+      ("P" #'paradox-list-packages))))
 
 
 
