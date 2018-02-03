@@ -6,23 +6,30 @@
     (when (file-directory-p dir)
       (add-to-list 'load-path dir))))
 
+(defmacro measure-load (target &rest body)
+  (declare (indent defun))
+  `(let ((elapsed)
+         (start (current-time)))
+     (prog1
+         ,@body
+       (with-current-buffer (get-buffer-create "*Load Times*")
+         (when (= 0 (buffer-size))
+           (insert (format "| %-60s | %-23s | elapsed  |\n" "feature" "timestamp"))
+           (insert "|------------------------------------------+-------------------------+----------|\n"))
+         (goto-char (point-max))
+         (setq elapsed (float-time (time-subtract (current-time) start)))
+         (insert (format "| %-60s | %s | %f |\n"
+                         ,target
+                         (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
+                         elapsed))))))
+
+(defadvice load (around dotemacs activate)
+  (measure-load file ad-do-it))
+
 (defadvice require (around dotemacs activate)
-  (let ((elapsed)
-        (loaded (memq feature features))
-        (start (current-time)))
-    (prog1
-        ad-do-it
-      (unless loaded
-        (with-current-buffer (get-buffer-create "*Require Times*")
-          (when (= 0 (buffer-size))
-            (insert (format "| %-40s | %-23s | elapsed  |\n" "feature" "timestamp"))
-            (insert "|------------------------------------------+-------------------------+----------|\n"))
-          (goto-char (point-max))
-          (setq elapsed (float-time (time-subtract (current-time) start)))
-          (insert (format "| %-40s | %s | %f |\n"
-                          feature
-                          (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
-                          elapsed)))))))
+  (if (memq feature features)
+      ad-do-it
+    (measure-load feature ad-do-it)))
 
 (defun require-package (package)
   "Ensures that PACKAGE is installed."
