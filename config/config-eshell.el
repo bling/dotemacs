@@ -9,7 +9,7 @@
   :group 'dotemacs-eshell)
 
 (defcustom dotemacs-eshell/prompt-git-info
-  t
+  (executable-find "git")
   "Turns on additional git information in the prompt."
   :group 'dotemacs-eshell
   :type 'boolean)

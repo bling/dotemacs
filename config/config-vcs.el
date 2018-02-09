@@ -19,25 +19,28 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
-(require-package 'magit)
+(when (executable-find "git")
+  (require-package 'magit)
 
-(defun /vcs/magit-post-display-buffer-hook()
-  (if (string-match "*magit:" (buffer-name))
-      (delete-other-windows)))
-(add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
+  (defun /vcs/magit-post-display-buffer-hook()
+    (if (string-match "*magit:" (buffer-name))
+        (delete-other-windows)))
+  (add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
 
-(setq magit-section-show-child-count t)
-(setq magit-diff-arguments '("--histogram"))
-(setq magit-ediff-dwim-show-on-hunks t)
+  (setq magit-section-show-child-count t)
+  (setq magit-diff-arguments '("--histogram"))
+  (setq magit-ediff-dwim-show-on-hunks t)
 
-
+  (after 'eshell
+    (require-package 'pcmpl-git)
+    (require 'pcmpl-git))
 
-(if (display-graphic-p)
-    (progn
-      (require-package 'git-gutter-fringe+)
-      (require 'git-gutter-fringe+))
-  (require-package 'git-gutter+))
-(global-git-gutter+-mode)
+  (if (display-graphic-p)
+      (progn
+        (require-package 'git-gutter-fringe+)
+        (require 'git-gutter-fringe+))
+    (require-package 'git-gutter+))
+  (global-git-gutter+-mode))
 
 
 
@@ -45,12 +48,6 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (unless (display-graphic-p)
   (diff-hl-margin-mode))
-
-
-
-(after 'eshell
-  (require-package 'pcmpl-git)
-  (require 'pcmpl-git))
 
 
 
