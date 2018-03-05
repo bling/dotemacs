@@ -82,6 +82,8 @@
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 
   (add-hook 'web-mode-hook #'/web/web-mode-hook)
+  (after 'yasnippet
+    (add-hook 'web-mode-hook #'yas-minor-mode))
 
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
 
