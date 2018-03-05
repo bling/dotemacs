@@ -62,8 +62,10 @@
   (if on
       (progn
         (counsel-mode t)
+        (counsel-projectile-mode t)
         (ivy-mode t))
     (counsel-mode -1)
+    (counsel-projectile-mode -1)
     (ivy-mode -1)))
 
 (when (eq dotemacs-switch-engine 'ivy)
