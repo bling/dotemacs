@@ -86,11 +86,8 @@
 (require-package 'discover-my-major)
 
 
-(when (and (>= emacs-major-version 24)
-           (>= emacs-minor-version 4))
-  (setq paradox-execute-asynchronously t)
-  (require-package 'paradox)
-  (evilify paradox-menu-mode paradox-menu-mode-map))
+(setq paradox-execute-asynchronously t)
+(require-package 'paradox)
 
 
 (require-package 'vlf)
