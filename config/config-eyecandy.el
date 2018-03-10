@@ -129,6 +129,9 @@
 
 
 (when (font-info "all-the-icons")
+  (setq all-the-icons-scale-factor 0.7)
+  (setq inhibit-compacting-font-caches t)
+
   (after 'dired
     (require-package 'all-the-icons-dired)
     (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))

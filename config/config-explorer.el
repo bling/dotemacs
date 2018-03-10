@@ -11,6 +11,12 @@
           (const :tag "dired-sidebar" dired-sidebar))
   :group 'dotemacs-explorer)
 
+(defcustom dotemacs-explorer/all-the-icons
+  nil
+  "Integrates with all-the-icons if available."
+  :type 'boolean
+  :group 'dotemacs-explorer)
+
 
 
 (cond
@@ -20,11 +26,28 @@
 
   (setq treemacs-indentation 1)
   (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
-  (setq treemacs-follow-mode t)
   (setq treemacs-follow-after-init t)
   (setq treemacs-filewatch-mode t)
+  (setq treemacs-tag-follow-mode t)
   (setq treemacs-file-event-delay 1000)
   (setq treemacs-header-function #'treemacs-projectile-create-header)
+
+  (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
+    (after 'treemacs
+      (require 'all-the-icons)
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "csharp-line") "cs")
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "css3") "css")
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "git") "gitignore")
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "html5") "html" "htm")
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "java") "java")
+      (treemacs-define-custom-icon (all-the-icons-alltheicon "javascript") "js")
+      (treemacs-define-custom-icon (all-the-icons-fileicon "elisp") "el" "elc")
+      (treemacs-define-custom-icon (all-the-icons-fileicon "jsx-2") "jsx")
+      (treemacs-define-custom-icon (all-the-icons-fileicon "org") "org")
+      (treemacs-define-custom-icon (all-the-icons-fileicon "typescript") "ts")
+      (treemacs-define-custom-icon (all-the-icons-octicon "markdown") "md")
+      (treemacs-define-custom-icon (all-the-icons-octicon "settings") "json" "yaml" "yml" "ini")
+      (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
 
   (after 'evil
     (require-package 'treemacs-evil)
