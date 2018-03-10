@@ -23,40 +23,30 @@
   (require-package 'counsel-projectile))
 
 
+(defmacro /ivy/propertize (prefix face)
+  `(lambda (str)
+     (propertize str 'line-prefix ,prefix 'face ,face)))
+
+
 (defun /ivy/mini ()
   (interactive)
+  (setq gc-cons-threshold most-positive-fixnum)
   (let* ((buffers (mapcar #'buffer-name (buffer-list)))
-         (bufnames (mapcar #'(lambda (buf) (propertize buf 'line-prefix "[Buffer] ")) buffers))
-         (recents (mapcar #'(lambda (file) (propertize file 'line-prefix "[Recent] ")) recentf-list)))
-    (ivy-read "Search: " (append bufnames recents)
+         (project-files
+          (if (projectile-project-p)
+              (mapcar (/ivy/propertize "[ project ] " 'ivy-virtual) (projectile-current-project-files))
+            nil))
+         (bufnames (mapcar (/ivy/propertize "[ buffer  ] " 'ivy-remote) buffers))
+         (recents (mapcar (/ivy/propertize "[ recent  ] " 'ivy-subdir) recentf-list)))
+    (ivy-read "Search: " (append project-files bufnames recents)
               :action (lambda (f)
                         (with-ivy-window
-                         (cond ((member f bufnames)
-                                (switch-to-buffer f))
-                               (t
-                                (find-file f))))))))
-
-(defun /ivy/everything ()
-  (interactive)
-  (let* ((buffers (mapcar #'buffer-name (buffer-list)))
-         (base-files (append buffers recentf-list))
-         (files (delete-dups (if (projectile-project-p)
-                                 (append
-                                  (projectile-project-buffer-files)
-                                  (projectile-recentf-files)
-                                  (projectile-current-project-files)
-                                  base-files)
-                               base-files))))
-    (ivy-read "Uber Buffers: " files
-              :action
-              (lambda (f)
-                (with-ivy-window
-                 (cond ((member f buffers)
-                        (switch-to-buffer f))
-                       ((file-exists-p f)
-                        (find-file f))
-                       (t
-                        (find-file (concat (projectile-project-root) f)))))))))
+                          (cond ((member f bufnames)
+                                 (switch-to-buffer f))
+                                ((file-exists-p f)
+                                 (find-file f))
+                                (t
+                                 (find-file (concat (projectile-project-root) f)))))))))
 
 (defun /ivy/activate-as-switch-engine (on)
   (if on

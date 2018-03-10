@@ -4,6 +4,7 @@
       ("SPC p" #'projectile-command-map "projectile...")
       ("SPC /"
        (bind
+        (setq gc-cons-threshold most-positive-fixnum)
         (if current-prefix-arg
             (cond
              ((executable-find "ag")  (call-interactively #'projectile-ag))
@@ -23,6 +24,7 @@
        "search..."))
     (-define-keys evil-normal-state-map
       ("C-p" (bind
+              (setq gc-cons-threshold most-positive-fixnum)
               (cond ((eq dotemacs-switch-engine 'helm)
                      (call-interactively #'helm-projectile))
                     ((eq dotemacs-switch-engine 'ivy)
