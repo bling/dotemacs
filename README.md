@@ -26,11 +26,7 @@ The code here is self-explanatory.  This is how you declare what packages you wa
 
 ### simple building block 2
 
-``` cl
-(defalias 'after 'with-eval-after-load)
-```
-
-`with-eval-after-load` lets you defer execution of code until after a feature has been loaded.  This is used extensively throughout the config, so an alias is set up for ease of use.  This is what keeps the config loading fast.
+`with-eval-after-load` lets you defer execution of code until after a feature has been loaded.  This is used extensively throughout the config, so wrapping macro has been written for ease of use.  This is what keeps the config loading fast.
 
 Another useful feature is that it can also be used to run code if a package has been installed by using `-autoloads`; e.g.
 
@@ -38,8 +34,11 @@ Another useful feature is that it can also be used to run code if a package has 
 (after 'magit
   ;; execute after magit has been loaded
   )
-(after "magit-autoloads")
+(after "magit-autoloads"
   ;; execute if magit is installed/available
+  )
+(after [evil magit]
+  ;; execute after evil and magit have been loaded
   )
 ```
 

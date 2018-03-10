@@ -240,8 +240,8 @@
   (global-set-key (kbd "C-x g") #'/hydras/git/body))
 
 
-(after "dired-sidebar-autoloads"
-  (global-set-key [f2] #'dired-sidebar-toggle-sidebar))
+(global-set-key [f2] #'/explorer/toggle)
+(global-set-key [f3] #'/explorer/find-file)
 
 
 (after "multiple-cursors-autoloads"

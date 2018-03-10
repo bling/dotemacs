@@ -49,6 +49,11 @@
 (put 'narrow-to-region 'disabled nil)
 
 
+;; dired
+(after 'dired
+  (require 'dired-x))
+
+
 ;; url
 (setq url-configuration-directory (concat dotemacs-cache-directory "url/"))
 
