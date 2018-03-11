@@ -28,10 +28,10 @@
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (/typescript/setup)))
 
-(lazy-major-mode "\\.ts$" typescript-mode)
+(/boot/lazy-major-mode "\\.ts$" typescript-mode)
 (add-hook 'typescript-mode-hook #'/typescript/typescript-mode-hook)
 
-(lazy-major-mode "\\.tsx$" web-mode)
+(/boot/lazy-major-mode "\\.tsx$" web-mode)
 (add-hook 'web-mode-hook #'/typescript/web-mode-hook)
 
 (after [tide evil]

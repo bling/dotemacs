@@ -1,5 +1,5 @@
 (after 'evil-evilified-state
-  (-define-keys evil-evilified-state-map
+  (/bindings/define-keys evil-evilified-state-map
     ("g b" #'/hydras/buffers/lambda-b-and-exit)
     ("," /bindings/normal-comma-leader-map)
     ("SPC" /bindings/normal-space-leader-map)))
@@ -10,46 +10,46 @@
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
-  (-define-keys evil-normal-state-map ("g d" #'dumb-jump-go))
+  (/bindings/define-keys evil-normal-state-map ("g d" #'dumb-jump-go))
 
   (require-package 'key-chord)
   (key-chord-mode 1)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (-define-key evil-normal-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
-  (-define-key evil-visual-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
+  (/bindings/define-key evil-normal-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
+  (/bindings/define-key evil-visual-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
 
   (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
   (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
 
-  (-define-keys evil-visual-state-map
+  (/bindings/define-keys evil-visual-state-map
     (", e" #'eval-region))
 
-  (-define-key evil-visual-state-map "SPC SPC" #'execute-extended-command "M-x")
+  (/bindings/define-key evil-visual-state-map "SPC SPC" #'execute-extended-command "M-x")
 
   (after "evil-numbers-autoloads"
-    (-define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
-    (-define-key evil-normal-state-map "C-S-a" #'evil-numbers/dec-at-pt))
+    (/bindings/define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
+    (/bindings/define-key evil-normal-state-map "C-S-a" #'evil-numbers/dec-at-pt))
 
   (after "git-gutter+-autoloads"
-    (-define-keys evil-normal-state-map
+    (/bindings/define-keys evil-normal-state-map
       ("[ h" #'git-gutter+-previous-hunk)
       ("] h" #'git-gutter+-next-hunk))
-    (-define-keys evil-visual-state-map
+    (/bindings/define-keys evil-visual-state-map
       ("SPC g a" #'git-gutter+-stage-hunks)
       ("SPC g r" #'git-gutter+-revert-hunks))
     (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
 
-  (-define-keys evil-normal-state-map
+  (/bindings/define-keys evil-normal-state-map
     ("g p" "`[v`]")
     ("g b" #'/hydras/buffers/lambda-b-and-exit))
 
-  (-define-keys evil-normal-state-map
+  (/bindings/define-keys evil-normal-state-map
     ("C-b" #'evil-scroll-up)
     ("C-f" #'evil-scroll-down))
 
-  (-define-keys evil-normal-state-map
+  (/bindings/define-keys evil-normal-state-map
     ("[ SPC" (bind (evil-insert-newline-above) (forward-line)))
     ("] SPC" (bind (evil-insert-newline-below) (forward-line -1)))
     ("[ e" "ddkP")
@@ -61,12 +61,12 @@
 
   (global-set-key (kbd "C-w") 'evil-window-map)
   (after 'evil-evilified-state
-    (-define-keys evil-evilified-state-map
+    (/bindings/define-keys evil-evilified-state-map
       ("C-h" #'evil-window-left)
       ("C-j" #'evil-window-down)
       ("C-k" #'evil-window-up)
       ("C-l" #'evil-window-right)))
-  (-define-keys evil-normal-state-map
+  (/bindings/define-keys evil-normal-state-map
     ("C-h" #'evil-window-left)
     ("C-j" #'evil-window-down)
     ("C-k" #'evil-window-up)
@@ -76,11 +76,11 @@
     ("C-w C-k" #'evil-window-up)
     ("C-w C-l" #'evil-window-right))
 
-  (-define-keys evil-motion-state-map
+  (/bindings/define-keys evil-motion-state-map
     ("j" #'evil-next-visual-line)
     ("k" #'evil-previous-visual-line))
 
-  (-define-keys evil-normal-state-map
+  (/bindings/define-keys evil-normal-state-map
     ("p" #'/hydras/paste/evil-paste-after)
     ("P" #'/hydras/paste/evil-paste-before)
     ("Q" #'/utils/window-killer)

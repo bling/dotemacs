@@ -66,7 +66,7 @@
     (helm-mode -1)))
 
 (when (eq dotemacs-switch-engine 'helm)
-  (delayed-init
+  (/boot/delayed-init
    (/helm/activate-as-switch-engine t)))
 
 (provide 'config-helm)

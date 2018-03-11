@@ -1,4 +1,4 @@
-(lazy-major-mode "\\.go$" go-mode)
+(/boot/lazy-major-mode "\\.go$" go-mode)
 
 (after 'go-mode
   (require-package 'go-eldoc)

@@ -96,7 +96,7 @@
               (push '("return" . 8592) prettify-symbols-alist))))
 
 
-(delayed-init
+(/boot/delayed-init
  (require-package 'color-identifiers-mode)
  (global-color-identifiers-mode)
  (diminish 'color-identifiers-mode))

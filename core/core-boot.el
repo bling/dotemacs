@@ -6,7 +6,7 @@
     (when (file-directory-p dir)
       (add-to-list 'load-path dir))))
 
-(defmacro measure-load (target &rest body)
+(defmacro /boot/measure-load (target &rest body)
   (declare (indent defun))
   `(let ((elapsed)
          (start (current-time)))
@@ -24,12 +24,18 @@
                          elapsed))))))
 
 (defadvice load (around dotemacs activate)
-  (measure-load file ad-do-it))
+  (/boot/measure-load file ad-do-it))
 
 (defadvice require (around dotemacs activate)
   (if (memq feature features)
       ad-do-it
-    (measure-load feature ad-do-it)))
+    (/boot/measure-load feature ad-do-it)))
+
+(defmacro bind (&rest commands)
+  "Convenience macro which creates a lambda interactive command."
+  `(lambda (arg)
+     (interactive "P")
+     ,@commands))
 
 (defun require-package (package)
   "Ensures that PACKAGE is installed."
@@ -67,14 +73,14 @@ FEATURE may be any one of:
    (t
     `(with-eval-after-load ,feature ,@body))))
 
-(defmacro lazy-major-mode (pattern mode)
+(defmacro /boot/lazy-major-mode (pattern mode)
   "Defines a new major-mode matched by PATTERN, installs MODE if necessary, and activates it."
   `(add-to-list 'auto-mode-alist
                 '(,pattern . (lambda ()
                                (require-package (quote ,mode))
                                (,mode)))))
 
-(defmacro delayed-init (&rest body)
+(defmacro /boot/delayed-init (&rest body)
   "Runs BODY after idle for a predetermined amount of time."
   `(run-with-idle-timer
     0.5

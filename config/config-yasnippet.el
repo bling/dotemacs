@@ -1,4 +1,4 @@
-(delayed-init
+(/boot/delayed-init
  (require-package 'yasnippet)
 
  (require 'yasnippet)

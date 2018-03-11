@@ -1,15 +1,9 @@
-(defmacro bind (&rest commands)
-  "Convenience macro which creates a lambda interactive command."
-  `(lambda (arg)
-     (interactive "P")
-     ,@commands))
-
 (require-package 'which-key)
 (setq which-key-idle-delay 0.2)
 (setq which-key-min-display-lines 3)
 (which-key-mode)
 
-(defmacro -define-prefix-keys (keymap prefix &rest body)
+(defmacro /bindings/define-prefix-keys (keymap prefix &rest body)
   (declare (indent defun))
   `(progn
      ,@(cl-loop for binding in body
@@ -25,14 +19,14 @@
                          seq)
                        desc))))))
 
-(defmacro -define-keys (keymap &rest body)
+(defmacro /bindings/define-keys (keymap &rest body)
   (declare (indent defun))
-  `(-define-prefix-keys ,keymap nil ,@body))
+  `(/bindings/define-prefix-keys ,keymap nil ,@body))
 
-(defmacro -define-key (keymap sequence binding &optional description)
+(defmacro /bindings/define-key (keymap sequence binding &optional description)
   (declare (indent defun))
-  `(-define-prefix-keys ,keymap nil
-     (,sequence ,binding ,description)))
+  `(/bindings/define-prefix-keys ,keymap nil
+                                 (,sequence ,binding ,description)))
 
 (defun /bindings/custom-major-mode-hydra ()
   (interactive)
@@ -44,7 +38,7 @@
 
 
 (setq /bindings/normal-space-leader-map (make-sparse-keymap))
-(-define-prefix-keys /bindings/normal-space-leader-map "SPC"
+(/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
   ("SPC" #'execute-extended-command "M-x")
   ("t" #'/hydras/toggles/body "toggle...")
   ("q" #'/hydras/quit/body "quit...")
@@ -64,44 +58,44 @@
                (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
 
 (after "magit-autoloads"
-  (-define-prefix-keys /bindings/normal-space-leader-map "SPC"
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("g" #'/hydras/git/body "git...")))
 
 (after "counsel-autoloads"
-  (-define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("i" #'/hydras/ivy/body "ivy...")))
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+                                ("i" #'/hydras/ivy/body "ivy...")))
 
 (after "helm-autoloads"
-  (-define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("h" #'/hydras/helm/body "helm...")))
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+                                ("h" #'/hydras/helm/body "helm...")))
 
 (after "helm-dash-autoloads"
-  (-define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("d" #'helm-dash "dash")))
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+                                ("d" #'helm-dash "dash")))
 
 (after "fzf-autoloads"
-  (-define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("F" #'fzf)))
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+                                ("F" #'fzf)))
 
 
 
 (setq /bindings/normal-comma-leader-map (make-sparse-keymap))
-(-define-prefix-keys /bindings/normal-comma-leader-map ","
-  ("w" #'save-buffer)
-  ("e" #'eval-last-sexp)
-  (", e" #'eval-defun)
-  ("E" #'eval-defun)
-  ("f" ctl-x-5-map "frames")
-  ("c" #'/eshell/new-split "eshell")
-  ("C" #'customize-group)
-  ("v" (kbd "C-w v C-w l") "vsplit")
-  ("s" (kbd "C-w s C-w j") "split")
-  ("P" #'package-list-packages "packages")
-  ("h" help-map "help"))
+(/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
+                              ("w" #'save-buffer)
+                              ("e" #'eval-last-sexp)
+                              (", e" #'eval-defun)
+                              ("E" #'eval-defun)
+                              ("f" ctl-x-5-map "frames")
+                              ("c" #'/eshell/new-split "eshell")
+                              ("C" #'customize-group)
+                              ("v" (kbd "C-w v C-w l") "vsplit")
+                              ("s" (kbd "C-w s C-w j") "split")
+                              ("P" #'package-list-packages "packages")
+                              ("h" help-map "help"))
 
 (after "paradox-autoloads"
-  (-define-prefix-keys /bindings/normal-comma-leader-map ","
-    ("P" #'paradox-list-packages)))
+  (/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
+                                ("P" #'paradox-list-packages)))
 
 
 
@@ -160,41 +154,41 @@
 
 
 (after "helm-autoloads"
-  (-define-key (current-global-map) "C-c h" #'/hydras/helm/body "helm..."))
+  (/bindings/define-key (current-global-map) "C-c h" #'/hydras/helm/body "helm..."))
 
 
 (after "counsel-autoloads"
-  (-define-key (current-global-map) "C-c i" #'/hydras/ivy/body "ivy..."))
+  (/bindings/define-key (current-global-map) "C-c i" #'/hydras/ivy/body "ivy..."))
 
 
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 
-(-define-keys (current-global-map)
-  ("C-c c" #'org-capture)
-  ("C-c a" #'org-agenda)
-  ("C-c l" #'org-store-link)
-  ("C-c s" #'/utils/goto-scratch-buffer)
-  ("C-c e" #'/utils/eval-and-replace)
-  ("C-c t" #'/eshell/new-split))
+(/bindings/define-keys (current-global-map)
+                       ("C-c c" #'org-capture)
+                       ("C-c a" #'org-agenda)
+                       ("C-c l" #'org-store-link)
+                       ("C-c s" #'/utils/goto-scratch-buffer)
+                       ("C-c e" #'/utils/eval-and-replace)
+                       ("C-c t" #'/eshell/new-split))
 
-(-define-keys (current-global-map)
-  ("C-x c" #'calculator)
-  ("C-x C" #'calendar)
-  ("C-x C-b" #'ibuffer)
-  ("C-x C-k" #'kill-this-buffer)
-  ("C-x n" #'/hydras/narrow/body)
-  ("C-x p" #'proced))
+(/bindings/define-keys (current-global-map)
+                       ("C-x c" #'calculator)
+                       ("C-x C" #'calendar)
+                       ("C-x C-b" #'ibuffer)
+                       ("C-x C-k" #'kill-this-buffer)
+                       ("C-x n" #'/hydras/narrow/body)
+                       ("C-x p" #'proced))
 
 (after "vkill-autoloads"
   (autoload 'vkill "vkill" nil t)
   (global-set-key (kbd "C-x p") 'vkill))
 
-(-define-keys (current-global-map)
-  ("C-s"   #'isearch-forward-regexp)
-  ("C-M-s" #'isearch-forward)
-  ("C-r"   #'isearch-backward-regexp)
-  ("C-M-r" #'isearch-backward))
+(/bindings/define-keys (current-global-map)
+                       ("C-s"   #'isearch-forward-regexp)
+                       ("C-M-s" #'isearch-forward)
+                       ("C-r"   #'isearch-backward-regexp)
+                       ("C-M-r" #'isearch-backward))
 
 
 (global-set-key (kbd "<f5>") (bind (profiler-start 'cpu+mem)))

@@ -29,13 +29,13 @@
   :group 'dotemacs-web)
 
 
-(lazy-major-mode "\\.jade$" jade-mode)
-(lazy-major-mode "\\.scss$" scss-mode)
-(lazy-major-mode "\\.sass$" sass-mode)
-(lazy-major-mode "\\.less$" less-css-mode)
+(/boot/lazy-major-mode "\\.jade$" jade-mode)
+(/boot/lazy-major-mode "\\.scss$" scss-mode)
+(/boot/lazy-major-mode "\\.sass$" sass-mode)
+(/boot/lazy-major-mode "\\.less$" less-css-mode)
 
 
-(lazy-major-mode "\\.coffee\\'" coffee-mode)
+(/boot/lazy-major-mode "\\.coffee\\'" coffee-mode)
 (setq coffee-indent-like-python-mode t)
 
 
@@ -61,7 +61,7 @@
 (add-hook 'stylus-mode-hook #'rainbow-mode)
 
 
-(lazy-major-mode "\\.html?$" web-mode)
+(/boot/lazy-major-mode "\\.html?$" web-mode)
 
 
 (after 'web-mode

@@ -64,8 +64,8 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
-(lazy-major-mode "^\\.gitignore$" gitignore-mode)
-(lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
+(/boot/lazy-major-mode "^\\.gitignore$" gitignore-mode)
+(/boot/lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
 
 
 
