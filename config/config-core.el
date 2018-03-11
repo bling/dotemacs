@@ -1,3 +1,19 @@
+(defgroup dotemacs-core nil
+  "Configuration options for core Emacs functionality."
+  :group 'dotemacs
+  :prefix 'dotemacs-core)
+
+(defcustom dotemacs-core/default-coding-system
+  'utf-8
+  "The default coding system to use."
+  :type '(radio
+          (const :tag "utf-8" utf-8)
+          (const :tag "utf-8-dos" utf-8-dos)
+          (const :tag "utf-8-unix" utf-8-unix))
+  :group 'dotemacs-core)
+
+
+
 (setq server-auth-dir (concat dotemacs-cache-directory "server"))
 (require 'server)
 (unless (server-running-p)
@@ -154,11 +170,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
+(let ((coding dotemacs-core/default-coding-system))
+  (setq locale-coding-system coding)
+  (set-selection-coding-system coding)
+  (set-default-coding-systems coding)
+  (prefer-coding-system coding)
+  (setq-default buffer-file-coding-system coding))
 
 
 (setq sentence-end-double-space nil)
