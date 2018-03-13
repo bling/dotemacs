@@ -26,7 +26,7 @@
 (defmacro /bindings/define-key (keymap sequence binding &optional description)
   (declare (indent defun))
   `(/bindings/define-prefix-keys ,keymap nil
-                                 (,sequence ,binding ,description)))
+     (,sequence ,binding ,description)))
 
 (defun /bindings/custom-major-mode-hydra ()
   (interactive)
@@ -63,39 +63,39 @@
 
 (after "counsel-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-                                ("i" #'/hydras/ivy/body "ivy...")))
+    ("i" #'/hydras/ivy/body "ivy...")))
 
 (after "helm-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-                                ("h" #'/hydras/helm/body "helm...")))
+    ("h" #'/hydras/helm/body "helm...")))
 
 (after "helm-dash-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-                                ("d" #'helm-dash "dash")))
+    ("d" #'helm-dash "dash")))
 
 (after "fzf-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-                                ("F" #'fzf)))
+    ("F" #'fzf)))
 
 
 
 (setq /bindings/normal-comma-leader-map (make-sparse-keymap))
 (/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
-                              ("w" #'save-buffer)
-                              ("e" #'eval-last-sexp)
-                              (", e" #'eval-defun)
-                              ("E" #'eval-defun)
-                              ("f" ctl-x-5-map "frames")
-                              ("c" #'/eshell/new-split "eshell")
-                              ("C" #'customize-group)
-                              ("v" (kbd "C-w v C-w l") "vsplit")
-                              ("s" (kbd "C-w s C-w j") "split")
-                              ("P" #'package-list-packages "packages")
-                              ("h" help-map "help"))
+  ("w" #'save-buffer)
+  ("e" #'eval-last-sexp)
+  (", e" #'eval-defun)
+  ("E" #'eval-defun)
+  ("f" ctl-x-5-map "frames")
+  ("c" #'/eshell/new-split "eshell")
+  ("C" #'customize-group)
+  ("v" (kbd "C-w v C-w l") "vsplit")
+  ("s" (kbd "C-w s C-w j") "split")
+  ("P" #'package-list-packages "packages")
+  ("h" help-map "help"))
 
 (after "paradox-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
-                                ("P" #'paradox-list-packages)))
+    ("P" #'paradox-list-packages)))
 
 
 
@@ -165,30 +165,30 @@
 (global-set-key [next] 'next-buffer)
 
 (/bindings/define-keys (current-global-map)
-                       ("C-c c" #'org-capture)
-                       ("C-c a" #'org-agenda)
-                       ("C-c l" #'org-store-link)
-                       ("C-c s" #'/utils/goto-scratch-buffer)
-                       ("C-c e" #'/utils/eval-and-replace)
-                       ("C-c t" #'/eshell/new-split))
+  ("C-c c" #'org-capture)
+  ("C-c a" #'org-agenda)
+  ("C-c l" #'org-store-link)
+  ("C-c s" #'/utils/goto-scratch-buffer)
+  ("C-c e" #'/utils/eval-and-replace)
+  ("C-c t" #'/eshell/new-split))
 
 (/bindings/define-keys (current-global-map)
-                       ("C-x c" #'calculator)
-                       ("C-x C" #'calendar)
-                       ("C-x C-b" #'ibuffer)
-                       ("C-x C-k" #'kill-this-buffer)
-                       ("C-x n" #'/hydras/narrow/body)
-                       ("C-x p" #'proced))
+  ("C-x c" #'calculator)
+  ("C-x C" #'calendar)
+  ("C-x C-b" #'ibuffer)
+  ("C-x C-k" #'kill-this-buffer)
+  ("C-x n" #'/hydras/narrow/body)
+  ("C-x p" #'proced))
 
 (after "vkill-autoloads"
   (autoload 'vkill "vkill" nil t)
   (global-set-key (kbd "C-x p") 'vkill))
 
 (/bindings/define-keys (current-global-map)
-                       ("C-s"   #'isearch-forward-regexp)
-                       ("C-M-s" #'isearch-forward)
-                       ("C-r"   #'isearch-backward-regexp)
-                       ("C-M-r" #'isearch-backward))
+  ("C-s"   #'isearch-forward-regexp)
+  ("C-M-s" #'isearch-forward)
+  ("C-r"   #'isearch-backward-regexp)
+  ("C-M-r" #'isearch-backward))
 
 
 (global-set-key (kbd "<f5>") (bind (profiler-start 'cpu+mem)))
