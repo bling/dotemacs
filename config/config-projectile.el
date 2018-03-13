@@ -25,6 +25,6 @@
         (concat "ack -f --print0"
                 (mapconcat #'identity (cons "" projectile-globally-ignored-directories) " --ignore-dir=")))))
 
-(projectile-global-mode t)
+(projectile-mode t)
 
 (provide 'config-projectile)

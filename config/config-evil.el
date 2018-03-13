@@ -81,7 +81,7 @@
 
 
 (unless (display-graphic-p)
-  (evil-esc-mode))
+  (evil-esc-mode 1))
 
 
 (require-package 'evil-commentary)
