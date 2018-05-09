@@ -113,6 +113,18 @@
               (local-set-key (kbd "C-h") #'evil-window-left)
               (local-set-key (kbd "C-j") #'evil-window-down)
               (local-set-key (kbd "C-k") #'evil-window-up)
-              (local-set-key (kbd "C-l") #'evil-window-right))))
+              (local-set-key (kbd "C-l") #'evil-window-right)))
+
+  (require-package 'evil-collection)
+  (setq evil-collection-company-use-tng nil)
+  (add-hook 'evil-collection-setup-hook
+            (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)
+              (evil-collection-translate-key 'normal mode-keymaps
+                "[" nil
+                "]" nil
+                "[[" "["
+                "]]" "]"
+                )))
+  (evil-collection-init))
 
 (provide 'config-bindings-evil)

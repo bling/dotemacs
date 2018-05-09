@@ -218,16 +218,4 @@
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
 
-(evilify profiler-report-mode profiler-report-mode-map)
-(evilify Custom-mode Custom-mode-map)
-(evilify help-mode help-mode-map)
-(evilify ibuffer-mode ibuffer-mode-map)
-(evilify package-menu-mode package-menu-mode-map)
-(evilify calendar-mode calendar-mode-map
-  "j" #'calendar-forward-week
-  "k" #'calendar-backward-week
-  "l" #'calendar-forward-day
-  "h" #'calendar-backward-day)
-
-
 (provide 'config-core)

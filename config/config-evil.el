@@ -10,17 +10,14 @@
   :group 'dotemacs-evil)
 
 (defcustom dotemacs-evil/emacs-state-major-modes
-  '(eshell-mode
-    term-mode
-    calculator-mode
+  '(calculator-mode
     makey-key-mode)
   "List of major modes that should default to Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
 
 (defcustom dotemacs-evil/emacs-state-minor-modes
-  '(edebug-mode
-    git-commit-mode
+  '(git-commit-mode
     magit-blame-mode)
   "List of minor modes that when active should switch to Emacs state."
   :type '(repeat (symbol))
@@ -46,6 +43,8 @@
 (setq evil-operator-state-cursor '("red" hollow))
 
 (add-hook 'evil-jumps-post-jump-hook #'recenter)
+
+(setq evil-want-integration nil)
 
 (require-package 'evil)
 (require 'evil)
@@ -141,11 +140,5 @@
 
 (defadvice evil-ex-search-previous (after dotemacs activate)
   (recenter))
-
-
-
-(require 'evil-evilified-state)
-(with-current-buffer "*Messages*"
-  (evil-evilified-state))
 
 (provide 'config-evil)

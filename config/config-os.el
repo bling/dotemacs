@@ -27,8 +27,7 @@
   (osx-trash-setup)
 
   (require-package 'reveal-in-osx-finder)
-  (require-package 'vkill)
-  (evilify vkill-mode vkill-mode-map))
+  (require-package 'vkill))
 
 (defun /os/reveal-in-os ()
   (interactive)

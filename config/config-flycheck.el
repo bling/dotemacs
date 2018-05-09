@@ -13,8 +13,9 @@
   (setq flycheck-pos-tip-timeout -1)
   (flycheck-pos-tip-mode))
 
-(evilify flycheck-error-list-mode flycheck-error-list-mode-map
-  "j" #'flycheck-error-list-next-error
-  "k" #'flycheck-error-list-previous-error)
+(after [evil flycheck]
+  (evil-define-key 'normal flycheck-error-list-mode-map
+    "j" #'flycheck-error-list-next-error
+    "k" #'flycheck-error-list-previous-error))
 
 (provide 'config-flycheck)

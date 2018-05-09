@@ -87,10 +87,4 @@ FEATURE may be any one of:
     nil
     (lambda () ,@body)))
 
-(defmacro evilify (mode map &rest body)
-  (declare (indent defun))
-  (if body
-      `(after 'evil-evilified-state (evilified-state-evilify ,mode ,map ,@body))
-    `(after 'evil-evilified-state (evilified-state-evilify ,mode ,map))))
-
 (provide 'core-boot)
