@@ -28,13 +28,6 @@
   `(/bindings/define-prefix-keys ,keymap nil
      (,sequence ,binding ,description)))
 
-(defun /bindings/custom-major-mode-hydra ()
-  (interactive)
-  (let ((func (intern (concat "/hydras/modes/" (symbol-name major-mode) "/body"))))
-    (if (fboundp func)
-        (call-interactively func)
-      (message "No custom major-mode bindings defined."))))
-
 
 
 (setq /bindings/normal-space-leader-map (make-sparse-keymap))

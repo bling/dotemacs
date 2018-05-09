@@ -1,4 +1,5 @@
 (after [evil tide]
+  (evil-define-key 'normal tide-mode-map (kbd "RET") #'/hydras/modes/typescript-mode/body)
   (evil-define-key 'normal tide-mode-map (kbd "g d") #'tide-jump-to-definition)
   (evil-define-key 'normal tide-mode-map (kbd "g r") #'tide-rename-symbol)
 

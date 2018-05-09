@@ -17,9 +17,6 @@
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
-  (/bindings/define-key evil-normal-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
-  (/bindings/define-key evil-visual-state-map (kbd "RET") #'/bindings/custom-major-mode-hydra)
-
   (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
   (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
 
@@ -94,6 +91,9 @@
   (after 'coffee-mode
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
+
+  (after 'css-mode
+    (evil-define-key 'normal css-mode-map (kbd ", p") #'/hydras/modes/css-mode/body))
 
   (after 'stylus-mode
     (define-key stylus-mode-map [remap eval-last-sexp] '/stylus/compile-and-eval-buffer)
