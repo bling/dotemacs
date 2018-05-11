@@ -11,6 +11,7 @@
 
 (defcustom dotemacs-evil/emacs-state-major-modes
   '(calculator-mode
+    eshell-mode
     makey-key-mode)
   "List of major modes that should default to Emacs state."
   :type '(repeat (symbol))

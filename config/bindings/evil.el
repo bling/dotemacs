@@ -119,7 +119,11 @@
   (setq evil-collection-company-use-tng nil)
   (add-hook 'evil-collection-setup-hook
             (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)
+              ;; removes any bindings to SPC and , since they are global prefix keys
+              ;; [ and ] are rebound to [[ and ]] respectively so global style vim-unimpaired mappings remain
               (evil-collection-translate-key 'normal mode-keymaps
+                (kbd "SPC") nil
+                "," nil
                 "[" nil
                 "]" nil
                 "[[" "["
