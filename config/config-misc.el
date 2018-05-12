@@ -8,6 +8,7 @@
 
 (require-package 'undo-tree)
 (setq undo-tree-auto-save-history t)
+(setq undo-tree-enable-undo-in-region nil)
 (setq undo-tree-history-directory-alist
       `(("." . ,(concat dotemacs-cache-directory "undo/"))))
 (setq undo-tree-visualizer-timestamps t)
