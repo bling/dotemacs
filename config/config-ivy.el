@@ -2,11 +2,19 @@
 (setq ivy-use-virtual-buffers t)
 (setq ivy-virtual-abbreviate 'full)
 (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-(setq ivy-height 12)
+(setq ivy-height 16)
 (setq ivy-display-style 'fancy)
 (setq ivy-count-format "[%d/%d] ")
 (setq ivy-initial-inputs-alist nil)
 
+(after 'lv
+  (setq ivy-display-function
+        (defun /ivy/display-function (text)
+          (let ((lv-force-update t))
+            (lv-message
+             (if (string-match "\\`\n" text)
+                 (substring text 1)
+               text))))))
 
 (require-package 'swiper)
 (after 'swiper
