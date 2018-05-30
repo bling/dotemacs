@@ -49,6 +49,12 @@
             (const :tag "smartparens" smartparens))
     :group 'dotemacs)
 
+  (defcustom dotemacs-globally-ignored-directories
+    '("elpa" ".cache" "target" "dist" "node_modules" ".git" ".hg" ".svn" ".idea")
+    "A set of default directories to ignore for anything that involves searching."
+    :type '(repeat string)
+    :group 'dotemacs)
+
   (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                            ("org" . "http://orgmode.org/elpa/")
                            ("gnu" . "http://elpa.gnu.org/packages/")))

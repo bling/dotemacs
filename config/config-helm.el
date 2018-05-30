@@ -29,6 +29,8 @@
 
   (require-package 'helm-ag)
   (setq helm-ag-fuzzy-match t)
+  (setq helm-ag-use-agignore t)
+  (setq helm-ag-ignore-patterns dotemacs-globally-ignored-directories)
   (after 'helm-ag
     (cond ((executable-find "ag")
            t)

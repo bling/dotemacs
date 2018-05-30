@@ -9,11 +9,10 @@
 (after 'helm-projectile
   (add-to-list 'helm-projectile-sources-list 'helm-source-projectile-recentf-list))
 
-(require 'projectile)
+(projectile-mode)
 
-(add-to-list 'projectile-globally-ignored-directories "elpa")
-(add-to-list 'projectile-globally-ignored-directories ".cache")
-(add-to-list 'projectile-globally-ignored-directories "node_modules")
+(dolist (dir dotemacs-globally-ignored-directories)
+  (add-to-list 'projectile-globally-ignored-directories dir))
 
 (cond
  ((executable-find "ag")
@@ -24,7 +23,5 @@
   (setq projectile-generic-command
         (concat "ack -f --print0"
                 (mapconcat #'identity (cons "" projectile-globally-ignored-directories) " --ignore-dir=")))))
-
-(projectile-mode t)
 
 (provide 'config-projectile)
