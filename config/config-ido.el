@@ -6,8 +6,6 @@
 (setq ido-save-directory-list-file (concat dotemacs-cache-directory "ido.last"))
 
 (after 'ido
-  (require-package 'ido-ubiquitous)
-
   (require-package 'flx-ido)
   (flx-ido-mode t)
 
@@ -19,10 +17,9 @@
       (progn
         (ido-mode t)
         (ido-everywhere t)
-        (ido-ubiquitous-mode t))
+        )
     (ido-mode -1)
-    (ido-everywhere -1)
-    (ido-ubiquitous-mode -1)))
+    (ido-everywhere -1)))
 
 (when (eq dotemacs-switch-engine 'ido)
   (/ido/activate-as-switch-engine t))
