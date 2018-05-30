@@ -1,3 +1,4 @@
+alias ag ag --vimgrep --color $*
 alias d dired $1
 alias g git $*
 alias gP git push $*
