@@ -65,7 +65,7 @@
 (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
 
 
-(require-package 'etags-select)
+(require 'etags-select)
 (setq etags-select-go-if-unambiguous t)
 
 
