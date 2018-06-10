@@ -80,7 +80,6 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 
-(require-package 'framemove)
 (require 'framemove)
 (setq framemove-hook-into-windmove t)
 
