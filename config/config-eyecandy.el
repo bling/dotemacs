@@ -11,6 +11,14 @@
           (const :tag "spaceline" spaceline))
   :group 'dotemacs-eyecandy)
 
+(defcustom dotemacs-eyecandy/folding
+  'origami
+  "The library to use for folding."
+  :type '(radio
+          (const :tag "origami" origami)
+          (const :tag "hide-show" hide-show))
+  :group 'dotemacs-eyecandy)
+
 
 
 (when (eq dotemacs-pair-engine 'emacs)
@@ -24,18 +32,25 @@
 (size-indication-mode t)
 
 
-(defun /eyecandy/fold-overlay (ov)
-  (when (eq 'code (overlay-get ov 'hs))
-    (let ((col (save-excursion
-                 (move-end-of-line 0)
-                 (current-column)))
-          (count (count-lines (overlay-start ov) (overlay-end ov))))
-      (overlay-put ov 'after-string
-                   (format "%s [ %d ] ... "
-                           (make-string (- (window-width) col 32) (string-to-char "."))
-                           count)))))
-(setq hs-set-up-overlay '/eyecandy/fold-overlay)
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+(cond
+ ((eq dotemacs-eyecandy/folding 'origami)
+  (progn
+    (require-package 'origami)
+    (global-origami-mode)))
+ ((eq dotemacs-eyecandy/folding 'hide-show)
+  (progn
+    (defun /eyecandy/fold-overlay (ov)
+      (when (eq 'code (overlay-get ov 'hs))
+        (let ((col (save-excursion
+                     (move-end-of-line 0)
+                     (current-column)))
+              (count (count-lines (overlay-start ov) (overlay-end ov))))
+          (overlay-put ov 'after-string
+                       (format "%s [ %d ] ... "
+                               (make-string (- (window-width) col 32) (string-to-char "."))
+                               count)))))
+    (setq hs-set-up-overlay '/eyecandy/fold-overlay)
+    (add-hook 'prog-mode-hook #'hs-minor-mode))))
 
 
 (require-package 'diminish)
@@ -129,7 +144,8 @@
 (eval-sexp-fu-flash-mode)
 
 
-(when (font-info "all-the-icons")
+(when (and (display-graphic-p)
+           (font-info "all-the-icons"))
   (setq all-the-icons-scale-factor 0.7)
   (setq inhibit-compacting-font-caches t)
 

@@ -93,7 +93,7 @@
     (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
 
   (after 'css-mode
-    (evil-define-key 'normal css-mode-map (kbd ", p") #'/hydras/modes/css-mode/body))
+    (evil-define-key 'normal css-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
 
   (after 'stylus-mode
     (define-key stylus-mode-map [remap eval-last-sexp] '/stylus/compile-and-eval-buffer)
