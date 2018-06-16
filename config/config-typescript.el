@@ -8,35 +8,58 @@
   :group 'dotemacs-typescript
   :type 'boolean)
 
-(setq tide-completion-detailed t)
-(setq tide-completion-ignore-case t)
-(setq tide-always-show-documentation t)
+(defcustom dotemacs-typescript/engine
+  'tide
+  "The engine to drive TypeScript."
+  :type '(radio
+          (const :tag "tide" tide)
+          (const :tag "lsp" lsp))
+  :group 'dotemacs-typescript)
 
-(defun /typescript/setup ()
-  (when dotemacs-typescript/tide-format-before-save
-    (add-hook 'before-save-hook #'tide-format-before-save))
+
 
-  (tide-setup)
-  (tide-hl-identifier-mode t)
-  (eldoc-mode t))
+(defun /typescript/initialize-tide ()
+  (setq tide-completion-detailed t)
+  (setq tide-completion-ignore-case t)
+  (setq tide-always-show-documentation t)
 
-(defun /typescript/typescript-mode-hook ()
-  (require-package 'tide)
-  (/typescript/setup))
+  (defun /typescript/tide/setup ()
+    (when dotemacs-typescript/tide-format-before-save
+      (add-hook 'before-save-hook #'tide-format-before-save))
 
-(defun /typescript/web-mode-hook ()
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (/typescript/setup)))
+    (tide-setup)
+    (tide-hl-identifier-mode t)
+    (eldoc-mode t))
 
-(/boot/lazy-major-mode "\\.ts$" typescript-mode)
-(add-hook 'typescript-mode-hook #'/typescript/typescript-mode-hook)
+  (defun /typescript/tide/typescript-mode-hook ()
+    (require-package 'tide)
+    (/typescript/tide/setup))
 
-(/boot/lazy-major-mode "\\.tsx$" web-mode)
-(add-hook 'web-mode-hook #'/typescript/web-mode-hook)
+  (defun /typescript/tide/web-mode-hook ()
+    (when (string-equal "tsx" (file-name-extension buffer-file-name))
+      (/typescript/tide/setup)))
 
-(after [tide evil]
-  (defadvice tide-jump-to-definition (before dotemacs activate)
-    (evil-set-jump)))
+  (/boot/lazy-major-mode "\\.ts$" typescript-mode)
+  (add-hook 'typescript-mode-hook #'/typescript/tide/typescript-mode-hook)
+
+  (/boot/lazy-major-mode "\\.tsx$" web-mode)
+  (add-hook 'web-mode-hook #'/typescript/tide/web-mode-hook)
+
+  (after [tide evil]
+    (defadvice tide-jump-to-definition (before dotemacs activate)
+      (evil-set-jump))))
+
+(defun /typescript/initialize-lsp ()
+  (after 'typescript-mode
+    (require-package 'lsp-typescript)
+    (require 'lsp-typescript)
+    (add-hook 'typescript-mode-hook #'lsp-typescript-enable)))
+
+(cond
+ ((eq dotemacs-typescript/engine 'tide)
+  (/typescript/initialize-tide))
+ ((eq dotemacs-typescript/engine 'lsp)
+  (/typescript/initialize-lsp)))
 
 (after [tide flycheck]
   (flycheck-add-mode 'typescript-tslint 'web-mode))
