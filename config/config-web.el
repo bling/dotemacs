@@ -23,11 +23,7 @@
   :type 'boolean
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/js2-integration nil
-  "When non-nil, integrates `js2-mode' into `web-mode' buffers."
-  :type 'boolean
-  :group 'dotemacs-web)
-
+
 
 (/boot/lazy-major-mode "\\.jade$" jade-mode)
 (/boot/lazy-major-mode "\\.scss$" scss-mode)
@@ -72,12 +68,6 @@
     (when (and dotemacs-web/treat-js-as-jsx
                (string-match-p "\\.js$" (buffer-file-name)))
       (web-mode-set-content-type "jsx"))
-
-    (when (and dotemacs-web/js2-integration
-               (or (equal web-mode-content-type "javascript")
-                   (equal web-mode-content-type "jsx")))
-      (require-package 'js2-mode)
-      (js2-minor-mode))
 
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 
