@@ -261,32 +261,11 @@
 
 
 
-(defhydra /hydras/modes/typescript-mode (:hint nil :exit t)
-  "
-   typescript:  _d_ jump to definition   _R_ refactor             _e_ project errors
-                _h_ documentation        _j_ insert jsdoc         _o_ organize imports
-                _r_ find references      _f_ fix error at point   _v_ verify setup
-                _n_ rename               _F_ format               _S_ restart server
-"
-  ("e" tide-project-errors)
-  ("j" tide-jsdoc-template)
-  ("d" tide-jump-to-definition)
-  ("R" tide-refactor)
-  ("n" tide-rename-symbol)
-  ("o" tide-organize-imports)
-  ("r" tide-references)
-  ("S" tide-restart-server)
-  ("f" tide-fix)
-  ("F" tide-format)
-  ("v" tide-verify-setup)
-  ("h" tide-documentation-at-point))
-
-
-
 (defhydra /hydras/modes/css-mode (:hint nil :exit t)
   "
    css:  _t_ generate type definition for CSS
 "
   ("t" /typescript/generate-typings-for-css))
 
-(provide 'config-hydras)
+
+(provide 'config-bindings-hydras)
