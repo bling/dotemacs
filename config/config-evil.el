@@ -30,6 +30,14 @@
   :type 'boolean
   :group 'dotemacs-evil)
 
+(defcustom dotemacs-evil/comments
+  'evil-nerd-commenter
+  "The library to use for comments."
+  :type '(radio
+          (const :tag "evil-nerd-commenter" evil-nerd-commenter)
+          (const :tag "evil-commentary" evil-commentary))
+  :group 'dotemacs-evil)
+
 
 
 (setq evil-search-module 'evil-search)
@@ -84,8 +92,18 @@
   (evil-esc-mode 1))
 
 
-(require-package 'evil-commentary)
-(evil-commentary-mode t)
+(cond
+ ((eq dotemacs-evil/comments 'evil-commentary)
+  (require-package 'evil-commentary)
+  (evil-commentary-mode t))
+ ((eq dotemacs-evil/comments 'evil-nerd-commenter)
+  (require-package 'evil-nerd-commenter)
+  (require 'evil-nerd-commenter)
+  (require 'evil-nerd-commenter-operator)
+  (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
+  (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
+  (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
+  (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator)))
 
 
 (require-package 'evil-surround)
