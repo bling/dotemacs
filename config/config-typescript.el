@@ -18,51 +18,40 @@
 
 
 
-(defun /typescript/initialize-tide ()
-  (setq tide-completion-detailed t)
-  (setq tide-completion-ignore-case t)
-  (setq tide-always-show-documentation t)
-
-  (defun /typescript/tide/setup ()
+(defun /typescript/setup ()
+  (cond
+   ((eq dotemacs-typescript/engine 'tide)
+    (require-package 'tide)
+    (setq tide-completion-detailed t)
+    (setq tide-completion-ignore-case t)
+    (setq tide-always-show-documentation t)
     (when dotemacs-typescript/tide-format-before-save
       (add-hook 'before-save-hook #'tide-format-before-save))
 
     (tide-setup)
     (tide-hl-identifier-mode t)
     (eldoc-mode t))
-
-  (defun /typescript/tide/typescript-mode-hook ()
-    (require-package 'tide)
-    (/typescript/tide/setup))
-
-  (defun /typescript/tide/web-mode-hook ()
-    (when (string-equal "tsx" (file-name-extension buffer-file-name))
-      (/typescript/tide/setup)))
-
-  (/boot/lazy-major-mode "\\.ts$" typescript-mode)
-  (add-hook 'typescript-mode-hook #'/typescript/tide/typescript-mode-hook)
-
-  (/boot/lazy-major-mode "\\.tsx$" web-mode)
-  (add-hook 'web-mode-hook #'/typescript/tide/web-mode-hook)
-
-  (after [tide evil]
-    (defadvice tide-jump-to-definition (before dotemacs activate)
-      (evil-set-jump))))
-
-(defun /typescript/initialize-lsp ()
-  (after 'typescript-mode
+   ((eq dotemacs-typescript/engine 'lsp)
     (require-package 'lsp-typescript)
     (require 'lsp-typescript)
-    (add-hook 'typescript-mode-hook #'lsp-typescript-enable)))
+    (lsp-typescript-enable))))
 
-(cond
- ((eq dotemacs-typescript/engine 'tide)
-  (/typescript/initialize-tide))
- ((eq dotemacs-typescript/engine 'lsp)
-  (/typescript/initialize-lsp)))
+(when (eq dotemacs-typescript/engine 'tide)
+  (after [tide evil]
+    (defadvice tide-jump-to-definition (before dotemacs activate)
+      (evil-set-jump)))
 
-(after [tide flycheck]
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
+  (after [tide flycheck]
+    (flycheck-add-mode 'typescript-tslint 'web-mode)))
+
+(/boot/lazy-major-mode "\\.ts$" typescript-mode)
+(add-hook 'typescript-mode-hook #'/typescript/setup)
+
+(/boot/lazy-major-mode "\\.tsx$" web-mode)
+(add-hook 'web-mode-hook
+          (defun /typescript/web-mode-hook ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (/typescript/setup))))
 
 (defun /typescript/generate-typings-for-css ()
   "Generates a Typescript type definition file for the current CSS file."
