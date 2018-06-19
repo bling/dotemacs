@@ -30,7 +30,6 @@
   (setq treemacs-filewatch-mode t)
   (setq treemacs-tag-follow-mode t)
   (setq treemacs-file-event-delay 1000)
-  (setq treemacs-header-function #'treemacs-projectile-create-header)
 
   (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
     (after 'treemacs
@@ -49,6 +48,12 @@
       (treemacs-define-custom-icon (all-the-icons-octicon "settings") "json" "yaml" "yml" "ini")
       (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
 
+  (after 'treemacs
+    (if (and (executable-find "git")
+             (executable-find "python3"))
+        (treemacs-git-mode 'extended)
+      (treemacs-git-mode 'simple)))
+
   (after 'evil
     (require-package 'treemacs-evil)
     (require 'treemacs-evil))
@@ -64,9 +69,7 @@
   (interactive)
   (cond
    ((eq dotemacs-explorer/option 'treemacs)
-    (if (treemacs--is-visible?)
-        (treemacs-projectile-toggle)
-      (treemacs-projectile)))
+    (treemacs))
    ((eq dotemacs-explorer/option 'dired-sidebar)
     (dired-sidebar-toggle-sidebar))))
 
