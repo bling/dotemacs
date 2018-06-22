@@ -6,7 +6,8 @@
 (defcustom dotemacs-eshell/plan9
   nil
   "Turns on Plan9 style prompt in eshell when non-nil."
-  :group 'dotemacs-eshell)
+  :group 'dotemacs-eshell
+  :type 'boolean)
 
 (defcustom dotemacs-eshell/prompt-git-info
   (executable-find "git")
@@ -14,6 +15,13 @@
   :group 'dotemacs-eshell
   :type 'boolean)
 
+(defcustom dotemacs-eshell/visual-commands
+  '("ssh" "htop" "top" "tail")
+  "Turns on additional git information in the prompt."
+  :group 'dotemacs-eshell
+  :type '(repeat string))
+
+
 
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
 (setq eshell-buffer-maximum-lines 20000)
@@ -98,7 +106,8 @@
 
 
 (after 'em-term
-  (add-to-list 'eshell-visual-commands "ssh"))
+  (dolist (cmd dotemacs-eshell/visual-commands)
+    (add-to-list 'eshell-visual-commands cmd)))
 
 
 (eval-when-compile (require 'cl))
