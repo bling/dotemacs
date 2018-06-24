@@ -9,6 +9,12 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   :type 'boolean
   :group 'dotemacs-vcs)
 
+(defcustom dotemacs-vcs/gutter (not (eq system-type 'windows-nt))
+  "When non-nil, enables VCS changes in the gutter.
+This is non-nil by default on Windows machines, where this is a heavy performance cost."
+  :type 'boolean
+  :group 'dotemacs-vcs)
+
 
 
 (when dotemacs-vcs/inhibit-vc-integration
@@ -36,12 +42,13 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
     (require-package 'pcmpl-git)
     (require 'pcmpl-git))
 
-  (if (display-graphic-p)
-      (progn
-        (require-package 'git-gutter-fringe+)
-        (require 'git-gutter-fringe+))
-    (require-package 'git-gutter+))
-  (global-git-gutter+-mode))
+  (when dotemacs-vcs/gutter
+    (if (display-graphic-p)
+        (progn
+          (require-package 'git-gutter-fringe+)
+          (require 'git-gutter-fringe+))
+      (require-package 'git-gutter+))
+    (global-git-gutter+-mode)))
 
 
 
