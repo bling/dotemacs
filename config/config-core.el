@@ -179,7 +179,6 @@
 
 
 (setq sentence-end-double-space nil)
-(setq delete-by-moving-to-trash t)
 (setq ring-bell-function 'ignore)
 (setq mark-ring-max 64)
 (setq global-mark-ring-max 128)
@@ -204,12 +203,6 @@
 (transient-mark-mode t)
 (delete-selection-mode t)
 (random t) ;; seed
-
-
-(when (eq dotemacs-pair-engine 'emacs)
-  (electric-pair-mode t)
-  (add-hook 'minibuffer-setup-hook (lambda () (electric-pair-mode -1)))
-  (add-hook 'minibuffer-exit-hook (lambda () (electric-pair-mode t))))
 
 
 (defun /core/find-file-hook ()

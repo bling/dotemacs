@@ -158,11 +158,7 @@
   ("W" toggle-word-wrap)
   ("r" read-only-mode)
   ("f" auto-fill-mode)
-  ("p" (cond
-        ((eq dotemacs-pair-engine 'emacs)
-         (call-interactively #'electric-pair-mode))
-        ((eq dotemacs-pair-engine 'smartparens)
-         (call-interactively #'smartparens-global-mode))))
+  ("p" /pairs/toggle)
   ("'" /hydras/toggles/switch-engine/body))
 
 
