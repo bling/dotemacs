@@ -207,9 +207,10 @@
 
 (defhydra /hydras/git (:hint nil :exit t)
   "
-   magit:  _s_ → status  _l_ → log    _f_ → file      staging:  _a_ → +hunk  _A_ → +buffer
-           _c_ → commit  _d_ → diff   _z_ → stash               _r_ → -hunk  _R_ → -buffer
-           _p_ → push    _b_ → blame  _m_ → merge
+  magit: _s_ → status  _l_ → log    _f_ → file       staging: _a_ → +hunk  _A_ → +buffer      history: _t_ → time machine
+         _c_ → commit  _d_ → diff   _z_ → stash               _r_ → -hunk  _R_ → -buffer
+         _p_ → push    _b_ → blame  _m_ → merge
+
 "
   ("s" magit-status)
   ("b" magit-blame-popup)
@@ -223,7 +224,8 @@
   ("a" git-gutter+-stage-hunks)
   ("r" git-gutter+-revert-hunk)
   ("A" git-gutter+-stage-whole-buffer)
-  ("R" git-gutter+-unstage-whole-buffer))
+  ("R" git-gutter+-unstage-whole-buffer)
+  ("t" git-timemachine))
 
 
 

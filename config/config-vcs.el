@@ -59,7 +59,9 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
           (require-package 'git-gutter-fringe+)
           (require 'git-gutter-fringe+))
       (require-package 'git-gutter+))
-    (global-git-gutter+-mode)))
+    (global-git-gutter+-mode))
+
+  (require-package 'git-timemachine))
 
 
 
