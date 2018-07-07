@@ -40,7 +40,18 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
   (after 'eshell
     (require-package 'pcmpl-git)
-    (require 'pcmpl-git))
+    (require 'pcmpl-git)
+
+    (defalias 'pcomplete/g #'pcomplete/git)
+
+    (defun pcomplete/gbr ()
+      (pcomplete-here* (pcmpl-git-branches)))
+
+    (defun pcomplete/gco ()
+      (pcomplete-here* (pcmpl-git-complete-commit)))
+
+    (defun pcomplete/grb ()
+      (pcomplete-here* (pcmpl-git-complete-commit))))
 
   (when dotemacs-vcs/gutter
     (if (display-graphic-p)

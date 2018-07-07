@@ -16,7 +16,7 @@
   :type 'boolean)
 
 (defcustom dotemacs-eshell/visual-commands
-  '("ssh" "htop" "top" "tail")
+  '("ssh" "htop" "top" "tail" "tmux")
   "Turns on additional git information in the prompt."
   :group 'dotemacs-eshell
   :type '(repeat string))
