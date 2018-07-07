@@ -32,10 +32,7 @@
     (tide-hl-identifier-mode t)
     (eldoc-mode t))
    ((eq dotemacs-typescript/engine 'lsp)
-    (/lsp/setup)
-    (require-package 'lsp-typescript)
-    (require 'lsp-typescript)
-    (lsp-typescript-enable))))
+    (/lsp/activate 'lsp-typescript))))
 
 (when (eq dotemacs-typescript/engine 'tide)
   (after [tide evil]

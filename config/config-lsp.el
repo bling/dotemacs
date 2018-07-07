@@ -1,4 +1,4 @@
-(defun /lsp/setup ()
+(defun /lsp/activate (mode)
   (require-package 'lsp-mode)
   (require-package 'lsp-ui)
 
@@ -6,6 +6,10 @@
 
   (after 'company
     (require-package 'company-lsp)
-    (add-to-list 'company-backends 'company-lsp)))
+    (add-to-list 'company-backends 'company-lsp))
+
+  (require-package mode)
+  (require mode)
+  (funcall (intern (concat (symbol-name mode) "-enable"))))
 
 (provide 'config-lsp)

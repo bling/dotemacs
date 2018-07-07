@@ -23,6 +23,18 @@
   :type 'boolean
   :group 'dotemacs-web)
 
+(defcustom dotemacs-web/lsp-html
+  (executable-find "html-languageserver")
+  "Whether to use LSP mode for HTML buffers."
+  :type 'boolean
+  :group 'dotemacs-web)
+
+(defcustom dotemacs-web/lsp-css
+  (executable-find "css-languageserver")
+  "Whether to use LSP mode for HTML buffers."
+  :type 'boolean
+  :group 'dotemacs-web)
+
 
 
 (/boot/lazy-major-mode "\\.jade$" jade-mode)
@@ -60,6 +72,13 @@
 (/boot/lazy-major-mode "\\.html?$" web-mode)
 
 
+(when dotemacs-web/lsp-css
+  (add-hook
+   'css-mode-hook
+   (defun /web/css-mode-hook ()
+     (/lsp/activate 'lsp-css))))
+
+
 (after 'web-mode
   (defun /web/web-mode-hook ()
     (electric-pair-mode -1)
@@ -68,6 +87,10 @@
     (when (and dotemacs-web/treat-js-as-jsx
                (string-match-p "\\.js$" (buffer-file-name)))
       (web-mode-set-content-type "jsx"))
+
+    (when (and (equal web-mode-content-type "html")
+               dotemacs-web/lsp-html)
+      (/lsp/activate 'lsp-html))
 
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 
