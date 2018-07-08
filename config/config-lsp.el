@@ -4,6 +4,9 @@
 
   (add-hook 'lsp-mode-hook #'lsp-ui-mode)
 
+  (setq lsp-ui-doc-include-signature t)
+  (setq lsp-ui-doc-header t)
+
   (after 'company
     (require-package 'company-lsp)
     (add-to-list 'company-backends 'company-lsp))
