@@ -6,20 +6,25 @@
       (setq gc-cons-threshold most-positive-fixnum)
       (if current-prefix-arg
           (cond
-           ((executable-find "ag")  (call-interactively #'projectile-ag))
            ((executable-find "rg")  (call-interactively #'projectile-rg))
+           ((executable-find "ag")  (call-interactively #'projectile-ag))
            ((executable-find "pt")  (call-interactively #'projectile-pt))
            ((executable-find "ack") (call-interactively #'projectile-ack))
            (t                       (call-interactively #'projectile-grep)))
         (cond
          ((eq dotemacs-switch-engine 'ivy)
           (cond
-           ((executable-find "ag") (counsel-ag))
-           ((executable-find "rg") (counsel-rg))
+           ((executable-find "rg") (counsel-projectile-rg))
+           ((executable-find "ag") (counsel-projectile-ag))
            ((executable-find "pt") (counsel-pt))
-           ((executable-find "ack") (counsel-ack))))
+           ((executable-find "ack") (counsel-ack))
+           (t (counsel-grep))))
          ((eq dotemacs-switch-engine 'helm)
-          (helm-do-ag (projectile-project-root))))))
+          (cond
+           ((executable-find "rg") (helm-projectile-rg))
+           ((executable-find "ag") (helm-projectile-ag))
+           ((executable-find "ack") (helm-projectile-ack))
+           (t (helm-projectile-grep)))))))
      "search...")))
 
 (after 'evil
