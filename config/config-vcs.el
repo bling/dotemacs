@@ -84,6 +84,15 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
+(defun /vcs/setup-vdiff ()
+  (require-package 'vdiff)
+  (require 'vdiff)
+  (after 'magit
+    (require-package 'vdiff-magit)
+    (require 'vdiff-magit)))
+
+
+
 (/boot/lazy-major-mode "^\\.gitignore$" gitignore-mode)
 (/boot/lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
 

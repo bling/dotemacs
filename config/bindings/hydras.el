@@ -138,10 +138,11 @@
   ("i" (/hydras/toggles/activate-switch-engine 'ivy))
   ("o" (/hydras/toggles/activate-switch-engine 'ido)))
 
+(defvar /hydras/toggles/vdiff nil)
 (defhydra /hydras/toggles (:hint nil :exit t)
   "
    toggle:  _a_ → aggressive indent   _s_ → flycheck   _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch-engine
-            _f_ → auto-fill           _S_ → flyspell   _c_ → completion     _W_ → word wrap        _g_ → debug on quit
+            _f_ → auto-fill           _S_ → flyspell   _c_ → completion     _W_ → word wrap        _g_ → debug on quit    _d_ → ediff/vdiff
             _w_ → whitespace          ^ ^              _p_ → auto-pairing   _b_ → page break
 "
   ("a" aggressive-indent-mode)
@@ -159,6 +160,15 @@
   ("r" read-only-mode)
   ("f" auto-fill-mode)
   ("p" /pairs/toggle)
+  ("d" (progn
+         (if /hydras/toggles/vdiff
+             (progn
+               (/bindings/vdiff/turn-off)
+               (message "using ediff"))
+           (/vcs/setup-vdiff)
+           (/bindings/vdiff/turn-on)
+           (message "using vdiff"))
+         (setq /hydras/toggles/vdiff (not /hydras/toggles/vdiff))))
   ("'" /hydras/toggles/switch-engine/body))
 
 
