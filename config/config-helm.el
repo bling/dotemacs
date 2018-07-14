@@ -40,6 +40,10 @@
            (setq helm-ag-base-command "ack --nogroup --nocolor"))))
 
 
+  (setq helm-adaptive-history-file (concat dotemacs-cache-directory "helm-adaptive-history"))
+  (helm-adaptive-mode t)
+
+
   (setq helm-swoop-pre-input-function #'ignore)
   (setq helm-swoop-use-line-number-face t)
   (setq helm-swoop-split-with-multiple-windows t)

@@ -15,13 +15,17 @@
   (add-to-list 'projectile-globally-ignored-directories dir))
 
 (cond
+ ((executable-find "rg")
+  (setq projectile-generic-command
+        (concat "rg -0 --files --color never "
+                (mapconcat (lambda (dir) (concat "--glob " "'!" dir "'")) projectile-globally-ignored-directories " "))))
  ((executable-find "ag")
   (setq projectile-generic-command
-        (concat "ag -0 -l --nocolor"
-                (mapconcat #'identity (cons "" projectile-globally-ignored-directories) " --ignore-dir="))))
+        (concat "ag -0 -l --nocolor "
+                (mapconcat (lambda (dir) (concat "--ignore-dir=" dir)) projectile-globally-ignored-directories " "))))
  ((executable-find "ack")
   (setq projectile-generic-command
         (concat "ack -f --print0"
-                (mapconcat #'identity (cons "" projectile-globally-ignored-directories) " --ignore-dir=")))))
+                (mapconcat (lambda (dir) (concat "--ignore-dir=" dir)) projectile-globally-ignored-directories " ")))))
 
 (provide 'config-projectile)
