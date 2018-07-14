@@ -96,9 +96,17 @@
 (require 'vlf-setup)
 
 
-(require-package 'popwin)
-(require 'popwin)
-(popwin-mode)
+(require-package 'shackle)
+(shackle-mode)
+(setq shackle-rules
+      '((help-mode :align right :size 80)
+        (diff-mode :align right :size 0.5)
+        (magit-diff-mode :align right :size 0.5)
+        ((:custom
+          (lambda (buffer)
+            (with-current-buffer buffer
+              (derived-mode-p 'compilation-mode))))
+         :select t)))
 
 
 (require-package 'restart-emacs)
