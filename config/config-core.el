@@ -125,6 +125,7 @@
 ;; ibuffer
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
+(setq ibuffer-use-other-window t)
 (add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
 
 

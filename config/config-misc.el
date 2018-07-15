@@ -102,11 +102,11 @@
       '((help-mode :align right :size 80)
         (diff-mode :align right :size 0.5)
         (magit-diff-mode :align right :size 0.5)
-        ((:custom
-          (lambda (buffer)
-            (with-current-buffer buffer
-              (derived-mode-p 'compilation-mode))))
-         :select t)))
+        (magit-revision-mode :align right :size 0.5)
+        (ibuffer-mode :align right :size 0.5)
+        (ag-mode :align right :size 0.5)
+        ("^\\*helm.*\\*$" :regexp t :align bottom)
+        ))
 
 
 (require-package 'restart-emacs)

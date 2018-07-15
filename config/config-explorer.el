@@ -49,10 +49,10 @@
       (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
 
   (after 'treemacs
-    (if (and (executable-find "git")
-             (executable-find "python3"))
-        (treemacs-git-mode 'extended)
-      (treemacs-git-mode 'simple)))
+    (when (executable-find "git")
+      (if (executable-find "python3")
+          (treemacs-git-mode 'extended)
+        (treemacs-git-mode 'simple))))
 
   (after 'evil
     (require-package 'treemacs-evil)
