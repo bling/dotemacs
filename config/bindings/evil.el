@@ -103,6 +103,22 @@
   (after 'js2-mode
     (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var))
 
+  (after 'flycheck
+    (evil-define-key 'normal flycheck-error-list-mode-map
+      "j" #'flycheck-error-list-next-error
+      "k" #'flycheck-error-list-previous-error))
+
+  (after 'diff-mode
+    (evil-define-key 'normal diff-mode diff-mode-map
+      "j" #'diff-hunk-next
+      "k" #'diff-hunk-prev))
+
+  (after 'vc-annotate
+    (evil-define-key 'normal vc-annotate-mode-map
+      (kbd "M-p") #'vc-annotate-prev-revision
+      (kbd "M-n") #'vc-annotate-next-revision
+      "l" #'vc-annotate-show-log-revision-at-line))
+
   (after "avy-autoloads"
     (define-key evil-operator-state-map (kbd "z") 'avy-goto-char-2)
     (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)

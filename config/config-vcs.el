@@ -111,14 +111,4 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
-(after [evil diff-mode]
-  (evil-define-key 'normal diff-mode diff-mode-map
-    "j" #'diff-hunk-next
-    "k" #'diff-hunk-prev))
-(after [evil vc-annotate]
-  (evil-define-key 'normal vc-annotate-mode-map
-    (kbd "M-p") #'vc-annotate-prev-revision
-    (kbd "M-n") #'vc-annotate-next-revision
-    "l" #'vc-annotate-show-log-revision-at-line))
-
 (provide 'config-vcs)

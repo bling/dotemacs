@@ -13,11 +13,6 @@
   (setq flycheck-pos-tip-timeout -1)
   (flycheck-pos-tip-mode))
 
-(after [evil flycheck]
-  (evil-define-key 'normal flycheck-error-list-mode-map
-    "j" #'flycheck-error-list-next-error
-    "k" #'flycheck-error-list-previous-error))
-
 (defun /flycheck/advice/next-error-find-buffer (orig-func &rest args)
   (let* ((special-buffers
           (cl-loop for buffer in (mapcar #'window-buffer (window-list))
