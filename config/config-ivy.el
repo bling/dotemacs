@@ -30,31 +30,44 @@
 (after "projectile-autoloads"
   (require-package 'counsel-projectile))
 
+
 
-(defmacro /ivy/propertize (prefix face)
-  `(lambda (str)
-     (propertize str 'line-prefix ,prefix 'face ,face)))
+(after 'ivy
+  (defvar /ivy/mini/buffers nil)
+  (defvar /ivy/mini/project-files nil)
+  (defvar /ivy/mini/recentf-files nil)
 
+  (defun /ivy/mini ()
+    (interactive)
+    (setq gc-cons-threshold most-positive-fixnum)
+    (setq /ivy/mini/buffers (mapcar #'buffer-name (buffer-list)))
+    (setq /ivy/mini/project-files (if (projectile-project-p) (projectile-current-project-files) nil))
+    (setq /ivy/mini/recentf-files recentf-list)
+    (ivy-read
+     "Search: "
+     (append /ivy/mini/buffers /ivy/mini/project-files /ivy/mini/recentf-files)
+     :caller '/ivy/mini
+     :action (lambda (f)
+               (with-ivy-window
+                 (cond ((member f /ivy/mini/buffers)
+                        (switch-to-buffer f))
+                       ((file-exists-p f)
+                        (find-file f))
+                       (t
+                        (find-file (concat (projectile-project-root) f))))))))
 
-(defun /ivy/mini ()
-  (interactive)
-  (setq gc-cons-threshold most-positive-fixnum)
-  (let* ((buffers (mapcar #'buffer-name (buffer-list)))
-         (project-files
-          (if (projectile-project-p)
-              (mapcar (/ivy/propertize "[ project ] " 'ivy-virtual) (projectile-current-project-files))
-            nil))
-         (bufnames (mapcar (/ivy/propertize "[ buffer  ] " 'ivy-remote) buffers))
-         (recents (mapcar (/ivy/propertize "[ recent  ] " 'ivy-subdir) recentf-list)))
-    (ivy-read "Search: " (append project-files bufnames recents)
-              :action (lambda (f)
-                        (with-ivy-window
-                          (cond ((member f bufnames)
-                                 (switch-to-buffer f))
-                                ((file-exists-p f)
-                                 (find-file f))
-                                (t
-                                 (find-file (concat (projectile-project-root) f)))))))))
+  (ivy-set-display-transformer
+   '/ivy/mini
+   (lambda (candidate)
+     (cond
+      ((member candidate /ivy/mini/buffers)
+       (concat "[buffer]  " (propertize candidate 'face 'ivy-virtual)))
+      ((member candidate /ivy/mini/project-files)
+       (concat "[project] " (propertize candidate 'face 'ivy-remote)))
+      ((member candidate /ivy/mini/recentf-files)
+       (concat "[recentf] " (propertize candidate 'face 'ivy-subdir)))))))
+
+
 
 (defun /ivy/activate-as-switch-engine (on)
   (if on
