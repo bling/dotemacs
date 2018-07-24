@@ -23,13 +23,18 @@
 (add-hook 'lisp-interaction-mode-hook #'/lisp/major-mode-hook)
 (add-hook 'ielm-mode-hook #'/lisp/major-mode-hook)
 
+(defun /lisp/recompile-config ()
+  (interactive)
+  (byte-compile-file (concat user-emacs-directory "init.el"))
+  (byte-recompile-directory (concat user-emacs-directory "core/") 0 t)
+  (byte-recompile-directory (concat user-emacs-directory "config/") 0 t))
+
 (when dotemacs-lisp/compile-config
   (require-package 'auto-compile)
   (auto-compile-on-save-mode)
   (add-hook 'after-init-hook
             (defun /lisp/after-init-auto-compile-hook ()
               (unless (file-exists-p (concat user-emacs-directory "init.elc"))
-                (byte-compile-file (concat user-emacs-directory "init.el"))
-                (byte-recompile-directory (concat user-emacs-directory "config/") 0 t)))))
+                (/lisp/recompile-config)))))
 
 (provide 'config-lisp)
