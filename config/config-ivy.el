@@ -43,18 +43,22 @@
     (setq /ivy/mini/buffers (mapcar #'buffer-name (buffer-list)))
     (setq /ivy/mini/project-files (if (projectile-project-p) (projectile-current-project-files) nil))
     (setq /ivy/mini/recentf-files recentf-list)
-    (ivy-read
-     "Search: "
-     (append /ivy/mini/buffers /ivy/mini/project-files /ivy/mini/recentf-files)
-     :caller '/ivy/mini
-     :action (lambda (f)
-               (with-ivy-window
-                 (cond ((member f /ivy/mini/buffers)
-                        (switch-to-buffer f))
-                       ((file-exists-p f)
-                        (find-file f))
-                       (t
-                        (find-file (concat (projectile-project-root) f))))))))
+    (let ((ivy-dynamic-exhibit-delay-ms 100)
+          (candidates (append /ivy/mini/buffers /ivy/mini/project-files /ivy/mini/recentf-files)))
+      (ivy-read
+       "Search: "
+       (lambda (input)
+         (ivy--filter input candidates))
+       :dynamic-collection t
+       :caller '/ivy/mini
+       :action (lambda (f)
+                 (with-ivy-window
+                   (cond ((member f /ivy/mini/buffers)
+                          (switch-to-buffer f))
+                         ((file-exists-p f)
+                          (find-file f))
+                         (t
+                          (find-file (concat (projectile-project-root) f)))))))))
 
   (ivy-set-display-transformer
    '/ivy/mini
