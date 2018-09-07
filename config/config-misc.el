@@ -100,6 +100,7 @@
 (shackle-mode)
 (setq shackle-rules
       '((help-mode :align right :size 80)
+        (compilation-mode :align bottom :size 0.2)
         (diff-mode :align right :size 0.5)
         (magit-diff-mode :align right :size 0.5)
         (magit-revision-mode :align right :size 0.5)

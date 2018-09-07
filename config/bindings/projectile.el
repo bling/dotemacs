@@ -6,7 +6,7 @@
       (setq gc-cons-threshold most-positive-fixnum)
       (if current-prefix-arg
           (cond
-           ((executable-find "rg")  (call-interactively #'projectile-rg))
+           ((executable-find "rg")  (call-interactively #'projectile-ripgrep))
            ((executable-find "ag")  (call-interactively #'projectile-ag))
            ((executable-find "pt")  (call-interactively #'projectile-pt))
            ((executable-find "ack") (call-interactively #'projectile-ack))
