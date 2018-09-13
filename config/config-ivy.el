@@ -7,14 +7,6 @@
 (setq ivy-count-format "[%d/%d] ")
 (setq ivy-initial-inputs-alist nil)
 
-(after 'lv
-  (setq ivy-display-function
-        (defun /ivy/display-function (text)
-          (let ((lv-force-update t))
-            (lv-message
-             (if (string-match "\\`\n" text)
-                 (substring text 1)
-               text))))))
 
 (require-package 'swiper)
 (after 'swiper
