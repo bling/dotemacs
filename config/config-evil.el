@@ -53,7 +53,7 @@
 
 (add-hook 'evil-jumps-post-jump-hook #'recenter)
 
-(setq evil-want-integration nil)
+(setq evil-want-keybinding nil) ;; evil-collection will provide instead
 
 (require-package 'evil)
 (require 'evil)
