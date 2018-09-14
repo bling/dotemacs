@@ -29,7 +29,7 @@
   (defvar /ivy/mini/project-files nil)
   (defvar /ivy/mini/recentf-files nil)
 
-  (defun /ivy/mini ()
+  (defun /ivy/everything ()
     (interactive)
     (setq gc-cons-threshold most-positive-fixnum)
     (setq /ivy/mini/buffers (mapcar #'buffer-name (buffer-list)))

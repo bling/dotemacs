@@ -60,7 +60,7 @@
   ("k" kill-this-buffer)
   ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/mini :helm #'helm-mini))
+  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'/helm/everything))
   ("e" erase-buffer)
   ("E" (let ((inhibit-read-only t)) (erase-buffer))))
 
@@ -180,8 +180,8 @@
            _e_ → recentf   _r_ → register    _x_ → M-x
            _f_ → files     _t_ → tags
 "
+  ("b" /helm/everything)
   ("a" helm-apropos)
-  ("b" helm-mini)
   ("d" helm-dash)
   ("e" helm-recentf)
   ("f" helm-find-files)
@@ -202,7 +202,7 @@
           _e_ → recentf    _x_ → M-x         _L_ → swiper (multi)
           _f_ → files
 "
-  ("b" /ivy/mini)
+  ("b" /ivy/everything)
   ("e" counsel-recentf)
   ("f" counsel-find-file)
   ("y" counsel-yank-pop)

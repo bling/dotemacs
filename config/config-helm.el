@@ -52,8 +52,20 @@
   (require-package 'helm-swoop)
 
 
-  (after "projectile-autoloads"
-    (require-package 'helm-projectile))
+  (require-package 'helm-projectile)
+
+
+  (defun /helm/everything ()
+    (interactive)
+    (require 'helm-projectile)
+    (if (projectile-project-p)
+        (let ((helm-mini-default-sources
+               (append
+                '(helm-source-projectile-recentf-list
+                  helm-source-projectile-files-list)
+                helm-mini-default-sources)))
+          (helm-mini))
+      (helm-mini)))
 
 
   ;; take between 10-30% of screen space
