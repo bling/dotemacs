@@ -43,6 +43,9 @@
   ("l" #'/hydras/jumps/lambda-l-and-exit "lines(current)")
   ("L" #'/hydras/jumps/lambda-L-and-exit "lines(all)")
   ("o" #'/hydras/jumps/lambda-i-and-exit "outline")
+  ("v" vc-prefix-map)
+  ("4" ctl-x-4-map)
+  ("5" ctl-x-5-map)
   ("'" #'/eshell/new-split "shell")
   ("y" (bind
         (cond ((eq dotemacs-switch-engine 'ivy)
