@@ -82,7 +82,6 @@
 (after 'web-mode
   (defun /web/web-mode-hook ()
     (electric-pair-mode -1)
-    (and (fboundp #'smartparens-mode) (smartparens-mode -1))
 
     (when (and dotemacs-web/treat-js-as-jsx
                (string-match-p "\\.js$" (buffer-file-name)))
@@ -105,6 +104,7 @@
   (setq web-mode-css-indent-offset dotemacs-web/indent-offset)
   (setq web-mode-sql-indent-offset dotemacs-web/indent-offset)
 
+  (setq web-mode-enable-auto-pairing (not (eq dotemacs-pair-engine 'smartparens)))
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-current-element-highlight t)
   (setq web-mode-enable-element-content-fontification t)
