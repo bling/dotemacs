@@ -21,42 +21,43 @@
 
 (cond
  ((eq dotemacs-explorer/option 'treemacs)
-  (require-package 'treemacs)
-  (require-package 'treemacs-projectile)
+  (/boot/delayed-init ;; delay load to allow treemacs to calculate icon colors based on the current theme
+   (require-package 'treemacs)
+   (require-package 'treemacs-projectile)
 
-  (setq treemacs-indentation 1)
-  (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
-  (setq treemacs-follow-after-init t)
-  (setq treemacs-filewatch-mode t)
-  (setq treemacs-tag-follow-mode t)
-  (setq treemacs-file-event-delay 1000)
+   (setq treemacs-indentation 1)
+   (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
+   (setq treemacs-follow-after-init t)
+   (setq treemacs-filewatch-mode t)
+   (setq treemacs-tag-follow-mode t)
+   (setq treemacs-file-event-delay 1000)
 
-  (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
-    (after 'treemacs
-      (require 'all-the-icons)
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "csharp-line") "cs")
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "css3") "css")
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "git") "gitignore")
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "html5") "html" "htm")
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "java") "java")
-      (treemacs-define-custom-icon (all-the-icons-alltheicon "javascript") "js")
-      (treemacs-define-custom-icon (all-the-icons-fileicon "elisp") "el" "elc")
-      (treemacs-define-custom-icon (all-the-icons-fileicon "jsx-2") "jsx")
-      (treemacs-define-custom-icon (all-the-icons-fileicon "org") "org")
-      (treemacs-define-custom-icon (all-the-icons-fileicon "typescript") "ts")
-      (treemacs-define-custom-icon (all-the-icons-octicon "markdown") "md")
-      (treemacs-define-custom-icon (all-the-icons-octicon "settings") "json" "yaml" "yml" "ini")
-      (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
+   (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
+     (after 'treemacs
+       (require 'all-the-icons)
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "csharp-line") "cs")
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "css3") "css")
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "git") "gitignore")
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "html5") "html" "htm")
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "java") "java")
+       (treemacs-define-custom-icon (all-the-icons-alltheicon "javascript") "js")
+       (treemacs-define-custom-icon (all-the-icons-fileicon "elisp") "el" "elc")
+       (treemacs-define-custom-icon (all-the-icons-fileicon "jsx-2") "jsx")
+       (treemacs-define-custom-icon (all-the-icons-fileicon "org") "org")
+       (treemacs-define-custom-icon (all-the-icons-fileicon "typescript") "ts")
+       (treemacs-define-custom-icon (all-the-icons-octicon "markdown") "md")
+       (treemacs-define-custom-icon (all-the-icons-octicon "settings") "json" "yaml" "yml" "ini")
+       (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
 
-  (after 'treemacs
-    (when (executable-find "git")
-      (if (executable-find "python3")
-          (treemacs-git-mode 'extended)
-        (treemacs-git-mode 'simple))))
+   (after 'treemacs
+     (when (executable-find "git")
+       (if (executable-find "python3")
+           (treemacs-git-mode 'extended)
+         (treemacs-git-mode 'simple))))
 
-  (after 'evil
-    (require-package 'treemacs-evil)
-    (require 'treemacs-evil))
+   (after 'evil
+     (require-package 'treemacs-evil)
+     (require 'treemacs-evil)))
   )
 
  ((eq dotemacs-explorer/option 'dired-sidebar)
@@ -77,6 +78,7 @@
   (interactive)
   (cond
    ((eq dotemacs-explorer/option 'treemacs)
+    (require 'treemacs)
     (treemacs-find-file))
    ((eq dotemacs-explorer/option 'dired-sidebar)
     (dired-sidebar-find-file))))
