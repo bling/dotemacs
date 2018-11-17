@@ -5,11 +5,6 @@
     :group 'dotemacs
     :prefix 'dotemacs-company)
 
-  (defcustom dotemacs-company/ycmd-server-command nil
-    "The path to the ycmd package."
-    :group 'dotemacs-company
-    :type 'boolean)
-
   (require-package 'company)
 
   (setq company-idle-delay 0.2)
@@ -25,21 +20,9 @@
 
   (setq company-etags-ignore-case t)
 
-  (when (executable-find "tern")
-    (after "company-tern-autoloads"
-      (add-to-list 'company-backends 'company-tern)))
-
   (setq company-global-modes
         '(not
           eshell-mode comint-mode text-mode erc-mode))
-
-  (when dotemacs-company/ycmd-server-command
-    (setq ycmd-server-command `("python" ,dotemacs-company/ycmd-server-command))
-    (require-package 'ycmd)
-    (ycmd-setup)
-
-    (require-package 'company-ycmd)
-    (company-ycmd-setup))
 
   (global-company-mode)
 
