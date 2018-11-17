@@ -27,13 +27,13 @@
 
   (setq org-agenda-files `(,org-directory))
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline (expand-file-name dotemacs-org/inbox-file) "INBOX")
+        `(("t" "Todo" entry (file+headline ,(expand-file-name dotemacs-org/inbox-file) "INBOX")
            "* TODO %?\n%U\n%a\n")
-          ("n" "Note" entry (file+headline (expand-file-name dotemacs-org/inbox-file) "NOTES")
+          ("n" "Note" entry (file+headline ,(expand-file-name dotemacs-org/inbox-file) "NOTES")
            "* %? :NOTE:\n%U\n%a\n")
-          ("m" "Meeting" entry (file (expand-file-name dotemacs-org/inbox-file))
+          ("m" "Meeting" entry (file ,(expand-file-name dotemacs-org/inbox-file))
            "* MEETING %? :MEETING:\n%U")
-          ("j" "Journal" entry (file+datetree (expand-file-name dotemacs-org/journal-file))
+          ("j" "Journal" entry (file+datetree ,(expand-file-name dotemacs-org/journal-file))
            "* %U\n** %?")))
 
   (setq org-use-fast-todo-selection t)
