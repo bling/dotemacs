@@ -84,7 +84,7 @@
     ("Y" "y$"))
 
   ;; emacs lisp
-  (evil-define-key 'normal emacs-lisp-mode-map "K" (bind (help-xref-interned (symbol-at-point))))
+  (evil-define-key 'normal emacs-lisp-mode-map "K" #'helpful-at-point)
   (after "elisp-slime-nav-autoloads"
     (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
 

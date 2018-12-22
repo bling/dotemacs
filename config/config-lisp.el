@@ -37,4 +37,11 @@
               (unless (file-exists-p (concat user-emacs-directory "init.elc"))
                 (/lisp/recompile-config)))))
 
+
+(require-package 'helpful)
+(advice-add #'describe-function :override #'helpful-callable)
+(advice-add #'describe-variable :override #'helpful-variable)
+(advice-add #'describe-key :override #'helpful-key)
+
+
 (provide 'config-lisp)
