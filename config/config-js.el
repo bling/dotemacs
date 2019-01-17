@@ -39,7 +39,7 @@
       (require-package 'js2-mode)
       (js2-minor-mode))
      ((eq dotemacs-js/engine 'lsp)
-      (/lsp/activate 'lsp-javascript-typescript))))))
+      (/lsp/activate))))))
 
 (add-to-list 'auto-mode-alist '("\\.jsx?$" . /js/auto-mode-alist-hook))
 

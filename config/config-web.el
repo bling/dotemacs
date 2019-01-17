@@ -73,10 +73,7 @@
 
 
 (when dotemacs-web/lsp-css
-  (add-hook
-   'css-mode-hook
-   (defun /web/css-mode-hook ()
-     (/lsp/activate 'lsp-css))))
+  (add-hook 'css-mode-hook #'/lsp/activate))
 
 
 (after 'web-mode
@@ -89,7 +86,7 @@
 
     (when (and (equal web-mode-content-type "html")
                dotemacs-web/lsp-html)
-      (/lsp/activate 'lsp-html))
+      (/lsp/activate))
 
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 

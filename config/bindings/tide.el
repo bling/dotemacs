@@ -4,7 +4,7 @@
    typescript:  _d_ jump to definition   _R_ refactor           _e_ project errors       _v_ verify setup
                 _h_ documentation        _j_ insert jsdoc       _o_ organize imports     _S_ restart server
                 _r_ find references      _f_ fix at point       _a_ navigate
-                _n_ rename symbol        _F_ format
+                _n_ rename symbol        _=_ format
                 _N_ rename file          _l_ tslint disable next line
 "
     ("a" tide-nav)
@@ -17,7 +17,7 @@
     ("o" tide-organize-imports)
     ("r" tide-references)
     ("f" tide-fix)
-    ("F" tide-format)
+    ("=" tide-format)
     ("l" tide-add-tslint-disable-next-line)
     ("h" tide-documentation-at-point)
     ("v" tide-verify-setup)

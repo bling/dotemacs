@@ -32,7 +32,7 @@
     (tide-hl-identifier-mode t)
     (eldoc-mode t))
    ((eq dotemacs-typescript/engine 'lsp)
-    (/lsp/activate 'lsp-typescript))))
+    (/lsp/activate))))
 
 (when (eq dotemacs-typescript/engine 'tide)
   (after [tide evil]
@@ -45,11 +45,15 @@
 (/boot/lazy-major-mode "\\.ts$" typescript-mode)
 (add-hook 'typescript-mode-hook #'/typescript/setup)
 
-(/boot/lazy-major-mode "\\.tsx$" web-mode)
-(add-hook 'web-mode-hook
-          (defun /typescript/web-mode-hook ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (/typescript/setup))))
+(after 'web-mode
+  (define-derived-mode typescript-tsx-mode web-mode "typescript-tsx")
+  (add-hook 'typescript-tsx-mode-hook #'/typescript/setup))
+(add-to-list
+ 'auto-mode-alist
+ '("\\.tsx$" . (lambda ()
+                 (require-package 'web-mode)
+                 (require 'web-mode)
+                 (typescript-tsx-mode))))
 
 (defun /typescript/generate-typings-for-css ()
   "Generates a Typescript type definition file for the current CSS file."
