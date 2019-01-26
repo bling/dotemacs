@@ -18,11 +18,6 @@
   :type 'boolean
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/treat-js-as-jsx nil
-  "Treats .js files as JSX files."
-  :type 'boolean
-  :group 'dotemacs-web)
-
 (defcustom dotemacs-web/lsp-html
   (executable-find "html-languageserver")
   "Whether to use LSP mode for HTML buffers."
@@ -79,10 +74,6 @@
 (after 'web-mode
   (defun /web/web-mode-hook ()
     (electric-pair-mode -1)
-
-    (when (and dotemacs-web/treat-js-as-jsx
-               (string-match-p "\\.js$" (buffer-file-name)))
-      (web-mode-set-content-type "jsx"))
 
     (when (and (equal web-mode-content-type "html")
                dotemacs-web/lsp-html)

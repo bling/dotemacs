@@ -12,6 +12,11 @@
           (const :tag "utf-8-unix" utf-8-unix))
   :group 'dotemacs-core)
 
+(defcustom dotemacs-core/maximum-file-size (* 1024 1024 20)
+  "The threshold for when `fundamental-mode' is used instead of the desired major mode."
+  :type 'integer
+  :group 'dotemacs-core)
+
 
 
 (setq server-auth-dir (concat dotemacs-cache-directory "server"))
@@ -207,7 +212,8 @@
 
 
 (defun /core/find-file-hook ()
-  (when (string-match "\\.min\\." (buffer-file-name))
+  (when (or (string-match "\\.min\\." (buffer-file-name))
+            (> (buffer-size) dotemacs-core/maximum-file-size))
     (fundamental-mode)))
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
