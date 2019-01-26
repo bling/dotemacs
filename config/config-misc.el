@@ -106,8 +106,20 @@
         (magit-revision-mode :align right :size 0.5)
         (ibuffer-mode :align right :size 0.5)
         (ag-mode :align right :size 0.5)
+        (compilation-mode :align bottom :size 0.3)
         ("^\\*helm.*\\*$" :regexp t :align bottom)
         ))
+
+
+(when (executable-find "prettier")
+  (require-package 'reformatter)
+  (reformatter-define prettier-css :program "prettier" :args '("--parser=css"))
+  (reformatter-define prettier-html :program "prettier" :args '("--parser=html"))
+  (reformatter-define prettier-javascript :program "prettier" :args '("--parser=babylon"))
+  (reformatter-define prettier-json :program "prettier" :args '("--parser=json"))
+  (reformatter-define prettier-markdown :program "prettier" :args '("--parser=markdown"))
+  (reformatter-define prettier-typescript :program "prettier" :args '("--parser=typescript"))
+  (reformatter-define prettier-yaml :program "prettier" :args '("--parser=yaml")))
 
 
 (require-package 'restart-emacs)
