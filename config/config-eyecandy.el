@@ -4,7 +4,7 @@
   :prefix 'dotemacs-eyecandy)
 
 (defcustom dotemacs-eyecandy/mode-line
-  'spaceline
+  'doom
   "List of hooks to automatically start up in Evil Emacs state."
   :type '(radio
           (const :tag "smart mode line" sml)
