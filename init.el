@@ -9,6 +9,7 @@
 (let ((gc-cons-threshold (* 256 1024 1024))
       (file-name-handler-alist nil)
       (core-directory (concat user-emacs-directory "core/"))
+      (bindings-directory (concat user-emacs-directory "bindings/"))
       (config-directory (concat user-emacs-directory "config/")))
 
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -67,7 +68,8 @@
   (when (file-exists-p custom-file)
     (load custom-file))
 
-  (cl-loop for file in (reverse (directory-files-recursively config-directory "\\.el$"))
+  (cl-loop for file in (append (reverse (directory-files-recursively config-directory "\\.el$"))
+                               (reverse (directory-files-recursively bindings-directory "\\.el$")))
            do (condition-case ex
                   (load (file-name-sans-extension file))
                 ('error (with-current-buffer "*scratch*"

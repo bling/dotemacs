@@ -59,7 +59,7 @@ Basically, it recursively finds anything in `config/` and loads it.  If you want
 
 #### bindings in one place
 
-Another decision is to keep all keybindings in one place: `config-bindings.el`.  Because of this, things like [use-package][3] aren't particularly useful here because it doesn't add much value over `(require-package)` and `after`.
+Another decision is to keep all keybindings in one place: `/bindings/**/*.el`.  Because of this, things like [use-package][3] aren't particularly useful here because it doesn't add much value over `(require-package)` and `after`.
 
 Keybindings are the single most differentiating factor between configs.  By defining them in one place, if you want to use/fork this config, you can simply change the bindings to your liking and still use all the other preconfigured packages as is.  If you're not an Evil user, delete `config-evil.el` and you will get a pure Emacs experience.
 

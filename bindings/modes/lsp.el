@@ -25,7 +25,6 @@
     ("o" lsp-ui-imenu)
     ("S" lsp-restart-workspace)
     ("i" lsp-describe-session)
-    ("i" lsp-describe-session)
     ("w" /bindings/lsp/workspace/hydra/body))
 
   (evil-define-key 'normal lsp-ui-mode-map (kbd "RET") #'/bindings/lsp/hydra/body)
