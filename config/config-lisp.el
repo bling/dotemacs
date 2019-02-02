@@ -29,6 +29,10 @@
   (byte-recompile-directory (concat user-emacs-directory "core/") 0 t)
   (byte-recompile-directory (concat user-emacs-directory "config/") 0 t))
 
+(defun /lisp/recompile-elpa ()
+  (interactive)
+  (byte-recompile-directory (concat user-emacs-directory "elpa/") 0 t))
+
 (when dotemacs-lisp/compile-config
   (require-package 'auto-compile)
   (auto-compile-on-save-mode)
