@@ -145,8 +145,9 @@
 (require-package 'evil-numbers)
 
 
-(require-package 'evil-terminal-cursor-changer)
-(evil-terminal-cursor-changer-activate)
+(unless (display-graphic-p)
+  (require-package 'evil-terminal-cursor-changer)
+  (evil-terminal-cursor-changer-activate))
 
 
 

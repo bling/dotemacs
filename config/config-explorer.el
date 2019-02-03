@@ -55,7 +55,7 @@
            (treemacs-git-mode 'extended)
          (treemacs-git-mode 'simple))))
 
-   (after 'evil
+   (after [evil treemacs]
      (require-package 'treemacs-evil)
      (require 'treemacs-evil)))
   )
