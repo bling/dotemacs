@@ -1,7 +1,3 @@
-(setq lv-use-separator t)
-(require-package 'hydra)
-(autoload 'hydra-default-pre "hydra")
-
 (defun /hydras/switch-action (fallback &rest props)
   "Performs an action based on the value of `dotemacs-switch-engine'."
   (cond
@@ -212,8 +208,9 @@
 
 
 
-(autoload 'magit-log-popup "magit-log" nil t)
-(autoload 'magit-commit-popup "magit-commit" nil t)
+(autoload 'magit-blame "magit-blame" nil t)
+(autoload 'magit-diff "magit-diff" nil t)
+(autoload 'magit-log "magit-log" nil t)
 
 (defhydra /hydras/git (:hint nil :exit t)
   "
@@ -223,14 +220,14 @@
 
 "
   ("s" magit-status)
-  ("b" magit-blame-popup)
-  ("f" magit-file-popup)
-  ("z" magit-stash-popup)
-  ("l" magit-log-popup)
-  ("d" magit-diff-popup)
-  ("c" magit-commit-popup)
-  ("m" magit-merge-popup)
-  ("p" magit-push-popup)
+  ("b" magit-blame)
+  ("f" magit-file-dispatch)
+  ("z" magit-stash)
+  ("l" magit-log)
+  ("d" magit-diff)
+  ("c" magit-commit)
+  ("m" magit-merge)
+  ("p" magit-push)
   ("a" git-gutter+-stage-hunks)
   ("r" git-gutter+-revert-hunk)
   ("A" git-gutter+-stage-whole-buffer)

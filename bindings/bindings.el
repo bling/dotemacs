@@ -3,6 +3,18 @@
 (setq which-key-min-display-lines 3)
 (which-key-mode)
 
+
+(setq lv-use-separator t)
+(require-package 'hydra)
+(autoload 'hydra-default-pre "hydra")
+
+
+(require-package 'transient)
+(setq transient-history-file (concat dotemacs-cache-directory "transient/history.el"))
+(setq transient-levels-file (concat dotemacs-cache-directory "transient/levels.el"))
+(setq transient-values-file (concat dotemacs-cache-directory "transient/values.el"))
+
+
 (defmacro /bindings/define-prefix-keys (keymap prefix &rest body)
   (declare (indent defun))
   `(progn
