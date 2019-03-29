@@ -140,6 +140,7 @@
 
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
   (add-to-list 'eshell-preoutput-filter-functions #'/eshell/color-filter)
+  (buffer-disable-undo)
 
   ;; get rid of annoying 'terminal is not fully functional' warning
   (when (executable-find "cat")
