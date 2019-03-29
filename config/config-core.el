@@ -39,6 +39,12 @@
 (savehist-mode)
 
 
+;; undo
+(setq undo-limit (* 1024 10 10))
+(setq undo-outer-limit (* 1024 10 10))
+(setq undo-strong-limit (* 1024 10 10))
+
+
 ;; recent files
 (require 'recentf)
 (setq recentf-save-file (concat dotemacs-cache-directory "recentf"))

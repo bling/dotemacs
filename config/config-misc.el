@@ -1,3 +1,16 @@
+(defgroup dotemacs-misc nil
+  "Configuration options for miscellaneous."
+  :group 'dotemacs
+  :prefix 'dotemacs-misc)
+
+(defcustom dotemacs-misc/inhibit-undo-tree
+  t
+  "If non-nil, disables undo-tree and replaces it with desktop-mode."
+  :type 'boolean
+  :group 'dotemacs-evil)
+
+
+
 (require-package 'pcache)
 (setq pcache-directory (concat dotemacs-cache-directory "pcache/"))
 
@@ -6,14 +19,29 @@
 (setq request-storage-directory (concat dotemacs-cache-directory "request/"))
 
 
-(require-package 'undo-tree)
-(setq undo-tree-auto-save-history t)
-(setq undo-tree-enable-undo-in-region nil)
-(setq undo-tree-history-directory-alist
-      `(("." . ,(concat dotemacs-cache-directory "undo/"))))
-(setq undo-tree-visualizer-timestamps t)
-(setq undo-tree-visualizer-diff t)
-(global-undo-tree-mode)
+(if dotemacs-misc/inhibit-undo-tree
+    (after 'evil-integration
+      (global-undo-tree-mode -1)
+
+      (defun /misc/append-buffer-undo-list (alist)
+        (append `(,(cons 'buffer-undo-list buffer-undo-list)) alist))
+
+      ;; due to a bug, buffer-undo-list is not included here, so we have to patch it in
+      (advice-add #'buffer-local-variables :filter-return #'/misc/append-buffer-undo-list)
+
+      (add-to-list 'desktop-locals-to-save 'buffer-undo-list)
+      (setq desktop-path `(,dotemacs-cache-directory))
+      (setq desktop-base-file-name "emacs.desktop")
+      (setq desktop-base-lock-name "emacs.desktop.lock")
+      (desktop-save-mode t))
+  (require-package 'undo-tree)
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-enable-undo-in-region nil)
+  (setq undo-tree-history-directory-alist
+        `(("." . ,(concat dotemacs-cache-directory "undo/"))))
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-diff t)
+  (global-undo-tree-mode))
 
 
 (require-package 'multiple-cursors)
