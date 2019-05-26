@@ -35,6 +35,9 @@
   ;;   (setq company-quickhelp-delay 0.2)
   ;;   (company-quickhelp-mode t))
 
+  (require-package 'company-posframe)
+  (company-posframe-mode 1)
+
   (after 'yasnippet
     (setq company-backends
           (mapcar
