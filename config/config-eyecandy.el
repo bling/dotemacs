@@ -110,11 +110,19 @@
 
 
 (when (fboundp 'global-prettify-symbols-mode)
-  (global-prettify-symbols-mode)
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (push '("function" . 955) prettify-symbols-alist)
-              (push '("return" . 8592) prettify-symbols-alist))))
+  (defun /eyecandy/js-symbols ()
+    (setq-local
+     prettify-symbols-alist
+     '(
+       ("function" . ?λ)
+       ("return" . ?←)
+       ("=>". ?⇒)
+       (">=". ?≥)
+       ("<=". ?≤)
+       )))
+  (add-hook 'js-mode-hook #'/eyecandy/js-symbols)
+  (add-hook 'js2-mode-hook #'/eyecandy/js-symbols)
+  (add-hook 'typescript-mode-hook #'/eyecandy/js-symbols))
 
 
 (/boot/delayed-init
