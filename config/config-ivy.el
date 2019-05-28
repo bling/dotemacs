@@ -57,11 +57,11 @@
    (lambda (candidate)
      (cond
       ((member candidate /ivy/mini/buffers)
-       (concat "[buffer]  " (propertize candidate 'face 'ivy-virtual)))
+       (concat " buffer      " (propertize candidate 'face 'ivy-virtual)))
       ((member candidate /ivy/mini/project-files)
-       (concat "[project] " (propertize candidate 'face 'ivy-remote)))
+       (concat " project     " (propertize candidate 'face 'ivy-remote)))
       ((member candidate /ivy/mini/recentf-files)
-       (concat "[recentf] " (propertize candidate 'face 'ivy-subdir)))))))
+       (concat " recentf     " (propertize candidate 'face 'ivy-subdir)))))))
 
 
 

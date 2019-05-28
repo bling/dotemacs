@@ -1,30 +1,28 @@
 (after [evil tide hydra]
-  (defhydra /bindings/tide/hydra (:hint nil :exit t)
-    "
-   typescript:  _d_ jump to definition   _R_ refactor           _e_ project errors       _v_ verify setup
-                _h_ documentation        _j_ insert jsdoc       _o_ organize imports     _S_ restart server
-                _r_ find references      _f_ fix at point       _a_ navigate
-                _n_ rename symbol        _=_ format
-                _N_ rename file          _l_ tslint disable next line
-"
-    ("a" tide-nav)
-    ("e" tide-project-errors)
-    ("j" tide-jsdoc-template)
-    ("d" tide-jump-to-definition)
-    ("R" tide-refactor)
-    ("n" tide-rename-symbol)
-    ("N" tide-rename-file)
-    ("o" tide-organize-imports)
-    ("r" tide-references)
-    ("f" tide-fix)
-    ("=" tide-format)
-    ("l" tide-add-tslint-disable-next-line)
-    ("h" tide-documentation-at-point)
-    ("v" tide-verify-setup)
-    ("S" tide-restart-server))
+  (defhydra /bindings/tide/hydra (:exit t)
+    ("a" tide-nav "navigate" :column "nav")
+    ("r" tide-references "find references")
+    ("d" tide-jump-to-definition "jump to def")
+
+    ("e" tide-project-errors "project errors" :column "info")
+    ("h" tide-documentation-at-point "doc at point")
+
+    ("R" tide-refactor "refactor" :column "refactor")
+    ("n" tide-rename-symbol "rename symbol")
+    ("N" tide-rename-file "rename file")
+    ("o" tide-organize-imports "organize imports")
+    ("f" tide-fix "fix")
+    ("=" tide-format "format")
+
+    ("j" tide-jsdoc-template "insert jsdoc" :column "insert")
+    ("l" tide-add-tslint-disable-next-line "tslint disable next line")
+
+    ("v" tide-verify-setup "verify setup" :column "setup")
+    ("S" tide-restart-server "restart server"))
 
   (evil-define-key 'normal tide-mode-map (kbd "RET") #'/bindings/tide/hydra/body)
   (evil-define-key 'normal tide-mode-map (kbd "g r") #'tide-rename-symbol)
+  (evil-define-key 'normal tide-mode-map (kbd "K") #'tide-documentation-at-point)
 
   (evil-define-key 'normal tide-references-mode-map
     (kbd "j") #'tide-find-next-reference
