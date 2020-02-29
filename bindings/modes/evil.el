@@ -85,8 +85,10 @@
 
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" #'helpful-at-point)
-  (after "elisp-slime-nav-autoloads"
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point))
+  (add-hook 'elisp-slime-nav-mode-hook
+            (lambda ()
+              (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point)
+              (evil-define-key 'normal elisp-slime-nav-mode-map "K" #'helpful-at-point)))
 
   (after 'coffee-mode
     (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
