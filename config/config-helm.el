@@ -5,6 +5,7 @@
 (setq helm-buffer-max-length 40)
 
 
+
 (after 'helm-source
   (defun /helm/make-source (f &rest args)
     (let ((source-type (cadr args))
@@ -16,6 +17,11 @@
 
 
 (after 'helm
+  (if (>= emacs-major-version 27)
+      (add-to-list 'completion-styles 'flex)
+    (add-to-list 'completion-styles 'helm-flex))
+
+
   (require-package 'helm-descbinds)
 
 
