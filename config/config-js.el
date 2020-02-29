@@ -17,8 +17,7 @@
   :group 'dotemacs-js)
 
 (defcustom dotemacs-js/use-lsp
-  (or (executable-find "javascript-typescript-stdio")
-      (executable-find "typescript-language-server"))
+  t
   "Enable LSP for JavaScript buffers."
   :type 'boolean
   :group 'dotemacs-js)

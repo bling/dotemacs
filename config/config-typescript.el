@@ -9,7 +9,7 @@
   :type 'boolean)
 
 (defcustom dotemacs-typescript/engine
-  'tide
+  'lsp
   "The engine to drive TypeScript."
   :type '(radio
           (const :tag "tide" tide)

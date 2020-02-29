@@ -18,14 +18,14 @@
   :type 'boolean
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/lsp-html
-  (executable-find "html-languageserver")
+(defcustom dotemacs-web/use-lsp-html
+  t
   "Whether to use LSP mode for HTML buffers."
   :type 'boolean
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/lsp-css
-  (executable-find "css-languageserver")
+(defcustom dotemacs-web/use-lsp-css
+  t
   "Whether to use LSP mode for HTML buffers."
   :type 'boolean
   :group 'dotemacs-web)
@@ -67,7 +67,7 @@
 (/boot/lazy-major-mode "\\.html?$" web-mode)
 
 
-(when dotemacs-web/lsp-css
+(when dotemacs-web/use-lsp-css
   (add-hook 'css-mode-hook #'/lsp/activate))
 
 
@@ -76,7 +76,7 @@
     (electric-pair-mode -1)
 
     (when (and (equal web-mode-content-type "html")
-               dotemacs-web/lsp-html)
+               dotemacs-web/use-lsp-html)
       (/lsp/activate))
 
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
