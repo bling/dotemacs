@@ -3,6 +3,7 @@
 
   (require-package 'lsp-mode)
   (require-package 'lsp-ui)
+  (require-package 'lsp-treemacs)
   (require-package 'company-lsp)
 
   (setq lsp-prefer-flymake nil) ;; use flycheck
@@ -11,8 +12,10 @@
 
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-header t)
+  (setq lsp-ui-doc-position 'top)
 
-  (lsp))
+  (lsp)
+  (lsp-treemacs-sync-mode t))
 
 (defun /lsp/suggest-project-root ()
   "Suggests the nearest project that is not a dependency."

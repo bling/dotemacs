@@ -65,6 +65,10 @@
               ((eq dotemacs-switch-engine 'helm)
                (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
 
+(after 'lsp-mode
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+    ("RET" lsp-command-map "lsp...")))
+
 (after "magit-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("g" #'/hydras/git/body "git...")))

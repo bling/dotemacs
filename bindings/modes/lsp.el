@@ -10,16 +10,20 @@
 
     ("r" lsp-ui-peek-find-references "peek references" :column "references")
     ("R" xref-find-references "xref references")
+    ("u" lsp-treemacs-references "usages")
 
     ("n" lsp-rename "rename" :column "refactor")
     ("=" lsp-format-buffer "format")
     ("a" lsp-ui-sideline-apply-code-actions "apply code action")
 
-    ("o" lsp-ui-imenu "outline" :column "info")
-    ("i" lsp-describe-session "session info")
+    ;; ("o" lsp-ui-imenu "outline" :column "info")
+    ("o" lsp-treemacs-symbols "outline" :column "info")
+
+    ("e" lsp-treemacs-errors-list "list" :column "errors")
 
     ("S" lsp-restart-workspace "restart workspace" :column "workspace")
-    ("w" /bindings/lsp/workspace/hydra/body "folders"))
+    ("w" /bindings/lsp/workspace/hydra/body "folders")
+    ("i" lsp-describe-session "session info"))
 
   (evil-define-key 'normal lsp-ui-mode-map (kbd "RET") #'/bindings/lsp/hydra/body)
   (evil-define-key 'normal lsp-ui-mode-map (kbd "g r") #'lsp-rename)
