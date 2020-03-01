@@ -29,11 +29,7 @@
       ;; due to a bug, buffer-undo-list is not included here, so we have to patch it in
       (advice-add #'buffer-local-variables :filter-return #'/misc/append-buffer-undo-list)
 
-      (add-to-list 'desktop-locals-to-save 'buffer-undo-list)
-      (setq desktop-path `(,dotemacs-cache-directory))
-      (setq desktop-base-file-name "emacs.desktop")
-      (setq desktop-base-lock-name "emacs.desktop.lock")
-      (desktop-save-mode t))
+      (add-to-list 'desktop-locals-to-save 'buffer-undo-list))
   (require-package 'undo-tree)
   (setq undo-tree-auto-save-history t)
   (setq undo-tree-enable-undo-in-region nil)

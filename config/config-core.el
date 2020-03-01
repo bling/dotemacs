@@ -30,6 +30,14 @@
 (savehist-mode)
 
 
+;; desktop
+(setq desktop-path `(,dotemacs-cache-directory))
+(setq desktop-base-file-name "emacs.desktop")
+(setq desktop-base-lock-name "emacs.desktop.lock")
+(setq desktop-save t)
+(desktop-save-mode t)
+
+
 ;; undo
 (setq undo-limit (* 1024 10 10))
 (setq undo-outer-limit (* 1024 10 10))
