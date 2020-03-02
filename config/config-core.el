@@ -11,9 +11,6 @@
 
 
 (setq server-auth-dir (concat dotemacs-cache-directory "server"))
-(require 'server)
-(unless (server-running-p)
-  (server-start))
 
 
 ;; move cursor to the last position upon open
