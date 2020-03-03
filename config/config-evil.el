@@ -12,7 +12,9 @@
 (defcustom dotemacs-evil/emacs-state-major-modes
   '(calculator-mode
     eshell-mode
-    makey-key-mode)
+    makey-key-mode
+    shell-mode
+    term-mode)
   "List of major modes that should default to Emacs state."
   :type '(repeat (symbol))
   :group 'dotemacs-evil)
@@ -125,6 +127,7 @@
 
 (require-package 'evil-avy)
 (evil-avy-mode)
+(add-hook 'magit-status-mode-hook (lambda () (evil-avy-mode -1)))
 
 
 (require-package 'evil-matchit)
