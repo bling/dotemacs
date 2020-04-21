@@ -17,7 +17,7 @@
 
 (defcustom dotemacs-eshell/visual-commands
   '("ssh" "htop" "top" "tail" "tmux")
-  "Turns on additional git information in the prompt."
+  "A list of commands that present their output in a visual fashion."
   :group 'dotemacs-eshell
   :type '(repeat string))
 

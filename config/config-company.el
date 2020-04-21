@@ -22,7 +22,13 @@
 
   (setq company-global-modes
         '(not
-          eshell-mode comint-mode text-mode erc-mode))
+          comint-mode
+          erc-mode
+          eshell-mode
+          term-char-mode
+          term-line-mode
+          term-mode
+          text-mode))
 
   (global-company-mode)
 

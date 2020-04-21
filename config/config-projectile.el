@@ -17,11 +17,11 @@
 (cond
  ((executable-find "rg")
   (setq projectile-generic-command
-        (concat "rg -0 --files --color never "
+        (concat "rg -0 --hidden --files --color never "
                 (mapconcat (lambda (dir) (concat "--glob " "'!" dir "'")) projectile-globally-ignored-directories " "))))
  ((executable-find "ag")
   (setq projectile-generic-command
-        (concat "ag -0 -l --nocolor "
+        (concat "ag -0 -l --hidden --nocolor "
                 (mapconcat (lambda (dir) (concat "--ignore-dir=" dir)) projectile-globally-ignored-directories " "))))
  ((executable-find "ack")
   (setq projectile-generic-command
