@@ -1,6 +1,24 @@
+(defgroup dotemacs-lsp nil
+  "Configuration options for LSP."
+  :group 'dotemacs
+  :prefix 'dotemacs-lsp)
+
+(defcustom dotemacs-lsp/inhibit-paths '("node_modules")
+  "A list of paths that should not activate LSP."
+  :type '(repeat string)
+  :group 'dotemacs-lsp)
+
+
+
 (defun /lsp/activate ()
   (interactive)
+  (unless (seq-filter
+           (lambda (path)
+             (string-match-p path (buffer-file-name)))
+           dotemacs-lsp/inhibit-paths)
+    (/lsp/do-activate)))
 
+(defun /lsp/do-activate ()
   (require-package 'lsp-mode)
   (require-package 'lsp-ui)
   (require-package 'lsp-treemacs)
