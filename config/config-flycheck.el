@@ -1,6 +1,7 @@
 (require-package 'flycheck)
 
 (setq flycheck-standard-error-navigation t)
+(setq flycheck-temp-prefix (concat dotemacs-cache-directory "flycheck/"))
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc html-tidy))
 
 (after 'web-mode
