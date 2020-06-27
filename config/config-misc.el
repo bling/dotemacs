@@ -67,7 +67,7 @@
 (when (executable-find "ag")
   (require-package 'ag)
   (setq ag-highlight-search t)
-  (setq ag-ignore-list dotemacs-globally-ignored-directories)
+  (setq-default ag-ignore-list dotemacs-globally-ignored-directories)
   (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
   (require-package 'wgrep-ag))
 
