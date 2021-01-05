@@ -1,30 +1,19 @@
-(require-package 'ivy)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-virtual-abbreviate 'full)
-(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-(setq ivy-height 16)
-(setq ivy-display-style 'fancy)
-(setq ivy-count-format "[%d/%d] ")
-(setq ivy-initial-inputs-alist nil)
-
-
-(require-package 'swiper)
-(after 'swiper
-  (defadvice swiper (before dotemacs activate)
-    (setq gc-cons-threshold most-positive-fixnum))
-  (defadvice swiper-all (before dotemacs activate)
-    (setq gc-cons-threshold most-positive-fixnum)))
-
-
-(require-package 'counsel)
-
-
-(after "projectile-autoloads"
-  (require-package 'counsel-projectile))
-
-
-
 (after 'ivy
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-virtual-abbreviate 'full)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-height 16)
+  (setq ivy-display-style 'fancy)
+  (setq ivy-count-format "[%d/%d] ")
+  (setq ivy-initial-inputs-alist nil)
+
+  (require-package 'swiper)
+  (after 'swiper
+    (defadvice swiper (before dotemacs activate)
+      (setq gc-cons-threshold most-positive-fixnum))
+    (defadvice swiper-all (before dotemacs activate)
+      (setq gc-cons-threshold most-positive-fixnum)))
+
   (defvar /ivy/mini/buffers nil)
   (defvar /ivy/mini/project-files nil)
   (defvar /ivy/mini/recentf-files nil)
@@ -45,12 +34,12 @@
        :caller '/ivy/mini
        :action (lambda (f)
                  (with-ivy-window
-                   (cond ((member f /ivy/mini/buffers)
-                          (switch-to-buffer f))
-                         ((file-exists-p f)
-                          (find-file f))
-                         (t
-                          (find-file (concat (projectile-project-root) f)))))))))
+                  (cond ((member f /ivy/mini/buffers)
+                         (switch-to-buffer f))
+                        ((file-exists-p f)
+                         (find-file f))
+                        (t
+                         (find-file (concat (projectile-project-root) f)))))))))
 
   (ivy-set-display-transformer
    '/ivy/mini
@@ -66,8 +55,13 @@
 
 
 (defun /ivy/activate-as-switch-engine (on)
+  (require-package 'ivy)
+  (require-package 'counsel)
+  (require-package 'counsel-projectile)
+
   (if on
       (progn
+        (setq projectile-completion-system 'ivy)
         (counsel-mode t)
         (counsel-projectile-mode t)
         (ivy-mode t))

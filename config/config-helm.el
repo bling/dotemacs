@@ -1,11 +1,3 @@
-(require-package 'helm)
-
-
-(setq helm-bookmark-show-location t)
-(setq helm-buffer-max-length 40)
-
-
-
 (after 'helm-source
   (defun /helm/make-source (f &rest args)
     (let ((source-type (cadr args))
@@ -17,6 +9,10 @@
 
 
 (after 'helm
+  (setq helm-bookmark-show-location t)
+  (setq helm-buffer-max-length 40)
+
+
   (if (>= emacs-major-version 27)
       (add-to-list 'completion-styles 'flex)
     (add-to-list 'completion-styles 'helm-flex))
@@ -80,8 +76,11 @@
   (helm-autoresize-mode t))
 
 (defun /helm/activate-as-switch-engine (on)
+  (require-package 'helm)
+
   (if on
       (progn
+        (setq projectile-completion-system 'helm)
         (global-set-key [remap execute-extended-command] #'helm-M-x)
         (global-set-key [remap find-file] #'helm-find-files)
         (helm-mode t))
