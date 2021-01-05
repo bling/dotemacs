@@ -19,6 +19,11 @@
            ((executable-find "rg") (counsel-projectile-rg))
            ((executable-find "ack") (counsel-ack))
            (t (counsel-grep))))
+         ((eq dotemacs-switch-engine 'selectrum)
+          (cond
+           ((executable-find "rg") (consult-ripgrep))
+           ((and (executable-find "git") (vc-git-root default-directory)) (consult-git-grep))
+           (t (consult-grep))))
          ((eq dotemacs-switch-engine 'helm)
           (cond
            ((executable-find "ag") (helm-projectile-ag))
@@ -35,6 +40,8 @@
                    (call-interactively #'helm-projectile))
                   ((eq dotemacs-switch-engine 'ivy)
                    (call-interactively #'counsel-projectile))
+                  ((eq dotemacs-switch-engine 'selectrum)
+                   (call-interactively #'projectile-find-file-dwim))
                   (t
                    (call-interactively #'projectile-find-file-dwim)))))))
 

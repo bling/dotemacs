@@ -4,7 +4,6 @@
 (setq projectile-known-projects-file (concat dotemacs-cache-directory "projectile-bookmarks.eld"))
 (setq projectile-indexing-method 'alien)
 (setq projectile-enable-caching t)
-(setq projectile-completion-system dotemacs-switch-engine)
 (setq projectile-files-cache-expire (* 60 60 24 14)) ;; 2 weeks
 
 (after 'helm-projectile

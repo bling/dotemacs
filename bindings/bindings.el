@@ -60,10 +60,13 @@
   ("5" ctl-x-5-map)
   ("'" #'/eshell/new-split "shell")
   ("y" (bind
-        (cond ((eq dotemacs-switch-engine 'ivy)
-               (call-interactively #'counsel-yank-pop))
-              ((eq dotemacs-switch-engine 'helm)
-               (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
+        (cond
+         ((eq dotemacs-switch-engine 'ivy)
+          (call-interactively #'counsel-yank-pop))
+         ((eq dotemacs-switch-engine 'selectrum)
+          (call-interactively #'consult-yank-pop))
+         ((eq dotemacs-switch-engine 'helm)
+          (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
 
 (after 'lsp-mode
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
@@ -76,6 +79,10 @@
 (after "counsel-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("i" #'/hydras/ivy/body "ivy...")))
+
+(after "consult-autoloads"
+  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+    ("c" #'/hydras/consult/body "consult...")))
 
 (after "helm-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
