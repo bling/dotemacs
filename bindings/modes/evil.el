@@ -10,7 +10,7 @@
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
-  (/bindings/define-keys evil-normal-state-map ("g d" #'dumb-jump-go))
+  (/bindings/define-keys evil-normal-state-map ("g d" #'xref-find-definitions))
 
   (require-package 'key-chord)
   (key-chord-mode 1)

@@ -48,9 +48,8 @@
 
 
 (require-package 'dumb-jump)
-(after [evil dumb-jump]
-  (defadvice dumb-jump-go (before dotemacs activate)
-    (evil-set-jump)))
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(add-hook 'dumb-jump-after-jump-hook #'evil-set-jump)
 
 
 (require-package 'wgrep)
