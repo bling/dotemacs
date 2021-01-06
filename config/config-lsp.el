@@ -22,7 +22,6 @@
   (require-package 'lsp-mode)
   (require-package 'lsp-ui)
   (require-package 'lsp-treemacs)
-  (require-package 'company-lsp)
 
   (setq lsp-prefer-flymake nil) ;; use flycheck
   (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))

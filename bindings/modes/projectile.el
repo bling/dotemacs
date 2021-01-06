@@ -1,4 +1,6 @@
 (after "projectile-autoloads"
+  (global-set-key (kbd "C-c p") projectile-command-map)
+
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("p" #'projectile-command-map "projectile...")
     ("/"
@@ -39,7 +41,7 @@
             (cond ((eq dotemacs-switch-engine 'helm)
                    (call-interactively #'helm-projectile))
                   ((eq dotemacs-switch-engine 'ivy)
-                   (call-interactively #'counsel-projectile))
+                   (call-interactively #'counsel-projectile-find-file-dwim))
                   ((eq dotemacs-switch-engine 'selectrum)
                    (call-interactively #'projectile-find-file-dwim))
                   (t

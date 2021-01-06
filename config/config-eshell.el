@@ -16,7 +16,7 @@
   :type 'boolean)
 
 (defcustom dotemacs-eshell/visual-commands
-  '("ssh" "htop" "top" "tail" "tmux")
+  '("ssh" "htop" "top" "tail" "tmux" "vtop")
   "A list of commands that present their output in a visual fashion."
   :group 'dotemacs-eshell
   :type '(repeat string))
