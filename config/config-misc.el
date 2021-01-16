@@ -19,6 +19,7 @@
 (setq request-storage-directory (concat dotemacs-cache-directory "request/"))
 
 
+(require-package 'undo-tree)
 (if dotemacs-misc/inhibit-undo-tree
     (after 'evil-integration
       (global-undo-tree-mode -1)

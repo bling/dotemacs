@@ -1,8 +1,8 @@
-(after 'selectrum
+(defun /selectrum/init ()
+  (require-package 'selectrum)
   (setq selectrum-num-candidates-displayed 16)
   (setq selectrum-count-style 'current/matches)
 
-  (require-package 'selectrum)
   (require-package 'selectrum-prescient)
   (require-package 'marginalia)
 
@@ -18,16 +18,15 @@
 
 
 (defun /selectrum/activate-as-switch-engine (on)
+  (/selectrum/init)
   (if on
       (progn
         (setq projectile-completion-system 'default)
         (selectrum-mode t)
         (selectrum-prescient-mode t)
         (prescient-persist-mode t)
-        (consult-preview-mode t)
         (marginalia-mode t))
     (marginalia-mode -1)
-    (consult-preview-mode -1)
     (prescient-persist-mode -1)
     (selectrum-prescient-mode -1)
     (selectrum-mode -1)))
