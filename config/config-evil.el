@@ -120,11 +120,6 @@
 (require 'evil-anzu)
 
 
-(after 'magit
-  (require-package 'evil-magit)
-  (require 'evil-magit))
-
-
 (require-package 'evil-avy)
 (evil-avy-mode)
 (add-hook 'magit-status-mode-hook (lambda () (evil-avy-mode -1)))
