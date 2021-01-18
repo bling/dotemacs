@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-eyecandy nil
   "Configuration options for eye candy."
   :group 'dotemacs

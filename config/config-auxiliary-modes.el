@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (/boot/lazy-major-mode "Dockerfile$" dockerfile-mode)
 (/boot/lazy-major-mode "\\.\\(md\\|markdown\\)$" markdown-mode)
 (/boot/lazy-major-mode "\\.csv$" csv-mode)

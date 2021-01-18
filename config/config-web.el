@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-web nil
   "Configuration options for web."
   :group 'dotemacs

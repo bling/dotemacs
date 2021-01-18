@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-spelling nil
   "Configuration options for spelling."
   :group 'dotemacs
@@ -12,7 +14,6 @@
 (when (or (executable-find "aspell")
           (executable-find "ispell")
           (executable-find "hunspell"))
-  (eval-when-compile (require 'cl))
   (add-hook 'after-change-major-mode-hook
             (lambda ()
               (when (cl-find-if #'derived-mode-p dotemacs-spelling/major-modes)

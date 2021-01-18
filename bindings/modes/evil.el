@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'evil-evilified-state
   (/bindings/define-keys evil-evilified-state-map
     ("g b" #'/hydras/buffers/lambda-b-and-exit)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-vcs nil
   "Configuration options for version control."
   :group 'dotemacs

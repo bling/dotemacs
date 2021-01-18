@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (require-package 'which-key)
 (setq which-key-idle-delay 0.2)
 (setq which-key-min-display-lines 3)

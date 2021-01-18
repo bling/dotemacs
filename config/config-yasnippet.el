@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (/boot/delayed-init
  (require-package 'yasnippet)
 

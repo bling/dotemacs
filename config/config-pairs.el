@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defun /pairs/init-smartparens ()
   (require-package 'smartparens)
   (require 'smartparens-config)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (add-hook 'csharp-mode-hook
           (lambda ()
             (require-package 'omnisharp)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-lsp nil
   "Configuration options for LSP."
   :group 'dotemacs

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'org
   (defgroup dotemacs-org nil
     "Configuration options for org-mode."

@@ -1,4 +1,4 @@
-(eval-when-compile (require 'cl))
+;; -*- lexical-binding: t -*-
 
 (let ((base (concat user-emacs-directory "elisp/")))
   (add-to-list 'load-path base)

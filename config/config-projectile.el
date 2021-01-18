@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (require-package 'projectile)
 
 (setq projectile-cache-file (concat dotemacs-cache-directory "projectile.cache"))

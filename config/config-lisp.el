@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-lisp nil
   "Configuration options for lisp."
   :group 'dotemacs

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'lsp-ui
   (defhydra /bindings/lsp/workspace/hydra (:exit t)
     ("a" lsp-workspace-folders-add "add folder" :column "workspace")

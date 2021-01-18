@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-eshell nil
   "Configuration options for eshell-mode."
   :group 'dotemacs
@@ -110,12 +112,11 @@
     (add-to-list 'eshell-visual-commands cmd)))
 
 
-(eval-when-compile (require 'cl))
-(lexical-let ((count 0))
+(let ((count 0))
   (defun /eshell/new-split ()
     (interactive)
     (split-window)
-    (eshell (incf count))))
+    (eshell (cl-incf count))))
 
 
 (after "magit-autoloads"

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (when (eq dotemacs-completion-engine 'auto-complete)
   (require-package 'auto-complete)
 

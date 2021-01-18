@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-core nil
   "Configuration options for core Emacs functionality."
   :group 'dotemacs

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'company
   (define-key company-active-map (kbd "<backtab>") #'company-select-previous)
   (define-key company-active-map (kbd "<tab>") #'company-select-next)

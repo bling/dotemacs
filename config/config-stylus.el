@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (add-to-list 'auto-mode-alist
              '("\\.styl$" . (lambda ()
                               (require-package 'stylus-mode)

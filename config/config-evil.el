@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-evil nil
   "Configuration options for evil-mode."
   :group 'dotemacs

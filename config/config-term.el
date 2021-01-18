@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (require-package 'xterm-color)
 (require 'xterm-color)
 

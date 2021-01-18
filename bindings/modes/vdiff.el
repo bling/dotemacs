@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'vdiff
   (define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map)
   (define-key vdiff-3way-mode-map (kbd "C-c") vdiff-mode-prefix-map))

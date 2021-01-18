@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-typescript nil
   "Configuration options for TypeScript."
   :group 'dotemacs

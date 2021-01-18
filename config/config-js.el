@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-js nil
   "Configuration options for Javascript."
   :group 'dotemacs

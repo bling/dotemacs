@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (add-hook 'clojure-mode-hook
           (lambda ()
             (require-package 'cider)

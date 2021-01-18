@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (setq ido-enable-prefix nil)
 (setq ido-use-virtual-buffers t)
 (setq ido-enable-flex-matching t)

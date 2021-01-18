@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defun /selectrum/init ()
   (require-package 'selectrum)
   (setq selectrum-num-candidates-displayed 16)

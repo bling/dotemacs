@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after "projectile-autoloads"
   (global-set-key (kbd "C-c p") projectile-command-map)
 

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'helm-source
   (defun /helm/make-source (f &rest args)
     (let ((source-type (cadr args))
@@ -21,8 +23,8 @@
   (require-package 'helm-descbinds)
 
 
-  (require-package 'helm-flx)
-  (helm-flx-mode t)
+  ;; (require-package 'helm-flx)
+  ;; (helm-flx-mode t)
 
 
   (require-package 'helm-dash)

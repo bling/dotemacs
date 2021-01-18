@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after [evil tide hydra]
   (defhydra /bindings/tide/hydra (:exit t)
     ("a" tide-nav "navigate" :column "nav")

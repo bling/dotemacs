@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (after 'ivy
   (setq ivy-use-virtual-buffers t)
   (setq ivy-virtual-abbreviate 'full)

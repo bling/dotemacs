@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-explorer nil
   "Configuration options for file explorers."
   :group 'dotemacs

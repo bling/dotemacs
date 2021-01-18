@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-misc nil
   "Configuration options for miscellaneous."
   :group 'dotemacs
