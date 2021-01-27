@@ -57,9 +57,9 @@
     :type '(repeat string)
     :group 'dotemacs)
 
-  (setq package-archives '(("melpa" . "http://melpa.org/packages/")
-                           ("org" . "http://orgmode.org/elpa/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("org" . "https://orgmode.org/elpa/")
+                           ("gnu" . "https://elpa.gnu.org/packages/")))
   (setq package-enable-at-startup nil)
   (package-initialize)
 
