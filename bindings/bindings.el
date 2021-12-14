@@ -65,7 +65,7 @@
         (cond
          ((eq dotemacs-switch-engine 'ivy)
           (call-interactively #'counsel-yank-pop))
-         ((eq dotemacs-switch-engine 'selectrum)
+         ((eq dotemacs-switch-engine 'consult)
           (call-interactively #'consult-yank-pop))
          ((eq dotemacs-switch-engine 'helm)
           (call-interactively #'helm-show-kill-ring)))) "kill-ring"))

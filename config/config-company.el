@@ -34,14 +34,6 @@
 
   (global-company-mode)
 
-  (require-package 'prescient)
-  (setq prescient-filter-method '(literal regexp initialism fuzzy))
-  (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
-  (setq prescient-history-length 500)
-
-  (require-package 'company-prescient)
-  (company-prescient-mode t)
-
   ;; (when (display-graphic-p)
   ;;   (require-package 'company-quickhelp)
   ;;   (setq company-quickhelp-delay 0.2)

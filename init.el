@@ -34,11 +34,11 @@
     :group 'dotemacs)
 
   (defcustom dotemacs-switch-engine
-    'selectrum
+    'consult
     "The primary engine to use for narrowing and navigation."
     :type '(radio
             (const :tag "helm" helm)
-            (const :tag "selectrum" selectrum)
+            (const :tag "consult" consult)
             (const :tag "ido" ido)
             (const :tag "ivy" ivy))
     :group 'dotemacs)

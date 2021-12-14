@@ -7,8 +7,8 @@
     (call-interactively (plist-get props :ivy)))
    ((and (eq dotemacs-switch-engine 'helm) (plist-get props :helm))
     (call-interactively (plist-get props :helm)))
-   ((and (eq dotemacs-switch-engine 'selectrum) (plist-get props :selectrum))
-    (call-interactively (plist-get props :selectrum)))
+   ((and (eq dotemacs-switch-engine 'consult) (plist-get props :consult))
+    (call-interactively (plist-get props :consult)))
    (t
     (if fallback
         (call-interactively fallback)
@@ -60,7 +60,7 @@
   ("k" kill-this-buffer)
   ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'/helm/everything :selectrum #'consult-buffer))
+  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'/helm/everything :consult #'consult-buffer))
   ("e" erase-buffer)
   ("E" (let ((inhibit-read-only t)) (erase-buffer))))
 
@@ -71,9 +71,9 @@
    jump   _i_ → outline in current buffer   _l_ → lines in current buffer
           _b_ → bookmarks                   _L_ → lines in all buffers
 "
-  ("i" (/hydras/switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu :selectrum #'consult-imenu))
-  ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-swoop             :selectrum #'consult-line))
-  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all   :selectrum #'consult-line))
+  ("i" (/hydras/switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu :consult #'consult-imenu))
+  ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-swoop             :consult #'consult-line))
+  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all   :consult #'consult-line))
   ("b" bookmark-jump))
 
 
@@ -111,7 +111,7 @@
   ("D" /utils/delete-current-buffer-file)
   ("R" /utils/rename-current-buffer-file)
   ("f" (/hydras/switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
-  ("r" (/hydras/switch-action nil         :ivy #'counsel-recentf   :helm #'helm-recentf    :selectrum #'consult-recent-file))
+  ("r" (/hydras/switch-action nil         :ivy #'counsel-recentf   :helm #'helm-recentf    :consult #'consult-recent-file))
   ("y" /utils/copy-file-name-to-clipboard)
   ("E" /utils/find-file-as-root)
   ("c" copy-file)
@@ -130,13 +130,13 @@
 (defhydra /hydras/toggles/switch-engine (:hint nil :exit t)
   "
    engine:  _h_ → helm
-            _s_ → selectrum
+            _c_ → consult
             _i_ → ivy
             _o_ → ido
 "
   ("h" (/hydras/toggles/activate-switch-engine 'helm))
   ("i" (/hydras/toggles/activate-switch-engine 'ivy))
-  ("s" (/hydras/toggles/activate-switch-engine 'selectrum))
+  ("c" (/hydras/toggles/activate-switch-engine 'consult))
   ("o" (/hydras/toggles/activate-switch-engine 'ido)))
 
 (defvar /hydras/toggles/vdiff nil)
