@@ -9,15 +9,13 @@
   (add-to-list 'orderless-matching-styles 'orderless-flex)
 
   (require-package 'consult)
-  (setq consult-project-root-function #'projectile-project-root)
 
   (after 'projectile
     (require-package 'consult-projectile)
     (require 'consult-projectile))
 
   (after 'lsp-mode
-    (require-package 'consult-lsp)
-    (consult-lsp-marginalia-mode t)))
+    (require-package 'consult-lsp)))
 
 (defun /consult/activate-as-switch-engine (on)
   (/consult/init)
