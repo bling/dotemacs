@@ -108,7 +108,8 @@
     (spaceline-helm-mode)))
  ((eq dotemacs-eyecandy/mode-line 'doom)
   (require-package 'doom-modeline)
-  (doom-modeline-init)))
+  (require 'doom-modeline)
+  (doom-modeline-mode t)))
 
 
 (when (fboundp 'global-prettify-symbols-mode)
