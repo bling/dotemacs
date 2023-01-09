@@ -59,7 +59,7 @@
   ("o" #'/hydras/jumps/lambda-i-and-exit "outline")
   ("v" vc-prefix-map)
   ("4" ctl-x-4-map)
-  ("5" ctl-x-5-map)
+  ("5" ctl-x-5-map "frames...")
   ("'" #'/eshell/new-split "shell")
   ("y" (bind
         (cond
