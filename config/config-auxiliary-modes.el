@@ -9,5 +9,6 @@
 (/boot/lazy-major-mode "\\.toml$" toml-mode)
 (/boot/lazy-major-mode "\\.vim$" vimrc-mode)
 (/boot/lazy-major-mode "\\.yaml$" yaml-mode)
+(/boot/lazy-major-mode "\\.rego$" rego-mode)
 
 (provide 'config-auxiliary-modes)
