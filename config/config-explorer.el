@@ -36,23 +36,14 @@
 
    (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
      (after 'treemacs
-       (require 'all-the-icons)
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "csharp-line") "cs")
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "css3") "css")
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "git") "gitignore")
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "html5") "html" "htm")
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "java") "java")
-       (treemacs-define-custom-icon (all-the-icons-alltheicon "javascript") "js")
-       (treemacs-define-custom-icon (all-the-icons-fileicon "elisp") "el" "elc")
-       (treemacs-define-custom-icon (all-the-icons-fileicon "jsx-2") "jsx")
-       (treemacs-define-custom-icon (all-the-icons-fileicon "org") "org")
-       (treemacs-define-custom-icon (all-the-icons-fileicon "typescript") "ts")
-       (treemacs-define-custom-icon (all-the-icons-octicon "markdown") "md")
-       (treemacs-define-custom-icon (all-the-icons-octicon "settings") "json" "yaml" "yml" "ini")
-       (treemacs-define-custom-icon (all-the-icons-octicon "file-media") "ico" "png" "jpg" "jpeg" "svg")))
+       (require-package 'treemacs-all-the-icons)
+       (require 'treemacs-all-the-icons)))
 
    (after 'treemacs
      (when (executable-find "git")
+       (require-package 'treemacs-magit)
+       (require 'treemacs-magit)
+
        (if (executable-find "python3")
            (treemacs-git-mode 'extended)
          (treemacs-git-mode 'simple))))
