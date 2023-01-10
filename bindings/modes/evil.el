@@ -48,16 +48,6 @@
     ("C-b" #'evil-scroll-up)
     ("C-f" #'evil-scroll-down))
 
-  (/bindings/define-keys evil-normal-state-map
-    ("[ SPC" (bind (evil-insert-newline-above) (forward-line)))
-    ("] SPC" (bind (evil-insert-newline-below) (forward-line -1)))
-    ("[ e" "ddkP")
-    ("] e" "ddp")
-    ("[ b" 'previous-buffer)
-    ("] b" 'next-buffer)
-    ("[ q" 'previous-error)
-    ("] q" 'next-error))
-
   (global-set-key (kbd "C-w") 'evil-window-map)
   (after 'evil-evilified-state
     (/bindings/define-keys evil-evilified-state-map
@@ -136,19 +126,17 @@
               (local-set-key (kbd "C-l") #'evil-window-right)))
 
   (require-package 'evil-collection)
-  (setq evil-collection-company-use-tng nil)
   (add-hook 'evil-collection-setup-hook
             (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)
               ;; removes any bindings to SPC and , since they are global prefix keys
-              ;; [ and ] are rebound to [[ and ]] respectively so global style vim-unimpaired mappings remain
               (evil-collection-translate-key 'normal mode-keymaps
                 (kbd "SPC") nil
                 "," nil
-                "[" nil
-                "]" nil
-                "[[" "["
-                "]]" "]"
                 )))
-  (evil-collection-init))
+  (evil-collection-init)
+
+  ;; fix compilation-mode integration
+  (advice-add #'evil-collection-unimpaired-next-error :override #'next-error)
+  (advice-add #'evil-collection-unimpaired-prev-error :override #'previous-error))
 
 (provide 'config-bindings-evil)
