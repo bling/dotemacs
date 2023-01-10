@@ -165,6 +165,10 @@
   (setq all-the-icons-scale-factor 0.7)
   (setq inhibit-compacting-font-caches t)
 
+  (after 'ibuffer
+    (require-package 'all-the-icons-ibuffer)
+    (add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode))
+
   (after 'dired
     (require-package 'all-the-icons-dired)
     (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
