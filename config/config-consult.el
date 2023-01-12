@@ -14,6 +14,9 @@
     (require-package 'consult-projectile)
     (require 'consult-projectile))
 
+  (after 'eglot
+    (require-package 'consult-eglot))
+
   (after 'lsp-mode
     (require-package 'consult-lsp)))
 

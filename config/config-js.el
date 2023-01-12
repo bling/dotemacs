@@ -10,7 +10,7 @@
   :type 'integer
   :group 'dotemacs-js)
 
-(defcustom dotemacs-js/engine
+(defcustom dotemacs-js/mode
   'js
   "The major mode to drive JavaScript."
   :type '(radio
@@ -18,25 +18,32 @@
           (const :tag "js2-mode" js2-mode))
   :group 'dotemacs-js)
 
-(defcustom dotemacs-js/use-lsp
-  t
-  "Enable LSP for JavaScript buffers."
-  :type 'boolean
+(defcustom dotemacs-js/engine
+  nil
+  "Whether to activate enhanced LSP functionalities."
+  :type '(radio
+          (const :tag "none" nil)
+          (const :tag "lsp" lsp)
+          (const :tag "eglot" eglot))
   :group 'dotemacs-js)
 
 
 
 (setq js-indent-level dotemacs-js/indent-offset)
 
-(when (eq dotemacs-js/engine 'js2)
+(when (eq dotemacs-js/mode 'js2)
   (defun /js/activate-js2 ()
     (require-package 'js2-mode)
     (js2-jsx-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx?$" . /js/activate-js2)))
 
-(when dotemacs-js/use-lsp
+(cond
+ ((eq dotemacs-js/engine 'lsp)
   (add-hook 'js-mode-hook #'/lsp/activate)
   (add-hook 'js-jsx-mode-hook #'/lsp/activate))
+ ((eq dotemacs-js/engine 'eglot)
+  (add-hook 'js-mode-hook #'/eglot/activate)
+  (add-hook 'js-jsx-mode-hook #'/eglot/activate)))
 
 (after 'js2-mode
   (setq js2-highlight-level 3)

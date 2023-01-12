@@ -15,6 +15,7 @@
   "The engine to drive TypeScript."
   :type '(radio
           (const :tag "tide" tide)
+          (const :tag "eglot" eglot)
           (const :tag "lsp" lsp))
   :group 'dotemacs-typescript)
 
@@ -33,6 +34,8 @@
     (tide-setup)
     (tide-hl-identifier-mode t)
     (eldoc-mode t))
+   ((eq dotemacs-typescript/engine 'eglot)
+    (/eglot/activate))
    ((eq dotemacs-typescript/engine 'lsp)
     (/lsp/activate))))
 
@@ -50,6 +53,12 @@
 (after 'web-mode
   (define-derived-mode typescript-tsx-mode web-mode "typescript-tsx")
   (add-hook 'typescript-tsx-mode-hook #'/typescript/setup))
+
+(when (eq dotemacs-typescript/engine 'eglot)
+  (after [eglot]
+    (add-to-list 'eglot-server-programs
+                 '(typescript-tsx-mode "typescript-language-server" "--stdio"))))
+
 (add-to-list
  'auto-mode-alist
  '("\\.tsx$" . (lambda ()

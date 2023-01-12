@@ -20,16 +20,22 @@
   :type 'boolean
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/use-lsp-html
-  t
-  "Whether to use LSP mode for HTML buffers."
-  :type 'boolean
+(defcustom dotemacs-web/html-engine
+  nil
+  "Whether to activate enhanced LSP functionalities for HTML."
+  :type '(radio
+          (const :tag "none" nil)
+          (const :tag "eglot" eglot)
+          (const :tag "lsp" lsp))
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/use-lsp-css
-  t
-  "Whether to use LSP mode for HTML buffers."
-  :type 'boolean
+(defcustom dotemacs-web/css-engine
+  nil
+  "Whether to activate enhanced LSP functionalities for CSS."
+  :type '(radio
+          (const :tag "none" nil)
+          (const :tag "eglot" eglot)
+          (const :tag "lsp" lsp))
   :group 'dotemacs-web)
 
 
@@ -69,17 +75,23 @@
 (/boot/lazy-major-mode "\\.html?$" web-mode)
 
 
-(when dotemacs-web/use-lsp-css
+(cond
+ ((eq dotemacs-web/html-engine 'lsp)
   (add-hook 'css-mode-hook #'/lsp/activate))
+ ((eq dotemacs-web/html-engine 'eglot)
+  (add-hook 'css-mode-hook #'/eglot/activate)))
 
 
 (after 'web-mode
   (defun /web/web-mode-hook ()
     (electric-pair-mode -1)
 
-    (when (and (equal web-mode-content-type "html")
-               dotemacs-web/use-lsp-html)
-      (/lsp/activate))
+    (when (equal web-mode-content-type "html")
+      (cond
+       ((eq dotemacs-web/html-engine 'lsp)
+        (/lsp/activate))
+       ((eq dotemacs-web/html-engine 'eglot)
+        (/eglot/activate))))
 
     (setq web-mode-enable-auto-quoting (not (equal web-mode-content-type "jsx"))))
 
