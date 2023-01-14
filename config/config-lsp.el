@@ -29,9 +29,14 @@
   (setq lsp-keep-workspace-alive nil)
   (setq read-process-output-max (* 1024 1024))
 
+  (setq lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-sideline-delay 0.5)
+
   (setq lsp-ui-doc-include-signature t)
   (setq lsp-ui-doc-header t)
   (setq lsp-ui-doc-position 'top)
+  (setq lsp-ui-doc-delay 1)
+  (setq lsp-ui-doc-show-with-cursor t)
 
   (lsp)
   (lsp-treemacs-sync-mode t))
