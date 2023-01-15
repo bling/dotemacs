@@ -22,6 +22,11 @@
   (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
   (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
 
+  (define-key evil-normal-state-map (kbd ", h f") #'helpful-function)
+  (define-key evil-normal-state-map (kbd ", h k") #'helpful-key)
+  (define-key evil-normal-state-map (kbd ", h v") #'helpful-variable)
+  (define-key evil-normal-state-map (kbd ", h x") #'helpful-command)
+
   (/bindings/define-keys evil-visual-state-map
     (", e" #'eval-region))
 

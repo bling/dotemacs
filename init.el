@@ -26,9 +26,10 @@
     :group 'dotemacs)
 
   (defcustom dotemacs-completion-engine
-    'company
+    'corfu
     "The completion engine the use."
     :type '(radio
+            (const :tag "corfu" corfu)
             (const :tag "company-mode" company)
             (const :tag "auto-complete-mode" auto-complete))
     :group 'dotemacs)

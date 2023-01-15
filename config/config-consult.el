@@ -15,7 +15,7 @@
 
 (defun /consult/init ()
   (require-package 'vertico)
-  (setq vertico-count 16)
+  (setq vertico-count 20)
 
   (require-package 'marginalia)
 
