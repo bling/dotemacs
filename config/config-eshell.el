@@ -28,7 +28,6 @@
 (setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
 (setq eshell-buffer-maximum-lines 20000)
 (setq eshell-scroll-to-bottom-on-input 'this)
-(setq eshell-buffer-shorthand t)
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
 (setq eshell-glob-case-insensitive t)
 (setq eshell-error-if-no-glob t)

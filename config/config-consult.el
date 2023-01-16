@@ -60,7 +60,6 @@
           (add-to-list 'completion-styles 'orderless))
         (when (eq dotemacs-consult/filtering 'prescient)
           (vertico-prescient-mode t))
-        (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
         (marginalia-mode t)
         (vertico-mode t))
     (setq completion-in-region-function #'completion--in-region)
@@ -68,7 +67,6 @@
       (setq completion-styles (delete 'orderless completion-styles)))
     (when (eq dotemacs-consult/filtering 'prescient)
       (vertico-prescient-mode -1))
-    (advice-remove #'completing-read-multiple #'consult-completing-read-multiple)
     (marginalia-mode -1)
     (vertico-mode -1)))
 

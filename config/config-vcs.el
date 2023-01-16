@@ -44,8 +44,6 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   (add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
 
   (setq magit-section-show-child-count t)
-  (setq magit-diff-arguments '("--histogram"))
-  (setq magit-ediff-dwim-show-on-hunks t)
   (setq magit-display-buffer-function #'magit-display-buffer-fullcolumn-most-v1)
 
   (after 'eshell
