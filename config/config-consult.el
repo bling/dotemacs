@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (defgroup dotemacs-consult nil
   "Configuration options for Consult."
   :group 'dotemacs
@@ -38,7 +40,8 @@
 
   (after 'projectile
     (require-package 'consult-projectile)
-    (require 'consult-projectile))
+    (require 'consult-projectile)
+    (add-to-list 'consult-projectile-sources 'consult-projectile--source-projectile-recentf))
 
   (after 'eglot
     (require-package 'consult-eglot))
