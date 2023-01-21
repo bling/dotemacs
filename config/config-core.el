@@ -131,6 +131,12 @@
 (midnight-delay-set 'midnight-delay 0)
 
 
+;; proced
+(setq-default proced-auto-update-flag t)
+(setq proced-auto-update-interval 1)
+(setq proced-enable-color-flag t)
+
+
 ;; ibuffer
 (setq ibuffer-expert t)
 (setq ibuffer-show-empty-filter-groups nil)
