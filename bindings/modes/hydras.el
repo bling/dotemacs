@@ -73,7 +73,7 @@
 "
   ("i" (/hydras/switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu :consult #'consult-imenu))
   ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-swoop             :consult #'consult-line))
-  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all   :consult #'consult-line))
+  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all   :consult #'consult-line-multi))
   ("b" bookmark-jump))
 
 
@@ -215,21 +215,26 @@
 
 (defhydra /hydras/consult (:hint nil :exit t)
   "
-   consult:   _a_ → apropos    _g_ → goto line    _l_ → lines
-              _b_ → mini       _y_ → kill-ring    _E_ → errors
-              _e_ → recentf    _r_ → register
-              _f_ → files      _x_ → M-x
+   consult:   _b_ → mini       _g_ → goto line      _d_ → dash
+              _e_ → recentf    _y_ → kill-ring      _E_ → errors
+              _f_ → files      _r_ → register       _x_ → M-x
+                               _l_ → lines          _t_ → themes
+                               _L_ → lines (multi)
+                               _m_ → bookmarks
 "
-  ("a" consult-apropos)
   ("b" consult-buffer)
+  ("d" consult-dash)
   ("e" consult-recent-file)
   ("E" consult-flycheck)
   ("f" find-file)
   ("g" consult-goto-line)
   ("l" consult-line)
+  ("L" consult-line-multi)
+  ("m" consult-bookmark)
   ("r" consult-register)
+  ("t" consult-theme)
   ("x" execute-extended-command)
-  ("y" consult-yank))
+  ("y" consult-yank-from-kill-ring))
 
 
 
