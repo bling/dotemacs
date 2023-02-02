@@ -5,6 +5,7 @@
   (require-package 'corfu)
   (setq corfu-auto-prefix 2)
   (setq corfu-auto t)
+  (setq corfu-cycle t)
   (global-corfu-mode t)
 
   (setq corfu-popupinfo-delay '(1.0 . 0.2))
