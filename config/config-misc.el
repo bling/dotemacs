@@ -141,7 +141,7 @@
   (require-package 'reformatter)
   (reformatter-define prettier-css :program "prettier" :args '("--parser=css"))
   (reformatter-define prettier-html :program "prettier" :args '("--parser=html"))
-  (reformatter-define prettier-javascript :program "prettier" :args '("--parser=babylon"))
+  (reformatter-define prettier-javascript :program "prettier" :args '("--parser=babel"))
   (reformatter-define prettier-json :program "prettier" :args '("--parser=json"))
   (reformatter-define prettier-markdown :program "prettier" :args '("--parser=markdown"))
   (reformatter-define prettier-typescript :program "prettier" :args '("--parser=typescript"))
