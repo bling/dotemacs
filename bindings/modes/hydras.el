@@ -215,12 +215,10 @@
 
 (defhydra /hydras/consult (:hint nil :exit t)
   "
-   consult:   _b_ → mini       _g_ → goto line      _d_ → dash
-              _e_ → recentf    _y_ → kill-ring      _E_ → errors
-              _f_ → files      _r_ → register       _x_ → M-x
-                               _l_ → lines          _t_ → themes
-                               _L_ → lines (multi)
-                               _m_ → bookmarks
+   consult:   _b_ → mini       _g_ → goto line       _y_ → kill-ring    _d_ → dash
+              _e_ → recentf    _l_ → lines           _r_ → register     _E_ → errors
+              _f_ → files      _L_ → lines (multi)   _x_ → M-x          _t_ → themes
+              _m_ → bookmarks
 "
   ("b" consult-buffer)
   ("d" consult-dash)
