@@ -55,7 +55,7 @@
 
 FEATURE may be any one of:
     'evil            => (with-eval-after-load 'evil BODY)
-    \"evil-autoloads\" => (with-eval-after-load \"evil-autolaods\" BODY)
+    \"evil-autoloads\" => (with-eval-after-load \"evil-autoloads\" BODY)
     [evil cider]     => (with-eval-after-load 'evil
                           (with-eval-after-load 'cider
                             BODY))
