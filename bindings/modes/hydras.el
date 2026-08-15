@@ -46,7 +46,7 @@
    quit:  _q_ → quit    _r_ → restart
 "
   ("q" save-buffers-kill-terminal)
-  ("r" (restart-emacs '("--debug-init"))))
+  ("r" restart-emacs))
 
 
 
@@ -57,7 +57,7 @@
               _s_ → goto scratch     _E_ → erase buffer (force)    ^ ^
 "
   ("s" /utils/goto-scratch-buffer)
-  ("k" kill-this-buffer)
+  ("k" kill-current-buffer)
   ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
   ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'/helm/everything :consult #'consult-buffer))
@@ -72,8 +72,8 @@
           _b_ → bookmarks                   _L_ → lines in all buffers
 "
   ("i" (/hydras/switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu :consult #'consult-imenu))
-  ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-swoop             :consult #'consult-line))
-  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-swoop-all   :consult #'consult-line-multi))
+  ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-occur             :consult #'consult-line))
+  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-occur-all   :consult #'consult-line-multi))
   ("b" bookmark-jump))
 
 
@@ -82,13 +82,10 @@
   "
     search     project      ^^directory    ^^buffer       ^^buffers      ^^web
                -------      ^^---------    ^^------       ^^-------      ^^---
-               _a_ → ag       _A_ → ag       _l_ → lines    _L_ → lines    _g_ → google
-               _p_ → pt       _P_ → pt
+               _r_ → rg       _R_ → rg       _l_ → lines    _L_ → lines    _g_ → google
 "
-  ("a" projectile-ag)
-  ("p" projectile-pt)
-  ("A" ag)
-  ("P" pt-regexp)
+  ("r" projectile-ripgrep)
+  ("R" ripgrep-regexp)
   ("l" /hydras/jumps/lambda-l-and-exit)
   ("L" /hydras/jumps/lambda-L-and-exit)
   ("g" /utils/google))
@@ -149,7 +146,7 @@
   ("a" aggressive-indent-mode)
   ("c" (if (eq dotemacs-completion-engine 'company)
            (call-interactively 'company-mode)
-         (call-interactively 'auto-complete-mode)))
+         (call-interactively 'corfu-mode)))
   ("t" toggle-truncate-lines)
   ("e" toggle-debug-on-error)
   ("g" toggle-debug-on-quit)
@@ -176,8 +173,8 @@
 
 (defhydra /hydras/helm (:hint nil :exit t)
   "
-   helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring  _l_ → swoop
-           _b_ → mini      _p_ → projectile  _d_ → dash       _L_ → swoop (multi)
+   helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring  _l_ → occur
+           _b_ → mini      _p_ → projectile  _d_ → dash       _L_ → occur (multi)
            _e_ → recentf   _r_ → register    _x_ → M-x
            _f_ → files     _t_ → tags
 "
@@ -191,8 +188,8 @@
   ("r" helm-register)
   ("t" helm-etags-select)
   ("x" helm-M-x)
-  ("l" helm-swoop)
-  ("L" helm-multi-swoop-all)
+  ("l" helm-occur)
+  ("L" helm-multi-occur-all)
   ("y" helm-show-kill-ring))
 
 
@@ -242,8 +239,8 @@
 
 (defhydra /hydras/git (:hint nil :exit t)
   "
-  magit: _s_ → status  _l_ → log    _f_ → file       staging: _a_ → +hunk  _A_ → +buffer      history: _t_ → time machine
-         _c_ → commit  _d_ → diff   _z_ → stash               _r_ → -hunk  _R_ → -buffer
+  magit: _s_ → status  _l_ → log    _f_ → file       staging: _a_ → +hunk  _A_ → +file        history: _t_ → time machine
+         _c_ → commit  _d_ → diff   _z_ → stash               _r_ → -hunk  _R_ → -file
          _p_ → push    _b_ → blame  _m_ → merge
 
 "
@@ -256,10 +253,10 @@
   ("c" magit-commit)
   ("m" magit-merge)
   ("p" magit-push)
-  ("a" git-gutter+-stage-hunks)
-  ("r" git-gutter+-revert-hunk)
-  ("A" git-gutter+-stage-whole-buffer)
-  ("R" git-gutter+-unstage-whole-buffer)
+  ("a" diff-hl-stage-current-hunk)
+  ("r" diff-hl-revert-hunk)
+  ("A" magit-stage-file)
+  ("R" magit-unstage-file)
   ("t" git-timemachine))
 
 

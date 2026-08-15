@@ -6,16 +6,11 @@
   (setq corfu-auto-prefix 2)
   (setq corfu-auto t)
   (setq corfu-cycle t)
+  (setq global-corfu-minibuffer nil)
   (global-corfu-mode t)
 
   (setq corfu-popupinfo-delay '(1.0 . 0.2))
   (corfu-popupinfo-mode t)
-
-  (defun /corfu/move-to-minibuffer ()
-    (interactive)
-    (let ((completion-extra-properties corfu--extra)
-          completion-cycle-threshold completion-cycling)
-      (apply #'consult-completion-in-region completion-in-region--data)))
 
   (after [prescient]
     (require-package 'corfu-prescient)
@@ -44,10 +39,12 @@
       ((derived-mode-p 'comint-mode) (comint-send-input)))))
 
   (require-package 'cape)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-dabbrev t)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-keyword)
 
   ;; workarounds for upstream bugs
-  (advice-add #'pcomplete-completions-at-point :around #'cape-wrap-silent)
-  (advice-add #'pcomplete-completions-at-point :around #'cape-wrap-purify))
+  (advice-add #'pcomplete-completions-at-point :around #'cape-wrap-silent))
+
+(provide 'config-corfu)

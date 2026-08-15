@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
+(require 'cl-lib)
+
 (defgroup dotemacs-eshell nil
   "Configuration options for eshell-mode."
   :group 'dotemacs
@@ -45,11 +47,16 @@
                        (propertize " [" 'face 'font-lock-keyword-face)
                        (propertize branch 'face 'font-lock-function-name-face)
                        (let* ((status (shell-command-to-string "git status --porcelain"))
-                              (parts (split-string status "\n" t " "))
-                              (states (mapcar #'string-to-char parts))
-                              (added (count-if (lambda (char) (= char ?A)) states))
-                              (modified (count-if (lambda (char) (= char ?M)) states))
-                              (deleted (count-if (lambda (char) (= char ?D)) states)))
+                              (lines (split-string status "\n" t))
+                              (added 0)
+                              (modified 0)
+                              (deleted 0))
+                         (dolist (line lines)
+                           (let ((x (and (> (length line) 0) (aref line 0)))
+                                 (y (and (> (length line) 1) (aref line 1))))
+                             (when (or (eq x ?A) (eq y ?A)) (cl-incf added))
+                             (when (or (eq x ?M) (eq y ?M)) (cl-incf modified))
+                             (when (or (eq x ?D) (eq y ?D)) (cl-incf deleted))))
                          (when (> (+ added modified deleted) 0)
                            (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face)))
                        (propertize "]" 'face 'font-lock-keyword-face)))))
@@ -57,8 +64,10 @@
 
 
 (when (executable-find "fortune")
-  (defadvice eshell (before dotemacs activate)
-    (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n"))))
+  (advice-add
+   'eshell :before
+   (lambda (&rest _)
+     (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n")))))
 
 
 ;; plan 9 smart shell
@@ -73,7 +82,7 @@
 (defun eshell/ff (&rest args)
   "Opens a file in emacs."
   (when (not (null args))
-    (mapc #'find-file (mapcar #'expand-file-name (eshell-flatten-list (reverse args))))))
+    (mapc #'find-file (mapcar #'expand-file-name (flatten-tree (reverse args))))))
 
 
 (defun eshell/h ()
@@ -130,8 +139,7 @@
   (let* ((directories (hash-table-keys eshell-z-freq-dir-hash-table))
          (non-existent (cl-remove-if #'file-exists-p directories)))
     (cl-loop for dir in non-existent
-             do (remhash (eshell-z--expand-directory-name dir)
-                         eshell-z-freq-dir-hash-table))
+             do (remhash dir eshell-z-freq-dir-hash-table))
     (eshell-z--write-freq-dir-hash-table)))
 
 

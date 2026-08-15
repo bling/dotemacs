@@ -6,7 +6,7 @@
   :prefix 'dotemacs-consult)
 
 (defcustom dotemacs-consult/filtering
-  'prescient
+  'orderless
   "The filtering library to use."
   :type '(radio
           (const :tag "orderless" orderless)
@@ -25,18 +25,23 @@
    ((eq dotemacs-consult/filtering 'orderless)
     (require-package 'orderless)
     (require 'orderless)
-    (add-to-list 'orderless-matching-styles 'orderless-flex))
+    (setq orderless-matching-styles
+          '(orderless-literal
+            orderless-initialism
+            orderless-regexp
+            orderless-flex)))
    ((eq dotemacs-consult/filtering 'prescient)
     (require-package 'prescient)
-    (require 'prescient)
     (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
+    (setq prescient-filter-method '(literal regexp initialism fuzzy))
     (setq prescient-persist-mode t)
-    (add-to-list 'prescient-filter-method 'fuzzy)
+    (require 'prescient)
 
     (require-package 'vertico-prescient)
     (setq vertico-prescient-override-sorting t)))
 
   (require-package 'consult)
+  (require-package 'consult-dash)
 
   (after 'projectile
     (require-package 'consult-projectile)
@@ -53,19 +58,12 @@
   (/consult/init)
   (if on
       (progn
-        (setq completion-in-region-function
-              (lambda (&rest args)
-                (apply (if vertico-mode
-                           #'consult-completion-in-region
-                         #'completion--in-region)
-                       args)))
         (when (eq dotemacs-consult/filtering 'orderless)
           (add-to-list 'completion-styles 'orderless))
         (when (eq dotemacs-consult/filtering 'prescient)
           (vertico-prescient-mode t))
         (marginalia-mode t)
         (vertico-mode t))
-    (setq completion-in-region-function #'completion--in-region)
     (when (eq dotemacs-consult/filtering 'orderless)
       (setq completion-styles (delete 'orderless completion-styles)))
     (when (eq dotemacs-consult/filtering 'prescient)

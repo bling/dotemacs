@@ -25,17 +25,20 @@
   (/os/addpath path))
 
 (when (eq system-type 'darwin)
-  (require-package 'osx-trash)
-  (osx-trash-setup)
-
-  (require-package 'reveal-in-osx-finder)
-  (require-package 'vkill))
+  (require-package 'reveal-in-osx-finder))
 
 (defun /os/reveal-in-os ()
   (interactive)
-  (if (eq system-type 'windows-nt)
+  (let ((dir (file-name-directory (or (buffer-file-name) default-directory))))
+    (cond
+     ((eq system-type 'windows-nt)
       (start-process "*explorer*" "*explorer*" "explorer.exe"
-                     (replace-regexp-in-string "/" "\\\\" (file-name-directory (buffer-file-name))))
-    (call-interactively #'reveal-in-osx-finder)))
+                     (replace-regexp-in-string "/" "\\\\" dir)))
+     ((eq system-type 'darwin)
+      (call-interactively #'reveal-in-osx-finder))
+     ((executable-find "xdg-open")
+      (start-process "*xdg-open*" nil "xdg-open" dir))
+     (t
+      (dired dir)))))
 
 (provide 'config-os)

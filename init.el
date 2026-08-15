@@ -30,8 +30,7 @@
     "The completion engine the use."
     :type '(radio
             (const :tag "corfu" corfu)
-            (const :tag "company-mode" company)
-            (const :tag "auto-complete-mode" auto-complete))
+            (const :tag "company-mode" company))
     :group 'dotemacs)
 
   (defcustom dotemacs-switch-engine
@@ -58,9 +57,11 @@
     :type '(repeat string)
     :group 'dotemacs)
 
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")
-                           ("gnu" . "https://elpa.gnu.org/packages/")))
+  (when (fboundp 'startup-redirect-eln-cache)
+    (startup-redirect-eln-cache (expand-file-name ".cache/eln-cache/" user-emacs-directory)))
+
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   (setq package-enable-at-startup nil)
   (package-initialize)
 
@@ -70,9 +71,14 @@
   (when (file-exists-p custom-file)
     (load custom-file))
 
+  ;; exclude certain patterns from native comp since they always fail
+  (after 'comp
+    (add-to-list 'native-comp-jit-compilation-deny-list "\\.el\\.gz\\'")
+    (add-to-list 'native-comp-jit-compilation-deny-list "-*-loaddefs\\.el\\'"))
+
   (cl-loop for file in (append (reverse (directory-files-recursively config-directory "\\.el$"))
                                (reverse (directory-files-recursively bindings-directory "\\.el$")))
-           do (condition-case ex
+           do (condition-case-unless-debug ex
                   (load (file-name-sans-extension file))
-                ('error (with-current-buffer "*scratch*"
-                          (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))
+                (error (with-current-buffer "*scratch*"
+                         (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))

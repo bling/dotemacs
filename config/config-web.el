@@ -10,16 +10,6 @@
   :type 'integer
   :group 'dotemacs-web)
 
-(defcustom dotemacs-web/use-skewer-mode nil
-  "When non-nil, enables `skewer-mode' integration."
-  :type 'boolean
-  :group 'dotemacs-web)
-
-(defcustom dotemacs-web/use-emmet-mode nil
-  "When non-nil, enables `emmet-mode' integration."
-  :type 'boolean
-  :group 'dotemacs-web)
-
 (defcustom dotemacs-web/html-engine
   nil
   "Whether to activate enhanced LSP functionalities for HTML."
@@ -39,31 +29,6 @@
   :group 'dotemacs-web)
 
 
-
-(/boot/lazy-major-mode "\\.jade$" jade-mode)
-(/boot/lazy-major-mode "\\.scss$" scss-mode)
-(/boot/lazy-major-mode "\\.sass$" sass-mode)
-(/boot/lazy-major-mode "\\.less$" less-css-mode)
-
-
-(/boot/lazy-major-mode "\\.coffee\\'" coffee-mode)
-(setq coffee-indent-like-python-mode t)
-
-
-(when dotemacs-web/use-skewer-mode
-  (require-package 'skewer-mode)
-  (skewer-setup))
-
-
-(when dotemacs-web/use-emmet-mode
-  (defun /web/turn-on-emmet-mode ()
-    (require-package 'emmet-mode)
-    (emmet-mode))
-
-  (add-hook 'css-mode-hook #'/web/turn-on-emmet-mode)
-  (add-hook 'sgml-mode-hook #'/web/turn-on-emmet-mode)
-  (add-hook 'web-mode-hook #'/web/turn-on-emmet-mode))
-
 
 (require-package 'rainbow-mode)
 (add-hook 'html-mode-hook #'rainbow-mode)
@@ -119,8 +84,9 @@
 
 
 ;; indent after deleting a tag
-(defadvice sgml-delete-tag (after dotemacs activate)
-  (indent-region (point-min) (point-max)))
+(advice-add
+ 'sgml-delete-tag :after
+ (lambda (&rest _) (indent-region (point-min) (point-max))))
 
 
 (provide 'config-web)

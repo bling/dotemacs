@@ -12,9 +12,8 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (when (display-graphic-p)
-  (require-package 'flycheck-pos-tip)
-  (setq flycheck-pos-tip-timeout -1)
-  (flycheck-pos-tip-mode))
+  (require-package 'flycheck-posframe)
+  (flycheck-posframe-mode))
 
 (defun /flycheck/advice/next-error-find-buffer (orig-func &rest args)
   (let* ((special-buffers
