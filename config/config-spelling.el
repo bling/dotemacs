@@ -16,7 +16,7 @@
           (executable-find "hunspell"))
   (add-hook 'after-change-major-mode-hook
             (lambda ()
-              (when (cl-find-if #'derived-mode-p dotemacs-spelling/major-modes)
-                (turn-on-flyspell)))))
+              (when (apply #'derived-mode-p dotemacs-spelling/major-modes)
+                (flyspell-mode)))))
 
 (provide 'config-spelling)

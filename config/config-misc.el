@@ -51,27 +51,16 @@
 
 
 (require-package 'dumb-jump)
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-(add-hook 'dumb-jump-after-jump-hook #'evil-set-jump)
+(after 'xref
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate t)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 
 (require-package 'wgrep)
 
 
-(when (executable-find "pt")
-  (require-package 'pt)
-  (require-package 'wgrep-pt)
-  (after 'evil
-    (add-to-list 'evil-motion-state-modes 'pt-search-mode)
-    (evil-add-hjkl-bindings pt-search-mode-hook 'motion)))
-
-
-(when (executable-find "ag")
-  (require-package 'ag)
-  (setq ag-highlight-search t)
-  (setq-default ag-ignore-list dotemacs-globally-ignored-directories)
-  (add-hook 'ag-mode-hook (lambda () (toggle-truncate-lines t)))
-  (require-package 'wgrep-ag))
+(when (executable-find "rg")
+  (require-package 'ripgrep))
 
 
 (require-package 'avy)
@@ -80,26 +69,10 @@
 (require-package 'expand-region)
 
 
-(when (executable-find "editorconfig")
-  (require-package 'editorconfig)
-  (editorconfig-mode))
-
-
 (require-package 'aggressive-indent)
 (require 'aggressive-indent)
 (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
-
-
-(require 'etags-select)
-(setq etags-select-go-if-unambiguous t)
-
-
-(require-package 'windsize)
-(require 'windsize)
-(setq windsize-cols 16)
-(setq windsize-rows 8)
-(windsize-default-keybindings)
 
 
 (require-package 'rainbow-delimiters)
@@ -110,31 +83,13 @@
 (setq framemove-hook-into-windmove t)
 
 
-(require-package 'discover-my-major)
-
-
-(setq paradox-execute-asynchronously t)
-(require-package 'paradox)
-
-
 (require-package 'vlf)
 (setq vlf-application 'dont-ask)
 (require 'vlf-setup)
 
 
-(require-package 'shackle)
-(shackle-mode)
-(setq shackle-rules
-      '((help-mode :align right :size 80)
-        (compilation-mode :align bottom :size 0.2)
-        (diff-mode :align right :size 0.5)
-        (magit-diff-mode :align right :size 0.5)
-        (magit-revision-mode :align right :size 0.5)
-        (ibuffer-mode :align right :size 0.5)
-        (ag-mode :align right :size 0.5)
-        (compilation-mode :align bottom :size 0.3)
-        ("^\\*helm.*\\*$" :regexp t :align bottom)
-        ))
+(require-package 'dash-docs)
+(setq dash-docs-browser-func #'eww)
 
 
 (when (executable-find "prettier")
@@ -146,9 +101,6 @@
   (reformatter-define prettier-markdown :program "prettier" :args '("--parser=markdown"))
   (reformatter-define prettier-typescript :program "prettier" :args '("--parser=typescript"))
   (reformatter-define prettier-yaml :program "prettier" :args '("--parser=yaml")))
-
-
-(require-package 'restart-emacs)
 
 
 (provide 'config-misc)
