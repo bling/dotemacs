@@ -18,6 +18,7 @@
     (", e" #'eval-region))
 
   (/bindings/define-key evil-visual-state-map "SPC SPC" #'execute-extended-command "M-x")
+  (/bindings/define-key evil-visual-state-map "SPC /" #'/transients/project/search "search...")
 
   (after "evil-numbers-autoloads"
     (/bindings/define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
