@@ -25,7 +25,6 @@
  ((eq dotemacs-explorer/option 'treemacs)
   (/boot/delayed-init ;; delay load to allow treemacs to calculate icon colors based on the current theme
    (require-package 'treemacs)
-   (require-package 'treemacs-projectile)
 
    (setq treemacs-indentation 1)
    (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
