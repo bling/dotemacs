@@ -14,7 +14,6 @@
 (defcustom dotemacs-evil/emacs-state-major-modes
   '(calculator-mode
     eshell-mode
-    makey-key-mode
     shell-mode
     term-mode)
   "List of major modes that should default to Emacs state."
@@ -92,10 +91,6 @@
   (define-key evil-emacs-state-map (kbd "<escape>") 'evil-normal-state))
 
 
-(unless (display-graphic-p)
-  (evil-esc-mode 1))
-
-
 (cond
  ((eq dotemacs-evil/comments 'evil-commentary)
   (require-package 'evil-commentary)
@@ -151,10 +146,7 @@
 
 
 
-(defadvice evil-ex-search-next (after dotemacs activate)
-  (recenter))
-
-(defadvice evil-ex-search-previous (after dotemacs activate)
-  (recenter))
+(advice-add 'evil-ex-search-next :after (lambda (&rest _) (recenter)))
+(advice-add 'evil-ex-search-previous :after (lambda (&rest _) (recenter)))
 
 (provide 'config-evil)

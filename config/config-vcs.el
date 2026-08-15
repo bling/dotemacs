@@ -11,12 +11,6 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   :type 'boolean
   :group 'dotemacs-vcs)
 
-(defcustom dotemacs-vcs/gutter (not (eq system-type 'windows-nt))
-  "When non-nil, enables VCS changes in the gutter.
-This is non-nil by default on Windows machines, where this is a heavy performance cost."
-  :type 'boolean
-  :group 'dotemacs-vcs)
-
 (defcustom dotemacs-vcs/diff
   'ediff
   "The default diffing tool."
@@ -38,9 +32,9 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 (when (executable-find "git")
   (require-package 'magit)
 
-  (defun /vcs/magit-post-display-buffer-hook()
-    (if (string-match "*magit:" (buffer-name))
-        (delete-other-windows)))
+  (defun /vcs/magit-post-display-buffer-hook ()
+    (when (string-match-p "\\*magit:" (buffer-name))
+      (delete-other-windows)))
   (add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
 
   (setq magit-section-show-child-count t)
@@ -50,25 +44,7 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   (after 'eshell
     (require-package 'pcmpl-git)
     (require 'pcmpl-git)
-
-    (defalias 'pcomplete/g #'pcomplete/git)
-
-    (defun pcomplete/gbr ()
-      (pcomplete-here* (pcmpl-git-branches)))
-
-    (defun pcomplete/gco ()
-      (pcomplete-here* (pcmpl-git-complete-commit)))
-
-    (defun pcomplete/grb ()
-      (pcomplete-here* (pcmpl-git-complete-commit))))
-
-  (when dotemacs-vcs/gutter
-    (if (display-graphic-p)
-        (progn
-          (require-package 'git-gutter-fringe+)
-          (require 'git-gutter-fringe+))
-      (require-package 'git-gutter+))
-    (global-git-gutter+-mode))
+    (defalias 'pcomplete/g #'pcomplete/git))
 
   (require-package 'git-timemachine))
 
@@ -76,8 +52,10 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 (require-package 'diff-hl)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-(unless (display-graphic-p)
-  (diff-hl-margin-mode))
+(add-hook 'prog-mode-hook (lambda ()
+                            (if (display-graphic-p)
+                                (diff-hl-mode)
+                              (diff-hl-margin-mode))))
 
 
 
@@ -107,8 +85,8 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
-(/boot/lazy-major-mode "^\\.gitignore$" gitignore-mode)
-(/boot/lazy-major-mode "^\\.gitattributes$" gitattributes-mode)
+(add-to-list 'auto-mode-alist '("\\.gitignore\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.gitattributes\\'" . conf-mode))
 
 
 
