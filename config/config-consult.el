@@ -42,11 +42,7 @@
 
   (require-package 'consult)
   (require-package 'consult-dash)
-
-  (after 'projectile
-    (require-package 'consult-projectile)
-    (require 'consult-projectile)
-    (add-to-list 'consult-projectile-sources 'consult-projectile--source-projectile-recentf))
+  (require-package 'consult-project-extra)
 
   (after 'eglot
     (require-package 'consult-eglot))
