@@ -55,12 +55,6 @@
                              (org-agenda-files :maxlevel . 9)))
   (setq org-refile-use-outline-path 'file)
   (setq org-outline-path-complete-in-steps nil)
-  (setq org-completion-use-ido t)
-
-  (when (boundp 'org-plantuml-jar-path)
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((plantuml . t))))
 
   (add-hook 'org-babel-after-execute-hook #'org-redisplay-inline-images)
 
@@ -69,41 +63,9 @@
     (setq show-trailing-whitespace t))
   (add-hook 'org-mode-hook #'/org/org-mode-hook)
 
-  (require-package 'ob-async)
-  (require 'ob-async)
-
-  (require-package 'org-bullets)
-  (setq org-bullets-bullet-list '("●" "○" "◆" "◇" "▸"))
-  (add-hook 'org-mode-hook #'org-bullets-mode))
-
-(after 'ob-plantuml
-  (when (executable-find "npm")
-    (let ((default-directory (concat user-emacs-directory "/extra/plantuml-server/")))
-      (unless (file-exists-p "node_modules/")
-        (shell-command "npm install"))
-
-      (ignore-errors
-        (let ((kill-buffer-query-functions nil))
-          (kill-buffer "*plantuml-server*")))
-      (start-process "*plantuml-server*" "*plantuml-server*" "npm" "start"))
-
-    (defun init-org/generate-diagram (uml)
-      (let ((url-request-method "POST")
-            (url-request-extra-headers '(("Content-Type" . "text/plain")))
-            (url-request-data uml))
-        (let* ((buffer (url-retrieve-synchronously "http://localhost:8182/svg")))
-          (with-current-buffer buffer
-            (goto-char (point-min))
-            (search-forward "\n\n")
-            (buffer-substring (point) (point-max))))))
-
-    (defun org-babel-execute:plantuml (body params)
-      (let* ((out-file (or (cdr (assoc :file params))
-                           (error "PlantUML requires a \":file\" header argument"))))
-        (let ((png (init-org/generate-diagram (concat "@startuml\n" body "\n@enduml"))))
-          (with-temp-buffer
-            (insert png)
-            (write-file out-file)))))))
+  (require-package 'org-modern)
+  (after 'org
+    (global-org-modern-mode t)))
 
 (provide 'config-org)
 

@@ -2,11 +2,12 @@
 
 (after 'helm-source
   (defun /helm/make-source (f &rest args)
-    (let ((source-type (cadr args))
-          (props (cddr args)))
+    (let* ((name (car args))
+           (source-type (cadr args))
+           (props (cddr args)))
       (unless (child-of-class-p source-type 'helm-source-async)
-        (plist-put props :fuzzy-match t))
-      (apply f args)))
+        (setq props (plist-put (copy-sequence props) :fuzzy-match t)))
+      (apply f name source-type props)))
   (advice-add 'helm-make-source :around '/helm/make-source))
 
 
@@ -14,46 +15,11 @@
   (setq helm-bookmark-show-location t)
   (setq helm-buffer-max-length 40)
 
-
-  (if (>= emacs-major-version 27)
-      (add-to-list 'completion-styles 'flex)
-    (add-to-list 'completion-styles 'helm-flex))
-
-
   (require-package 'helm-descbinds)
-
-
-  ;; (require-package 'helm-flx)
-  ;; (helm-flx-mode t)
-
-
   (require-package 'helm-dash)
-  (setq helm-dash-browser-func 'eww)
-
-
-  (require-package 'helm-ag)
-  (setq helm-ag-fuzzy-match t)
-  (setq helm-ag-use-agignore t)
-  (setq helm-ag-ignore-patterns dotemacs-globally-ignored-directories)
-  (after 'helm-ag
-    (cond ((executable-find "ag")
-           t)
-          ((executable-find "pt")
-           (setq helm-ag-base-command "pt -e --nogroup --nocolor"))
-          ((executable-find "ack")
-           (setq helm-ag-base-command "ack --nogroup --nocolor"))))
-
 
   (setq helm-adaptive-history-file (concat dotemacs-cache-directory "helm-adaptive-history"))
   (helm-adaptive-mode t)
-
-
-  (setq helm-swoop-pre-input-function #'ignore)
-  (setq helm-swoop-use-line-number-face t)
-  (setq helm-swoop-split-with-multiple-windows t)
-  (setq helm-swoop-speed-or-color t)
-  (setq helm-swoop-use-fuzzy-match t)
-  (require-package 'helm-swoop)
 
 
   (require-package 'helm-projectile)

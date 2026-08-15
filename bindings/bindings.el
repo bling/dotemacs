@@ -1,11 +1,5 @@
 ;; -*- lexical-binding: t -*-
 
-(require-package 'which-key)
-(setq which-key-idle-delay 0.2)
-(setq which-key-min-display-lines 3)
-(which-key-mode)
-
-
 (setq lv-use-separator t)
 (require-package 'hydra)
 (autoload 'hydra-default-pre "hydra")
@@ -90,9 +84,13 @@
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("h" #'/hydras/helm/body "helm...")))
 
-(after "helm-dash-autoloads"
-  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("d" #'helm-dash "dash")))
+(/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+  ("d" (bind
+        (cond
+         ((eq dotemacs-switch-engine 'consult)
+          (call-interactively #'consult-dash))
+         ((eq dotemacs-switch-engine 'helm)
+          (call-interactively #'helm-dash)))) "dash"))
 
 (after "fzf-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
@@ -113,10 +111,6 @@
   ("s" (kbd "C-w s C-w j") "split")
   ("P" #'package-list-packages "packages")
   ("h" help-map "help"))
-
-(after "paradox-autoloads"
-  (/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
-    ("P" #'paradox-list-packages)))
 
 
 
@@ -152,11 +146,6 @@
 (after 'comint
   (define-key comint-mode-map [up] 'comint-previous-input)
   (define-key comint-mode-map [down] 'comint-next-input))
-
-
-(after 'auto-complete
-  (define-key ac-completing-map (kbd "C-n") 'ac-next)
-  (define-key ac-completing-map (kbd "C-p") 'ac-previous))
 
 
 (after "expand-region-autoloads"
@@ -197,13 +186,9 @@
   ("C-x c" #'calculator)
   ("C-x C" #'calendar)
   ("C-x C-b" #'ibuffer)
-  ("C-x C-k" #'kill-this-buffer)
+  ("C-x C-k" #'kill-current-buffer)
   ("C-x n" #'/hydras/narrow/body)
   ("C-x p" #'proced))
-
-(after "vkill-autoloads"
-  (autoload 'vkill "vkill" nil t)
-  (global-set-key (kbd "C-x p") 'vkill))
 
 (/bindings/define-keys (current-global-map)
   ("C-s"   #'isearch-forward-regexp)
@@ -220,12 +205,14 @@
 (global-unset-key (kbd "C-x m"))
 
 
-(global-set-key (kbd "C-x C-c") (bind (message "Thou shall not quit!")))
+(defun dotemacs/no-quit (&rest _)
+  (message "Thou shall not quit!"))
+
+
+(global-set-key (kbd "C-x C-c") (bind (dotemacs/no-quit)))
 (after 'evil
-  (defadvice evil-quit (around dotemacs activate)
-    (message "Thou shall not quit!"))
-  (defadvice evil-quit-all (around dotemacs activate)
-    (message "Thou shall not quit!")))
+  (advice-add 'evil-quit :override #'dotemacs/no-quit)
+  (advice-add 'evil-quit-all :override #'dotemacs/no-quit))
 
 
 (provide 'config-bindings)

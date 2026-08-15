@@ -1,23 +1,10 @@
 ;; -*- lexical-binding: t -*-
 
-(after 'evil-evilified-state
-  (/bindings/define-keys evil-evilified-state-map
-    ("g b" #'/hydras/buffers/lambda-b-and-exit)
-    ("," /bindings/normal-comma-leader-map)
-    ("SPC" /bindings/normal-space-leader-map)))
-
-
-
 (after 'evil
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
   (/bindings/define-keys evil-normal-state-map ("g d" #'xref-find-definitions))
-
-  (require-package 'key-chord)
-  (key-chord-mode 1)
-  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
   (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
   (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
@@ -36,14 +23,13 @@
     (/bindings/define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
     (/bindings/define-key evil-normal-state-map "C-S-a" #'evil-numbers/dec-at-pt))
 
-  (after "git-gutter+-autoloads"
+  (after 'diff-hl
     (/bindings/define-keys evil-normal-state-map
-      ("[ h" #'git-gutter+-previous-hunk)
-      ("] h" #'git-gutter+-next-hunk))
+      ("[ h" #'diff-hl-previous-hunk)
+      ("] h" #'diff-hl-next-hunk))
     (/bindings/define-keys evil-visual-state-map
-      ("SPC g a" #'git-gutter+-stage-hunks)
-      ("SPC g r" #'git-gutter+-revert-hunks))
-    (evil-ex-define-cmd "Gw" (bind (git-gutter+-stage-whole-buffer))))
+      ("SPC g a" #'diff-hl-stage-current-hunk)
+      ("SPC g r" #'diff-hl-revert-hunk)))
 
   (/bindings/define-keys evil-normal-state-map
     ("g p" "`[v`]")
@@ -82,25 +68,10 @@
 
   ;; emacs lisp
   (evil-define-key 'normal emacs-lisp-mode-map "K" #'helpful-at-point)
-  (add-hook 'elisp-slime-nav-mode-hook
-            (lambda ()
-              (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "g d") 'elisp-slime-nav-find-elisp-thing-at-point)
-              (evil-define-key 'normal elisp-slime-nav-mode-map "K" #'helpful-at-point)))
-
-  (after 'coffee-mode
-    (evil-define-key 'visual coffee-mode-map (kbd ", p") 'coffee-compile-region)
-    (evil-define-key 'normal coffee-mode-map (kbd ", p") 'coffee-compile-buffer))
+  (evil-define-key 'normal lisp-interaction-mode-map "K" #'helpful-at-point)
 
   (after 'css-mode
     (evil-define-key 'normal css-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
-
-  (after 'stylus-mode
-    (define-key stylus-mode-map [remap eval-last-sexp] '/stylus/compile-and-eval-buffer)
-    (evil-define-key 'visual stylus-mode-map (kbd ", p") '/stylus/compile-and-show-region)
-    (evil-define-key 'normal stylus-mode-map (kbd ", p") '/stylus/compile-and-show-buffer))
-
-  (after 'js2-mode
-    (evil-define-key 'normal js2-mode-map (kbd "g r") #'js2r-rename-var))
 
   (after 'flycheck
     (evil-define-key 'normal flycheck-error-list-mode-map
@@ -108,7 +79,7 @@
       "k" #'flycheck-error-list-previous-error))
 
   (after 'diff-mode
-    (evil-define-key 'normal diff-mode diff-mode-map
+    (evil-define-key 'normal diff-mode-map
       "j" #'diff-hunk-next
       "k" #'diff-hunk-prev))
 
@@ -138,10 +109,6 @@
                 (kbd "SPC") nil
                 "," nil
                 )))
-  (evil-collection-init)
-
-  ;; fix compilation-mode integration
-  (advice-add #'evil-collection-unimpaired-next-error :override #'next-error)
-  (advice-add #'evil-collection-unimpaired-prev-error :override #'previous-error))
+  (evil-collection-init))
 
 (provide 'config-bindings-evil)

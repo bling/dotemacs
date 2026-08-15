@@ -41,8 +41,9 @@
 
 (when (eq dotemacs-typescript/engine 'tide)
   (after [tide evil]
-    (defadvice tide-jump-to-definition (before dotemacs activate)
-      (evil-set-jump))))
+    (advice-add
+     'tide-jump-to-definition :before
+     (lambda (&rest _) (evil-set-jump)))))
 
 (/boot/lazy-major-mode "\\.ts$" typescript-mode)
 (add-hook 'typescript-mode-hook #'/typescript/setup)

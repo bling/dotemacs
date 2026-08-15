@@ -13,9 +13,9 @@
           (const :tag "dired-sidebar" dired-sidebar))
   :group 'dotemacs-explorer)
 
-(defcustom dotemacs-explorer/all-the-icons
+(defcustom dotemacs-explorer/nerd-icons
   nil
-  "Integrates with all-the-icons if available."
+  "Integrates with nerd-icons if available."
   :type 'boolean
   :group 'dotemacs-explorer)
 
@@ -34,10 +34,10 @@
    (setq treemacs-tag-follow-mode t)
    (setq treemacs-file-event-delay 1000)
 
-   (when (and dotemacs-explorer/all-the-icons (font-info "all-the-icons"))
+   (when dotemacs-explorer/nerd-icons
      (after 'treemacs
-       (require-package 'treemacs-all-the-icons)
-       (require 'treemacs-all-the-icons)))
+       (require-package 'treemacs-nerd-icons)
+       (require 'treemacs-nerd-icons)))
 
    (after 'treemacs
      (when (executable-find "git")

@@ -18,12 +18,12 @@
 ;; move cursor to the last position upon open
 (require 'saveplace)
 (setq save-place-file (concat dotemacs-cache-directory "places"))
-(setq-default save-place t)
+(save-place-mode t)
 
 
 ;; savehist
 (setq savehist-file (concat dotemacs-cache-directory "savehist")
-      savehist-additional-variables '(search ring regexp-search-ring)
+      savehist-additional-variables '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
       history-length 1000)
 (savehist-mode)
@@ -35,12 +35,6 @@
 (setq desktop-base-lock-name "emacs.desktop.lock")
 (setq desktop-save t)
 (desktop-save-mode t)
-
-
-;; undo
-(setq undo-limit (* 1024 10 10))
-(setq undo-outer-limit (* 1024 10 10))
-(setq undo-strong-limit (* 1024 10 10))
 
 
 ;; recent files
@@ -62,8 +56,8 @@
 (add-hook 'minibuffer-exit-hook #'/core/minibuffer-exit-hook)
 
 
-;; pcomplete
-(setq pcomplete-ignore-case t)
+;; completion
+(setq completion-ignore-case t)
 
 
 ;; imenu
@@ -76,8 +70,8 @@
 
 ;; dired
 (after 'dired
+  (setq dired-listing-switches "-alh")
   (require 'dired-x))
-
 
 ;; url
 (setq url-configuration-directory (concat dotemacs-cache-directory "url/"))
@@ -99,12 +93,8 @@
 ;; compile
 (setq compilation-always-kill t)
 (setq compilation-ask-about-save nil)
-(add-hook 'compilation-filter-hook
-          (lambda ()
-            (when (eq major-mode 'compilation-mode)
-              (require 'ansi-color)
-              (let ((inhibit-read-only t))
-                (ansi-color-apply-on-region (point-min) (point-max))))))
+(add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
+(add-hook 'compilation-filter-hook #'ansi-osc-compilation-filter)
 
 
 ;; bookmarks
@@ -142,6 +132,16 @@
 (setq ibuffer-show-empty-filter-groups nil)
 (setq ibuffer-use-other-window t)
 (add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
+
+
+;; so-long
+(global-so-long-mode 1)
+
+
+;; which-key
+(setq which-key-idle-delay 0.2)
+(setq which-key-min-display-lines 3)
+(which-key-mode)
 
 
 ;; move auto-save to the cache
@@ -183,13 +183,11 @@
 (add-hook 'kill-buffer-query-functions '/core/do-not-kill-scratch-buffer)
 
 
-(defalias 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 
 ;; https://stackoverflow.com/questions/2901541/which-coding-system-should-i-use-in-emacs
-(setq utf-translate-cjk-mode nil)
 (set-language-environment 'utf-8)
-(set-keyboard-coding-system 'utf-8-mac)
 (setq locale-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -206,6 +204,7 @@
 (setq echo-keystrokes 0.01)
 (setq initial-major-mode 'emacs-lisp-mode)
 (setq eval-expression-print-level nil)
+(setq read-extended-command-predicate #'command-completion-default-include-p)
 (setq-default indent-tabs-mode nil)
 
 (setq inhibit-splash-screen t)
@@ -221,13 +220,17 @@
 (electric-indent-mode t)
 (transient-mark-mode t)
 (delete-selection-mode t)
-(random t) ;; seed
 
 
 (defun /core/find-file-hook ()
-  (when (or (string-match "\\.min\\." (buffer-file-name))
+  (when (or (and (buffer-file-name)
+                 (string-match-p "\\.min\\." (buffer-file-name)))
             (> (buffer-size) dotemacs-core/maximum-file-size))
-    (fundamental-mode)))
+    (buffer-disable-undo)
+    (when (bound-and-true-p display-line-numbers-mode)
+      (display-line-numbers-mode -1))
+    (fundamental-mode)
+    (message "Large file detected. Switched to fundamental mode.")))
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
 

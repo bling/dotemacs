@@ -23,13 +23,17 @@
                          (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
                          elapsed))))))
 
-(defadvice load (around dotemacs activate)
-  (/boot/measure-load file ad-do-it))
+(advice-add
+ 'load :around
+ (lambda (orig-fn file &optional noerror nomessage nosuffix must-suffix)
+   (/boot/measure-load file (funcall orig-fn file noerror nomessage nosuffix must-suffix))))
 
-(defadvice require (around dotemacs activate)
-  (if (memq feature features)
-      ad-do-it
-    (/boot/measure-load feature ad-do-it)))
+(advice-add
+ 'require :around
+ (lambda (orig-fn feature &optional filename noerror)
+   (if (memq feature features)
+       (funcall orig-fn feature filename noerror)
+     (/boot/measure-load feature (funcall orig-fn feature filename noerror)))))
 
 (defmacro bind (&rest commands)
   "Convenience macro which creates a lambda interactive command."
@@ -45,19 +49,14 @@
       (package-refresh-contents))
     (package-install package)))
 
-(unless (fboundp 'with-eval-after-load)
-  (defmacro with-eval-after-load (file &rest body)
-    (declare (indent 1))
-    `(eval-after-load ,file (lambda () ,@body))))
-
 (defmacro after (feature &rest body)
   "Executes BODY after FEATURE has been loaded.
 
 FEATURE may be any one of:
     'evil            => (with-eval-after-load 'evil BODY)
-    \"evil-autoloads\" => (with-eval-after-load \"evil-autolaods\" BODY)
-    [evil cider]     => (with-eval-after-load 'evil
-                          (with-eval-after-load 'cider
+    \"evil-autoloads\" => (with-eval-after-load \"evil-autoloads\" BODY)
+    [evil project]     => (with-eval-after-load 'evil
+                          (with-eval-after-load 'project
                             BODY))
 "
   (declare (indent 1))
