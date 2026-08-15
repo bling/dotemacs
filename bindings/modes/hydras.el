@@ -60,7 +60,7 @@
   ("k" kill-current-buffer)
   ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'/helm/everything :consult #'consult-buffer))
+  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'helm-mini :consult #'consult-buffer))
   ("e" erase-buffer)
   ("E" (let ((inhibit-read-only t)) (erase-buffer))))
 
@@ -84,7 +84,11 @@
                -------      ^^---------    ^^------       ^^-------      ^^---
                _r_ → rg       _R_ → rg       _l_ → lines    _L_ → lines    _g_ → google
 "
-  ("r" projectile-ripgrep)
+  ("r" (cond
+        ((eq dotemacs-switch-engine 'consult)
+         (call-interactively #'consult-ripgrep))
+        ((eq dotemacs-switch-engine 'helm)
+         (call-interactively #'helm-do-grep-ag-project))))
   ("R" ripgrep-regexp)
   ("l" /hydras/jumps/lambda-l-and-exit)
   ("L" /hydras/jumps/lambda-L-and-exit)
@@ -174,17 +178,17 @@
 (defhydra /hydras/helm (:hint nil :exit t)
   "
    helm:   _a_ → apropos   _m_ → bookmarks   _y_ → kill-ring  _l_ → occur
-           _b_ → mini      _p_ → projectile  _d_ → dash       _L_ → occur (multi)
+           _b_ → mini      _p_ → project     _d_ → dash       _L_ → occur (multi)
            _e_ → recentf   _r_ → register    _x_ → M-x
            _f_ → files     _t_ → tags
 "
-  ("b" /helm/everything)
+  ("b" helm-mini)
   ("a" helm-apropos)
   ("d" helm-dash)
   ("e" helm-recentf)
   ("f" helm-find-files)
   ("m" helm-bookmarks)
-  ("p" helm-projectile)
+  ("p" project-find-file)
   ("r" helm-register)
   ("t" helm-etags-select)
   ("x" helm-M-x)

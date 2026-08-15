@@ -44,13 +44,15 @@
 (defun /lsp/suggest-project-root ()
   "Suggests the nearest project that is not a dependency."
   (or
-   (locate-dominating-file
-    (buffer-file-name)
-    (lambda (dir)
-      (if (string-match-p "node_modules" dir)
-          nil
-        (file-exists-p (concat dir "package.json")))))
-   (projectile-project-root)))
+   (when-let ((file (buffer-file-name)))
+     (locate-dominating-file
+      file
+      (lambda (dir)
+        (if (string-match-p "node_modules" dir)
+            nil
+          (file-exists-p (concat dir "package.json"))))))
+   (when-let ((pr (project-current)))
+     (project-root pr))))
 
 (after 'lsp-mode
   (advice-add #'lsp--suggest-project-root :override #'/lsp/suggest-project-root))
