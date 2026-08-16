@@ -1,11 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 
-(when (eq dotemacs-pair-engine 'emacs)
-  (show-paren-mode)
-  (setq show-paren-delay 0))
-
-
+(show-paren-mode t)
 (line-number-mode t)
 (column-number-mode t)
 (display-time-mode t)

@@ -39,16 +39,7 @@
     :type '(radio
             (const :tag "helm" helm)
             (const :tag "consult" consult)
-            (const :tag "ido" ido)
-            (const :tag "ivy" ivy))
-    :group 'dotemacs)
-
-  (defcustom dotemacs-pair-engine
-    'emacs
-    "The primary engine to use auto-pairing and parens matching."
-    :type '(radio
-            (const :tag "emacs" emacs)
-            (const :tag "smartparens" smartparens))
+            (const :tag "ido" ido))
     :group 'dotemacs)
 
   (defcustom dotemacs-globally-ignored-directories

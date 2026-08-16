@@ -3,8 +3,6 @@
 (defun /hydras/switch-action (fallback &rest props)
   "Performs an action based on the value of `dotemacs-switch-engine'."
   (cond
-   ((and (eq dotemacs-switch-engine 'ivy) (plist-get props :ivy))
-    (call-interactively (plist-get props :ivy)))
    ((and (eq dotemacs-switch-engine 'helm) (plist-get props :helm))
     (call-interactively (plist-get props :helm)))
    ((and (eq dotemacs-switch-engine 'consult) (plist-get props :consult))
@@ -60,7 +58,7 @@
   ("k" kill-current-buffer)
   ("f" /os/reveal-in-os)
   ("m" (switch-to-buffer "*Messages*"))
-  ("b" (/hydras/switch-action #'switch-to-buffer :ivy #'/ivy/everything :helm #'helm-mini :consult #'consult-buffer))
+  ("b" (/hydras/switch-action #'switch-to-buffer :helm #'helm-mini :consult #'consult-buffer))
   ("e" erase-buffer)
   ("E" (let ((inhibit-read-only t)) (erase-buffer))))
 
@@ -71,9 +69,9 @@
    jump   _i_ → outline in current buffer   _l_ → lines in current buffer
           _b_ → bookmarks                   _L_ → lines in all buffers
 "
-  ("i" (/hydras/switch-action #'imenu :ivy #'counsel-imenu :helm #'helm-semantic-or-imenu :consult #'consult-imenu))
-  ("l" (/hydras/switch-action nil     :ivy #'swiper        :helm #'helm-occur             :consult #'consult-line))
-  ("L" (/hydras/switch-action nil     :ivy #'swiper-all    :helm #'helm-multi-occur-all   :consult #'consult-line-multi))
+  ("i" (/hydras/switch-action #'imenu :helm #'helm-semantic-or-imenu :consult #'consult-imenu))
+  ("l" (/hydras/switch-action nil     :helm #'helm-occur             :consult #'consult-line))
+  ("L" (/hydras/switch-action nil     :helm #'helm-multi-occur-all   :consult #'consult-line-multi))
   ("b" bookmark-jump))
 
 
@@ -111,8 +109,8 @@
 "
   ("D" /utils/delete-current-buffer-file)
   ("R" /utils/rename-current-buffer-file)
-  ("f" (/hydras/switch-action #'find-file :ivy #'counsel-find-file :helm #'helm-find-files))
-  ("r" (/hydras/switch-action nil         :ivy #'counsel-recentf   :helm #'helm-recentf    :consult #'consult-recent-file))
+  ("f" (/hydras/switch-action #'find-file :helm #'helm-find-files))
+  ("r" (/hydras/switch-action nil         :helm #'helm-recentf    :consult #'consult-recent-file))
   ("y" /utils/copy-file-name-to-clipboard)
   ("E" /utils/find-file-as-root)
   ("c" copy-file)
@@ -132,19 +130,16 @@
   "
    engine:  _h_ → helm
             _c_ → consult
-            _i_ → ivy
             _o_ → ido
 "
   ("h" (/hydras/toggles/activate-switch-engine 'helm))
-  ("i" (/hydras/toggles/activate-switch-engine 'ivy))
   ("c" (/hydras/toggles/activate-switch-engine 'consult))
   ("o" (/hydras/toggles/activate-switch-engine 'ido)))
 
-(defvar /hydras/toggles/vdiff nil)
 (defhydra /hydras/toggles (:hint nil :exit t)
   "
    toggle:  _a_ → aggressive indent   _s_ → flycheck     _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch-engine
-            _F_ → auto-fill           _S_ → flyspell     _c_ → completion     _W_ → word wrap        _g_ → debug on quit    _d_ → ediff/vdiff
+            _F_ → auto-fill           _S_ → flyspell     _c_ → completion     _W_ → word wrap        _g_ → debug on quit
             _w_ → whitespace          _f_ → auto-format  _p_ → auto-pairing   _b_ → page break
 "
   ("a" aggressive-indent-mode)
@@ -163,15 +158,6 @@
   ("f" apheleia-mode)
   ("F" auto-fill-mode)
   ("p" /pairs/toggle)
-  ("d" (progn
-         (if /hydras/toggles/vdiff
-             (progn
-               (/bindings/vdiff/turn-off)
-               (message "using ediff"))
-           (/vcs/setup-vdiff)
-           (/bindings/vdiff/turn-on)
-           (message "using vdiff"))
-         (setq /hydras/toggles/vdiff (not /hydras/toggles/vdiff))))
   ("'" /hydras/toggles/switch-engine/body))
 
 
@@ -199,21 +185,6 @@
 
 
 
-(defhydra /hydras/ivy (:hint nil :exit t)
-  "
-   ivy:   _b_ → mini       _y_ → kill-ring   _l_ → swiper
-          _e_ → recentf    _x_ → M-x         _L_ → swiper (multi)
-          _f_ → files
-"
-  ("b" /ivy/everything)
-  ("e" counsel-recentf)
-  ("f" counsel-find-file)
-  ("y" counsel-yank-pop)
-  ("x" counsel-M-x)
-  ("l" swiper)
-  ("L" swiper-all))
-
-
 
 (defhydra /hydras/consult (:hint nil :exit t)
   "

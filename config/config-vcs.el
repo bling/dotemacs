@@ -11,14 +11,6 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   :type 'boolean
   :group 'dotemacs-vcs)
 
-(defcustom dotemacs-vcs/diff
-  'ediff
-  "The default diffing tool."
-  :type '(radio
-          (const :tag "ediff" ediff)
-          (const :tag "vdiff" vdiff))
-  :group 'dotemacs-vcs)
-
 
 
 (when dotemacs-vcs/inhibit-vc-integration
@@ -68,20 +60,6 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 (add-hook 'shell-mode-hook #'/vcs/with-editor-export)
 (add-hook 'term-exec-hook #'/vcs/with-editor-export)
 (add-hook 'eshell-mode-hook #'/vcs/with-editor-export)
-
-
-
-(defun /vcs/setup-vdiff ()
-  (require-package 'vdiff)
-  (require 'vdiff)
-  (after 'magit
-    (require-package 'vdiff-magit)
-    (require 'vdiff-magit)))
-
-(when (eq dotemacs-vcs/diff 'vdiff)
-  (/vcs/setup-vdiff)
-  (after 'config-bindings-vdiff
-    (/bindings/vdiff/turn-on)))
 
 
 
