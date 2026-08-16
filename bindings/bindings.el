@@ -57,8 +57,6 @@
   ("'" #'/eshell/new-split "shell")
   ("y" (bind
         (cond
-         ((eq dotemacs-switch-engine 'ivy)
-          (call-interactively #'counsel-yank-pop))
          ((eq dotemacs-switch-engine 'consult)
           (call-interactively #'consult-yank-pop))
          ((eq dotemacs-switch-engine 'helm)
@@ -72,9 +70,6 @@
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("g" #'/hydras/git/body "git...")))
 
-(after "counsel-autoloads"
-  (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-    ("i" #'/hydras/ivy/body "ivy...")))
 
 (after "consult-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
@@ -124,8 +119,6 @@
 (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
 
 
-(after 'ivy
-  (define-key ivy-mode-map [escape] (kbd "C-g")))
 
 
 (after "magit-autoloads"
@@ -167,8 +160,6 @@
   (/bindings/define-key (current-global-map) "C-c h" #'/hydras/helm/body "helm..."))
 
 
-(after "counsel-autoloads"
-  (/bindings/define-key (current-global-map) "C-c i" #'/hydras/ivy/body "ivy..."))
 
 
 (global-set-key [prior] 'previous-buffer)
