@@ -68,10 +68,19 @@
 (put 'narrow-to-region 'disabled nil)
 
 
+;; pairing
+(electric-pair-mode t)
+;; don't complete pairs across newline
+(setq electric-pair-skip-whitespace-chars '(32 9))
+(add-hook 'minibuffer-setup-hook (defun /core/electric-pair-off () (electric-pair-mode -1)))
+(add-hook 'minibuffer-exit-hook (defun /core/electric-pair-on () (electric-pair-mode t)))
+
+
 ;; dired
 (after 'dired
   (setq dired-listing-switches "-alh")
   (require 'dired-x))
+
 
 ;; url
 (setq url-configuration-directory (concat dotemacs-cache-directory "url/"))
