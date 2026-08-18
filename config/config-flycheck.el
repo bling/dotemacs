@@ -6,8 +6,9 @@
 (setq flycheck-temp-prefix (concat dotemacs-cache-directory "flycheck/"))
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc html-tidy))
 
-(after 'web-mode
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+(after 'flycheck
+  (flycheck-add-mode 'javascript-eslint 'js-ts-mode)
+  (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 

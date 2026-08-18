@@ -243,4 +243,7 @@
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
 
+(setq treesit-extra-load-path (list (concat dotemacs-cache-directory "tree-sitter")))
+
+
 (provide 'config-core)
