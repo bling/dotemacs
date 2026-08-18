@@ -1,6 +1,21 @@
 ;; -*- lexical-binding: t -*-
 
 (after 'evil
+  (defun /bindings/evil/window-or-frame (dir)
+    "Move to window in DIR, or cycle to next frame if no window exists there."
+    (condition-case nil
+        (pcase dir
+          ('left  (evil-window-left  1))
+          ('right (evil-window-right 1))
+          ('up    (evil-window-up    1))
+          ('down  (evil-window-down  1)))
+      (error (select-frame-set-input-focus (next-frame nil 'visible)))))
+
+  (defun /bindings/evil/window-or-frame-left  () (interactive) (/bindings/evil/window-or-frame 'left))
+  (defun /bindings/evil/window-or-frame-right () (interactive) (/bindings/evil/window-or-frame 'right))
+  (defun /bindings/evil/window-or-frame-up    () (interactive) (/bindings/evil/window-or-frame 'up))
+  (defun /bindings/evil/window-or-frame-down  () (interactive) (/bindings/evil/window-or-frame 'down))
+
   (after "multiple-cursors-autoloads"
     (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
 
@@ -43,19 +58,23 @@
   (global-set-key (kbd "C-w") 'evil-window-map)
   (after 'evil-evilified-state
     (/bindings/define-keys evil-evilified-state-map
-      ("C-h" #'evil-window-left)
-      ("C-j" #'evil-window-down)
-      ("C-k" #'evil-window-up)
-      ("C-l" #'evil-window-right)))
+      ("C-h" #'/bindings/evil/window-or-frame-left)
+      ("C-j" #'/bindings/evil/window-or-frame-down)
+      ("C-k" #'/bindings/evil/window-or-frame-up)
+      ("C-l" #'/bindings/evil/window-or-frame-right)))
   (/bindings/define-keys evil-normal-state-map
-    ("C-h" #'evil-window-left)
-    ("C-j" #'evil-window-down)
-    ("C-k" #'evil-window-up)
-    ("C-l" #'evil-window-right)
-    ("C-w C-h" #'evil-window-left)
-    ("C-w C-j" #'evil-window-down)
-    ("C-w C-k" #'evil-window-up)
-    ("C-w C-l" #'evil-window-right))
+    ("C-h" #'/bindings/evil/window-or-frame-left)
+    ("C-j" #'/bindings/evil/window-or-frame-down)
+    ("C-k" #'/bindings/evil/window-or-frame-up)
+    ("C-l" #'/bindings/evil/window-or-frame-right)
+    ("C-w C-h" #'/bindings/evil/window-or-frame-left)
+    ("C-w   h" #'/bindings/evil/window-or-frame-left)
+    ("C-w C-j" #'/bindings/evil/window-or-frame-down)
+    ("C-w   j" #'/bindings/evil/window-or-frame-down)
+    ("C-w C-k" #'/bindings/evil/window-or-frame-up)
+    ("C-w   k" #'/bindings/evil/window-or-frame-up)
+    ("C-w C-l" #'/bindings/evil/window-or-frame-right)
+    ("C-w   l" #'/bindings/evil/window-or-frame-right))
 
   (/bindings/define-keys evil-motion-state-map
     ("j" #'evil-next-visual-line)
@@ -100,10 +119,10 @@
 
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-h") #'evil-window-left)
-              (local-set-key (kbd "C-j") #'evil-window-down)
-              (local-set-key (kbd "C-k") #'evil-window-up)
-              (local-set-key (kbd "C-l") #'evil-window-right)))
+              (local-set-key (kbd "C-h") #'/bindings/evil/window-or-frame-left)
+              (local-set-key (kbd "C-j") #'/bindings/evil/window-or-frame-down)
+              (local-set-key (kbd "C-k") #'/bindings/evil/window-or-frame-up)
+              (local-set-key (kbd "C-l") #'/bindings/evil/window-or-frame-right)))
 
   (require-package 'evil-collection)
   (add-hook 'evil-collection-setup-hook
