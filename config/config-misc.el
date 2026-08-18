@@ -79,10 +79,6 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 
-(require 'framemove)
-(setq framemove-hook-into-windmove t)
-
-
 (require-package 'vlf)
 (setq vlf-application 'dont-ask)
 (require 'vlf-setup)
