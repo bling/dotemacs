@@ -1,10 +1,11 @@
 ;; -*- lexical-binding: t -*-
 
 (let ((base (concat user-emacs-directory "elisp/")))
-  (add-to-list 'load-path base)
-  (dolist (dir (directory-files base t "^[^.]"))
-    (when (file-directory-p dir)
-      (add-to-list 'load-path dir))))
+  (when (file-directory-p base)
+    (add-to-list 'load-path base)
+    (dolist (dir (directory-files base t "^[^.]"))
+      (when (file-directory-p dir)
+        (add-to-list 'load-path dir)))))
 
 (defmacro /boot/measure-load (target &rest body)
   (declare (indent defun))
