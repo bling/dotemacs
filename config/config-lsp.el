@@ -28,6 +28,7 @@
   (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
   (setq lsp-keep-workspace-alive nil)
   (setq lsp-diagnostics-provider :flymake)
+  (setq lsp-enable-on-type-formatting nil)
   (setq read-process-output-max (* 1024 1024))
 
   (setq lsp-ui-sideline-show-hover t)
@@ -45,17 +46,28 @@
 (defun /lsp/suggest-project-root ()
   "Suggests the nearest project that is not a dependency."
   (or
-   (when-let ((file (buffer-file-name)))
+   (when-let* ((file (buffer-file-name)))
      (locate-dominating-file
       file
       (lambda (dir)
         (if (string-match-p "node_modules" dir)
             nil
           (file-exists-p (concat dir "package.json"))))))
-   (when-let ((pr (project-current)))
+   (when-let* ((pr (project-current)))
      (project-root pr))))
 
 (after 'lsp-mode
-  (advice-add #'lsp--suggest-project-root :override #'/lsp/suggest-project-root))
+  (advice-add #'lsp--suggest-project-root :override #'/lsp/suggest-project-root)
+
+  (when (executable-find "tsgo")
+    (add-to-list 'lsp-disabled-clients 'ts-ls)
+    (add-to-list 'lsp-disabled-clients 'jsts-ls)
+    (advice-add #'lsp--client-capabilities :filter-return
+                (lambda (caps)
+                  (let* ((td (assq 'textDocument caps))
+                         (td-val (cdr td)))
+                    (when td
+                      (setcdr td (assq-delete-all 'inlineCompletion td-val)))
+                    caps)))))
 
 (provide 'config-lsp)
