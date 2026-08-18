@@ -135,6 +135,10 @@
                 (kbd "SPC") nil
                 "," nil
                 )))
-  (evil-collection-init))
+  (evil-collection-init)
+
+  ;; fix compilation-mode integration
+  (advice-add #'evil-collection-unimpaired-next-error :override #'next-error)
+  (advice-add #'evil-collection-unimpaired-previous-error :override #'previous-error))
 
 (provide 'config-bindings-evil)

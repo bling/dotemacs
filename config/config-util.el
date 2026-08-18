@@ -101,4 +101,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive "f")
   (find-file-other-window (concat "/sudo:root@localhost:" file)))
 
+(defun /utils/activate-lsp ()
+  "Activates the configured LSP engine."
+  (cond
+   ((eq dotemacs-lsp-engine 'lsp)
+    (/lsp/activate))
+   ((eq dotemacs-lsp-engine 'eglot)
+    (/eglot/activate))))
+
 (provide 'config-util)
