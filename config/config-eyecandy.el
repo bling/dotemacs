@@ -39,8 +39,9 @@
        ("<=". ?≤)
        )))
   (add-hook 'js-mode-hook #'/eyecandy/js-symbols)
-  (add-hook 'js2-mode-hook #'/eyecandy/js-symbols)
-  (add-hook 'typescript-mode-hook #'/eyecandy/js-symbols))
+  (add-hook 'js-ts-mode-hook #'/eyecandy/js-symbols)
+  (add-hook 'typescript-ts-mode-hook #'/eyecandy/js-symbols)
+  (add-hook 'tsx-ts-mode-hook #'/eyecandy/js-symbols))
 
 
 (require-package 'symbol-overlay)

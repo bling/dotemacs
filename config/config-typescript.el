@@ -45,24 +45,13 @@
      'tide-jump-to-definition :before
      (lambda (&rest _) (evil-set-jump)))))
 
-(/boot/lazy-major-mode "\\.ts$" typescript-mode)
-(add-hook 'typescript-mode-hook #'/typescript/setup)
+(when (fboundp 'typescript-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.[mc]?ts\\'" . typescript-ts-mode))
+  (add-hook 'typescript-ts-mode-hook #'/typescript/setup))
 
-(after 'web-mode
-  (define-derived-mode typescript-tsx-mode web-mode "typescript-tsx")
-  (add-hook 'typescript-tsx-mode-hook #'/typescript/setup))
-
-(when (eq dotemacs-typescript/engine 'eglot)
-  (after [eglot]
-    (add-to-list 'eglot-server-programs
-                 '(typescript-tsx-mode "typescript-language-server" "--stdio"))))
-
-(add-to-list
- 'auto-mode-alist
- '("\\.tsx$" . (lambda ()
-                 (require-package 'web-mode)
-                 (require 'web-mode)
-                 (typescript-tsx-mode))))
+(when (fboundp 'tsx-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.[mc]?tsx\\'" . tsx-ts-mode))
+  (add-hook 'tsx-ts-mode-hook #'/typescript/setup))
 
 (defun /typescript/generate-typings-for-css ()
   "Generates a Typescript type definition file for the current CSS file."
