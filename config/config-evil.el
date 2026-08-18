@@ -57,6 +57,7 @@
 (add-hook 'evil-jumps-post-jump-hook #'recenter)
 
 (setq evil-want-keybinding nil) ;; evil-collection will provide instead
+(setq evil-undo-system 'undo-fu)
 
 (require-package 'evil)
 (require 'evil)
