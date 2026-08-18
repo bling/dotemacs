@@ -27,6 +27,7 @@
 
   (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
   (setq lsp-keep-workspace-alive nil)
+  (setq lsp-diagnostics-provider :flymake)
   (setq read-process-output-max (* 1024 1024))
 
   (setq lsp-ui-sideline-show-hover t)
