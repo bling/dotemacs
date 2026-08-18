@@ -12,31 +12,29 @@
   (setq corfu-popupinfo-delay '(1.0 . 0.2))
   (corfu-popupinfo-mode t)
 
-  (after [prescient]
-    (require-package 'corfu-prescient)
-    (setq corfu-prescient-override-sorting t)
-    (corfu-prescient-mode t))
+  (after 'prescient
+    (when (eq dotemacs-consult/filtering 'prescient)
+      (require-package 'corfu-prescient)
+      (setq corfu-prescient-override-sorting t)
+      (corfu-prescient-mode t)))
 
-  (after [lsp-completion]
-    (setq lsp-completion-provider :none)
-    (defun /corfu/lsp-setup-completion ()
-      (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-            '(flex)))
-    (add-hook 'lsp-completion-mode #'/corfu/lsp-setup-completion))
+  (after 'lsp-completion
+    (setq lsp-completion-provider :none))
+
+  (after 'eglot
+    (setf (alist-get 'styles (alist-get 'eglot completion-category-overrides))
+          '(flex basic))
+    (setf (alist-get 'styles (alist-get 'eglot-capf completion-category-overrides))
+          '(flex basic))
+    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
 
   (add-hook
    'eshell-mode-hook
    (defun /corfu/eshell-mode-hook ()
-     (setq-local corfu-auto nil)))
-
-  (advice-add
-   #'corfu-insert
-   :after
-   (defun /corfu/corfu-insert-for-shell (&rest _)
-     "Send completion candidate when insude comint/eshell."
-     (cond
-      ((derived-mode-p 'eshell-mode) (eshell-send-input))
-      ((derived-mode-p 'comint-mode) (comint-send-input)))))
+     (setq-local corfu-auto nil)
+     (setq-local corfu-quit-at-boundary t)
+     (setq-local corfu-quit-no-match t)
+     (setq-local corfu-preview-current nil)))
 
   (require-package 'cape)
   (add-hook 'completion-at-point-functions #'cape-dabbrev t)

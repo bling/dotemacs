@@ -42,6 +42,14 @@
             (const :tag "ido" ido))
     :group 'dotemacs)
 
+  (defcustom dotemacs-lsp-engine
+    'lsp
+    "The primary engine to use for LSP."
+    :type '(radio
+            (const :tag "lsp" lsp)
+            (const :tag "eglot" eglot))
+    :group 'dotemacs)
+
   (defcustom dotemacs-globally-ignored-directories
     '("elpa" ".cache" "target" "dist" "node_modules" ".git" ".hg" ".svn" ".idea")
     "A set of default directories to ignore for anything that involves searching."
