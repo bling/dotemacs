@@ -14,28 +14,28 @@
 
 
 
-(defvar /hydras/errors/flycheck nil)
+(defvar /hydras/errors/flymake nil)
 (defun /hydras/errors/target-list ()
-  (if /hydras/errors/flycheck
-      'flycheck
+  (if /hydras/errors/flymake
+      'flymake
     'emacs))
 (defhydra /hydras/errors (:hint nil)
   "
-   errors:  navigation                 flycheck
+   errors:  navigation                 flymake
             -----------------------    ---------------
             _j_ → next error             _l_ → list errors
-            _k_ → previous error         _?_ → describe checker
+            _k_ → previous error         _L_ → list project errors
             _t_ → toggle list (%(/hydras/errors/target-list))
 "
-  ("j" (if /hydras/errors/flycheck
-           (call-interactively #'flycheck-next-error)
+  ("j" (if /hydras/errors/flymake
+           (call-interactively #'flymake-goto-next-error)
          (call-interactively #'next-error)))
-  ("k" (if /hydras/errors/flycheck
-           (call-interactively #'flycheck-previous-error)
+  ("k" (if /hydras/errors/flymake
+           (call-interactively #'flymake-goto-prev-error)
          (call-interactively #'previous-error)))
-  ("t" (setq /hydras/errors/flycheck (not /hydras/errors/flycheck)))
-  ("?" flycheck-describe-checker)
-  ("l" flycheck-list-errors :exit t))
+  ("t" (setq /hydras/errors/flymake (not /hydras/errors/flymake)))
+  ("l" flymake-show-buffer-diagnostics :exit t)
+  ("L" flymake-show-project-diagnostics :exit t))
 
 
 
@@ -138,8 +138,8 @@
 
 (defhydra /hydras/toggles (:hint nil :exit t)
   "
-   toggle:  _a_ → aggressive indent   _s_ → flycheck     _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch-engine
-            _F_ → auto-fill           _S_ → flyspell     _c_ → completion     _W_ → word wrap        _g_ → debug on quit
+   toggle:  _a_ → aggressive indent   _m_ → flymake      _r_ → read only      _t_ → truncate lines   _e_ → debug on error   ' → switch-engine
+            _F_ → auto-fill           _s_ → flyspell     _c_ → completion     _W_ → word wrap        _g_ → debug on quit
             _w_ → whitespace          _f_ → auto-format  _p_ → auto-pairing   _b_ → page break
 "
   ("a" aggressive-indent-mode)
@@ -150,8 +150,8 @@
   ("e" toggle-debug-on-error)
   ("g" toggle-debug-on-quit)
   ("b" page-break-lines-mode)
-  ("s" flycheck-mode)
-  ("S" flyspell-mode)
+  ("m" flymake-mode)
+  ("s" flyspell-mode)
   ("w" whitespace-mode)
   ("W" toggle-word-wrap)
   ("r" read-only-mode)
@@ -196,7 +196,7 @@
   ("b" consult-buffer)
   ("d" consult-dash)
   ("e" consult-recent-file)
-  ("E" consult-flycheck)
+  ("E" consult-flymake)
   ("f" find-file)
   ("g" consult-goto-line)
   ("l" consult-line)
