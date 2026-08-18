@@ -96,10 +96,13 @@
   (after 'css-ts-mode
     (evil-define-key 'normal css-ts-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
 
-  (after 'flycheck
-    (evil-define-key 'normal flycheck-error-list-mode-map
-      "j" #'flycheck-error-list-next-error
-      "k" #'flycheck-error-list-previous-error))
+  (after 'flymake
+    (evil-define-key 'normal flymake-diagnostics-buffer-mode-map
+      "j" #'evil-next-line
+      "k" #'evil-previous-line)
+    (evil-define-key 'normal flymake-project-diagnostics-mode-map
+      "j" #'evil-next-line
+      "k" #'evil-previous-line))
 
   (after 'diff-mode
     (evil-define-key 'normal diff-mode-map
