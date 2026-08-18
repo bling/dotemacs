@@ -74,6 +74,9 @@
   (after 'css-mode
     (evil-define-key 'normal css-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
 
+  (after 'css-ts-mode
+    (evil-define-key 'normal css-ts-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
+
   (after 'flycheck
     (evil-define-key 'normal flycheck-error-list-mode-map
       "j" #'flycheck-error-list-next-error
