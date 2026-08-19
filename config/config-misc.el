@@ -42,6 +42,9 @@
 (require-package 'expand-region)
 
 
+(require-package 'crux)
+
+
 (require-package 'aggressive-indent)
 (require 'aggressive-indent)
 (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
