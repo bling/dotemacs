@@ -170,7 +170,7 @@
   ("C-c a" #'org-agenda)
   ("C-c l" #'org-store-link)
   ("C-c s" #'/utils/goto-scratch-buffer)
-  ("C-c e" #'/utils/eval-and-replace)
+  ("C-c e" #'crux-eval-and-replace)
   ("C-c t" #'/eshell/new-split))
 
 (/bindings/define-keys (current-global-map)

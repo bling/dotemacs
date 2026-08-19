@@ -50,13 +50,14 @@
 
 (defhydra /hydras/buffers (:hint nil :exit t)
   "
-   buffers:   _b_ → buffers          _k_ → kill buffer             _f_ → reveal in os
-              _m_ → goto messages    _e_ → erase buffer            ^ ^
-              _s_ → goto scratch     _E_ → erase buffer (force)    ^ ^
+   buffers:   _b_ → buffers          _k_ → kill buffer             _f_ → open in os
+              _m_ → goto messages    _K_ → kill other buffers      _e_ → erase buffer
+              _s_ → goto scratch     ^ ^                           _E_ → erase buffer (force)
 "
   ("s" /utils/goto-scratch-buffer)
   ("k" kill-current-buffer)
-  ("f" /os/reveal-in-os)
+  ("K" crux-kill-other-buffers)
+  ("f" crux-open-with)
   ("m" (switch-to-buffer "*Messages*"))
   ("b" (/hydras/switch-action #'switch-to-buffer :helm #'helm-mini :consult #'consult-buffer))
   ("e" erase-buffer)
@@ -107,12 +108,12 @@
    files:    _f_ → find files      _D_ → delete    _y_ → copy filename   _E_ → edit as root   _z_ → fzf
              _r_ → recent files    _R_ → rename    _c_ → copy file       _C_ → convert
 "
-  ("D" /utils/delete-current-buffer-file)
-  ("R" /utils/rename-current-buffer-file)
+  ("D" crux-delete-file-and-buffer)
+  ("R" crux-rename-file-and-buffer)
   ("f" (/hydras/switch-action #'find-file :helm #'helm-find-files))
   ("r" (/hydras/switch-action nil         :helm #'helm-recentf    :consult #'consult-recent-file))
-  ("y" /utils/copy-file-name-to-clipboard)
-  ("E" /utils/find-file-as-root)
+  ("y" crux-kill-buffer-truename)
+  ("E" crux-sudo-edit)
   ("c" copy-file)
   ("C" /hydras/files/convert/body)
   ("z" fzf))
