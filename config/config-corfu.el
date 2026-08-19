@@ -19,14 +19,26 @@
       (corfu-prescient-mode t)))
 
   (after 'lsp-completion
-    (setq lsp-completion-provider :none))
+    (setq lsp-completion-provider :none)
+    (defun /corfu/lsp-setup-capf ()
+      (setq-local completion-at-point-functions
+                  (cons (cape-capf-super
+                         #'lsp-completion-at-point
+                         #'yasnippet-capf)
+                        (remove #'yasnippet-capf
+                                (remove #'lsp-completion-at-point completion-at-point-functions)))))
+    (add-hook 'lsp-completion-mode-hook #'/corfu/lsp-setup-capf))
 
   (after 'eglot
-    (setf (alist-get 'styles (alist-get 'eglot completion-category-overrides))
-          '(flex basic))
-    (setf (alist-get 'styles (alist-get 'eglot-capf completion-category-overrides))
-          '(flex basic))
-    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster))
+    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+    (defun /corfu/eglot-setup-capf ()
+      (setq-local completion-at-point-functions
+                  (cons (cape-capf-super
+                         #'eglot-completion-at-point
+                         #'yasnippet-capf)
+                        (remove #'yasnippet-capf
+                                (remove #'eglot-completion-at-point completion-at-point-functions)))))
+    (add-hook 'eglot-managed-mode-hook #'/corfu/eglot-setup-capf))
 
   (add-hook
    'eshell-mode-hook

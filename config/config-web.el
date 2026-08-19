@@ -47,18 +47,6 @@
 (add-hook 'scss-mode-hook #'/utils/activate-lsp)
 (add-hook 'less-css-mode-hook #'/utils/activate-lsp)
 
-
-(after 'yasnippet
-  (dolist (hook '(html-mode-hook
-                  html-ts-mode-hook
-                  mhtml-mode-hook
-                  css-mode-hook
-                  css-ts-mode-hook
-                  scss-mode-hook
-                  less-css-mode-hook))
-    (add-hook hook #'yas-minor-mode)))
-
-
 ;; indent after deleting a tag
 (advice-add
  'sgml-delete-tag :after

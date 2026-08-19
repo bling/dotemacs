@@ -9,8 +9,6 @@
           (corfu-quit)
           (consult-completion-in-region beg end table pred)))))
 
-  (define-key corfu-map (kbd "C-s") #'/bindings/corfu/move-to-minibuffer)
-  (define-key corfu-map (kbd "<tab>") #'corfu-next)
-  (define-key corfu-map (kbd "<backtab>") #'corfu-previous))
+  (define-key corfu-map (kbd "C-s") #'/bindings/corfu/move-to-minibuffer))
 
 (provide 'config-bindings-corfu)
