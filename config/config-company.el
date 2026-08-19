@@ -35,19 +35,19 @@
   (global-company-mode)
 
   (after 'yasnippet
-    (setq company-backends
-          (mapcar
-           (lambda (backend)
-             (if (and (listp backend) (member 'company-yasnippet backend))
-                 backend
-               (append (if (consp backend) backend (list backend))
-                       '(:with company-yasnippet))))
-           company-backends)))
+    (setq company-backends (delq 'company-capf company-backends))
+    (add-to-list 'company-backends '(:separate company-capf :with company-yasnippet)))
 
-  (unless (face-attribute 'company-tooltip :background)
-    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-    (set-face-attribute 'company-preview nil :background "black")
-    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")))
+  (defun /company/merge-yasnippet-backend ()
+    (setq-local company-backends
+                (cons '(:separate company-capf :with company-yasnippet)
+                      (cl-remove-if
+                       (lambda (b)
+                         (or (eq b 'company-capf)
+                             (and (listp b) (memq 'company-capf b))))
+                       (copy-sequence company-backends)))))
+
+  (after 'lsp-completion
+    (add-hook 'lsp-completion-mode-hook #'/company/merge-yasnippet-backend)))
 
 (provide 'config-company)
