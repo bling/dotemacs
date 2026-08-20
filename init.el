@@ -1,29 +1,13 @@
 ;; -*- lexical-binding: t -*-
 
-(let ((emacs-start-time (current-time)))
-  (add-hook 'emacs-startup-hook
-            (lambda ()
-              (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
-                (message "[Emacs initialized in %.3fs]" elapsed)))))
-
-(let ((gc-cons-threshold (* 256 1024 1024))
-      (file-name-handler-alist nil)
+(let ((file-name-handler-alist nil)
       (core-directory (concat user-emacs-directory "core/"))
       (bindings-directory (concat user-emacs-directory "bindings/"))
       (config-directory (concat user-emacs-directory "config/")))
 
-  (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  (unless (display-graphic-p) (menu-bar-mode -1))
-
   (defgroup dotemacs nil
     "Custom configuration for dotemacs."
     :group 'local)
-
-  (defcustom dotemacs-cache-directory (concat user-emacs-directory ".cache/")
-    "The storage location for various persistent files."
-    :type 'directory
-    :group 'dotemacs)
 
   (defcustom dotemacs-completion-engine
     'corfu
@@ -56,9 +40,6 @@
     :type '(repeat string)
     :group 'dotemacs)
 
-  (when (fboundp 'startup-redirect-eln-cache)
-    (startup-redirect-eln-cache (expand-file-name ".cache/eln-cache/" user-emacs-directory)))
-
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   (setq package-enable-at-startup nil)
@@ -69,11 +50,6 @@
   (setq custom-file (concat user-emacs-directory "custom.el"))
   (when (file-exists-p custom-file)
     (load custom-file))
-
-  ;; exclude certain patterns from native comp since they always fail
-  (after 'comp
-    (add-to-list 'native-comp-jit-compilation-deny-list "\\.el\\.gz\\'")
-    (add-to-list 'native-comp-jit-compilation-deny-list "-*-loaddefs\\.el\\'"))
 
   (cl-loop for file in (append (reverse (directory-files-recursively config-directory "\\.el$"))
                                (reverse (directory-files-recursively bindings-directory "\\.el$")))
