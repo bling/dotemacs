@@ -30,7 +30,6 @@
 
 (defun /transients/project/ctrl+p ()
   (interactive)
-  (setq gc-cons-threshold most-positive-fixnum)
   (cond
    ((eq dotemacs-switch-engine 'consult)
     (call-interactively #'consult-project-extra-find))
