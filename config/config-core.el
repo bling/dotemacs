@@ -49,13 +49,6 @@
 (run-with-idle-timer 600 t #'recentf-save-list)
 
 
-;; gc
-(defun /core/minibuffer-setup-hook () (setq gc-cons-threshold most-positive-fixnum))
-(defun /core/minibuffer-exit-hook () (setq gc-cons-threshold (* 64 1024 1024)))
-(add-hook 'minibuffer-setup-hook #'/core/minibuffer-setup-hook)
-(add-hook 'minibuffer-exit-hook #'/core/minibuffer-exit-hook)
-
-
 ;; completion
 (setq completion-ignore-case t)
 

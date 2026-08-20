@@ -69,4 +69,8 @@
 (apheleia-global-mode t)
 
 
+(require-package 'gcmh)
+(gcmh-mode)
+
+
 (provide 'config-misc)
