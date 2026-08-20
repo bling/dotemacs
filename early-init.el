@@ -14,7 +14,6 @@
 
 ;; disable GC during init, gcmh will restore later
 (setq gc-cons-threshold most-positive-fixnum)
-(add-hook 'emacs-startup-hook (lambda () (setq gc-cons-threshold dotemacs-gs-cons-threshold)))
 
 ;; suppress random startup noise
 (setq inhibit-splash-screen t)
