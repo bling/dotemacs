@@ -216,9 +216,6 @@
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 (setq-default indent-tabs-mode nil)
 
-(setq inhibit-splash-screen t)
-(setq inhibit-startup-echo-area-message t)
-(setq inhibit-startup-message t)
 
 
 (global-visual-line-mode)
