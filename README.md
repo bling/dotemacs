@@ -8,21 +8,17 @@ There are many emacs configs, what makes this one different?
 
 ## kiss
 
-This is a keep it simple stupid config.  It is built with 3 simple building blocks; small enough that it is white magic instead of black magic.
+This is a keep it simple stupid config.  It only uses a couple simple building blocks.
 
 ### simple building block 1
 
 ``` cl
-(defun require-package (package)
-  "Ensures that PACKAGE is installed."
-  (unless (or (package-installed-p package)
-              (require package nil 'noerror))
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
+(require 'use-package)
+(setq use-package-always-ensure t)
+(setq use-package-always-defer t)
 ```
 
-The code here is self-explanatory.  This is how you declare what packages you want to install and use.  This was taken from [Purcell][1]'s config.
+Defaults `use-package` to lazily load and install packages.
 
 ### simple building block 2
 
@@ -42,7 +38,7 @@ Another useful feature is that it can also be used to run code if a package has 
   )
 ```
 
-This was taken from [milkypostman][2].
+This was taken from [milkypostman][1].
 
 ### simple building block 3
 
@@ -59,13 +55,13 @@ Basically, it recursively finds anything in `config/` and loads it.  If you want
 
 #### bindings in one place
 
-Another decision is to keep all keybindings in one place: `/bindings/**/*.el`.  Because of this, things like [use-package][3] aren't particularly useful here because it doesn't add much value over `(require-package)` and `after`.
+Another decision is to keep all keybindings in one place: `/bindings/**/*.el`.
 
 Keybindings are the single most differentiating factor between configs.  By defining them in one place, if you want to use/fork this config, you can simply change the bindings to your liking and still use all the other preconfigured packages as is.  If you're not an Evil user, delete `config-evil.el` and you will get a pure Emacs experience.
 
 #### lazy installation of major mode packages
 
-By combining `after`, `require-package`, and `auto-mode-alist`, packages are installed only when necessary.  If you never open a Javascript file, none of those packages will be installed.
+By combining `after`, `use-package`, and `auto-mode-alist`, packages are installed only when necessary.  If you never open a Javascript file, none of those packages will be installed.
 
 # install
 
@@ -79,7 +75,4 @@ here be dragons.
 
 MIT
 
-
-[1]: https://github.com/purcell/emacs.d
-[2]: http://milkbox.net/note/single-file-master-emacs-configuration/
-[3]: https://github.com/jwiegley/use-package
+[1]: http://milkbox.net/note/single-file-master-emacs-configuration/

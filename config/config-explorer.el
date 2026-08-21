@@ -23,40 +23,36 @@
 
 (cond
  ((eq dotemacs-explorer/option 'treemacs)
-  (/boot/delayed-init ;; delay load to allow treemacs to calculate icon colors based on the current theme
-   (require-package 'treemacs)
+  (use-package treemacs
+    :init
+    (setq treemacs-indentation 1)
+    (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
+    (setq treemacs-follow-after-init t)
+    (setq treemacs-file-event-delay 1000)
+    :config
+    (treemacs-filewatch-mode t)
+    (treemacs-tag-follow-mode t))
 
-   (setq treemacs-indentation 1)
-   (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
-   (setq treemacs-follow-after-init t)
-   (setq treemacs-filewatch-mode t)
-   (setq treemacs-tag-follow-mode t)
-   (setq treemacs-file-event-delay 1000)
+  (when dotemacs-explorer/nerd-icons
+    (after 'treemacs
+      (use-package treemacs-nerd-icons :demand t)))
 
-   (when dotemacs-explorer/nerd-icons
-     (after 'treemacs
-       (require-package 'treemacs-nerd-icons)
-       (require 'treemacs-nerd-icons)))
+  (after 'treemacs
+    (when (executable-find "git")
+      (use-package treemacs-magit :demand t)
 
-   (after 'treemacs
-     (when (executable-find "git")
-       (require-package 'treemacs-magit)
-       (require 'treemacs-magit)
+      (if (executable-find "python3")
+          (treemacs-git-mode 'extended)
+        (treemacs-git-mode 'simple))))
 
-       (if (executable-find "python3")
-           (treemacs-git-mode 'extended)
-         (treemacs-git-mode 'simple))))
-
-   (after [evil treemacs]
-     (require-package 'treemacs-evil)
-     (require 'treemacs-evil)))
-  )
+  (after [evil treemacs]
+    (use-package treemacs-evil :demand t)))
 
  ((eq dotemacs-explorer/option 'dired-sidebar)
-  (require-package 'dired-sidebar)
-  (setq dired-sidebar-should-follow-file t)
-  (setq dired-sidebar-follow-file-idle-delay 0.2))
- )
+  (use-package dired-sidebar
+    :init
+    (setq dired-sidebar-should-follow-file t)
+    (setq dired-sidebar-follow-file-idle-delay 0.2))))
 
 (defun /explorer/toggle ()
   (interactive)
@@ -70,7 +66,6 @@
   (interactive)
   (cond
    ((eq dotemacs-explorer/option 'treemacs)
-    (require 'treemacs)
     (treemacs-find-file))
    ((eq dotemacs-explorer/option 'dired-sidebar)
     (dired-sidebar-find-file))))

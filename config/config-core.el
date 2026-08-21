@@ -15,20 +15,16 @@
 ;; server
 (setq server-auth-dir (concat dotemacs-cache-directory "server/"))
 
-
-;; move cursor to the last position upon open
-(require 'saveplace)
+;; saveplace
 (setq save-place-file (concat dotemacs-cache-directory "places"))
 (save-place-mode t)
 
-
 ;; savehist
-(setq savehist-file (concat dotemacs-cache-directory "savehist")
-      savehist-additional-variables '(search-ring regexp-search-ring)
-      savehist-autosave-interval 60
-      history-length 1000)
-(savehist-mode)
-
+(setq savehist-file (concat dotemacs-cache-directory "savehist"))
+(setq savehist-additional-variables '(search-ring regexp-search-ring))
+(setq savehist-autosave-interval 60)
+(setq history-length 1000)
+(savehist-mode t)
 
 ;; desktop
 (setq desktop-path `(,dotemacs-cache-directory))
@@ -37,7 +33,6 @@
 (setq desktop-save t)
 (desktop-save-mode t)
 
-
 ;; recent files
 (require 'recentf)
 (setq recentf-save-file (concat dotemacs-cache-directory "recentf"))
@@ -45,53 +40,35 @@
 (setq recentf-max-menu-items 500)
 (setq recentf-auto-cleanup 300)
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
-(add-to-list 'recentf-exclude ".*elpa.*autoloads\.el$")
+(add-to-list 'recentf-exclude ".*elpa.*autoloads\\.el\\'")
 (recentf-mode t)
 (run-with-idle-timer 600 t #'recentf-save-list)
-
 
 ;; completion
 (setq completion-ignore-case t)
 
-
 ;; imenu
 (setq-default imenu-auto-rescan t)
-
 
 ;; narrowing
 (put 'narrow-to-region 'disabled nil)
 
-
-;; pairing
+;; electricity
+(setq electric-pair-skip-whitespace-chars '(32 9)) ;; don't complete pairs across newline
 (electric-pair-mode t)
-;; don't complete pairs across newline
-(setq electric-pair-skip-whitespace-chars '(32 9))
 (add-hook 'minibuffer-setup-hook (defun /core/electric-pair-off () (electric-pair-mode -1)))
 (add-hook 'minibuffer-exit-hook (defun /core/electric-pair-on () (electric-pair-mode t)))
 
-
 ;; dired
+(setq dired-listing-switches "-alh")
 (after 'dired
-  (setq dired-listing-switches "-alh")
   (require 'dired-x))
-
 
 ;; url
 (setq url-configuration-directory (concat dotemacs-cache-directory "url/"))
 
-
 ;; tramp
 (setq tramp-persistency-file-name (concat dotemacs-cache-directory "tramp"))
-
-
-;; comint
-(after 'comint
-  (defun /core/toggle-comint-scroll-to-bottom-on-output ()
-    (interactive)
-    (if comint-scroll-to-bottom-on-output
-        (setq comint-scroll-to-bottom-on-output nil)
-      (setq comint-scroll-to-bottom-on-output t))))
-
 
 ;; compile
 (setq compilation-always-kill t)
@@ -99,36 +76,29 @@
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 (add-hook 'compilation-filter-hook #'ansi-osc-compilation-filter)
 
-
 ;; bookmarks
 (setq bookmark-default-file (concat dotemacs-cache-directory "bookmarks"))
-(setq bookmark-save-flag 1) ;; save after every change
-
+(setq bookmark-save-flag 1)
 
 ;; fringe
 (when (display-graphic-p)
   (fringe-mode 16))
 
-
 ;; ediff
-(setq ediff-split-window-function 'split-window-horizontally) ;; side-by-side diffs
-(setq ediff-window-setup-function 'ediff-setup-windows-plain) ;; no extra frames
-
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; re-builder
-(setq reb-re-syntax 'string) ;; fix backslash madness
+(setq reb-re-syntax 'string)
 
-
-;; clean up old buffers periodically
-(midnight-mode)
+;; midnight
+(midnight-mode t)
 (midnight-delay-set 'midnight-delay 0)
 
-
 ;; proced
-(setq-default proced-auto-update-flag t)
+(setq proced-auto-update-flag t)
 (setq proced-auto-update-interval 1)
 (setq proced-enable-color-flag t)
-
 
 ;; ibuffer
 (setq ibuffer-expert t)
@@ -136,22 +106,15 @@
 (setq ibuffer-use-other-window t)
 (add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
 
-
-;; so-long
-(global-so-long-mode 1)
-
-
 ;; which-key
 (setq which-key-idle-delay 0.2)
 (setq which-key-min-display-lines 3)
-(which-key-mode)
-
+(which-key-mode t)
 
 ;; move auto-save to the cache
 (let ((dir (expand-file-name (concat dotemacs-cache-directory "auto-save/"))))
   (setq auto-save-list-file-prefix (concat dir "saves-"))
   (setq auto-save-file-name-transforms `((".*" ,(concat dir "save-") t))))
-
 
 ;; multiple-backups
 (setq backup-directory-alist `((".*" . ,(expand-file-name (concat dotemacs-cache-directory "backups/")))))
@@ -161,19 +124,16 @@
 (setq kept-new-versions 20)
 (setq delete-old-versions t)
 
-
 ;; better scrolling
-(setq scroll-conservatively 9999
-      scroll-preserve-screen-position t
-      scroll-margin 3)
+(setq scroll-conservatively 9999)
+(setq scroll-preserve-screen-position t)
+(setq scroll-margin 3)
 
-;; better buffer names for duplicates
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward
-      uniquify-separator "/"
-      uniquify-ignore-buffers-re "^\\*" ; leave special buffers alone
-      uniquify-after-kill-buffer-flag t)
-
+;; uniquify
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-ignore-buffers-re "^\\*")
+(setq uniquify-after-kill-buffer-flag t)
 
 (defun /core/do-not-kill-scratch-buffer ()
   (if (member (buffer-name (current-buffer))
@@ -184,14 +144,10 @@
     t))
 (add-hook 'kill-buffer-query-functions '/core/do-not-kill-scratch-buffer)
 
-
-(setq use-short-answers t)
-
-
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
 
-
+(setq use-short-answers t)
 (setq sentence-end-double-space nil)
 (setq ring-bell-function 'ignore)
 (setq mark-ring-max 64)
@@ -204,8 +160,7 @@
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 (setq-default indent-tabs-mode nil)
 
-
-
+(global-so-long-mode t)
 (global-visual-line-mode)
 (xterm-mouse-mode t)
 (which-function-mode t)
@@ -214,7 +169,6 @@
 (electric-indent-mode t)
 (transient-mark-mode t)
 (delete-selection-mode t)
-
 
 (defun /core/find-file-hook ()
   (when (or (and (buffer-file-name)
@@ -227,8 +181,5 @@
     (message "Large file detected. Switched to fundamental mode.")))
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
-
-(setq treesit-extra-load-path (list (concat dotemacs-cache-directory "tree-sitter")))
-
-
 (provide 'config-core)
+

@@ -7,7 +7,7 @@
 
 (defun /eglot/activate ()
   (interactive)
-  (require-package 'eglot)
+  (use-package eglot)
   (eglot-ensure))
 
 (after 'eglot
