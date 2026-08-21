@@ -1,13 +1,13 @@
 ;; -*- lexical-binding: t -*-
 
-(require 'flymake)
+(add-hook 'prog-mode-hook #'flymake-mode-on)
+(add-hook 'text-mode-hook #'flymake-mode-on)
 
-(add-hook 'prog-mode-hook #'flymake-mode)
-(add-hook 'text-mode-hook #'flymake-mode)
-
-(require-package 'flymake-collection)
-(after 'flymake-collection
-  (flymake-collection-hook-setup))
+(use-package flymake-collection
+  :demand t
+  :config
+  (flymake-collection-hook-setup)
+  (setf (alist-get 'emacs-lisp-mode flymake-collection-hook-config) nil))
 
 (defun /flymake/disable-dotfiles-elisp-checkers ()
   (remove-hook 'flymake-diagnostic-functions #'elisp-flymake-byte-compile t)

@@ -11,10 +11,10 @@
 (when (fboundp 'dockerfile-ts-mode)
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode)))
 
-(/boot/lazy-major-mode "\\.\\(md\\|markdown\\)\\'" markdown-mode)
-(/boot/lazy-major-mode "\\.csv\\'" csv-mode)
-(/boot/lazy-major-mode "\\.gitlab-ci\\.yml\\'" gitlab-ci-mode)
-(/boot/lazy-major-mode "\\.vim\\'" vimrc-mode)
-(/boot/lazy-major-mode "\\.rego\\'" rego-mode)
+(use-package-lazy-mode "\\.\\(md\\|markdown\\)\\'" markdown-mode)
+(use-package-lazy-mode "\\.csv\\'" csv-mode)
+(use-package-lazy-mode "\\.gitlab-ci\\.ya?ml\\'" gitlab-ci-mode)
+(use-package-lazy-mode "\\.vim\\'" vimrc-mode)
+(use-package-lazy-mode "\\.rego\\'" rego-mode)
 
 (provide 'config-auxiliary-modes)

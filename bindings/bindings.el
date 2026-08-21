@@ -1,14 +1,14 @@
 ;; -*- lexical-binding: t -*-
 
 (setq lv-use-separator t)
-(require-package 'hydra)
-(autoload 'hydra-default-pre "hydra")
+(use-package hydra)
 
 
-(require-package 'transient)
-(setq transient-history-file (concat dotemacs-cache-directory "transient/history.el"))
-(setq transient-levels-file (concat dotemacs-cache-directory "transient/levels.el"))
-(setq transient-values-file (concat dotemacs-cache-directory "transient/values.el"))
+(use-package transient
+  :init
+  (setq transient-history-file (concat dotemacs-cache-directory "transient/history.el"))
+  (setq transient-levels-file (concat dotemacs-cache-directory "transient/levels.el"))
+  (setq transient-values-file (concat dotemacs-cache-directory "transient/values.el")))
 
 
 (defmacro /bindings/define-prefix-keys (keymap prefix &rest body)

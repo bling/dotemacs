@@ -16,39 +16,44 @@
 
 
 (defun /consult/init ()
-  (require-package 'vertico)
-  (setq vertico-count 20)
+  (use-package vertico
+    :init
+    (setq vertico-count 15))
 
-  (require-package 'marginalia)
+  (use-package marginalia)
 
   (cond
    ((eq dotemacs-consult/filtering 'orderless)
-    (require-package 'orderless)
-    (require 'orderless)
-    (setq orderless-matching-styles
-          '(orderless-literal
-            orderless-initialism
-            orderless-regexp
-            orderless-flex)))
+    (use-package orderless
+      :demand t
+      :init
+      (setq orderless-matching-styles
+            '(orderless-literal
+              orderless-initialism
+              orderless-regexp
+              orderless-flex))))
    ((eq dotemacs-consult/filtering 'prescient)
-    (require-package 'prescient)
-    (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
-    (setq prescient-filter-method '(literal regexp initialism fuzzy))
-    (setq prescient-persist-mode t)
-    (require 'prescient)
+    (use-package prescient
+      :demand t
+      :init
+      (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
+      (setq prescient-filter-method '(literal regexp initialism fuzzy))
+      :config
+      (prescient-persist-mode t))
 
-    (require-package 'vertico-prescient)
-    (setq vertico-prescient-override-sorting t)))
+    (use-package vertico-prescient
+      :init
+      (setq vertico-prescient-override-sorting t))))
 
-  (require-package 'consult)
-  (require-package 'consult-dash)
-  (require-package 'consult-project-extra)
+  (use-package consult)
+  (use-package consult-dash)
+  (use-package consult-project-extra)
 
   (after 'eglot
-    (require-package 'consult-eglot))
+    (use-package consult-eglot))
 
   (after 'lsp-mode
-    (require-package 'consult-lsp)))
+    (use-package consult-lsp)))
 
 (defun /consult/activate-as-switch-engine (on)
   (/consult/init)
