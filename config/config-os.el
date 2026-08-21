@@ -9,8 +9,9 @@
 (if (eq system-type 'windows-nt)
     (dolist (path (split-string (getenv "PATH") ";"))
       (add-to-list 'exec-path (replace-regexp-in-string "\\\\" "/" path)))
-  (require-package 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell :demand t
+    :config
+    (exec-path-from-shell-initialize)))
 
 (defun /os/addpath (path)
   (let* ((directory (expand-file-name path))
@@ -25,7 +26,7 @@
   (/os/addpath path))
 
 (when (eq system-type 'darwin)
-  (require-package 'reveal-in-osx-finder))
+  (use-package reveal-in-osx-finder))
 
 (defun /os/reveal-in-os ()
   (interactive)

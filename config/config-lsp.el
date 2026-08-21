@@ -21,9 +21,9 @@
     (/lsp/do-activate)))
 
 (defun /lsp/do-activate ()
-  (require-package 'lsp-mode)
-  (require-package 'lsp-ui)
-  (require-package 'lsp-treemacs)
+  (use-package lsp-mode)
+  (use-package lsp-ui)
+  (use-package lsp-treemacs)
 
   (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
   (setq lsp-keep-workspace-alive nil)

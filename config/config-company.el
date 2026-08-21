@@ -7,32 +7,32 @@
     :group 'dotemacs
     :prefix 'dotemacs-company)
 
-  (require-package 'company)
+  (use-package company :demand t
+    :init
+    (setq company-idle-delay 0.2)
+    (setq company-minimum-prefix-length 1)
+    (setq company-show-quick-access t)
+    (setq company-tooltip-limit 20)
 
-  (setq company-idle-delay 0.2)
-  (setq company-minimum-prefix-length 1)
-  (setq company-show-quick-access t)
-  (setq company-tooltip-limit 20)
+    (setq company-dabbrev-downcase nil)
+    (setq company-dabbrev-ignore-case t)
 
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-ignore-case t)
+    (setq company-dabbrev-code-ignore-case t)
+    (setq company-dabbrev-code-everywhere t)
 
-  (setq company-dabbrev-code-ignore-case t)
-  (setq company-dabbrev-code-everywhere t)
+    (setq company-etags-ignore-case t)
 
-  (setq company-etags-ignore-case t)
-
-  (setq company-global-modes
-        '(not
-          comint-mode
-          erc-mode
-          eshell-mode
-          term-char-mode
-          term-line-mode
-          term-mode
-          text-mode))
-
-  (global-company-mode)
+    (setq company-global-modes
+          '(not
+            comint-mode
+            erc-mode
+            eshell-mode
+            term-char-mode
+            term-line-mode
+            term-mode
+            text-mode))
+    :config
+    (global-company-mode))
 
   (after 'yasnippet
     (setq company-backends (delq 'company-capf company-backends))

@@ -8,11 +8,13 @@
 (setq ido-save-directory-list-file (concat dotemacs-cache-directory "ido.last"))
 
 (after 'ido
-  (require-package 'flx-ido)
-  (flx-ido-mode t)
+  (use-package flx-ido :demand t
+    :config
+    (flx-ido-mode t))
 
-  (require-package 'ido-vertical-mode)
-  (ido-vertical-mode))
+  (use-package ido-vertical-mode :demand t
+    :config
+    (ido-vertical-mode)))
 
 (defun /ido/activate-as-switch-engine (on)
   (if on

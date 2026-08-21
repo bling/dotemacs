@@ -22,9 +22,9 @@
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 
-(require-package 'doom-modeline)
-(require 'doom-modeline)
-(doom-modeline-mode t)
+(use-package doom-modeline :demand t
+  :config
+  (doom-modeline-mode t))
 
 
 (when (fboundp 'global-prettify-symbols-mode)
@@ -44,45 +44,50 @@
   (add-hook 'tsx-ts-mode-hook #'/eyecandy/js-symbols))
 
 
-(require-package 'symbol-overlay)
-(add-hook 'prog-mode-hook #'symbol-overlay-mode)
+(use-package symbol-overlay
+  :hook prog-mode)
 
 
-(require-package 'page-break-lines)
-(global-page-break-lines-mode)
+(use-package page-break-lines :demand t
+  :config
+  (global-page-break-lines-mode))
 
 
-(require-package 'eros)
-(eros-mode)
+(use-package eros :demand t
+  :config
+  (eros-mode))
 
 
-(when (display-graphic-p)
-  (require-package 'nerd-icons)
-  (setq inhibit-compacting-font-caches t)
+(use-package nerd-icons)
+(setq inhibit-compacting-font-caches t)
 
-  (after 'ibuffer
-    (require-package 'nerd-icons-ibuffer)
-    (add-hook 'ibuffer-mode-hook #'nerd-icons-ibuffer-mode))
+(after 'ibuffer
+  (use-package nerd-icons-ibuffer
+    :hook ibuffer-mode))
 
-  (after 'dired
-    (require-package 'nerd-icons-dired)
-    (add-hook 'dired-mode-hook #'nerd-icons-dired-mode))
+(after 'dired
+  (use-package nerd-icons-dired
+    :hook dired-mode))
 
-  (after 'xref
-    (require-package 'nerd-icons-xref)
-    (nerd-icons-xref-mode))
+(after 'xref
+  (use-package nerd-icons-xref :demand t
+    :config
+    (nerd-icons-xref-mode)))
 
-  (after 'grep
-    (require-package 'nerd-icons-grep)
-    (nerd-icons-grep-mode))
+(after 'grep
+  (use-package nerd-icons-grep :demand t
+    :config
+    (nerd-icons-grep-mode)))
 
-  (after 'marginalia
-    (require-package 'nerd-icons-completion)
+(after 'marginalia
+  (use-package nerd-icons-completion :demand t
+    :config
     (nerd-icons-completion-mode)
-    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)))
 
-  (after 'corfu
-    (require-package 'nerd-icons-corfu)
+(after 'corfu
+  (use-package nerd-icons-corfu :demand t
+    :config
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)))
 
 

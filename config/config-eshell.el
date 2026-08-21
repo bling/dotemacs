@@ -131,9 +131,11 @@
   (defalias 'eshell/s #'magit-status))
 
 
-(require-package 'eshell-z)
-(setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
-(defalias 'eshell/j #'eshell/z)
+(use-package eshell-z
+  :init
+  (setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
+  :config
+  (defalias 'eshell/j #'eshell/z))
 
 (defun eshell/z-clean ()
   (let* ((directories (hash-table-keys eshell-z-freq-dir-hash-table))

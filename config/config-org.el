@@ -63,8 +63,8 @@
     (setq show-trailing-whitespace t))
   (add-hook 'org-mode-hook #'/org/org-mode-hook)
 
-  (require-package 'org-modern)
-  (after 'org
+  (use-package org-modern :demand t
+    :config
     (global-org-modern-mode t)))
 
 (provide 'config-org)

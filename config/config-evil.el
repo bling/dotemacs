@@ -15,6 +15,9 @@
   '(calculator-mode
     eshell-mode
     shell-mode
+    ghostel-mode
+    eat-mode
+    vterm-mode
     term-mode)
   "List of major modes that should default to Emacs state."
   :type '(repeat (symbol))
@@ -43,40 +46,36 @@
 
 
 
-(setq evil-search-module 'evil-search)
-(setq evil-magic 'very-magic)
+(use-package evil :demand t
+  :init
+  (setq evil-emacs-state-cursor '("red" box))
+  (setq evil-motion-state-cursor '("orange" box))
+  (setq evil-normal-state-cursor '("green" box))
+  (setq evil-visual-state-cursor '("orange" box))
+  (setq evil-insert-state-cursor '("red" bar))
+  (setq evil-replace-state-cursor '("red" bar))
+  (setq evil-operator-state-cursor '("red" hollow))
+  (setq evil-search-module 'evil-search)
+  (setq evil-magic 'very-magic)
+  (setq evil-want-keybinding nil) ;; evil-collection will provide instead
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (add-hook 'evil-jumps-post-jump-hook #'recenter)
+  (evil-mode)
 
-(setq evil-emacs-state-cursor '("red" box))
-(setq evil-motion-state-cursor '("orange" box))
-(setq evil-normal-state-cursor '("green" box))
-(setq evil-visual-state-cursor '("orange" box))
-(setq evil-insert-state-cursor '("red" bar))
-(setq evil-replace-state-cursor '("red" bar))
-(setq evil-operator-state-cursor '("red" hollow))
+  (cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
+           do (let ((hook (concat (symbol-name mode) "-hook")))
+                (add-hook (intern hook) `(lambda ()
+                                           (if ,mode
+                                               (evil-emacs-state)
+                                             (evil-normal-state))))))
 
-(add-hook 'evil-jumps-post-jump-hook #'recenter)
+  (cl-loop for hook in dotemacs-evil/emacs-state-hooks
+           do (add-hook hook #'evil-emacs-state))
 
-(setq evil-want-keybinding nil) ;; evil-collection will provide instead
-(setq evil-undo-system 'undo-fu)
+  (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
+           do (evil-set-initial-state mode 'emacs))
 
-(require-package 'evil)
-(require 'evil)
-(evil-mode)
-
-(cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
-         do (let ((hook (concat (symbol-name mode) "-hook")))
-              (add-hook (intern hook) `(lambda ()
-                                         (if ,mode
-                                             (evil-emacs-state)
-                                           (evil-normal-state))))))
-
-(cl-loop for hook in dotemacs-evil/emacs-state-hooks
-         do (add-hook hook #'evil-emacs-state))
-
-(cl-loop for mode in dotemacs-evil/emacs-state-major-modes
-         do (evil-set-initial-state mode 'emacs))
-
-(after 'evil-common
   (evil-put-property 'evil-state-properties 'normal   :tag " NORMAL ")
   (evil-put-property 'evil-state-properties 'insert   :tag " INSERT ")
   (evil-put-property 'evil-state-properties 'visual   :tag " VISUAL ")
@@ -94,55 +93,57 @@
 
 (cond
  ((eq dotemacs-evil/comments 'evil-commentary)
-  (require-package 'evil-commentary)
-  (evil-commentary-mode t))
+  (use-package evil-commentary :demand t
+    :config
+    (evil-commentary-mode t)))
  ((eq dotemacs-evil/comments 'evil-nerd-commenter)
-  (require-package 'evil-nerd-commenter)
-  (require 'evil-nerd-commenter)
-  (require 'evil-nerd-commenter-operator)
-  (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
-  (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
-  (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
-  (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator)))
+  (use-package evil-nerd-commenter :demand t
+    :config
+    (require 'evil-nerd-commenter-operator)
+    (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
+    (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
+    (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
+    (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator))))
 
 
-(require-package 'evil-surround)
-(global-evil-surround-mode t)
+(use-package evil-surround :demand t
+  :config
+  (global-evil-surround-mode t))
 
 
-(require-package 'evil-exchange)
-(evil-exchange-install)
+(use-package evil-exchange :demand t
+  :config
+  (evil-exchange-install))
 
 
-(require-package 'evil-anzu)
-(require 'evil-anzu)
+(use-package evil-anzu :demand t)
 
 
-(require-package 'evil-avy)
-(evil-avy-mode)
-(add-hook 'magit-status-mode-hook (lambda () (evil-avy-mode -1)))
+(use-package evil-avy :demand t
+  :config
+  (evil-avy-mode)
+  (add-hook 'magit-status-mode-hook (lambda () (evil-avy-mode -1))))
 
 
-(require-package 'evil-matchit)
-(defun evilmi-customize-keybinding ()
-  (evil-define-key 'normal evil-matchit-mode-map
-    "%" 'evilmi-jump-items))
-(global-evil-matchit-mode t)
+(use-package evil-matchit :demand t
+  :config
+  (global-evil-matchit-mode t))
 
 
-(require-package 'evil-indent-textobject)
-(require 'evil-indent-textobject)
+(use-package evil-indent-textobject :demand t)
 
 
-(require-package 'evil-visualstar)
-(global-evil-visualstar-mode t)
+(use-package evil-visualstar :demand t
+  :config
+  (global-evil-visualstar-mode t))
 
 
-(require-package 'evil-numbers)
+(use-package evil-numbers)
 
 
-(unless (display-graphic-p)
-  (require-package 'evil-terminal-cursor-changer)
+(use-package evil-terminal-cursor-changer :demand t
+  :if (not (display-graphic-p))
+  :config
   (evil-terminal-cursor-changer-activate))
 
 

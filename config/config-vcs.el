@@ -22,7 +22,7 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 (when (executable-find "git")
-  (require-package 'magit)
+  (use-package magit)
 
   (defun /vcs/magit-post-display-buffer-hook ()
     (when (string-match-p "\\*magit:" (buffer-name))
@@ -34,15 +34,14 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
   (setq magit-ediff-dwim-show-on-hunks t)
 
   (after 'eshell
-    (require-package 'pcmpl-git)
     (require 'pcmpl-git)
     (defalias 'pcomplete/g #'pcomplete/git))
 
-  (require-package 'git-timemachine))
+  (use-package git-timemachine))
 
 
 
-(require-package 'diff-hl)
+(use-package diff-hl)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (add-hook 'prog-mode-hook (lambda ()
                             (if (display-graphic-p)
@@ -51,8 +50,7 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 
-(require-package 'with-editor)
-(autoload 'with-editor-export-editor "with-editor")
+(use-package with-editor)
 (defun /vcs/with-editor-export ()
   (unless (equal (buffer-name) "*fzf*")
     (with-editor-export-editor)
