@@ -14,8 +14,8 @@
   (setq helm-bookmark-show-location t)
   (setq helm-buffer-max-length 40)
 
-  (require-package 'helm-descbinds)
-  (require-package 'helm-dash)
+  (use-package helm-descbinds)
+  (use-package helm-dash)
 
   (setq helm-adaptive-history-file (concat dotemacs-cache-directory "helm-adaptive-history"))
   (helm-adaptive-mode t)
@@ -25,7 +25,7 @@
   (helm-autoresize-mode t))
 
 (defun /helm/activate-as-switch-engine (on)
-  (require-package 'helm)
+  (use-package helm)
   (if on
       (progn
         (global-set-key [remap execute-extended-command] #'helm-M-x)

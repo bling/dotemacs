@@ -127,18 +127,19 @@
               (local-set-key (kbd "C-k") #'/bindings/evil/window-or-frame-up)
               (local-set-key (kbd "C-l") #'/bindings/evil/window-or-frame-right)))
 
-  (require-package 'evil-collection)
-  (add-hook 'evil-collection-setup-hook
-            (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)
-              ;; removes any bindings to SPC and , since they are global prefix keys
-              (evil-collection-translate-key 'normal mode-keymaps
-                (kbd "SPC") nil
-                "," nil
-                )))
-  (evil-collection-init)
+  (use-package evil-collection :demand t
+    :init
+    (add-hook 'evil-collection-setup-hook
+              (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)
+                ;; removes any bindings to SPC and , since they are global prefix keys
+                (evil-collection-translate-key 'normal mode-keymaps
+                  (kbd "SPC") nil
+                  "," nil)))
+    :config
+    (evil-collection-init)
 
-  ;; fix compilation-mode integration
-  (advice-add #'evil-collection-unimpaired-next-error :override #'next-error)
-  (advice-add #'evil-collection-unimpaired-previous-error :override #'previous-error))
+    ;; fix compilation-mode integration
+    (advice-add #'evil-collection-unimpaired-next-error :override #'next-error)
+    (advice-add #'evil-collection-unimpaired-previous-error :override #'previous-error)))
 
 (provide 'config-bindings-evil)

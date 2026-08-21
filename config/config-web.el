@@ -12,17 +12,14 @@
 
 
 
-(require-package 'rainbow-mode)
-(dolist (hook '(html-mode-hook
-                html-ts-mode-hook
-                mhtml-mode-hook
-                css-mode-hook
-                css-ts-mode-hook
-                scss-mode-hook
-                sass-mode-hook
-                less-css-mode-hook
-                stylus-mode-hook))
-  (add-hook hook #'rainbow-mode))
+(use-package rainbow-mode
+  :hook (html-mode
+         html-ts-mode
+         mhtml-mode
+         css-mode
+         css-ts-mode
+         scss-mode
+         less-css-mode))
 
 
 (setq-default sgml-basic-offset dotemacs-web/indent-offset)
