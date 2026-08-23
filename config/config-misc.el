@@ -92,15 +92,9 @@
 (setq dash-docs-browser-func #'eww)
 
 
-(when (executable-find "prettier")
-  (require-package 'reformatter)
-  (reformatter-define prettier-css :program "prettier" :args '("--parser=css"))
-  (reformatter-define prettier-html :program "prettier" :args '("--parser=html"))
-  (reformatter-define prettier-javascript :program "prettier" :args '("--parser=babel"))
-  (reformatter-define prettier-json :program "prettier" :args '("--parser=json"))
-  (reformatter-define prettier-markdown :program "prettier" :args '("--parser=markdown"))
-  (reformatter-define prettier-typescript :program "prettier" :args '("--parser=typescript"))
-  (reformatter-define prettier-yaml :program "prettier" :args '("--parser=yaml")))
+(require-package 'apheleia)
+(setq apheleia-formatters-respect-indent-level nil)
+(apheleia-global-mode t)
 
 
 (provide 'config-misc)
