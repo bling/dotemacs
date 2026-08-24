@@ -6,3 +6,4 @@ el-get
 custom.el
 node_modules
 *.elc
+*.so
