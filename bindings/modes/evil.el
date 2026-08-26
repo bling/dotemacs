@@ -48,8 +48,9 @@
       ("SPC g r" #'diff-hl-revert-hunk)))
 
   (/bindings/define-keys evil-normal-state-map
-    ("g p" "`[v`]")
-    ("g b" #'/hydras/buffers/lambda-b-and-exit))
+    ("Y" "y$")
+    ("g p" (bind (evil-visual-select (evil-get-marker ?\[) (evil-get-marker ?\]))))
+    ("g b" #'/transients/switch-to-buffer))
 
   (/bindings/define-keys evil-normal-state-map
     ("C-b" #'evil-scroll-up)
@@ -81,8 +82,6 @@
     ("k" #'evil-previous-visual-line))
 
   (/bindings/define-keys evil-normal-state-map
-    ("p" #'/hydras/paste/evil-paste-after)
-    ("P" #'/hydras/paste/evil-paste-before)
     ("Q" #'/utils/window-killer)
     ("Y" "y$"))
 
@@ -91,10 +90,10 @@
   (evil-define-key 'normal lisp-interaction-mode-map "K" #'helpful-at-point)
 
   (after 'css-mode
-    (evil-define-key 'normal css-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
+    (evil-define-key 'normal css-mode-map (kbd "RET") #'/transients/modes/css-mode))
 
   (after 'css-ts-mode
-    (evil-define-key 'normal css-ts-mode-map (kbd "RET") #'/hydras/modes/css-mode/body))
+    (evil-define-key 'normal css-ts-mode-map (kbd "RET") #'/transients/modes/css-mode))
 
   (after 'flymake
     (evil-define-key 'normal flymake-diagnostics-buffer-mode-map
