@@ -1,34 +1,36 @@
 ;; -*- lexical-binding: t -*-
 
 (after 'eglot
-  (defhydra /bindings/eglot/hydra (:exit t)
-    ("d" xref-find-definitions "definition" :column "nav")
-    ("r" xref-find-references "references")
-    ("s" (if (eq dotemacs-switch-engine 'consult)
-             (call-interactively #'consult-eglot-symbols)
-           (call-interactively #'xref-find-apropos)) "symbol search")
-    ("i" eglot-find-implementation "implementation")
-    ("t" eglot-find-typeDefinition "type definition")
+  (transient-define-prefix /bindings/eglot/transient ()
+    [["nav"
+      ("d" "definition" xref-find-definitions)
+      ("r" "references" xref-find-references)
+      ("s" "symbol search" (lambda () (interactive)
+                             (if (eq dotemacs-switch-engine 'consult)
+                                 (call-interactively #'consult-eglot-symbols)
+                               (call-interactively #'xref-find-apropos))))
+      ("i" "implementation" eglot-find-implementation)
+      ("t" "type definition" eglot-find-typeDefinition)]
+     ["refactor"
+      ("n" "rename" eglot-rename)
+      ("o" "organize imports" eglot-code-action-organize-imports)
+      ("f" "quick fix" eglot-code-action-quickfix)
+      ("x" "extract" eglot-code-action-extract)
+      ("l" "inline" eglot-code-action-inline)
+      ("a" "code actions" eglot-code-actions)
+      ("=" "format buffer" eglot-format-buffer)
+      ("F" "format region" eglot-format)]
+     ["info / errors"
+      ("h" "doc at point" eldoc-doc-buffer)
+      ("g" "doc glance" eldoc-print-current-symbol-info)
+      ("e" "buffer errors" flymake-show-buffer-diagnostics)
+      ("E" "project errors" flymake-show-project-diagnostics)]
+     ["server & toggles"
+      ("H" (lambda () (/transients/toggle-fmt "inlay hints" 'eglot-inlay-hints-mode)) eglot-inlay-hints-mode)
+      ("S" "restart server" eglot-reconnect)
+      ("Q" "shutdown" eglot-shutdown)]])
 
-    ("n" eglot-rename "rename" :column "refactor")
-    ("o" eglot-code-action-organize-imports "organize imports")
-    ("f" eglot-code-action-quickfix "quick fix")
-    ("x" eglot-code-action-extract "extract")
-    ("l" eglot-code-action-inline "inline")
-    ("a" eglot-code-actions "code actions")
-    ("=" eglot-format-buffer "format buffer")
-    ("F" eglot-format "format region")
-
-    ("h" eldoc-doc-buffer "doc at point" :column "info / errors")
-    ("g" eldoc-print-current-symbol-info "doc glance")
-    ("e" flymake-show-buffer-diagnostics "buffer errors")
-    ("E" flymake-show-project-diagnostics "project errors")
-
-    ("S" eglot-reconnect "restart server" :column "server & toggles")
-    ("Q" eglot-shutdown "shutdown")
-    ("H" eglot-inlay-hints-mode "inlay hints"))
-
-  (evil-define-key 'normal eglot-mode-map (kbd "RET") #'/bindings/eglot/hydra/body)
+  (evil-define-key 'normal eglot-mode-map (kbd "RET") #'/bindings/eglot/transient)
   (evil-define-key 'normal eglot-mode-map (kbd "g r") #'eglot-rename)
   (evil-define-key 'normal eglot-mode-map (kbd "g d") #'xref-find-definitions)
   (evil-define-key 'normal eglot-mode-map (kbd "K") #'eldoc))
