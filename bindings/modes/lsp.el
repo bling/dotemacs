@@ -13,8 +13,8 @@
       ("D" "xref definition" xref-find-definitions)
       ("r" "peek references" lsp-ui-peek-find-references)
       ("R" "xref references" xref-find-references)
-      ("c" "call hierarchy" lsp-treemacs-call-hierarchy)
-      ("T" "type hierarchy" lsp-treemacs-type-hierarchy)
+      ("c" "call hierarchy" lsp-treemacs-call-hierarchy :if (lambda () (fboundp #'lsp-treemacs-call-hierarchy)))
+      ("T" "type hierarchy" lsp-treemacs-type-hierarchy :if (lambda () (fboundp #'lsp-treemacs-type-hierarchy)))
       ("i" "implementation" lsp-find-implementation)
       ("t" "type definition" lsp-find-type-definition)]
      ["refactor"
@@ -27,11 +27,8 @@
      ["info / errors"
       ("h" "doc at point" lsp-describe-thing-at-point)
       ("g" "doc glance" lsp-ui-doc-glance)
-      ("s" "symbols" (lambda () (interactive)
-                       (if (eq dotemacs-switch-engine 'consult)
-                           (call-interactively #'consult-lsp-symbols)
-                         (call-interactively #'lsp-treemacs-symbols))))
-      ("e" "errors list" lsp-treemacs-errors-list)]
+      ("s" "symbols" consult-lsp-symbols :if (lambda () (fboundp #'consult-lsp-symbols)))
+      ("e" "errors list" lsp-treemacs-errors-list :if (lambda () (fboundp #'lsp-treemacs-errors-list)))]
      ["server & toggles"
       ("S" "restart workspace" lsp-restart-workspace)
       ("Q" "shutdown" lsp-shutdown-workspace)
