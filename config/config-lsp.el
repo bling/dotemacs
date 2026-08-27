@@ -23,7 +23,8 @@
 (defun /lsp/do-activate ()
   (use-package lsp-mode)
   (use-package lsp-ui)
-  (use-package lsp-treemacs)
+  (when (eq dotemacs-explorer/option 'treemacs)
+    (use-package lsp-treemacs))
 
   (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
   (setq lsp-keep-workspace-alive nil)
@@ -41,7 +42,8 @@
   (setq lsp-ui-doc-show-with-cursor t)
 
   (lsp)
-  (lsp-treemacs-sync-mode t))
+  (when (eq dotemacs-explorer/option 'treemacs)
+    (lsp-treemacs-sync-mode t)))
 
 (defun /lsp/suggest-project-root ()
   "Suggests the nearest project that is not a dependency."
