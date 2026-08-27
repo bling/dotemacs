@@ -6,7 +6,7 @@
   :prefix 'dotemacs-explorer)
 
 (defcustom dotemacs-explorer/option
-  'treemacs
+  'dired-sidebar
   "List of options for the file explorer."
   :type '(radio
           (const :tag "treemacs" treemacs)
@@ -49,6 +49,7 @@
     (use-package treemacs-evil :demand t)))
 
  ((eq dotemacs-explorer/option 'dired-sidebar)
+  (use-package dired-subtree :demand t)
   (use-package dired-sidebar
     :init
     (setq dired-sidebar-should-follow-file t)
