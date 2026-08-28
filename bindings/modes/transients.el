@@ -278,10 +278,4 @@
    ["widen"
     ("w" "widen" widen)]])
 
-
-
-(transient-define-prefix /transients/modes/css-mode ()
-  ["css"
-   ("t" "generate type definition for CSS" /typescript/generate-typings-for-css)])
-
 (provide 'config-bindings-transients)

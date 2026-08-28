@@ -54,12 +54,4 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
-(defun /utils/activate-lsp ()
-  "Activates the configured LSP engine."
-  (cond
-   ((eq dotemacs-lsp-engine 'lsp)
-    (/lsp/activate))
-   ((eq dotemacs-lsp-engine 'eglot)
-    (/eglot/activate))))
-
 (provide 'config-util)
