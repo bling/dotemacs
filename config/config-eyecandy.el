@@ -58,6 +58,12 @@
   (eros-mode))
 
 
+(use-package ultra-scroll :demand t
+  :if (display-graphic-p)
+  :config
+  (ultra-scroll-mode))
+
+
 (use-package nerd-icons)
 (setq inhibit-compacting-font-caches t)
 
