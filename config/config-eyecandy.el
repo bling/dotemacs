@@ -58,6 +58,12 @@
   (eros-mode))
 
 
+(when (and (display-graphic-p) (eq system-type 'darwin))
+  (use-package ultra-scroll
+    :config
+    (ultra-scroll-mode)))
+
+
 (use-package nerd-icons)
 (setq inhibit-compacting-font-caches t)
 
