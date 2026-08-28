@@ -30,9 +30,9 @@
       ("S" "restart server" eglot-reconnect)
       ("Q" "shutdown" eglot-shutdown)]])
 
-  (evil-define-key 'normal eglot-mode-map (kbd "RET") #'/bindings/eglot/transient)
-  (evil-define-key 'normal eglot-mode-map (kbd "g r") #'eglot-rename)
-  (evil-define-key 'normal eglot-mode-map (kbd "g d") #'xref-find-definitions)
-  (evil-define-key 'normal eglot-mode-map (kbd "K") #'eldoc))
+  (after 'evil
+    (evil-define-key 'normal eglot-mode-map (kbd "RET") #'/bindings/eglot/transient)
+    (evil-define-key 'normal eglot-mode-map (kbd "g r") #'eglot-rename)
+    (evil-define-key 'normal eglot-mode-map (kbd "K") #'eldoc)))
 
 (provide 'config-bindings-eglot)
