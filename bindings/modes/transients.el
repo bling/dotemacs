@@ -246,25 +246,6 @@
 
 
 
-(transient-define-prefix /transients/paste ()
-  :transient-non-suffix 'leave
-  [["paste"
-    ("p" "paste after" evil-paste-after)
-    ("P" "paste before" evil-paste-before)]
-   ["cycle"
-    ("C-k" "cycle previous" evil-paste-pop :transient t)
-    ("C-j" "cycle next" evil-paste-pop-next :transient t)]
-   ["kill ring"
-    (:info (lambda () (format "%s/%s" (length kill-ring-yank-pointer) (length kill-ring))))]])
-
-(defun /transients/paste/show (&rest _)
-  (/transients/paste))
-
-(advice-add 'evil-paste-after :after #'/transients/paste/show)
-(advice-add 'evil-paste-before :after #'/transients/paste/show)
-
-
-
 (transient-define-prefix /transients/narrow ()
   [["narrow"
     ("d" "defun" narrow-to-defun)
