@@ -38,19 +38,21 @@
       ("I" "session info" lsp-describe-session)]])
 
   (after 'lsp-ui
-    (evil-define-key 'normal lsp-ui-mode-map (kbd "RET") #'/bindings/lsp/transient)
-    (evil-define-key 'normal lsp-ui-mode-map (kbd "g r") #'lsp-rename)
-    (evil-define-key 'normal lsp-ui-mode-map (kbd "g d") #'lsp-ui-peek-find-definitions)
-    (evil-define-key 'normal lsp-ui-mode-map (kbd "K") #'lsp-describe-thing-at-point)
+    (after 'evil
+      (evil-define-key 'normal lsp-ui-mode-map (kbd "RET") #'/bindings/lsp/transient)
+      (evil-define-key 'normal lsp-ui-mode-map (kbd "g r") #'lsp-rename)
+      (evil-define-key 'normal lsp-ui-mode-map (kbd "g d") #'lsp-ui-peek-find-definitions)
+      (evil-define-key 'normal lsp-ui-mode-map (kbd "K") #'lsp-describe-thing-at-point))
 
     (define-key lsp-ui-peek-mode-map (kbd "k") #'lsp-ui-peek--select-prev)
     (define-key lsp-ui-peek-mode-map (kbd "j") #'lsp-ui-peek--select-next)
     (define-key lsp-ui-peek-mode-map (kbd "C-k") #'lsp-ui-peek--select-prev-file)
     (define-key lsp-ui-peek-mode-map (kbd "C-j") #'lsp-ui-peek--select-next-file))
 
-  (evil-define-key 'normal lsp-mode-map (kbd "RET") #'/bindings/lsp/transient)
-  (evil-define-key 'normal lsp-mode-map (kbd "g r") #'lsp-rename)
-  (evil-define-key 'normal lsp-mode-map (kbd "g d") #'lsp-find-definition)
-  (evil-define-key 'normal lsp-mode-map (kbd "K") #'lsp-describe-thing-at-point))
+  (after 'evil
+    (evil-define-key 'normal lsp-mode-map (kbd "RET") #'/bindings/lsp/transient)
+    (evil-define-key 'normal lsp-mode-map (kbd "g r") #'lsp-rename)
+    (evil-define-key 'normal lsp-mode-map (kbd "g d") #'lsp-find-definition)
+    (evil-define-key 'normal lsp-mode-map (kbd "K") #'lsp-describe-thing-at-point)))
 
 (provide 'config-bindings-lsp)
