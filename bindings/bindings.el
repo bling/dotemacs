@@ -27,11 +27,15 @@
                        (desc ,(caddr binding)))
                    (define-key ,keymap (kbd seq) func)
                    (when desc
-                     (which-key-add-key-based-replacements
-                       (if ,prefix
-                           (concat ,prefix " " seq)
-                         seq)
-                       desc))))))
+                     (which-key-add-keymap-based-replacements ,keymap seq desc)
+                     (when ,prefix
+                       (which-key-add-key-based-replacements
+                         (concat ,prefix " " seq)
+                         desc)
+                       (when (equal ,prefix "SPC")
+                         (which-key-add-key-based-replacements
+                           (concat "M-SPC " seq)
+                           desc))))))))
 
 (defmacro /bindings/define-keys (keymap &rest body)
   (declare (indent defun))
@@ -44,9 +48,14 @@
 
 
 
-(setq /bindings/normal-space-leader-map (make-sparse-keymap))
+(defvar /bindings/normal-space-leader-map (make-sparse-keymap))
+(defvar /bindings/visual-space-leader-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map /bindings/normal-space-leader-map) map))
+
 (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
   ("SPC" #'execute-extended-command "M-x")
+  ("M-SPC" #'execute-extended-command "M-x")
   ("t" #'/transients/toggles "toggle...")
   ("q" #'/transients/quit "quit...")
   ("e" #'/transients/errors "errors...")
@@ -57,8 +66,8 @@
   ("l" #'/transients/occur-current "lines(current)")
   ("L" #'/transients/occur-all "lines(all)")
   ("o" #'/transients/imenu "outline")
-  ("v" vc-prefix-map)
-  ("4" ctl-x-4-map)
+  ("v" vc-prefix-map "vc...")
+  ("4" ctl-x-4-map "windows...")
   ("5" ctl-x-5-map "frames...")
   ("'" #'/eshell/new-split "shell")
   ("y" (bind
@@ -98,7 +107,11 @@
 
 
 
-(setq /bindings/normal-comma-leader-map (make-sparse-keymap))
+(defvar /bindings/normal-comma-leader-map (make-sparse-keymap))
+(defvar /bindings/visual-comma-leader-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map /bindings/normal-comma-leader-map) map))
+
 (/bindings/define-prefix-keys /bindings/normal-comma-leader-map ","
   ("w" #'save-buffer)
   ("e" #'eval-last-sexp)
@@ -110,7 +123,13 @@
   ("v" (kbd "C-w v C-w l") "vsplit")
   ("s" (kbd "C-w s C-w j") "split")
   ("P" #'package-list-packages "packages")
-  ("h" help-map "help"))
+  ("h f" #'helpful-function)
+  ("h k" #'helpful-key)
+  ("h v" #'helpful-variable)
+  ("h x" #'helpful-command))
+
+(/bindings/define-prefix-keys /bindings/visual-comma-leader-map ","
+  ("e" #'eval-region))
 
 
 
@@ -142,14 +161,6 @@
   (global-set-key [mouse-4] (bind (scroll-down 1)))
   (global-set-key [mouse-5] (bind (scroll-up 1))))
 
-(after 'comint
-  (define-key comint-mode-map [up] 'comint-previous-input)
-  (define-key comint-mode-map [down] 'comint-next-input))
-
-(after 'compile
-  (define-key compilation-mode-map (kbd "j") 'compilation-next-error)
-  (define-key compilation-mode-map (kbd "k") 'compilation-previous-error))
-
 (/bindings/define-keys (current-global-map)
   ("C-c c" #'org-capture)
   ("C-c a" #'org-agenda)
@@ -172,12 +183,19 @@
   ("C-r"   #'isearch-backward-regexp)
   ("C-M-r" #'isearch-backward))
 
+(/bindings/define-keys (current-global-map)
+  ("C-x 4 h" #'windmove-left)
+  ("C-x 4 j" #'windmove-down)
+  ("C-x 4 k" #'windmove-up)
+  ("C-x 4 l" #'windmove-right))
+
 (global-set-key [prior] 'previous-buffer)
 (global-set-key [next] 'next-buffer)
 (global-set-key [f2] #'/explorer/toggle)
 (global-set-key [f3] #'/explorer/find-file)
 (global-set-key [f5] (bind (profiler-start 'cpu+mem)))
 (global-set-key [f6] (bind (profiler-report) (profiler-stop)))
+(global-set-key (kbd "M-SPC") /bindings/normal-space-leader-map)
 
 ;; have no use for these default bindings
 (global-unset-key (kbd "C-x m"))
