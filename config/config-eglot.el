@@ -1,14 +1,9 @@
 ;; -*- lexical-binding: t -*-
 
-(defgroup dotemacs-eglot nil
-  "Configuration options for Eglot."
-  :group 'dotemacs
-  :prefix 'dotemacs-eglot)
-
 (defun /eglot/activate ()
-  (interactive)
-  (use-package eglot)
-  (eglot-ensure))
+  (use-package eglot :demand t)
+  (when (eglot--lookup-mode major-mode)
+    (eglot-ensure)))
 
 (after 'eglot
   (setq eglot-autoshutdown t)
