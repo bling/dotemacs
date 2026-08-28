@@ -89,12 +89,6 @@
   (evil-define-key 'normal emacs-lisp-mode-map "K" #'helpful-at-point)
   (evil-define-key 'normal lisp-interaction-mode-map "K" #'helpful-at-point)
 
-  (after 'css-mode
-    (evil-define-key 'normal css-mode-map (kbd "RET") #'/transients/modes/css-mode))
-
-  (after 'css-ts-mode
-    (evil-define-key 'normal css-ts-mode-map (kbd "RET") #'/transients/modes/css-mode))
-
   (after 'flymake
     (evil-define-key 'normal flymake-diagnostics-buffer-mode-map
       "j" #'evil-next-line

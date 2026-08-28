@@ -59,11 +59,4 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 (add-hook 'term-exec-hook #'/vcs/with-editor-export)
 (add-hook 'eshell-mode-hook #'/vcs/with-editor-export)
 
-
-
-(add-to-list 'auto-mode-alist '("\\.gitignore\\'" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.gitattributes\\'" . conf-mode))
-
-
-
 (provide 'config-vcs)

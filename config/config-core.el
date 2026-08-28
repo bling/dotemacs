@@ -186,4 +186,3 @@
 (add-hook 'find-file-hook #'/core/find-file-hook)
 
 (provide 'config-core)
-
