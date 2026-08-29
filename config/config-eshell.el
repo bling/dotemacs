@@ -70,6 +70,17 @@
      (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n")))))
 
 
+(unless (eq system-type 'windows-nt)
+  ;; prevents freezing when used on a large number of files/directories
+  (after 'em-unix
+    (fmakunbound 'eshell/cat)
+    (fmakunbound 'eshell/cp)
+    (fmakunbound 'eshell/du)
+    (fmakunbound 'eshell/mv)
+    (fmakunbound 'eshell/rm)
+    (fmakunbound 'eshell/rmdir)))
+
+
 ;; plan 9 smart shell
 (when dotemacs-eshell/plan9
   (after 'esh-module
