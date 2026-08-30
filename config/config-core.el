@@ -137,7 +137,7 @@
 
 (defun /core/do-not-kill-scratch-buffer ()
   (if (member (buffer-name (current-buffer))
-              '("*scratch*" "*Messages*" "*Require Times*"))
+              '("*scratch*" "*Messages*"))
       (progn
         (bury-buffer)
         nil)
