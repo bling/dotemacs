@@ -121,6 +121,7 @@
                   (kbd "SPC") nil
                   "," nil)))
     :config
+    (setq evil-collection-mode-list (delq 'eat evil-collection-mode-list))
     (evil-collection-init)
 
     ;; replace flymake with compilation-mode integration
