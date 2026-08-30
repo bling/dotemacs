@@ -76,13 +76,22 @@
   (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
            do (evil-set-initial-state mode 'emacs))
 
-  (evil-put-property 'evil-state-properties 'normal   :tag " NORMAL ")
-  (evil-put-property 'evil-state-properties 'insert   :tag " INSERT ")
-  (evil-put-property 'evil-state-properties 'visual   :tag " VISUAL ")
-  (evil-put-property 'evil-state-properties 'motion   :tag " MOTION ")
-  (evil-put-property 'evil-state-properties 'emacs    :tag " EMACS ")
-  (evil-put-property 'evil-state-properties 'replace  :tag " REPLACE ")
-  (evil-put-property 'evil-state-properties 'operator :tag " OPERATOR "))
+  (setq evil-normal-state-tag   " NORMAL ")
+  (setq evil-insert-state-tag   " INSERT ")
+  (setq evil-visual-state-tag   " VISUAL ")
+  (setq evil-motion-state-tag   " MOTION ")
+  (setq evil-replace-state-tag  " REPLACE ")
+  (setq evil-operator-state-tag " OPERATOR ")
+  (setq evil-emacs-state-tag    " EMACS ")
+
+  (defvar-local /evil/emacs-state-modeline-tag nil)
+  (add-to-list 'global-mode-string '(:eval /evil/emacs-state-modeline-tag) t)
+  (add-hook 'evil-emacs-state-entry-hook
+            (defun /evil/turn-emacs-modeline-tag-on ()
+              (setq /evil/emacs-state-modeline-tag (propertize "   EMACS STATE   " 'face 'isearch))))
+  (add-hook 'evil-emacs-state-exit-hook
+            (defun /evil/turn-emacs-modeline-tag-off ()
+              (setq /evil/emacs-state-modeline-tag nil))))
 
 
 
