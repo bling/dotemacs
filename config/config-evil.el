@@ -82,7 +82,16 @@
   (evil-put-property 'evil-state-properties 'motion   :tag " MOTION ")
   (evil-put-property 'evil-state-properties 'emacs    :tag " EMACS ")
   (evil-put-property 'evil-state-properties 'replace  :tag " REPLACE ")
-  (evil-put-property 'evil-state-properties 'operator :tag " OPERATOR "))
+  (evil-put-property 'evil-state-properties 'operator :tag " OPERATOR ")
+
+  (defvar-local /evil/emacs-state-modeline-tag nil)
+  (add-to-list 'global-mode-string '(:eval /evil/emacs-state-modeline-tag) t)
+  (add-hook 'evil-emacs-state-entry-hook
+            (defun /evil/turn-emacs-modeline-tag-on ()
+              (setq /evil/emacs-state-modeline-tag (propertize "   EMACS STATE   " 'face 'isearch))))
+  (add-hook 'evil-emacs-state-exit-hook
+            (defun /evil/turn-emacs-modeline-tag-off ()
+              (setq /evil/emacs-state-modeline-tag nil))))
 
 
 
