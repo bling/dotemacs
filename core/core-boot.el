@@ -7,22 +7,52 @@
       (when (file-directory-p dir)
         (add-to-list 'load-path dir)))))
 
+(defvar /boot/load-time-entries nil)
+(defvar /boot/load-stack nil)
+(defvar /boot/load-seq 0)
+
+(defun /boot/load-times ()
+  "Shows the load times of all files/features."
+  (interactive)
+  (with-current-buffer (get-buffer-create "*Load Times*")
+    (require 'tabulated-list)
+    (tabulated-list-mode)
+    (setq tabulated-list-format
+          [("Feature / File" 50 t)
+           ("Timestamp"      15 (lambda (a b) (< (aref (car a) 0) (aref (car b) 0))))
+           ("Elapsed (s)"    12 (lambda (a b) (< (aref (car a) 1) (aref (car b) 1))) :right-align t)
+           ("Self (s)"       12 (lambda (a b) (< (aref (car a) 2) (aref (car b) 2))) :right-align t)])
+    (setq tabulated-list-sort-key nil)
+    (setq tabulated-list-entries (reverse /boot/load-time-entries))
+    (tabulated-list-init-header)
+    (tabulated-list-print)
+    (pop-to-buffer (current-buffer))))
+
 (defmacro /boot/measure-load (target &rest body)
   (declare (indent defun))
-  `(let ((elapsed)
-         (start (current-time)))
-     (prog1
-         ,@body
-       (with-current-buffer (get-buffer-create "*Load Times*")
-         (when (= 0 (buffer-size))
-           (insert (format "| %-60s | %-23s | elapsed  |\n" "feature" "timestamp"))
-           (insert "|------------------------------------------+-------------------------+----------|\n"))
-         (goto-char (point-max))
-         (setq elapsed (float-time (time-subtract (current-time) start)))
-         (insert (format "| %-60s | %s | %f |\n"
-                         ,target
-                         (format-time-string "%Y-%m-%d %H:%M:%S.%3N" (current-time))
-                         elapsed))))))
+  `(let* ((seq (setq /boot/load-seq (1+ /boot/load-seq)))
+          (depth (length /boot/load-stack))
+          (start (current-time))
+          (child-cell (list 0.0))
+          (frame (cons ,target child-cell))
+          (entry (list nil nil)))
+     (push entry /boot/load-time-entries)
+     (let ((/boot/load-stack (cons frame /boot/load-stack)))
+       (unwind-protect
+           (progn ,@body)
+         (let* ((elapsed (float-time (time-subtract (current-time) start)))
+                (self-time (max 0.0 (- elapsed (car child-cell))))
+                (parent-child-cell (when (cdr /boot/load-stack)
+                                     (cdr (cadr /boot/load-stack)))))
+           (when parent-child-cell
+             (setcar parent-child-cell (+ (car parent-child-cell) elapsed)))
+           (setcar entry (vector seq elapsed self-time))
+           (setcar (cdr entry)
+                   (vector
+                    (concat (make-string (* 2 depth) ?\s) (format "%s" ,target))
+                    (format-time-string "%T.%3N" start)
+                    (format "%.4f" elapsed)
+                    (format "%.4f" self-time))))))))
 
 (advice-add
  'load :around
@@ -81,4 +111,3 @@ FEATURE may be any one of:
                                (,mode)))))
 
 (provide 'core-boot)
-
