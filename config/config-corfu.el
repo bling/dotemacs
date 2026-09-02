@@ -3,14 +3,18 @@
 (when (eq dotemacs-completion-engine 'corfu)
 
   (use-package corfu :demand t
+    :hook (prog-mode text-mode)
     :init
     (setq global-corfu-minibuffer nil)
     (setq corfu-auto-prefix 2)
     (setq corfu-auto t)
     (setq corfu-cycle t)
-    (setq corfu-popupinfo-delay '(1.0 . 0.2))
+    (setq corfu-preselect 'first)
+    (setq corfu-preview-current nil)
+    (setq corfu-quit-at-boundary t)
+    (setq corfu-quit-no-match t)
+    (setq corfu-popupinfo-delay '(0.2 . 0.1))
     :config
-    (global-corfu-mode t)
     (corfu-popupinfo-mode t))
 
   (after 'prescient
