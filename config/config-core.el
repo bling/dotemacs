@@ -46,6 +46,7 @@
 
 ;; completion
 (setq completion-ignore-case t)
+(setq completions-format 'vertical)
 
 ;; imenu
 (setq-default imenu-auto-rescan t)
