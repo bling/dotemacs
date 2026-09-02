@@ -7,3 +7,4 @@ custom.el
 node_modules
 *.elc
 *.so
+user-lisp/.user-lisp-autoloads.el
