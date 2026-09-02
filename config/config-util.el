@@ -1,13 +1,19 @@
 ;; -*- lexical-binding: t -*-
 
 (defun /utils/window-killer ()
-  "closes the window, and deletes the buffer if it's the last window open."
+  "Close the current window, killing the buffer if it is not displayed elsewhere.
+If this is the only window in the frame, kill the buffer (or bury it if displayed elsewhere)."
   (interactive)
-  (if (> buffer-display-count 1)
-      (if (= (length (window-list)) 1)
-          (kill-buffer)
-        (delete-window))
-    (kill-buffer-and-window)))
+  (let ((displayed-elsewhere (cdr (get-buffer-window-list (current-buffer) nil t))))
+    (cond
+     ((one-window-p)
+      (if displayed-elsewhere
+          (bury-buffer)
+        (kill-current-buffer)))
+     (displayed-elsewhere
+      (delete-window))
+     (t
+      (kill-buffer-and-window)))))
 
 (defun /utils/minibuffer-keyboard-quit ()
   "Abort recursive edit.
