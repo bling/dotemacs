@@ -1,11 +1,12 @@
 ;; -*- lexical-binding: t -*-
 
-(let ((base (concat user-emacs-directory "elisp/")))
-  (when (file-directory-p base)
-    (add-to-list 'load-path base)
-    (dolist (dir (directory-files base t "^[^.]"))
-      (when (file-directory-p dir)
-        (add-to-list 'load-path dir)))))
+(unless (boundp 'user-lisp-directory)
+  (let ((base (concat user-emacs-directory "user-lisp/")))
+    (when (file-directory-p base)
+      (add-to-list 'load-path base)
+      (dolist (dir (directory-files base t "^[^.]"))
+        (when (file-directory-p dir)
+          (add-to-list 'load-path dir))))))
 
 (defvar /boot/load-time-entries nil)
 (defvar /boot/load-stack nil)
