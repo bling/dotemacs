@@ -23,7 +23,7 @@
     :type '(radio
             (const :tag "helm" helm)
             (const :tag "consult" consult)
-            (const :tag "ido" ido))
+            (const :tag "fido" fido))
     :group 'dotemacs)
 
   (defcustom dotemacs-globally-ignored-directories
