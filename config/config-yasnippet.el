@@ -6,7 +6,7 @@
   :init
   (setq yas-fallback-behavior 'return-nil)
   (setq yas-also-auto-indent-first-line t)
-  (setq yas-prompt-functions '(yas-ido-prompt yas-completing-prompt))
+  (setq yas-prompt-functions '(yas-completing-prompt))
   :config
   (/boot/delayed-init
    (yas-load-directory (concat user-emacs-directory "snippets/"))))

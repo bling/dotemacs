@@ -132,12 +132,6 @@
     (funcall func t))
   (message "Switched navigation engine to %s" engine))
 
-(transient-define-prefix /transients/toggles/switch-engine ()
-  ["engine"
-   ("h" "helm" (lambda () (interactive) (/transients/toggles/activate-switch-engine 'helm)))
-   ("c" "consult" (lambda () (interactive) (/transients/toggles/activate-switch-engine 'consult)))
-   ("o" "ido" (lambda () (interactive) (/transients/toggles/activate-switch-engine 'ido)))])
-
 (defun /transients/toggle-fmt (label var)
   (format "%s %s" label
           (if (and (boundp var) (symbol-value var))
@@ -172,8 +166,16 @@
    ["debug"
     ("e" (lambda () (/transients/toggle-fmt "debug on error" 'debug-on-error)) toggle-debug-on-error)
     ("g" (lambda () (/transients/toggle-fmt "debug on quit" 'debug-on-quit)) toggle-debug-on-quit)]
-   ["tools"
-    ("'" (lambda () (format "switch engine: [%s]" dotemacs-switch-engine)) /transients/toggles/switch-engine)]])
+   ["switch engine"
+    ("'h"
+     (lambda () (/transients/toggle-fmt "helm" (eq dotemacs-switch-engine 'helm)))
+     (lambda () (interactive) (/transients/toggles/activate-switch-engine 'helm)))
+    ("'c"
+     (lambda () (/transients/toggle-fmt "consult" (eq dotemacs-switch-engine 'consult)))
+     (lambda () (interactive) (/transients/toggles/activate-switch-engine 'consult)))
+    ("'f"
+     (lambda () (/transients/toggle-fmt "fido" (eq dotemacs-switch-engine 'fido)))
+     (lambda () (interactive) (/transients/toggles/activate-switch-engine 'fido)))]])
 
 
 
