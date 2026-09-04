@@ -100,19 +100,19 @@
   (define-key evil-emacs-state-map (kbd "<escape>") 'evil-normal-state))
 
 
-(cond
- ((eq dotemacs-evil/comments 'evil-commentary)
-  (use-package evil-commentary :demand t
-    :config
-    (evil-commentary-mode t)))
- ((eq dotemacs-evil/comments 'evil-nerd-commenter)
-  (use-package evil-nerd-commenter :demand t
-    :config
-    (require 'evil-nerd-commenter-operator)
-    (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
-    (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
-    (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
-    (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator))))
+(pcase dotemacs-evil/comments
+  ('evil-commentary
+   (use-package evil-commentary :demand t
+     :config
+     (evil-commentary-mode t)))
+  ('evil-nerd-commenter
+   (use-package evil-nerd-commenter :demand t
+     :config
+     (require 'evil-nerd-commenter-operator)
+     (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
+     (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
+     (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
+     (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator))))
 
 
 (use-package evil-surround :demand t
