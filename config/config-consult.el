@@ -22,29 +22,29 @@
 
   (use-package marginalia)
 
-  (cond
-   ((eq dotemacs-consult/filtering 'hotfuzz+orderless)
-    (use-package hotfuzz :demand t)
-    (use-package orderless
-      :demand t
-      :init
-      (setq orderless-matching-styles
-            '(orderless-literal
-              orderless-initialism
-              orderless-regexp
-              orderless-flex))))
-   ((eq dotemacs-consult/filtering 'prescient)
-    (use-package prescient
-      :demand t
-      :init
-      (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
-      (setq prescient-filter-method '(literal regexp initialism fuzzy))
-      :config
-      (prescient-persist-mode t))
+  (pcase dotemacs-consult/filtering
+    ('hotfuzz+orderless
+     (use-package hotfuzz :demand t)
+     (use-package orderless
+       :demand t
+       :init
+       (setq orderless-matching-styles
+             '(orderless-literal
+               orderless-initialism
+               orderless-regexp
+               orderless-flex))))
+    ('prescient
+     (use-package prescient
+       :demand t
+       :init
+       (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
+       (setq prescient-filter-method '(literal regexp initialism fuzzy))
+       :config
+       (prescient-persist-mode t))
 
-    (use-package vertico-prescient
-      :init
-      (setq vertico-prescient-override-sorting t))))
+     (use-package vertico-prescient
+       :init
+       (setq vertico-prescient-override-sorting t))))
 
   (use-package consult)
   (use-package consult-dash)
@@ -60,20 +60,20 @@
   (/consult/init)
   (if on
       (progn
-        (cond
-         ((eq dotemacs-consult/filtering 'hotfuzz+orderless)
-          (add-to-list 'completion-styles 'orderless)
-          (add-to-list 'completion-styles 'hotfuzz))
-         ((eq dotemacs-consult/filtering 'prescient)
-          (vertico-prescient-mode t)))
+        (pcase dotemacs-consult/filtering
+          ('hotfuzz+orderless
+           (add-to-list 'completion-styles 'orderless)
+           (add-to-list 'completion-styles 'hotfuzz))
+          ('prescient
+           (vertico-prescient-mode t)))
         (marginalia-mode t)
         (vertico-mode t))
-    (cond
-     ((eq dotemacs-consult/filtering 'hotfuzz+orderless)
-      (setq completion-styles (delete 'hotfuzz completion-styles))
-      (setq completion-styles (delete 'orderless completion-styles)))
-     ((eq dotemacs-consult/filtering 'prescient)
-      (vertico-prescient-mode -1)))
+    (pcase dotemacs-consult/filtering
+      ('hotfuzz+orderless
+       (setq completion-styles (delete 'hotfuzz completion-styles))
+       (setq completion-styles (delete 'orderless completion-styles)))
+      ('prescient
+       (vertico-prescient-mode -1)))
     (marginalia-mode -1)
     (vertico-mode -1)))
 

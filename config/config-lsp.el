@@ -138,11 +138,11 @@ lsp-mode has a lookback algorithm which will pick up the space before the (."
                (lambda (path)
                  (string-match-p path (buffer-file-name)))
                dotemacs-lsp/inhibit-paths))
-    (cond
-     ((eq dotemacs-lsp/engine 'lsp)
-      (/lsp-mode/activate))
-     ((eq dotemacs-lsp/engine 'eglot)
-      (/eglot/activate)))))
+    (pcase dotemacs-lsp/engine
+      ('lsp
+       (/lsp-mode/activate))
+      ('eglot
+       (/eglot/activate)))))
 
 (when dotemacs-lsp/engine
   (add-hook 'prog-mode-hook #'/lsp/activate))

@@ -25,26 +25,22 @@
         :config
         (corfu-prescient-mode t))))
 
+  (defun /corfu/wrap-with-yas (capf)
+    (setq-local completion-at-point-functions
+                (cons (cape-capf-super capf #'yasnippet-capf)
+                      (remove #'yasnippet-capf
+                              (remove capf completion-at-point-functions)))))
+
   (after 'lsp-completion
     (setq lsp-completion-provider :none)
     (defun /corfu/lsp-setup-capf ()
-      (setq-local completion-at-point-functions
-                  (cons (cape-capf-super
-                         #'lsp-completion-at-point
-                         #'yasnippet-capf)
-                        (remove #'yasnippet-capf
-                                (remove #'lsp-completion-at-point completion-at-point-functions)))))
+      (/corfu/wrap-with-yas #'lsp-completion-at-point))
     (add-hook 'lsp-completion-mode-hook #'/corfu/lsp-setup-capf))
 
   (after 'eglot
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     (defun /corfu/eglot-setup-capf ()
-      (setq-local completion-at-point-functions
-                  (cons (cape-capf-super
-                         #'eglot-completion-at-point
-                         #'yasnippet-capf)
-                        (remove #'yasnippet-capf
-                                (remove #'eglot-completion-at-point completion-at-point-functions)))))
+      (/corfu/wrap-with-yas #'eglot-completion-at-point))
     (add-hook 'eglot-managed-mode-hook #'/corfu/eglot-setup-capf))
 
   (add-hook
