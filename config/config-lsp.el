@@ -30,29 +30,32 @@
 
 
 (defun /lsp-mode/activate ()
-  (use-package lsp-mode :demand t
-    :init
-    (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
-    (setq lsp-keep-workspace-alive nil)
-    (setq lsp-diagnostics-provider :flymake)
-    (setq lsp-enable-on-type-formatting nil)
-    (setq lsp-enable-suggest-server-download nil)
-    (setq lsp-warn-no-matched-clients nil)
-    (setq read-process-output-max (* 1024 1024)))
+  (unless (fboundp 'lsp-mode)
+    (use-package lsp-mode
+      :init
+      (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
+      (setq lsp-keep-workspace-alive nil)
+      (setq lsp-diagnostics-provider :flymake)
+      (setq lsp-enable-on-type-formatting nil)
+      (setq lsp-enable-suggest-server-download nil)
+      (setq lsp-warn-no-matched-clients nil)
+      (setq read-process-output-max (* 1024 1024)))
 
-  (use-package lsp-ui :demand t
-    :init
-    (setq lsp-ui-sideline-show-hover t)
-    (setq lsp-ui-sideline-delay 0.5)
-    (setq lsp-ui-doc-include-signature t)
-    (setq lsp-ui-doc-header t)
-    (setq lsp-ui-doc-position 'top)
-    (setq lsp-ui-doc-delay 1)
-    (setq lsp-ui-doc-show-with-cursor t))
+    (use-package lsp-ui
+      :init
+      (setq lsp-ui-sideline-show-hover t)
+      (setq lsp-ui-sideline-delay 0.5)
+      (setq lsp-ui-doc-include-signature t)
+      (setq lsp-ui-doc-header t)
+      (setq lsp-ui-doc-position 'top)
+      (setq lsp-ui-doc-delay 1)
+      (setq lsp-ui-doc-show-with-cursor t))
+
+    (when (eq dotemacs-explorer/option 'treemacs)
+      (use-package lsp-treemacs)))
 
   (lsp-deferred)
   (when (eq dotemacs-explorer/option 'treemacs)
-    (use-package lsp-treemacs :demand t)
     (lsp-treemacs-sync-mode t)))
 
 (defun /lsp-mode/suggest-project-root ()
@@ -69,18 +72,61 @@
      (project-root pr))
    default-directory))
 
+(defun /lsp-mode/strip-nils (tree)
+  "Recursively strip any alist entry whose value is nil."
+  (cond
+   ((and (consp tree) (consp (car tree)))
+    (delq nil
+          (mapcar (lambda (pair)
+                    (if (consp pair)
+                        (let ((val (cdr pair)))
+                          (cond
+                           ((null val) nil)
+                           ((consp val)
+                            (let ((cleaned (/lsp-mode/strip-nils val)))
+                              (when cleaned (cons (car pair) cleaned))))
+                           (t pair)))
+                      pair))
+                  tree)))
+   (t tree)))
+
+(defun /lsp-mode/strip-space-trigger (workspace)
+  "Stops popup from appearing prematurely after typing things like \"if (\".
+lsp-mode has a lookback algorithm which will pick up the space before the (."
+  (let* ((caps (lsp--workspace-server-capabilities workspace))
+         (comp (lsp:server-capabilities-completion-provider? caps))
+         (triggers (append (lsp:completion-options-trigger-characters? comp) nil)))
+    (when (member " " triggers)
+      (lsp:set-completion-options-trigger-characters?
+       comp
+       (vconcat (delete " " triggers))))))
+
 (after 'lsp-mode
   (advice-add #'lsp--suggest-project-root :override #'/lsp-mode/suggest-project-root)
 
+  (when (executable-find "vtsls")
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection '("vtsls" "--stdio"))
+                      :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
+                      :priority 100
+                      :completion-in-comments? t
+                      :initialized-fn #'/lsp-mode/strip-space-trigger
+                      :server-id 'vtsls))
+    (lsp-disable-method-for-server "textDocument/documentColor" 'vtsls))
+
   (when (executable-find "tsgo")
-    (add-to-list 'lsp-disabled-clients 'ts-ls)
-    (add-to-list 'lsp-disabled-clients 'jsts-ls)
+    (after 'lsp-javascript
+      (when-let* ((client (gethash 'tsgo lsp-clients)))
+        (aset client (cl-struct-slot-offset 'lsp--client 'priority) 99)
+        (aset client (cl-struct-slot-offset 'lsp--client 'initialized-fn) #'/lsp-mode/strip-space-trigger)))
+
+    ;; tsgo is strict and disallows null, so we must strip them out
     (advice-add #'lsp--client-capabilities :filter-return
                 (lambda (caps)
-                  (let* ((td (assq 'textDocument caps))
-                         (td-val (cdr td)))
-                    (when td
-                      (setcdr td (assq-delete-all 'inlineCompletion td-val)))
+                  (if (eq (and lsp--cur-workspace
+                               (lsp--workspace-server-id lsp--cur-workspace))
+                          'tsgo)
+                      (/lsp-mode/strip-nils caps)
                     caps)))))
 
 (defun /lsp/activate ()
