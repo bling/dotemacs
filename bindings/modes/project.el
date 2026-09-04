@@ -16,27 +16,21 @@
            default-directory)))
        (t
         (call-interactively #'project-find-regexp)))
-    (cond
-     ((eq dotemacs-switch-engine 'consult)
-      (cond
-       ((executable-find "rg")
-        (consult-ripgrep))
-       (t
-        (consult-grep))))
-     ((eq dotemacs-switch-engine 'helm)
-      (helm-do-grep-ag-project))
-     (t
-      (call-interactively #'project-find-regexp)))))
+    (pcase dotemacs-switch-engine
+      ('consult
+       (if (executable-find "rg")
+           (consult-ripgrep)
+         (consult-grep)))
+      ('helm
+       (helm-do-grep-ag-project))
+      (_
+       (call-interactively #'project-find-regexp)))))
 
 (defun /transients/project/ctrl+p ()
   (interactive)
-  (cond
-   ((eq dotemacs-switch-engine 'consult)
-    (call-interactively #'consult-project-extra-find))
-   ((eq dotemacs-switch-engine 'helm)
-    (call-interactively #'helm-mini))
-   (t
-    (call-interactively #'project-find-file))))
+  (/transients/switch-action #'project-find-file
+    :consult #'consult-project-extra-find
+    :helm #'helm-mini))
 
 (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
   ("p" project-prefix-map "project...")
