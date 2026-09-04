@@ -31,15 +31,15 @@
 (defun /os/reveal-in-os ()
   (interactive)
   (let ((dir (file-name-directory (or (buffer-file-name) default-directory))))
-    (cond
-     ((eq system-type 'windows-nt)
-      (start-process "*explorer*" "*explorer*" "explorer.exe"
-                     (replace-regexp-in-string "/" "\\\\" dir)))
-     ((eq system-type 'darwin)
-      (call-interactively #'reveal-in-osx-finder))
-     ((executable-find "xdg-open")
-      (start-process "*xdg-open*" nil "xdg-open" dir))
-     (t
-      (dired dir)))))
+    (pcase system-type
+      ('windows-nt
+       (start-process "*explorer*" "*explorer*" "explorer.exe"
+                      (replace-regexp-in-string "/" "\\\\" dir)))
+      ('darwin
+       (call-interactively #'reveal-in-osx-finder))
+      (_
+       (if (executable-find "xdg-open")
+           (start-process "*xdg-open*" nil "xdg-open" dir)
+         (dired dir))))))
 
 (provide 'config-os)

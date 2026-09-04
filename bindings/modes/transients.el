@@ -2,15 +2,11 @@
 
 (defun /transients/switch-action (fallback &rest props)
   "Performs an action based on the value of `dotemacs-switch-engine'."
-  (cond
-   ((and (eq dotemacs-switch-engine 'helm) (plist-get props :helm))
-    (call-interactively (plist-get props :helm)))
-   ((and (eq dotemacs-switch-engine 'consult) (plist-get props :consult))
-    (call-interactively (plist-get props :consult)))
-   (t
-    (if fallback
-        (call-interactively fallback)
-      (message "unsupported action")))))
+  (let* ((key (intern (format ":%s" dotemacs-switch-engine)))
+         (action (or (plist-get props key) fallback)))
+    (if action
+        (call-interactively action)
+      (message "unsupported action"))))
 
 (defalias '/transients/switch-to-buffer
   (bind (/transients/switch-action #'switch-to-buffer :helm #'helm-mini :consult #'consult-buffer)))
@@ -84,11 +80,9 @@
 (transient-define-prefix /transients/search ()
   [["project"
     ("r" "rg" (lambda () (interactive)
-                (cond
-                 ((eq dotemacs-switch-engine 'consult)
-                  (call-interactively #'consult-ripgrep))
-                 ((eq dotemacs-switch-engine 'helm)
-                  (call-interactively #'helm-do-grep-ag-project))))
+                (/transients/switch-action nil
+                  :consult #'consult-ripgrep
+                  :helm #'helm-do-grep-ag-project))
      :if (lambda () (fboundp #'ripgrep-regexp)))]
    ["directory"
     ("R" "rg" ripgrep-regexp

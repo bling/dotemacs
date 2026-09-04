@@ -70,12 +70,8 @@
   ("4" ctl-x-4-map "windows...")
   ("5" ctl-x-5-map "frames...")
   ("'" #'/eshell/new-split "shell")
-  ("y" (bind
-        (cond
-         ((eq dotemacs-switch-engine 'consult)
-          (call-interactively #'consult-yank-pop))
-         ((eq dotemacs-switch-engine 'helm)
-          (call-interactively #'helm-show-kill-ring)))) "kill-ring"))
+  ("d" (bind (/transients/switch-action nil :consult #'consult-dash :helm #'helm-dash)) "dash")
+  ("y" (bind (/transients/switch-action nil :consult #'consult-yank-pop :helm #'helm-show-kill-ring)) "kill-ring"))
 
 (after 'lsp-mode
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
@@ -92,14 +88,6 @@
 (after "helm-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
     ("h" #'/transients/helm "helm...")))
-
-(/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
-  ("d" (bind
-        (cond
-         ((eq dotemacs-switch-engine 'consult)
-          (call-interactively #'consult-dash))
-         ((eq dotemacs-switch-engine 'helm)
-          (call-interactively #'helm-dash)))) "dash"))
 
 (after "fzf-autoloads"
   (/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
