@@ -48,15 +48,4 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
                                 (diff-hl-mode)
                               (diff-hl-margin-mode))))
 
-
-
-(use-package with-editor)
-(defun /vcs/with-editor-export ()
-  (unless (equal (buffer-name) "*fzf*")
-    (with-editor-export-editor)
-    (message "")))
-(add-hook 'shell-mode-hook #'/vcs/with-editor-export)
-(add-hook 'term-exec-hook #'/vcs/with-editor-export)
-(add-hook 'eshell-mode-hook #'/vcs/with-editor-export)
-
 (provide 'config-vcs)
