@@ -19,15 +19,9 @@
   :group 'dotemacs-eshell
   :type 'boolean)
 
-(defcustom dotemacs-eshell/visual-commands
-  '("ssh" "htop" "top" "tail" "tmux" "vtop")
-  "A list of commands that present their output in a visual fashion."
-  :group 'dotemacs-eshell
-  :type '(repeat string))
-
 
 
-(setq eshell-directory-name (concat dotemacs-cache-directory "eshell"))
+(setq eshell-directory-name (concat dotemacs-cache-directory "eshell/"))
 (setq eshell-buffer-maximum-lines 20000)
 (setq eshell-scroll-to-bottom-on-input 'this)
 (setq eshell-aliases-file (concat user-emacs-directory ".eshell-aliases"))
@@ -36,10 +30,12 @@
 (setq eshell-history-size (* 10 1024))
 (setq eshell-hist-ignoredups t)
 (setq eshell-cmpl-ignore-case t)
+(setq eshell-history-isearch 'dwim)
 (setq eshell-prompt-function
       (lambda ()
         (concat (propertize (abbreviate-file-name (eshell/pwd)) 'face 'eshell-prompt)
                 (when (and dotemacs-eshell/prompt-git-info
+                           (not (file-remote-p default-directory))
                            (fboundp #'vc-git-branches))
                   (let ((branch (car (vc-git-branches))))
                     (when branch
@@ -60,15 +56,14 @@
                          (when (> (+ added modified deleted) 0)
                            (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face)))
                        (propertize "]" 'face 'font-lock-keyword-face)))))
-                (propertize " $ " 'face 'font-lock-constant-face))))
-
+                (propertize " λ " 'face 'font-lock-constant-face))))
+(setq eshell-prompt-regexp "^[^λ\n]* λ ")
 
 (when (executable-find "fortune")
   (advice-add
    'eshell :before
    (lambda (&rest _)
      (setq eshell-banner-message (concat (shell-command-to-string "fortune") "\n")))))
-
 
 (unless (eq system-type 'windows-nt)
   ;; prevents freezing when used on a large number of files/directories
@@ -80,7 +75,6 @@
     (fmakunbound 'eshell/rm)
     (fmakunbound 'eshell/rmdir)))
 
-
 ;; plan 9 smart shell
 (when dotemacs-eshell/plan9
   (after 'esh-module
@@ -89,47 +83,21 @@
     (setq eshell-review-quick-commands nil)
     (setq eshell-smart-space-goes-to-end t)))
 
-
 (defun eshell/ff (&rest args)
   "Opens a file in emacs."
-  (when (not (null args))
+  (if (null args)
+      (call-interactively #'find-file)
     (mapc #'find-file (mapcar #'expand-file-name (flatten-tree (reverse args))))))
-
 
 (defun eshell/h ()
   "Quickly run a previous command."
   (insert (completing-read
            "Run previous command: "
-           (delete-dups (ring-elements eshell-history-ring))
-           nil
-           t)))
-
+           (delete-dups (ring-elements eshell-history-ring)) nil t)))
 
 (defun eshell/ssh-tramp (&rest args)
   (insert (apply #'format "cd /ssh:%s:\\~" args))
   (eshell-send-input))
-
-
-(defun /eshell/color-filter (string)
-  (let ((case-fold-search nil)
-        (lines (split-string string "\n")))
-    (cl-loop for line in lines
-             do (progn
-                  (cond ((string-match "\\[DEBUG\\]" line)
-                         (put-text-property 0 (length line) 'font-lock-face font-lock-comment-face line))
-                        ((string-match "\\[INFO\\]" line)
-                         (put-text-property 0 (length line) 'font-lock-face compilation-info-face line))
-                        ((string-match "\\[WARN\\]" line)
-                         (put-text-property 0 (length line) 'font-lock-face compilation-warning-face line))
-                        ((string-match "\\[ERROR\\]" line)
-                         (put-text-property 0 (length line) 'font-lock-face compilation-error-face line)))))
-    (mapconcat 'identity lines "\n")))
-
-
-(after 'em-term
-  (dolist (cmd dotemacs-eshell/visual-commands)
-    (add-to-list 'eshell-visual-commands cmd)))
-
 
 (let ((count 0))
   (defun /eshell/new-split ()
@@ -137,31 +105,15 @@
     (split-window)
     (eshell (cl-incf count))))
 
-
 (after "magit-autoloads"
   (defalias 'eshell/s #'magit-status))
 
-
-(use-package eshell-z
-  :init
-  (setq eshell-z-freq-dir-hash-table-file-name (concat dotemacs-cache-directory "eshell/z"))
-  :config
-  (defalias 'eshell/j #'eshell/z))
-
-(defun eshell/z-clean ()
-  (let* ((directories (hash-table-keys eshell-z-freq-dir-hash-table))
-         (non-existent (cl-remove-if #'file-exists-p directories)))
-    (cl-loop for dir in non-existent
-             do (remhash dir eshell-z-freq-dir-hash-table))
-    (eshell-z--write-freq-dir-hash-table)))
-
-
 (defun /eshell/eshell-mode-hook ()
-  (require 'eshell-z)
-
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
-  (add-to-list 'eshell-preoutput-filter-functions #'/eshell/color-filter)
   (buffer-disable-undo)
+
+  (setq-local completion-styles '(basic partial-completion emacs22))
+  (setq-local process-environment (copy-sequence process-environment))
 
   ;; get rid of annoying 'terminal is not fully functional' warning
   (when (executable-find "cat")
@@ -170,6 +122,5 @@
   (setenv "NODE_NO_READLINE" "1"))
 
 (add-hook 'eshell-mode-hook #'/eshell/eshell-mode-hook)
-
 
 (provide 'config-eshell)
