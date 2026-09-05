@@ -20,10 +20,12 @@
 (save-place-mode 1)
 
 ;; savehist
+(require 'savehist)
 (setq savehist-file (concat dotemacs-cache-directory "savehist"))
-(setq savehist-additional-variables '(search-ring regexp-search-ring))
 (setq savehist-autosave-interval 60)
 (setq history-length 1000)
+(add-to-list 'savehist-additional-variables 'search-ring)
+(add-to-list 'savehist-additional-variables 'regexp-search-ring)
 (savehist-mode 1)
 
 ;; desktop
