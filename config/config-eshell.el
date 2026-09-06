@@ -108,6 +108,10 @@
 (after "magit-autoloads"
   (defalias 'eshell/s #'magit-status))
 
+(when (executable-find "git")
+  (require 'pcmpl-git)
+  (defalias 'pcomplete/g #'pcomplete/git))
+
 (defun /eshell/eshell-mode-hook ()
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
   (buffer-disable-undo)
