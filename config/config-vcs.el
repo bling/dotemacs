@@ -22,20 +22,11 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 (when (executable-find "git")
-  (use-package magit)
-
-  (defun /vcs/magit-post-display-buffer-hook ()
-    (when (string-match-p "\\*magit:" (buffer-name))
-      (delete-other-windows)))
-  (add-hook 'magit-post-display-buffer-hook #'/vcs/magit-post-display-buffer-hook)
-
-  (setq magit-section-show-child-count t)
-  (setq magit-display-buffer-function #'magit-display-buffer-fullcolumn-most-v1)
-  (setq magit-ediff-dwim-show-on-hunks t)
-
-  (after 'eshell
-    (require 'pcmpl-git)
-    (defalias 'pcomplete/g #'pcomplete/git))
+  (use-package magit
+    :init
+    (setq magit-section-show-child-count t)
+    (setq magit-display-buffer-function #'magit-display-buffer-fullcolumn-most-v1)
+    (setq magit-ediff-dwim-show-on-hunks t))
 
   (use-package git-timemachine))
 

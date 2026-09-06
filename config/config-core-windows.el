@@ -6,32 +6,34 @@
   :prefix 'dotemacs-core-windows)
 
 (defcustom dotemacs-core/display-buffer-rules
-  '((help-mode           . fixed-right)
-    (helpful-mode        . fixed-right)
-    (diff-mode           . percent-right)
-    (magit-diff-mode     . percent-right)
-    (magit-revision-mode . percent-right)
-    (ibuffer-mode        . percent-right)
-    (grep-mode           . percent-right)
-    (ripgrep-search-mode . percent-right)
-    (compilation-mode    . percent-bottom)
+  '((help-mode           . right-fixed)
+    (helpful-mode        . right-fixed)
+    (diff-mode           . right-half)
+    (magit-diff-mode     . right-half)
+    (magit-revision-mode . right-half)
+    (ibuffer-mode        . right-half)
+    (grep-mode           . right-half)
+    (ripgrep-search-mode . right-half)
+    (compilation-mode    . bottom)
+    (vc-annotate-mode    . full-screen)
+    (magit-status-mode   . full-screen)
     ("^\\*helm.*\\*$"    . bottom))
   "Rules for buffer display placement.
 Each element is a cons cell (TARGET . POSITION) where:
 - TARGET is a major-mode symbol (matched via `derived-mode-p')
   or a regexp string (matched against the buffer name).
 - POSITION is one of:
-  - `percent-right' (or `right-half'): 50% width on the right
-  - `fixed-right': 100 columns fixed on the right
-  - `percent-bottom': 30% height at the bottom
-  - `bottom': bottom window"
+  - `right-half': 50% width on the right
+  - `right-fixed': 100 columns fixed on the right
+  - `bottom': bottom window
+  - `full-screen': full frame"
   :type '(repeat
           (cons (choice (symbol :tag "Major Mode")
                         (string :tag "Regexp Buffer Name"))
-                (choice (const :tag "Right (50% width)" percent-right)
-                        (const :tag "Right (100 columns fixed)" fixed-right)
-                        (const :tag "Bottom (30% height)" percent-bottom)
-                        (const :tag "Bottom" bottom))))
+                (choice (const :tag "Right (50% width)" right-half)
+                        (const :tag "Right (100 columns fixed)" right-fixed)
+                        (const :tag "Bottom" bottom)
+                        (const :tag "Full screen" full-screen))))
   :group 'dotemacs-core-windows)
 
 (defun /core/windows/display-buffer-match-p (position buffer)
@@ -43,17 +45,21 @@ Each element is a cons cell (TARGET . POSITION) where:
           (dolist (entry dotemacs-core/display-buffer-rules)
             (let ((target (car entry))
                   (pos (cdr entry)))
-              (when (or (eq pos position)
-                        (and (eq position 'percent-right) (eq pos 'right-half)))
+              (when (eq pos position)
                 (when (if (symbolp target)
                           (derived-mode-p target)
                         (string-match-p target (buffer-name buf)))
                   (throw 'match t))))))))))
 
 (setq display-buffer-alist
-      `(;; half right
+      `(;; full screen
         ((lambda (buf _alist)
-           (/core/windows/display-buffer-match-p 'percent-right buf))
+           (/core/windows/display-buffer-match-p 'full-screen buf))
+         (display-buffer-full-frame))
+
+        ;; half right
+        ((lambda (buf _alist)
+           (/core/windows/display-buffer-match-p 'right-half buf))
          (display-buffer-reuse-window display-buffer-in-direction)
          (direction . right)
          (window . root)
@@ -61,19 +67,11 @@ Each element is a cons cell (TARGET . POSITION) where:
 
         ;; fixed right
         ((lambda (buf _alist)
-           (/core/windows/display-buffer-match-p 'fixed-right buf))
+           (/core/windows/display-buffer-match-p 'right-fixed buf))
          (display-buffer-reuse-window display-buffer-in-direction)
          (direction . right)
          (window . root)
          (window-width . 100))
-
-        ;; bottom 30%
-        ((lambda (buf _alist)
-           (/core/windows/display-buffer-match-p 'percent-bottom buf))
-         (display-buffer-reuse-window display-buffer-in-direction)
-         (direction . bottom)
-         (window . root)
-         (window-height . 0.3))
 
         ;; bottom
         ((lambda (buf _alist)
