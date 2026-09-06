@@ -24,7 +24,10 @@
 
   (pcase dotemacs-consult/filtering
     ('hotfuzz+orderless
-     (use-package hotfuzz :demand t)
+     (use-package hotfuzz :demand t
+       :config
+       (unless (fboundp #'hotfuzz--filter-c)
+         (warn "Missing compiled module for hotfuzz.")))
      (use-package orderless
        :demand t
        :init
@@ -54,22 +57,29 @@
   (after 'lsp-mode
     (use-package consult-lsp)))
 
+(defun /consult/setup-completion-styles ()
+  (if (fboundp #'hotfuzz--filter-c)
+      (setq-local completion-styles '(hotfuzz orderless basic))
+    (setq-local completion-styles '(orderless basic))))
+
 (defun /consult/activate-as-switch-engine (on)
   (/consult/init)
   (if on
       (progn
         (pcase dotemacs-consult/filtering
           ('hotfuzz+orderless
-           (add-to-list 'completion-styles 'orderless)
-           (add-to-list 'completion-styles 'hotfuzz))
+           (add-hook 'minibuffer-setup-hook #'/consult/setup-completion-styles)
+           (add-hook 'text-mode-hook #'/consult/setup-completion-styles)
+           (add-hook 'prog-mode-hook #'/consult/setup-completion-styles))
           ('prescient
            (vertico-prescient-mode t)))
         (marginalia-mode t)
         (vertico-mode t))
     (pcase dotemacs-consult/filtering
       ('hotfuzz+orderless
-       (setq completion-styles (delete 'hotfuzz completion-styles))
-       (setq completion-styles (delete 'orderless completion-styles)))
+       (remove-hook 'minibuffer-setup-hook #'/consult/setup-completion-styles)
+       (remove-hook 'text-mode-hook #'/consult/setup-completion-styles)
+       (remove-hook 'prog-mode-hook #'/consult/setup-completion-styles))
       ('prescient
        (vertico-prescient-mode -1)))
     (marginalia-mode -1)
