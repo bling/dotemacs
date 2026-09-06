@@ -116,7 +116,6 @@
   (add-to-list 'eshell-output-filter-functions #'eshell-truncate-buffer)
   (buffer-disable-undo)
 
-  (setq-local completion-styles '(basic partial-completion emacs22))
   (setq-local process-environment (copy-sequence process-environment))
 
   ;; get rid of annoying 'terminal is not fully functional' warning
