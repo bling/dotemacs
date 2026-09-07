@@ -24,6 +24,7 @@
 (pcase dotemacs-explorer/option
   ('treemacs
    (use-package treemacs
+     :defer t
      :init
      (setq treemacs-indentation 1)
      (setq treemacs-indentation-string (propertize "|" 'face 'font-lock-comment-face))
@@ -35,22 +36,23 @@
 
    (when dotemacs-explorer/nerd-icons
      (after 'treemacs
-       (use-package treemacs-nerd-icons :demand t)))
+       (use-package treemacs-nerd-icons)))
 
    (after 'treemacs
      (when (executable-find "git")
-       (use-package treemacs-magit :demand t)
+       (use-package treemacs-magit)
 
        (if (executable-find "python3")
            (treemacs-git-mode 'extended)
          (treemacs-git-mode 'simple))))
 
    (after [evil treemacs]
-     (use-package treemacs-evil :demand t)))
+     (use-package treemacs-evil)))
 
   ('dired-sidebar
-   (use-package dired-subtree :demand t)
+   (use-package dired-subtree)
    (use-package dired-sidebar
+     :defer t
      :init
      (setq dired-sidebar-should-follow-file t)
      (setq dired-sidebar-follow-file-idle-delay 0.2))))

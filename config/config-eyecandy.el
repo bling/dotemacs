@@ -22,38 +22,34 @@
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 
-(use-package doom-modeline :demand t
+(use-package doom-modeline
   :config
   (doom-modeline-mode t))
 
 
 (when (fboundp 'global-prettify-symbols-mode)
-  (defun /eyecandy/js-symbols ()
-    (setq-local
-     prettify-symbols-alist
-     '(
-       ("function" . ?λ)
-       ("return" . ?←)
-       ("=>". ?⇒)
-       (">=". ?≥)
-       ("<=". ?≤)
-       )))
-  (add-hook 'js-mode-hook #'/eyecandy/js-symbols)
-  (add-hook 'js-ts-mode-hook #'/eyecandy/js-symbols)
-  (add-hook 'typescript-ts-mode-hook #'/eyecandy/js-symbols)
-  (add-hook 'tsx-ts-mode-hook #'/eyecandy/js-symbols))
+  (defun /eyecandy/set-pretty-symbols ()
+    (setq-local prettify-symbols-alist '(
+                                         ("function" . ?λ)
+                                         ("return" . ?←)
+                                         ("=>". ?⇒)
+                                         (">=". ?≥)
+                                         ("<=". ?≤)
+                                         )))
+  (add-hook 'js-base-mode-hook #'/eyecandy/set-pretty-symbols)
+  (add-hook 'typescript-ts-base-mode #'/eyecandy/set-pretty-symbols))
 
 
 (use-package symbol-overlay
   :hook prog-mode)
 
 
-(use-package page-break-lines :demand t
+(use-package page-break-lines
   :config
   (global-page-break-lines-mode))
 
 
-(use-package eros :demand t
+(use-package eros
   :config
   (eros-mode))
 
@@ -64,35 +60,20 @@
     (ultra-scroll-mode)))
 
 
-(use-package nerd-icons)
 (setq inhibit-compacting-font-caches t)
-
-(after 'ibuffer
-  (use-package nerd-icons-ibuffer
-    :hook ibuffer-mode))
-
-(after 'dired
-  (use-package nerd-icons-dired
-    :hook dired-mode))
-
-(after 'xref
-  (use-package nerd-icons-xref :demand t
-    :config
-    (nerd-icons-xref-mode)))
-
-(after 'grep
-  (use-package nerd-icons-grep :demand t
-    :config
-    (nerd-icons-grep-mode)))
-
-(after 'marginalia
-  (use-package nerd-icons-completion :demand t
-    :config
-    (nerd-icons-completion-mode)
+(use-package nerd-icons :defer t)
+(use-package nerd-icons-ibuffer :hook ibuffer-mode)
+(use-package nerd-icons-dired :hook dired-mode)
+(use-package nerd-icons-xref :config (nerd-icons-xref-mode))
+(use-package nerd-icons-grep :config (nerd-icons-grep-mode))
+(use-package nerd-icons-completion
+  :config
+  (nerd-icons-completion-mode)
+  (after 'marginalia
     (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)))
-
-(after 'corfu
-  (use-package nerd-icons-corfu :demand t
+(when (eq dotemacs-switch-engine 'consult)
+  (use-package nerd-icons-corfu
+    :after corfu
     :config
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)))
 

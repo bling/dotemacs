@@ -4,7 +4,6 @@
 (add-hook 'text-mode-hook #'flymake-mode-on)
 
 (use-package flymake-collection
-  :demand t
   :config
   (flymake-collection-hook-setup)
   (setf (alist-get 'emacs-lisp-mode flymake-collection-hook-config) nil))

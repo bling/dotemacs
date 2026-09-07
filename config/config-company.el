@@ -7,7 +7,7 @@
     :group 'dotemacs
     :prefix 'dotemacs-company)
 
-  (use-package company :demand t
+  (use-package company
     :hook (prog-mode text-mode)
     :init
     (setq company-idle-delay 0.2)

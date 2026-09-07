@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (use-package eat
+  :defer t
   :init
   (setq eat-kill-buffer-on-exit t)
   (setq eat-enable-shell-prompt-annotation t)
