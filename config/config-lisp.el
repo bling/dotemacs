@@ -15,6 +15,6 @@
   (interactive)
   (byte-recompile-directory (concat user-emacs-directory "elpa/") 0 t))
 
-(use-package helpful)
+(use-package helpful :defer t)
 
 (provide 'config-lisp)

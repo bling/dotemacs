@@ -112,7 +112,7 @@
               (local-set-key (kbd "C-k") #'/bindings/evil/window-or-frame-up)
               (local-set-key (kbd "C-l") #'/bindings/evil/window-or-frame-right)))
 
-  (use-package evil-collection :demand t
+  (use-package evil-collection
     :init
     (add-hook 'evil-collection-setup-hook
               (defun /bindings/evil/evil-collection-setup-hook (_mode mode-keymaps)

@@ -29,8 +29,11 @@
 
 
 
+(defvar /lsp-mode/initialized nil)
+
 (defun /lsp-mode/activate ()
-  (unless (fboundp 'lsp-mode)
+  (unless /lsp-mode/initialized
+    (setq /lsp-mode/initialized t)
     (use-package lsp-mode
       :init
       (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))

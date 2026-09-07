@@ -15,10 +15,9 @@ This is a keep it simple stupid config.  It only uses a couple simple building b
 ``` cl
 (require 'use-package)
 (setq use-package-always-ensure t)
-(setq use-package-always-defer t)
 ```
 
-Defaults `use-package` to lazily load and install packages.
+Modifies `use-package` to automatically install packages as necessary.
 
 ### simple building block 2
 

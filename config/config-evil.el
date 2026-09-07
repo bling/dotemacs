@@ -46,7 +46,7 @@
 
 
 
-(use-package evil :demand t
+(use-package evil
   :init
   (setq evil-emacs-state-cursor '("red" box))
   (setq evil-motion-state-cursor '("orange" box))
@@ -102,11 +102,11 @@
 
 (pcase dotemacs-evil/comments
   ('evil-commentary
-   (use-package evil-commentary :demand t
+   (use-package evil-commentary
      :config
      (evil-commentary-mode t)))
   ('evil-nerd-commenter
-   (use-package evil-nerd-commenter :demand t
+   (use-package evil-nerd-commenter
      :config
      (require 'evil-nerd-commenter-operator)
      (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
@@ -115,43 +115,43 @@
      (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator))))
 
 
-(use-package evil-surround :demand t
+(use-package evil-surround
   :config
   (global-evil-surround-mode t))
 
 
-(use-package evil-exchange :demand t
+(use-package evil-exchange
   :config
   (evil-exchange-install))
 
 
-(use-package evil-anzu :demand t)
+(use-package evil-anzu)
 
 
-(use-package evil-avy :demand t
+(use-package evil-avy
   :config
   (evil-avy-mode)
   (add-hook 'magit-status-mode-hook (lambda () (evil-avy-mode -1))))
 
 
-(use-package evil-matchit :demand t
+(use-package evil-matchit
   :config
   (global-evil-matchit-mode t))
 
 
-(use-package evil-indent-textobject :demand t)
+(use-package evil-indent-textobject)
 
 
-(use-package evil-visualstar :demand t
+(use-package evil-visualstar
   :config
   (global-evil-visualstar-mode t))
 
 
-(use-package evil-numbers)
+(use-package evil-numbers :defer t)
 
 
 (unless (display-graphic-p)
-  (use-package evil-terminal-cursor-changer :demand t
+  (use-package evil-terminal-cursor-changer
     :config
     (evil-terminal-cursor-changer-activate)))
 

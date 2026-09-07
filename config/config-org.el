@@ -63,7 +63,7 @@
     (setq show-trailing-whitespace t))
   (add-hook 'org-mode-hook #'/org/org-mode-hook)
 
-  (use-package org-modern :demand t
+  (use-package org-modern
     :config
     (global-org-modern-mode t)))
 

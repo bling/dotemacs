@@ -1,7 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
 (use-package transient
-  :demand t
   :init
   (setq transient-history-file (concat dotemacs-cache-directory "transient/history.el"))
   (setq transient-levels-file (concat dotemacs-cache-directory "transient/levels.el"))

@@ -13,6 +13,7 @@
           eat-exec) . /terminal/with-editor-export))
 
 (use-package eat
+  :defer t
   :init
   (setq eat-term-name "xterm-256color")
   (setq eat-kill-buffer-on-exit t)
