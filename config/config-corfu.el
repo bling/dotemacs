@@ -2,7 +2,7 @@
 
 (when (eq dotemacs-completion-engine 'corfu)
 
-  (use-package corfu :demand t
+  (use-package corfu
     :hook (prog-mode text-mode)
     :init
     (setq global-corfu-minibuffer nil)
@@ -19,7 +19,7 @@
 
   (after 'prescient
     (when (eq dotemacs-consult/filtering 'prescient)
-      (use-package corfu-prescient :demand t
+      (use-package corfu-prescient
         :init
         (setq corfu-prescient-override-sorting t)
         :config
@@ -44,7 +44,7 @@
     (add-hook 'eglot-managed-mode-hook #'/corfu/eglot-setup-capf))
 
   (use-package cape
-    :init
+    :config
     (add-hook 'completion-at-point-functions #'cape-dabbrev t)
     (add-hook 'completion-at-point-functions #'cape-file)
     (add-hook 'completion-at-point-functions #'cape-elisp-block)
