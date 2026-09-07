@@ -9,16 +9,11 @@
 
 
 (defun /eyecandy/fold-overlay (ov)
-  (when (eq 'code (overlay-get ov 'hs))
-    (let ((col (save-excursion
-                 (move-end-of-line 0)
-                 (current-column)))
-          (count (count-lines (overlay-start ov) (overlay-end ov))))
-      (overlay-put ov 'after-string
-                   (format "%s [ %d ] ... "
-                           (make-string (max 0 (- (window-width) col 32)) (string-to-char "."))
-                           count)))))
-(setq hs-set-up-overlay '/eyecandy/fold-overlay)
+  (let* ((col (save-excursion (goto-char (overlay-start ov)) (current-column)))
+         (str (format " [ %d lines ] " (count-lines (overlay-start ov) (overlay-end ov))))
+         (dots (make-string (max 0 (- (window-max-chars-per-line) col (length str) 2)) ?.)))
+    (overlay-put ov 'display (propertize (format " %s%s" dots str) 'face 'shadow))))
+(setq hs-set-up-overlay #'/eyecandy/fold-overlay)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 
