@@ -2,6 +2,7 @@
 
 (defun /lisp/major-mode-hook ()
   (setq-local dash-docs-common-docsets '("Emacs Lisp"))
+  (setq-local electric-pair-skip-whitespace-chars '(?\s ?\t ?\n))
   (eldoc-mode)
   (when (fboundp #'cape-elisp-symbol)
     (add-hook 'completion-at-point-functions #'cape-elisp-symbol nil t)))
