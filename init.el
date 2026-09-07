@@ -37,7 +37,6 @@
 
   (require 'use-package)
   (setq use-package-always-ensure t)
-  (setq use-package-always-defer t)
   (setq use-package-compute-statistics t)
   (setq use-package-expand-minimally t)
   (setq use-package-verbose t)

@@ -15,7 +15,13 @@
 
 
 
+(defvar /consult/initialized nil)
+
 (defun /consult/init ()
+  (use-package consult)
+  (use-package consult-dash)
+  (use-package consult-project-extra)
+
   (use-package vertico
     :init
     (setq vertico-count 15))
@@ -24,19 +30,17 @@
 
   (pcase dotemacs-consult/filtering
     ('hotfuzz+orderless
-     (use-package hotfuzz :demand t
+     (use-package hotfuzz
        :config
        (unless (fboundp #'hotfuzz--filter-c)
          (warn "Missing compiled module for hotfuzz.")))
      (use-package orderless
-       :demand t
        :init
        (setq orderless-matching-styles '(orderless-literal
                                          orderless-initialism
                                          orderless-regexp))))
     ('prescient
      (use-package prescient
-       :demand t
        :init
        (setq prescient-save-file (concat dotemacs-cache-directory "prescient-save.el"))
        (setq prescient-filter-method '(literal regexp initialism fuzzy))
@@ -46,10 +50,6 @@
      (use-package vertico-prescient
        :init
        (setq vertico-prescient-override-sorting t))))
-
-  (use-package consult)
-  (use-package consult-dash)
-  (use-package consult-project-extra)
 
   (after 'eglot
     (use-package consult-eglot))
@@ -63,7 +63,9 @@
     (setq-local completion-styles '(orderless basic))))
 
 (defun /consult/activate-as-switch-engine (on)
-  (/consult/init)
+  (unless /consult/initialized
+    (setq /consult/initialized t)
+    (/consult/init))
   (if on
       (progn
         (pcase dotemacs-consult/filtering
