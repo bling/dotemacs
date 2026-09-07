@@ -57,7 +57,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; electricity
-(setq electric-pair-skip-whitespace-chars '(32 9)) ;; don't complete pairs across newline
+(setq electric-pair-skip-whitespace-chars '(?\s ?\t))
 (electric-pair-mode t)
 (add-hook 'minibuffer-setup-hook (defun /core/electric-pair-off () (electric-pair-mode -1)))
 (add-hook 'minibuffer-exit-hook (defun /core/electric-pair-on () (electric-pair-mode t)))
