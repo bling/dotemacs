@@ -23,19 +23,20 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 (when (executable-find "git")
   (use-package magit
+    :defer t
     :init
     (setq magit-section-show-child-count t)
     (setq magit-ediff-dwim-show-on-hunks t))
 
-  (use-package git-timemachine))
+  (use-package git-timemachine :defer t))
 
 
 
-(use-package diff-hl)
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-(add-hook 'prog-mode-hook (lambda ()
-                            (if (display-graphic-p)
-                                (diff-hl-mode)
-                              (diff-hl-margin-mode))))
+(use-package diff-hl
+  :hook ((dired-mode . diff-hl-dired-mode)
+         (prog-mode . (lambda ()
+                        (if (display-graphic-p)
+                            (diff-hl-mode)
+                          (diff-hl-margin-mode))))))
 
 (provide 'config-vcs)

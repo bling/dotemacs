@@ -1,31 +1,35 @@
 ;; -*- lexical-binding: t -*-
 
-(after 'helm-source
-  (defun /helm/make-source (f &rest args)
-    (let* ((name (car args))
-           (source-type (cadr args))
-           (props (cddr args)))
-      (unless (child-of-class-p source-type 'helm-source-async)
-        (setq props (plist-put (copy-sequence props) :fuzzy-match t)))
-      (apply f name source-type props)))
-  (advice-add 'helm-make-source :around '/helm/make-source))
+(defvar /helm/initialized nil)
 
-(after 'helm
-  (setq helm-bookmark-show-location t)
-  (setq helm-buffer-max-length 40)
+(defun /helm/initialize ()
+  (use-package helm
+    :init
+    (setq helm-adaptive-history-file (concat dotemacs-cache-directory "helm-adaptive-history"))
+    (setq helm-bookmark-show-location t)
+    (setq helm-buffer-max-length 40)
+    (setq helm-autoresize-min-height 10)
+    (setq helm-autoresize-max-height 30)
+    :config
+    (defun /helm/make-source (f &rest args)
+      (let* ((name (car args))
+             (source-type (cadr args))
+             (props (cddr args)))
+        (unless (child-of-class-p source-type 'helm-source-async)
+          (setq props (plist-put (copy-sequence props) :fuzzy-match t)))
+        (apply f name source-type props)))
+    (advice-add 'helm-make-source :around '/helm/make-source)
 
-  (use-package helm-descbinds)
+    (helm-adaptive-mode t)
+    (helm-autoresize-mode t))
+
   (use-package helm-dash)
-
-  (setq helm-adaptive-history-file (concat dotemacs-cache-directory "helm-adaptive-history"))
-  (helm-adaptive-mode t)
-
-  (setq helm-autoresize-min-height 10)
-  (setq helm-autoresize-max-height 30)
-  (helm-autoresize-mode t))
+  (use-package helm-descbinds))
 
 (defun /helm/activate-as-switch-engine (on)
-  (use-package helm)
+  (unless /helm/initialized
+    (setq /helm/initialized t)
+    (/helm/initialize))
   (if on
       (progn
         (global-set-key [remap execute-extended-command] #'helm-M-x)
@@ -36,7 +40,6 @@
     (helm-mode -1)))
 
 (when (eq dotemacs-switch-engine 'helm)
-  (/boot/delayed-init
-   (/helm/activate-as-switch-engine t)))
+  (/helm/activate-as-switch-engine t))
 
 (provide 'config-helm)
