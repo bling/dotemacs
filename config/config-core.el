@@ -140,12 +140,10 @@
 
 (defun /core/do-not-kill-scratch-buffer ()
   (if (member (buffer-name (current-buffer))
-              '("*scratch*" "*Messages*"))
-      (progn
-        (bury-buffer)
-        nil)
+              '("*scratch*" "*Messages*" "*Warnings*"))
+      (bury-buffer)
     t))
-(add-hook 'kill-buffer-query-functions '/core/do-not-kill-scratch-buffer)
+(add-hook 'kill-buffer-query-functions #'/core/do-not-kill-scratch-buffer)
 
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
