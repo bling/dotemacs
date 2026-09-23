@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t -*-
 
-(require 'cl-lib)
-
 (defgroup dotemacs-eshell nil
   "Configuration options for eshell-mode."
   :group 'dotemacs
@@ -50,9 +48,9 @@
                          (dolist (line lines)
                            (let ((x (and (> (length line) 0) (aref line 0)))
                                  (y (and (> (length line) 1) (aref line 1))))
-                             (when (or (eq x ?A) (eq y ?A)) (cl-incf added))
-                             (when (or (eq x ?M) (eq y ?M)) (cl-incf modified))
-                             (when (or (eq x ?D) (eq y ?D)) (cl-incf deleted))))
+                             (when (or (eq x ?A) (eq y ?A)) (setq added (1+ added)))
+                             (when (or (eq x ?M) (eq y ?M)) (setq modified (1+ modified)))
+                             (when (or (eq x ?D) (eq y ?D)) (setq deleted (1+ deleted)))))
                          (when (> (+ added modified deleted) 0)
                            (propertize (format " +%d ~%d -%d" added modified deleted) 'face 'font-lock-comment-face)))
                        (propertize "]" 'face 'font-lock-keyword-face)))))
@@ -103,7 +101,7 @@
   (defun /eshell/new-split ()
     (interactive)
     (split-window)
-    (eshell (cl-incf count))))
+    (eshell (setq count (1+ count)))))
 
 (after "magit-autoloads"
   (defalias 'eshell/s #'magit-status))

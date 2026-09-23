@@ -47,9 +47,9 @@
   (when (file-exists-p custom-file)
     (load custom-file))
 
-  (cl-loop for file in (append (reverse (directory-files-recursively config-directory "\\.el$"))
-                               (reverse (directory-files-recursively bindings-directory "\\.el$")))
-           do (condition-case-unless-debug ex
-                  (load (file-name-sans-extension file))
-                (error (with-current-buffer "*scratch*"
-                         (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))
+  (dolist (file (append (reverse (directory-files-recursively config-directory "\\.el$"))
+                        (reverse (directory-files-recursively bindings-directory "\\.el$"))))
+    (condition-case-unless-debug ex
+        (load (file-name-sans-extension file))
+      (error (with-current-buffer "*scratch*"
+               (insert (format "[INIT ERROR]\n%s\n%s\n\n" file ex)))))))

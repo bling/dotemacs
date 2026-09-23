@@ -104,8 +104,8 @@ lsp-mode has a lookback algorithm which will pick up the space before the (."
   (when (executable-find "tsgo")
     (after 'lsp-javascript
       (when-let* ((client (gethash 'tsgo lsp-clients)))
-        (aset client (cl-struct-slot-offset 'lsp--client 'priority) 99)
-        (aset client (cl-struct-slot-offset 'lsp--client 'initialized-fn) #'/lsp-mode/strip-space-trigger)))
+        (setf (lsp--client-priority client) 99)
+        (setf (lsp--client-initialized-fn client) #'/lsp-mode/strip-space-trigger)))
 
     ;; tsgo is strict and disallows null, so we must strip them out
     (advice-add #'lsp--client-capabilities :filter-return
