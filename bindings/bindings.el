@@ -19,22 +19,23 @@
 (defmacro /bindings/define-prefix-keys (keymap prefix &rest body)
   (declare (indent defun))
   `(progn
-     ,@(cl-loop for binding in body
-                collect
-                `(let ((seq ,(car binding))
-                       (func ,(cadr binding))
-                       (desc ,(caddr binding)))
-                   (define-key ,keymap (kbd seq) func)
-                   (when desc
-                     (which-key-add-keymap-based-replacements ,keymap seq desc)
-                     (when ,prefix
-                       (which-key-add-key-based-replacements
-                         (concat ,prefix " " seq)
-                         desc)
-                       (when (equal ,prefix "SPC")
-                         (which-key-add-key-based-replacements
-                           (concat "M-SPC " seq)
-                           desc))))))))
+     ,@(mapcar
+        (lambda (binding)
+          `(let ((seq ,(car binding))
+                 (func ,(cadr binding))
+                 (desc ,(caddr binding)))
+             (define-key ,keymap (kbd seq) func)
+             (when desc
+               (which-key-add-keymap-based-replacements ,keymap seq desc)
+               (when ,prefix
+                 (which-key-add-key-based-replacements
+                   (concat ,prefix " " seq)
+                   desc)
+                 (when (equal ,prefix "SPC")
+                   (which-key-add-key-based-replacements
+                     (concat "M-SPC " seq)
+                     desc))))))
+        body)))
 
 (defmacro /bindings/define-keys (keymap &rest body)
   (declare (indent defun))

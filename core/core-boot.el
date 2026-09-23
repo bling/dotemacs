@@ -87,11 +87,9 @@ FEATURE may be any one of:
   (cond
    ((vectorp feature)
     (let ((prog (macroexp-progn body)))
-      (cl-loop for f across feature
-               do
-               (progn
-                 (setq prog (append `(',f) `(,prog)))
-                 (setq prog (append '(with-eval-after-load) prog))))
+      (dotimes (i (length feature))
+        (let ((f (aref feature (- (length feature) 1 i))))
+          (setq prog `(with-eval-after-load ',f ,prog))))
       prog))
    (t
     `(with-eval-after-load ,feature ,@body))))

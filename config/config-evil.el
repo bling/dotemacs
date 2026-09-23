@@ -63,18 +63,18 @@
   (add-hook 'evil-jumps-post-jump-hook #'recenter)
   (evil-mode)
 
-  (cl-loop for mode in dotemacs-evil/emacs-state-minor-modes
-           do (let ((hook (concat (symbol-name mode) "-hook")))
-                (add-hook (intern hook) `(lambda ()
-                                           (if ,mode
-                                               (evil-emacs-state)
-                                             (evil-normal-state))))))
+  (dolist (mode dotemacs-evil/emacs-state-minor-modes)
+    (let ((hook (concat (symbol-name mode) "-hook")))
+      (add-hook (intern hook) (lambda ()
+                                (if (symbol-value mode)
+                                    (evil-emacs-state)
+                                  (evil-normal-state))))))
 
-  (cl-loop for hook in dotemacs-evil/emacs-state-hooks
-           do (add-hook hook #'evil-emacs-state))
+  (dolist (hook dotemacs-evil/emacs-state-hooks)
+    (add-hook hook #'evil-emacs-state))
 
-  (cl-loop for mode in dotemacs-evil/emacs-state-major-modes
-           do (evil-set-initial-state mode 'emacs))
+  (dolist (mode dotemacs-evil/emacs-state-major-modes)
+    (evil-set-initial-state mode 'emacs))
 
   (setq evil-normal-state-tag   " NORMAL ")
   (setq evil-insert-state-tag   " INSERT ")

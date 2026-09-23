@@ -41,14 +41,7 @@ This was taken from [milkypostman][1].
 
 ### simple building block 3
 
-At the bottom of the `init.el` is the following gem:
-
-``` cl
-(cl-loop for file in (reverse (directory-files-recursively config-directory "\\.el$"))
-  do (load file)))
-```
-
-Basically, it recursively finds anything in `config/` and loads it.  If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be loaded.  Files are loaded in reverse order so that any functions defined will be available in child nodes.
+At the bottom of the `init.el` is a loop that recursively loads all files in the `config/` directory. If you want to add additional configuration for a new language, simply create `new-language.el` in `config/` and it will automatically be picked up. Files are loaded in reverse order so that any functions defined will be available in child nodes.
 
 ### other building blocks
 
