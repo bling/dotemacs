@@ -29,11 +29,30 @@
 
 
 
-(defvar /lsp-mode/initialized nil)
+(defun /lsp/eglot/activate ()
+  (require 'eglot)
+  (when (eglot--lookup-mode major-mode)
+    (eglot-ensure)))
 
-(defun /lsp-mode/activate ()
-  (unless /lsp-mode/initialized
-    (setq /lsp-mode/initialized t)
+(after 'eglot
+  (setq eglot-autoshutdown t)
+  (setq eglot-extend-to-xref t)
+
+  (let ((cmd (cond ((executable-find "vtsls") '("vtsls" "--stdio"))
+                   ((executable-find "tsgo")  '("tsgo" "--lsp" "--stdio")))))
+    (when cmd
+      (add-to-list 'eglot-server-programs
+                   `((typescript-ts-mode tsx-ts-mode js-ts-mode js-mode)
+                     . ,cmd)))))
+
+
+
+(defvar /lsp/lsp-mode/initialized nil)
+
+(defun /lsp/lsp-mode/initialize ()
+  (unless /lsp/lsp-mode/initialized
+    (setq /lsp/lsp-mode/initialized t)
+
     (use-package lsp-mode
       :init
       (setq lsp-session-file (concat dotemacs-cache-directory ".lsp-session-v1"))
@@ -42,6 +61,7 @@
       (setq lsp-enable-on-type-formatting nil)
       (setq lsp-enable-suggest-server-download nil)
       (setq lsp-warn-no-matched-clients nil)
+      (setq lsp-inlay-hint-enable t)
       (setq read-process-output-max (* 1024 1024)))
 
     (use-package lsp-ui
@@ -49,19 +69,45 @@
       (setq lsp-ui-sideline-show-hover t)
       (setq lsp-ui-sideline-delay 0.5)
       (setq lsp-ui-doc-include-signature t)
-      (setq lsp-ui-doc-header t)
       (setq lsp-ui-doc-position 'top)
       (setq lsp-ui-doc-delay 1)
       (setq lsp-ui-doc-show-with-cursor t))
 
     (when (eq dotemacs-explorer/option 'treemacs)
-      (use-package lsp-treemacs)))
+      (use-package lsp-treemacs))
 
+    (when (executable-find "vtsls")
+      (lsp-register-client
+       (make-lsp-client :new-connection (lsp-stdio-connection '("vtsls" "--stdio"))
+                        :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
+                        :priority 100
+                        :completion-in-comments? t
+                        :initialized-fn #'/lsp/lsp-mode/strip-space-trigger
+                        :server-id 'vtsls))
+      (lsp-disable-method-for-server "textDocument/documentColor" 'vtsls))
+
+    (when (executable-find "tsgo")
+      (after 'lsp-javascript
+        (when-let* ((client (gethash 'tsgo lsp-clients)))
+          (setf (cl-struct-slot-value 'lsp--client 'priority client) 99)
+          (setf (cl-struct-slot-value 'lsp--client 'initialized-fn client) #'/lsp/lsp-mode/strip-space-trigger)))
+
+      ;; tsgo is strict and disallows null, so we must strip them out
+      (advice-add #'lsp--client-capabilities :filter-return
+                  (lambda (caps)
+                    (if (eq (and lsp--cur-workspace
+                                 (lsp--workspace-server-id lsp--cur-workspace))
+                            'tsgo)
+                        (/lsp/lsp-mode/strip-nils caps)
+                      caps))))))
+
+(defun /lsp/lsp-mode/activate ()
+  (/lsp/lsp-mode/initialize)
   (lsp-deferred)
   (when (eq dotemacs-explorer/option 'treemacs)
     (lsp-treemacs-sync-mode t)))
 
-(defun /lsp-mode/strip-nils (tree)
+(defun /lsp/lsp-mode/strip-nils (tree)
   "Recursively strip any alist entry whose value is nil."
   (cond
    ((and (consp tree) (consp (car tree)))
@@ -72,14 +118,14 @@
                           (cond
                            ((null val) nil)
                            ((consp val)
-                            (let ((cleaned (/lsp-mode/strip-nils val)))
+                            (let ((cleaned (/lsp/lsp-mode/strip-nils val)))
                               (when cleaned (cons (car pair) cleaned))))
                            (t pair)))
                       pair))
                   tree)))
    (t tree)))
 
-(defun /lsp-mode/strip-space-trigger (workspace)
+(defun /lsp/lsp-mode/strip-space-trigger (workspace)
   "Stops popup from appearing prematurely after typing things like \"if (\".
 lsp-mode has a lookback algorithm which will pick up the space before the (."
   (let* ((caps (lsp--workspace-server-capabilities workspace))
@@ -89,32 +135,6 @@ lsp-mode has a lookback algorithm which will pick up the space before the (."
       (lsp:set-completion-options-trigger-characters?
        comp
        (vconcat (delete " " triggers))))))
-
-(after 'lsp-mode
-  (when (executable-find "vtsls")
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection '("vtsls" "--stdio"))
-                      :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
-                      :priority 100
-                      :completion-in-comments? t
-                      :initialized-fn #'/lsp-mode/strip-space-trigger
-                      :server-id 'vtsls))
-    (lsp-disable-method-for-server "textDocument/documentColor" 'vtsls))
-
-  (when (executable-find "tsgo")
-    (after 'lsp-javascript
-      (when-let* ((client (gethash 'tsgo lsp-clients)))
-        (setf (cl-struct-slot-value 'lsp--client 'priority client) 99)
-        (setf (cl-struct-slot-value 'lsp--client 'initialized-fn client) #'/lsp-mode/strip-space-trigger)))
-
-    ;; tsgo is strict and disallows null, so we must strip them out
-    (advice-add #'lsp--client-capabilities :filter-return
-                (lambda (caps)
-                  (if (eq (and lsp--cur-workspace
-                               (lsp--workspace-server-id lsp--cur-workspace))
-                          'tsgo)
-                      (/lsp-mode/strip-nils caps)
-                    caps)))))
 
 (defun /lsp/activate ()
   "Activates the configured LSP engine."
@@ -127,9 +147,9 @@ lsp-mode has a lookback algorithm which will pick up the space before the (."
                dotemacs-lsp/inhibit-paths))
     (pcase dotemacs-lsp/engine
       ('lsp
-       (/lsp-mode/activate))
+       (/lsp/lsp-mode/activate))
       ('eglot
-       (/eglot/activate)))))
+       (/lsp/eglot/activate)))))
 
 (when dotemacs-lsp/engine
   (add-hook 'prog-mode-hook #'/lsp/activate))
