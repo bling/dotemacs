@@ -2,7 +2,7 @@
 
 (require 'project)
 
-(global-set-key (kbd "C-c p") project-prefix-map)
+(keymap-global-set "C-c p" project-prefix-map)
 
 (defun /transients/project/search ()
   (interactive)
@@ -32,12 +32,12 @@
     :consult #'consult-project-extra-find
     :helm #'helm-mini))
 
-(/bindings/define-prefix-keys /bindings/normal-space-leader-map "SPC"
+(/bindings/set-prefix-keys /bindings/normal-space-leader-map "SPC"
   ("p" project-prefix-map "project...")
   ("/" #'/transients/project/search "search..."))
 
 (after 'evil
-  (/bindings/define-keys evil-normal-state-map
+  (/bindings/set-keys evil-normal-state-map
     ("C-p" #'/transients/project/ctrl+p)))
 
 (provide 'config-bindings-project)

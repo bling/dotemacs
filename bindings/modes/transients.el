@@ -2,6 +2,7 @@
 
 (defun /transients/switch-action (fallback &rest props)
   "Performs an action based on the value of `dotemacs-switch-engine'."
+  (declare (indent defun))
   (let* ((key (intern (format ":%s" dotemacs-switch-engine)))
          (action (or (plist-get props key) fallback)))
     (if action

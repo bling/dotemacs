@@ -17,14 +17,14 @@
   (defun /bindings/evil/window-or-frame-down  () (interactive) (/bindings/evil/window-or-frame 'down))
 
   (after "multiple-cursors-autoloads"
-    (define-key evil-normal-state-map (kbd "g r") 'mc/mark-all-like-this-dwim))
+    (keymap-set evil-normal-state-map "g r" #'mc/mark-all-like-this-dwim))
 
-  (/bindings/define-keys evil-normal-state-map ("g d" #'xref-find-definitions))
+  (/bindings/set-keys evil-normal-state-map ("g d" #'xref-find-definitions))
 
-  (define-key evil-normal-state-map (kbd "SPC") /bindings/normal-space-leader-map)
-  (define-key evil-visual-state-map (kbd "SPC") /bindings/visual-space-leader-map)
-  (define-key evil-normal-state-map (kbd ",") /bindings/normal-comma-leader-map)
-  (define-key evil-visual-state-map (kbd ",") /bindings/visual-comma-leader-map)
+  (keymap-set evil-normal-state-map "SPC" /bindings/normal-space-leader-map)
+  (keymap-set evil-visual-state-map "SPC" /bindings/visual-space-leader-map)
+  (keymap-set evil-normal-state-map "," /bindings/normal-comma-leader-map)
+  (keymap-set evil-visual-state-map "," /bindings/visual-comma-leader-map)
 
   (transient-define-prefix /bindings/evil/transients/paste ()
     :transient-non-suffix 'leave
@@ -44,45 +44,45 @@
   (advice-add 'evil-paste-before :after #'/bindings/evil/transients/paste/show)
 
   (after "evil-numbers-autoloads"
-    (/bindings/define-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
-    (/bindings/define-key evil-normal-state-map "C-S-a" #'evil-numbers/dec-at-pt))
+    (/bindings/set-key evil-normal-state-map "C-a" #'evil-numbers/inc-at-pt)
+    (/bindings/set-key evil-normal-state-map "C-S-a" #'evil-numbers/dec-at-pt))
 
   (after 'diff-hl
-    (/bindings/define-keys evil-normal-state-map
+    (/bindings/set-keys evil-normal-state-map
       ("[ h" #'diff-hl-previous-hunk)
       ("] h" #'diff-hl-next-hunk)))
 
-  (/bindings/define-keys evil-normal-state-map
-    ("Y" "y$")
+  (/bindings/set-keys evil-normal-state-map
+    ("Y" "y $")
     ("g p" (bind (evil-visual-select (evil-get-marker ?\[) (evil-get-marker ?\]))))
     ("g b" #'/transients/switch-to-buffer))
 
-  (global-set-key (kbd "C-w") 'evil-window-map)
+  (keymap-global-set "C-w" #'evil-window-map)
   (after 'evil-evilified-state
-    (/bindings/define-keys evil-evilified-state-map
+    (/bindings/set-keys evil-evilified-state-map
       ("C-h" #'/bindings/evil/window-or-frame-left)
       ("C-j" #'/bindings/evil/window-or-frame-down)
       ("C-k" #'/bindings/evil/window-or-frame-up)
       ("C-l" #'/bindings/evil/window-or-frame-right)))
-  (/bindings/define-keys evil-normal-state-map
+  (/bindings/set-keys evil-normal-state-map
     ("C-h" #'/bindings/evil/window-or-frame-left)
     ("C-j" #'/bindings/evil/window-or-frame-down)
     ("C-k" #'/bindings/evil/window-or-frame-up)
     ("C-l" #'/bindings/evil/window-or-frame-right)
     ("C-w C-h" #'/bindings/evil/window-or-frame-left)
-    ("C-w   h" #'/bindings/evil/window-or-frame-left)
+    ("C-w h"   #'/bindings/evil/window-or-frame-left)
     ("C-w C-j" #'/bindings/evil/window-or-frame-down)
-    ("C-w   j" #'/bindings/evil/window-or-frame-down)
+    ("C-w j"   #'/bindings/evil/window-or-frame-down)
     ("C-w C-k" #'/bindings/evil/window-or-frame-up)
-    ("C-w   k" #'/bindings/evil/window-or-frame-up)
+    ("C-w k"   #'/bindings/evil/window-or-frame-up)
     ("C-w C-l" #'/bindings/evil/window-or-frame-right)
-    ("C-w   l" #'/bindings/evil/window-or-frame-right))
+    ("C-w l"   #'/bindings/evil/window-or-frame-right))
 
-  (/bindings/define-keys evil-motion-state-map
+  (/bindings/set-keys evil-motion-state-map
     ("j" #'evil-next-visual-line)
     ("k" #'evil-previous-visual-line))
 
-  (/bindings/define-keys evil-normal-state-map
+  (/bindings/set-keys evil-normal-state-map
     ("Q" #'/utils/window-killer))
 
   ;; emacs lisp
@@ -101,35 +101,35 @@
       "l" #'vc-annotate-show-log-revision-at-line))
 
   (after "avy-autoloads"
-    (define-key evil-operator-state-map (kbd "z") 'avy-goto-char-2)
-    (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2)
-    (define-key evil-motion-state-map (kbd "S-SPC") 'avy-goto-line))
+    (keymap-set evil-operator-state-map "z" #'avy-goto-char-2)
+    (keymap-set evil-normal-state-map "s" #'avy-goto-char-2)
+    (keymap-set evil-motion-state-map "S-SPC" #'avy-goto-line))
 
   (add-hook 'eshell-mode-hook
             (lambda ()
-              (local-set-key (kbd "C-h") #'/bindings/evil/window-or-frame-left)
-              (local-set-key (kbd "C-j") #'/bindings/evil/window-or-frame-down)
-              (local-set-key (kbd "C-k") #'/bindings/evil/window-or-frame-up)
-              (local-set-key (kbd "C-l") #'/bindings/evil/window-or-frame-right)))
+              (keymap-local-set "C-h" #'/bindings/evil/window-or-frame-left)
+              (keymap-local-set "C-j" #'/bindings/evil/window-or-frame-down)
+              (keymap-local-set "C-k" #'/bindings/evil/window-or-frame-up)
+              (keymap-local-set "C-l" #'/bindings/evil/window-or-frame-right)))
 
   (use-package evil-textobj-tree-sitter
     :config
-    (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
-    (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
-    (define-key evil-outer-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.outer"))
-    (define-key evil-inner-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.inner"))
-    (define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
-    (define-key evil-inner-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
-    (define-key evil-outer-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.outer"))
-    (define-key evil-inner-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.inner"))
-    (define-key evil-outer-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.outer"))
-    (define-key evil-inner-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.inner"))
-    (define-key evil-outer-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.outer"))
-    (define-key evil-inner-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.inner"))
-    (define-key evil-normal-state-map (kbd "]f") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer")))
-    (define-key evil-normal-state-map (kbd "[f") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
-    (define-key evil-normal-state-map (kbd "]F") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t)))
-    (define-key evil-normal-state-map (kbd "[F") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))))
+    (keymap-set evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+    (keymap-set evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
+    (keymap-set evil-outer-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.outer"))
+    (keymap-set evil-inner-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.inner"))
+    (keymap-set evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
+    (keymap-set evil-inner-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
+    (keymap-set evil-outer-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.outer"))
+    (keymap-set evil-inner-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.inner"))
+    (keymap-set evil-outer-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.outer"))
+    (keymap-set evil-inner-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.inner"))
+    (keymap-set evil-outer-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.outer"))
+    (keymap-set evil-inner-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.inner"))
+    (keymap-set evil-normal-state-map "] f" (bind (evil-textobj-tree-sitter-goto-textobj "function.outer")))
+    (keymap-set evil-normal-state-map "[ f" (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
+    (keymap-set evil-normal-state-map "] F" (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t)))
+    (keymap-set evil-normal-state-map "[ F" (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))))
 
   (use-package evil-collection
     :init

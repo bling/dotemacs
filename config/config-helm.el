@@ -32,11 +32,11 @@
     (/helm/initialize))
   (if on
       (progn
-        (global-set-key [remap execute-extended-command] #'helm-M-x)
-        (global-set-key [remap find-file] #'helm-find-files)
+        (keymap-global-set "<remap> <execute-extended-command>" #'helm-M-x)
+        (keymap-global-set "<remap> <find-file>" #'helm-find-files)
         (helm-mode t))
-    (global-set-key [remap execute-extended-command] nil)
-    (global-set-key [remap find-file] nil)
+    (keymap-global-unset "<remap> <execute-extended-command>")
+    (keymap-global-unset "<remap> <find-file>")
     (helm-mode -1)))
 
 (when (eq dotemacs-switch-engine 'helm)

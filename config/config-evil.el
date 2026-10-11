@@ -97,7 +97,7 @@
 
 (when dotemacs-evil/emacs-insert-mode
   (defalias 'evil-insert-state 'evil-emacs-state)
-  (define-key evil-emacs-state-map (kbd "<escape>") 'evil-normal-state))
+  (keymap-set evil-emacs-state-map "<escape>" #'evil-normal-state))
 
 
 (pcase dotemacs-evil/comments
@@ -109,10 +109,10 @@
    (use-package evil-nerd-commenter
      :config
      (require 'evil-nerd-commenter-operator)
-     (define-key evil-inner-text-objects-map evilnc-comment-text-object 'evilnc-inner-comment)
-     (define-key evil-outer-text-objects-map evilnc-comment-text-object 'evilnc-outer-commenter)
-     (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
-     (define-key evil-normal-state-map "gy" 'evilnc-copy-and-comment-operator))))
+     (keymap-set evil-inner-text-objects-map evilnc-comment-text-object #'evilnc-inner-comment)
+     (keymap-set evil-outer-text-objects-map evilnc-comment-text-object #'evilnc-outer-commenter)
+     (keymap-set evil-normal-state-map "g c" #'evilnc-comment-operator)
+     (keymap-set evil-normal-state-map "g y" #'evilnc-copy-and-comment-operator))))
 
 
 (use-package evil-surround

@@ -44,10 +44,10 @@
       (evil-define-key 'normal lsp-ui-mode-map (kbd "g d") #'lsp-ui-peek-find-definitions)
       (evil-define-key 'normal lsp-ui-mode-map (kbd "K") #'lsp-describe-thing-at-point))
 
-    (define-key lsp-ui-peek-mode-map (kbd "k") #'lsp-ui-peek--select-prev)
-    (define-key lsp-ui-peek-mode-map (kbd "j") #'lsp-ui-peek--select-next)
-    (define-key lsp-ui-peek-mode-map (kbd "C-k") #'lsp-ui-peek--select-prev-file)
-    (define-key lsp-ui-peek-mode-map (kbd "C-j") #'lsp-ui-peek--select-next-file))
+    (keymap-set lsp-ui-peek-mode-map "k" #'lsp-ui-peek--select-prev)
+    (keymap-set lsp-ui-peek-mode-map "j" #'lsp-ui-peek--select-next)
+    (keymap-set lsp-ui-peek-mode-map "C-k" #'lsp-ui-peek--select-prev-file)
+    (keymap-set lsp-ui-peek-mode-map "C-j" #'lsp-ui-peek--select-next-file))
 
   (after 'evil
     (evil-define-key 'normal lsp-mode-map (kbd "RET") #'/bindings/lsp/transient)
