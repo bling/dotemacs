@@ -28,6 +28,9 @@
 
   (use-package marginalia)
 
+  (use-package embark)
+  (use-package embark-consult)
+
   (pcase dotemacs-consult/filtering
     ('hotfuzz+orderless
      (use-package hotfuzz
