@@ -70,6 +70,6 @@
     ('treemacs
      (treemacs-find-file))
     ('dired-sidebar
-     (dired-sidebar-find-file))))
+     (dired-sidebar-toggle-with-current-directory))))
 
 (provide 'config-explorer)
