@@ -112,6 +112,25 @@
               (local-set-key (kbd "C-k") #'/bindings/evil/window-or-frame-up)
               (local-set-key (kbd "C-l") #'/bindings/evil/window-or-frame-right)))
 
+  (use-package evil-textobj-tree-sitter
+    :config
+    (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+    (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
+    (define-key evil-outer-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.outer"))
+    (define-key evil-inner-text-objects-map "c" (evil-textobj-tree-sitter-get-textobj "class.inner"))
+    (define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.outer"))
+    (define-key evil-inner-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj "parameter.inner"))
+    (define-key evil-outer-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.outer"))
+    (define-key evil-inner-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj "conditional.inner"))
+    (define-key evil-outer-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.outer"))
+    (define-key evil-inner-text-objects-map "l" (evil-textobj-tree-sitter-get-textobj "loop.inner"))
+    (define-key evil-outer-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.outer"))
+    (define-key evil-inner-text-objects-map "/" (evil-textobj-tree-sitter-get-textobj "comment.inner"))
+    (define-key evil-normal-state-map (kbd "]f") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer")))
+    (define-key evil-normal-state-map (kbd "[f") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
+    (define-key evil-normal-state-map (kbd "]F") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" nil t)))
+    (define-key evil-normal-state-map (kbd "[F") (bind (evil-textobj-tree-sitter-goto-textobj "function.outer" t t))))
+
   (use-package evil-collection
     :init
     (add-hook 'evil-collection-setup-hook
