@@ -63,8 +63,8 @@
 ;; electricity
 (setq electric-pair-skip-whitespace-chars '(?\s ?\t))
 (electric-pair-mode t)
-(add-hook 'minibuffer-setup-hook (defun /core/electric-pair-off () (electric-pair-mode -1)))
-(add-hook 'minibuffer-exit-hook (defun /core/electric-pair-on () (electric-pair-mode t)))
+(add-hook 'minibuffer-setup-hook (defun /core/electric-pair-off ()
+                                   (setq-local electric-pair-mode nil)))
 
 ;; dired
 (setq dired-listing-switches "-alh")
@@ -120,6 +120,7 @@
 
 ;; move auto-save to the cache
 (let ((dir (expand-file-name (concat dotemacs-cache-directory "auto-save/"))))
+  (make-directory dir t)
   (setq auto-save-list-file-prefix (concat dir "saves-"))
   (setq auto-save-file-name-transforms `((".*" ,(concat dir "save-") t))))
 
@@ -184,6 +185,6 @@
       (display-line-numbers-mode -1))
     (fundamental-mode)
     (message "Large file detected. Switched to fundamental mode.")))
-(add-hook 'find-file-hook #'/core/find-file-hook)
+(add-hook 'find-file-hook #'/core/find-file-hook 100)
 
 (provide 'config-core)

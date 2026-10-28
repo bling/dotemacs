@@ -99,7 +99,7 @@
 (transient-define-prefix /transients/files ()
   [["files"
     ("f" "find files" (lambda () (interactive) (/transients/switch-action #'find-file :helm #'helm-find-files)))
-    ("r" "recent files" (lambda () (interactive) (/transients/switch-action nil :helm #'helm-recentf :consult #'consult-recent-file)))
+    ("r" "recent files" (lambda () (interactive) (/transients/switch-action #'recentf-open :helm #'helm-recentf :consult #'consult-recent-file)))
     ("z" "fzf" fzf :if (lambda () (fboundp #'fzf)))]
    ["file ops"
     :if (lambda () (buffer-file-name))
