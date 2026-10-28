@@ -77,14 +77,15 @@
       (use-package lsp-treemacs))
 
     (when (executable-find "vtsls")
-      (lsp-register-client
-       (make-lsp-client :new-connection (lsp-stdio-connection '("vtsls" "--stdio"))
-                        :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
-                        :priority 100
-                        :completion-in-comments? t
-                        :initialized-fn #'/lsp/lsp-mode/strip-space-trigger
-                        :server-id 'vtsls))
-      (lsp-disable-method-for-server "textDocument/documentColor" 'vtsls))
+      (after 'lsp-javascript
+        (lsp-register-client
+         (make-lsp-client :new-connection (lsp-stdio-connection '("vtsls" "--stdio"))
+                          :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
+                          :priority 100
+                          :completion-in-comments? t
+                          :initialized-fn #'/lsp/lsp-mode/strip-space-trigger
+                          :server-id 'vtsls))
+        (lsp-disable-method-for-server "textDocument/documentColor" 'vtsls)))
 
     (when (executable-find "tsgo")
       (after 'lsp-javascript

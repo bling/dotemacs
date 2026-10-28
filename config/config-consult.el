@@ -61,9 +61,7 @@
     (use-package consult-lsp)))
 
 (defun /consult/setup-completion-styles ()
-  (if (fboundp #'hotfuzz--filter-c)
-      (setq-local completion-styles '(hotfuzz orderless basic))
-    (setq-local completion-styles '(orderless basic))))
+  (setq-local completion-styles '(hotfuzz orderless basic)))
 
 (defun /consult/activate-as-switch-engine (on)
   (unless /consult/initialized

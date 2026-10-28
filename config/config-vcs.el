@@ -33,6 +33,7 @@ This is non-nil by default on Windows machines, where this is a heavy performanc
 
 
 (use-package diff-hl
+  :commands (diff-hl-stage-current-hunk diff-hl-revert-hunk)
   :hook ((dired-mode . diff-hl-dired-mode)
          (prog-mode . (lambda ()
                         (if (display-graphic-p)

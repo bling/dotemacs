@@ -9,7 +9,9 @@
 (defvar dotemacs-cache-directory (concat user-emacs-directory ".cache/")
   "The storage location for various persistent files.")
 
-(when (fboundp 'startup-redirect-eln-cache)
+(when (featurep 'native-compile)
+  ;; exclude certain patterns from native comp since they always fail
+  (setq native-comp-jit-compilation-deny-list '("\\.el\\.gz\\'" "-*-loaddefs\\.el\\'"))
   (startup-redirect-eln-cache (expand-file-name "eln-cache/" dotemacs-cache-directory)))
 
 ;; disable GC during init, gcmh will restore later
@@ -23,6 +25,3 @@
 (when (fboundp #'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp #'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp #'menu-bar-mode) (menu-bar-mode -1))
-
-;; exclude certain patterns from native comp since they always fail
-(setq native-comp-jit-compilation-deny-list '("\\.el\\.gz\\'" "-*-loaddefs\\.el\\'"))
